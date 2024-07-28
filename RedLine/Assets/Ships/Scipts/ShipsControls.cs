@@ -6,45 +6,61 @@ public class ShipsControls : MonoBehaviour
 {
     [Header("Refrences")]
     private Rigidbody m_rb;
+    public Transform rotation;
+    public Transform facingPoint;
+    public GameObject shipModel;
 
-    [Header("Public variables")]
+    [Space]
+
+    [Header("Speed Variables")]
+    private float m_accelerateMultiplier;
     public float maxSpeed;
     public float acceleration;
-    public float maxTurnSpeed;
+    public AnimationCurve speedCurve;
+
+    [Header("Turning Varibles")]
+    private float m_targetAngle;
+    private float m_currentAngle;
     public float turnSpeed;
-    public AnimationCurve curve;
-
-    [Header("Private Variables")]
-    private float m_accelerateMultiplier;
-    private float m_turnMultiplier;
-    private Vector3 m_facing;
-
+    private float m_shipAngle;
+    public AnimationCurve turnSpeedCurve;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_rb = GetComponentInChildren<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Accelerate();
         Turn();
+        Accelerate();
     }
 
     private void Accelerate()
     {
-        float multiplier = curve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
-        m_rb.velocity += acceleration * m_facing * multiplier * m_accelerateMultiplier;
+        float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
+        Vector3 direction = (transform.position - facingPoint.position).normalized;
+        Debug.Log(m_rb.velocity.magnitude);
+        m_rb.velocity += acceleration * direction * -m_accelerateMultiplier * multiplier;
     }
 
     private void Turn()
     {
-        m_rb.angularVelocity += new Vector3(0, turnSpeed * m_turnMultiplier, 0);
-        m_facing = m_rb.angularVelocity;
+        transform.LookAt(facingPoint);
+
+        m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.07f);
+
+        float multiplier = turnSpeedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
+
+        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.02f);
+
+        shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, m_shipAngle, -m_shipAngle * 0.4f));
+
+        rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (turnSpeed * multiplier), 0));
     }
 
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
-    public void SetTurnMultiplier(float multiplier) { m_turnMultiplier = multiplier; }
+    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
 }

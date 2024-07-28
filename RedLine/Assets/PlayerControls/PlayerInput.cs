@@ -27,12 +27,11 @@ public class PlayerInput : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        m_shipControls.SetSpeedMultiplier(context.ReadValue<Vector2>().y);
+        m_shipControls.SetSpeedMultiplier(context.ReadValue<float>());
     }
 
     public void Turn(InputAction.CallbackContext context)
     {
-        m_shipControls.SetTurnMultiplier(context.ReadValue<float>());
-        Debug.Log(context.ReadValue<float>());
+        m_shipControls.SetTurnMultipliers(context.ReadValue<float>());
     }
 }
