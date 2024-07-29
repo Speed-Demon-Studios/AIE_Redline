@@ -131,53 +131,54 @@ MonoBehaviour:
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
-  maxSpeed: 60
-  acceleration: 6
+  downForce: 0
+  maxSpeed: 30
+  acceleration: 2
   speedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -0.008483317
       value: 1
-      inSlope: -0.7263904
-      outSlope: -0.7263904
+      inSlope: -0.114296824
+      outSlope: -0.114296824
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.070539415
+      outWeight: 0.22916669
     - serializedVersion: 3
-      time: 0.9425984
-      value: 0.75
-      inSlope: -0.3050151
-      outSlope: -0.3050151
+      time: 1
+      value: 0.5
+      inSlope: -1.3470622
+      outSlope: -1.3470622
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1666666
+      inWeight: 0.09166667
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  turnSpeed: 4
+  turnSpeed: 2
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.31924495
-      outSlope: -0.31924495
+      inSlope: -0.26016045
+      outSlope: -0.26016045
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.104166664
+      outWeight: 0.2708333
     - serializedVersion: 3
-      time: 1
-      value: 0.3
-      inSlope: -0.16981135
-      outSlope: -0.16981135
+      time: 1.0041809
+      value: 0.4
+      inSlope: -0.67641693
+      outSlope: -0.67641693
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.16666669
+      inWeight: 0.0875
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -190,9 +191,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069181459855}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 5
-  m_AngularDrag: 2
+  m_Mass: 20
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -304,14 +305,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.25309968, y: -0, z: -0, w: 0.9674402}
+  m_LocalRotation: {x: 0.15433288, y: -0, z: -0, w: 0.98801893}
   m_LocalPosition: {x: 0, y: 2.94, z: -3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2868536069181459850}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 29.322, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.756, y: 0, z: 0}
 --- !u!20 &2868536069371765821
 Camera:
   m_ObjectHideFlags: 0
