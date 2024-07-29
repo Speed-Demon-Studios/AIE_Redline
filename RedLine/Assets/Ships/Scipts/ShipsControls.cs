@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class ShipsControls : MonoBehaviour
     public GameObject shipModel;
 
     [Space]
+
+    public float downForce;
 
     [Header("Speed Variables")]
     private float m_accelerateMultiplier;
@@ -36,6 +39,12 @@ public class ShipsControls : MonoBehaviour
     {
         Turn();
         Accelerate();
+        DownForce();
+    }
+
+    private void DownForce()
+    {
+        m_rb.AddForce(-transform.up * downForce);
     }
 
     private void Accelerate()
