@@ -10,6 +10,7 @@ public class ShipsControls : MonoBehaviour
     public Transform rotation;
     public Transform facingPoint;
     public GameObject shipModel;
+    public Transform rayCastPoint;
 
     [Space]
 
@@ -44,7 +45,10 @@ public class ShipsControls : MonoBehaviour
 
     private void DownForce()
     {
-        m_rb.AddForce(-transform.up * downForce);
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, -Vector3.up, out hit))
+            Debug.Log(hit.transform.gameObject);
+        //m_rb.AddForce(-transform.up * downForce);
     }
 
     private void Accelerate()
