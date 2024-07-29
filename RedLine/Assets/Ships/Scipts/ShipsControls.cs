@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class ShipsControls : MonoBehaviour
     public GameObject shipModel;
 
     [Space]
+
+    public float downForce;
 
     [Header("Speed Variables")]
     private float m_accelerateMultiplier;
@@ -36,6 +39,12 @@ public class ShipsControls : MonoBehaviour
     {
         Turn();
         Accelerate();
+        DownForce();
+    }
+
+    private void DownForce()
+    {
+        m_rb.AddForce(-transform.up * downForce);
     }
 
     private void Accelerate()
@@ -53,7 +62,7 @@ public class ShipsControls : MonoBehaviour
 
         float multiplier = turnSpeedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
 
-        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.05f);
+        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.06f);
 
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, m_shipAngle, -m_shipAngle * 0.4f));
 
