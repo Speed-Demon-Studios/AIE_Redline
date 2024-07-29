@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
         m_players.Add(player);
 
         Transform playerParent = player.transform.parent;
-        if (m_startingPoints[m_players.Count - 1].position != null)
+        if (m_startingPoints[m_players.Count - 1] != null)
         {
             playerParent.position = m_startingPoints[m_players.Count - 1].transform.position;
         }
