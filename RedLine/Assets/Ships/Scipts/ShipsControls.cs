@@ -42,7 +42,6 @@ public class ShipsControls : MonoBehaviour
     {
         float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
         Vector3 direction = (transform.position - facingPoint.position).normalized;
-        Debug.Log(m_rb.velocity.magnitude);
         m_rb.velocity += acceleration * direction * -m_accelerateMultiplier * multiplier;
     }
 
@@ -54,7 +53,7 @@ public class ShipsControls : MonoBehaviour
 
         float multiplier = turnSpeedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
 
-        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.02f);
+        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.05f);
 
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, m_shipAngle, -m_shipAngle * 0.4f));
 
