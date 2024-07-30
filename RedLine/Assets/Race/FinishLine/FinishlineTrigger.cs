@@ -11,6 +11,7 @@ public class FinishlineTrigger : MonoBehaviour
         if (other.tag.ToLower() == "racer")
         {
             RacerDetails rDeets = other.gameObject.GetComponent<RacerDetails>();
+            Debug.Log("Crossed Line!");
             rM.LapComplete(rDeets);
         }
     }

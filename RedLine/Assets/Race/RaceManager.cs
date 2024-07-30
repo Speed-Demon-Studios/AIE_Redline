@@ -9,21 +9,17 @@ public class RaceManager : MonoBehaviour
     
     public void LapComplete(RacerDetails racer)
     {
-        int _currentLap = racer.GetCurrentLap();
-
-
-        if (_currentLap < TotalLaps)
+        if (racer.currentLap < TotalLaps)
         {
-            _currentLap += 1;
+            racer.currentLap += 1;
         }
         
 
-        if (_currentLap > 0)
+        if (racer.currentLap > 0)
         {
-            Debug.Log("Lap " + (_currentLap - 1) + " Completed!");
+            Debug.Log("Lap " + (racer.currentLap - 1) + " Completed!");
         }
-
-        racer.SetCurrentLap(_currentLap);
+        return;
     }
 
 
