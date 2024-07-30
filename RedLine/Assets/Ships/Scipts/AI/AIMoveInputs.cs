@@ -17,10 +17,18 @@ public class AIMoveInputs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = nodeParent.transform.childCount; i > 0; i--)
+        float startNodeDistance = 5000;
+        int startNodeIndex = 0;
+        for(int i = 0; i < nodeParent.transform.childCount; i++)
         {
-            m_nodes.Add(nodeParent.transform.GetChild(i - 1).gameObject);
+            if(Vector3.Distance(this.transform.position, nodeParent.transform.GetChild(i).gameObject.transform.position) < startNodeDistance)
+            {
+                startNodeDistance = Vector3.Distance(this.transform.position, nodeParent.transform.GetChild(i).gameObject.transform.position);
+                startNodeIndex = i;
+            }
+            m_nodes.Add(nodeParent.transform.GetChild(i).gameObject);
         }
+        m_currentNodeIndex = startNodeIndex;
         m_controls = GetComponent<ShipsControls>();
     }
 

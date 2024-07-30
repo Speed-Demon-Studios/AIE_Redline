@@ -295,9 +295,9 @@ GameObject:
   - component: {fileID: 2819560891871692961}
   - component: {fileID: 2819560891871692962}
   - component: {fileID: 2819560891871692963}
-  - component: {fileID: 2819560891871692964}
   - component: {fileID: 2819560891871692965}
   - component: {fileID: 5609334039806038210}
+  - component: {fileID: 5573208418150351537}
   m_Layer: 0
   m_Name: AiShip
   m_TagString: Racer
@@ -340,9 +340,9 @@ MonoBehaviour:
   facingPoint: {fileID: 2819560891588230136}
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
-  downForce: 0
-  maxSpeed: 30
-  acceleration: 3
+  downForce: 450
+  maxSpeed: 125
+  acceleration: 10
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -408,19 +408,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!65 &2819560891871692964
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.3402043, z: 1}
-  m_Center: {x: 0, y: -0.32989785, z: 0}
 --- !u!114 &2819560891871692965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +462,19 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+--- !u!135 &5573208418150351537
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819560891871692966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0
