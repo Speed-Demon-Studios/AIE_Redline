@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject checkpointParent;
-
+    public GameObject[] StartingPoints;
     public static GameManager gManager { get; private set; }
 
     // Start is called before the first frame update
