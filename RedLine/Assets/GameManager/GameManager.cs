@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject checkpointParent;
+
     public static GameManager gManager { get; private set; }
 
     // Start is called before the first frame update

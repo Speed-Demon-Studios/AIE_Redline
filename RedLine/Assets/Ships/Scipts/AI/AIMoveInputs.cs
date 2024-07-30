@@ -47,7 +47,7 @@ public class AIMoveInputs : MonoBehaviour
 
         float angleRad = angle * Mathf.Deg2Rad;
 
-        Debug.Log(angleRad);
+        //Debug.Log(angleRad);
 
         if(angleRad < 0)
         {

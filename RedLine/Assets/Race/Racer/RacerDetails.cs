@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
 {
-    private int currentLap = 0;
-    
+    public int currentLap = 0;
+    public int placement = 0;
+    public int currentCheckpoint = 0;
+    private CheckpointHandler cHandler;
 
-    public int GetCurrentLap()
+    private void Awake()
     {
-        return currentLap;
     }
 
-    public void SetCurrentLap(int value)
+    public float NextCheckpointDistance()
     {
-        currentLap = value;
-        return;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        cHandler = GameManager.gManager.checkpointParent.GetComponent<CheckpointHandler>();
+        var nextCheckpoint = cHandler.GetCheckpoint(cHandler.GetNextIndex(currentCheckpoint));
+        return Vector3.Distance(transform.position, nextCheckpoint.transform.position);
     }
 }
