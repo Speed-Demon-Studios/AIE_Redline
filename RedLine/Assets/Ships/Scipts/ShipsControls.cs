@@ -131,9 +131,4 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(rayCastPoint.position, m_gizmosDrawPoint);
-    }
 }
