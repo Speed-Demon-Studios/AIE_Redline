@@ -229,6 +229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAsset: {fileID: -944628639613478452, guid: 0d2f1facbfb4c9a4898ab92d8ea79090,
     type: 3}
+  minPOV: 0
+  maxPOV: 0
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +248,8 @@ MonoBehaviour:
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
   downForce: 600
-  maxSpeed: 100
-  acceleration: 1.4
+  maxSpeed: 140
+  acceleration: 3.5
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -567,7 +569,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069701968794}
-  m_Mesh: {fileID: 6460833638552722679, guid: 5d4fda9d8ebf5e04887fa001ba23222f, type: 3}
+  m_Mesh: {fileID: 1453989443623043615, guid: 6dfa0f5ad4178594682fd6846aa1bae5, type: 3}
 --- !u!23 &2868536069701968773
 MeshRenderer:
   m_ObjectHideFlags: 0
