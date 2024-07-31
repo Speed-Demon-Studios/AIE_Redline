@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-    RacerDetails racer;
+    private RacerDetails racer;
+    
     private void Awake()
     {
         racer = GetComponentInParent<RacerDetails>();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

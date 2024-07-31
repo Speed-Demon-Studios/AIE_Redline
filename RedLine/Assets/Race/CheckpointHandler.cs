@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class CheckpointHandler : MonoBehaviour
 {
-
+    /// <summary>
+    /// Return the position of the checkpoint at the given index.
+    /// </summary>
     public Transform GetCheckpoint(int index)
     {
         return transform.GetChild(index);
     }
 
+    /// <summary>
+    /// Returns the next index.
+    /// </summary>
     public int GetNextIndex(int current)
     {
         int nextIndex = current + 1;
@@ -19,17 +24,5 @@ public class CheckpointHandler : MonoBehaviour
             return 0;
         }
         return nextIndex;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
