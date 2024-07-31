@@ -56,7 +56,7 @@ public class ShipsControls : MonoBehaviour
     private void RotateShip()
     {
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
-        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.06f);
+        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.04f);
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint);
