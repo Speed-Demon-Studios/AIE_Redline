@@ -5,6 +5,7 @@ using UnityEngine;
 public class CheckpointTrigger : MonoBehaviour
 {
     private RacerDetails racer;
+    public bool enteredCheckpoint = false;
     
     private void Awake()
     {
@@ -20,6 +21,16 @@ public class CheckpointTrigger : MonoBehaviour
             {
                 racer.currentCheckpoint = cHandler.GetNextIndex(racer.currentCheckpoint);
             }
+            enteredCheckpoint = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.ToLower() == "checkpoint" || enteredCheckpoint == true)
+        {
+            
+            enteredCheckpoint = false;
         }
     }
 }
