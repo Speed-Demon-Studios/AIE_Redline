@@ -33,8 +33,6 @@ public class ShipsControls : MonoBehaviour
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
 
-    private Vector3 m_gizmosDrawPoint;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -74,18 +72,8 @@ public class ShipsControls : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -rayCastPoint.up, out hit))
         {
-            Debug.Log(-transform.up);
-            //Debug.DrawLine(rayCastPoint.position, hit.point);
-            m_gizmosDrawPoint = hit.point;
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                go.transform.position = hit.point;
-                go.transform.localScale = Vector3.one * 0.3f;
-            }
             if (hit.transform.tag == "Road")
             {
-                Debug.Log(hit.transform.gameObject.tag);
                 m_targetPos = hit.normal;
             }
         }
