@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AIMoveInputs : MonoBehaviour
 {
-    private List<GameObject> m_nodes = new();
+    private List<Nodes> m_nodes = new();
     public GameObject nodeParent;
     public float distance;
     private int m_currentNodeIndex;
@@ -13,6 +14,9 @@ public class AIMoveInputs : MonoBehaviour
     private float m_speed;
     public float maxAngle;
     private ShipsControls m_controls;
+
+    private Vector3 m_currentPos;
+    public float radius;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,7 @@ public class AIMoveInputs : MonoBehaviour
                 startNodeDistance = Vector3.Distance(this.transform.position, nodeParent.transform.GetChild(i).gameObject.transform.position);
                 startNodeIndex = i;
             }
-            m_nodes.Add(nodeParent.transform.GetChild(i).gameObject);
+            m_nodes.Add(nodeParent.transform.GetChild(i).gameObject.GetComponent<Nodes>());
         }
         m_currentNodeIndex = startNodeIndex;
         m_controls = GetComponent<ShipsControls>();
@@ -41,21 +45,24 @@ public class AIMoveInputs : MonoBehaviour
 
     private void Turning()
     {
-        if (Vector3.Distance(this.gameObject.transform.position, m_nodes[m_currentNodeIndex].transform.position) < distance)
-            m_currentNodeIndex += 1;
 
-        if (m_currentNodeIndex > m_nodes.Count - 1)
-            m_currentNodeIndex = 0;
+
+        if (Vector3.Distance(this.gameObject.transform.position, m_currentPos) < distance)
+        {
+            m_currentNodeIndex += 1;
+            if (m_currentNodeIndex > m_nodes.Count - 1)
+                m_currentNodeIndex = 0;
+            m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+        }
 
         Vector3 direction = (transform.position - m_controls.facingPoint.position).normalized;
 
-        Vector3 nodeDirection = (transform.position - m_nodes[m_currentNodeIndex].transform.position).normalized;
+        Vector3 nodeDirection = (transform.position - m_currentPos).normalized;
 
         float angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
 
         float angleRad = angle * Mathf.Deg2Rad;
 
-        //Debug.Log(angleRad);
 
         if(angleRad < 0)
         {
@@ -66,6 +73,7 @@ public class AIMoveInputs : MonoBehaviour
         {
             m_speed = curve.Evaluate(angleRad / maxAngle);
         }
+
 
 
         m_controls.SetTurnMultipliers(-angleRad);
