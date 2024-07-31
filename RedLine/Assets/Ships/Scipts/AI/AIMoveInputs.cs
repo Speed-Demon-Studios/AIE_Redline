@@ -45,15 +45,19 @@ public class AIMoveInputs : MonoBehaviour
 
     private void Turning()
     {
-        if (Vector3.Distance(this.gameObject.transform.position, m_nodes[m_currentNodeIndex].ReturnNodePos()) < distance)
-            m_currentNodeIndex += 1;
 
-        if (m_currentNodeIndex > m_nodes.Count - 1)
-            m_currentNodeIndex = 0;
+
+        if (Vector3.Distance(this.gameObject.transform.position, m_currentPos) < distance)
+        {
+            m_currentNodeIndex += 1;
+            if (m_currentNodeIndex > m_nodes.Count - 1)
+                m_currentNodeIndex = 0;
+            m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+        }
 
         Vector3 direction = (transform.position - m_controls.facingPoint.position).normalized;
 
-        Vector3 nodeDirection = (transform.position - m_nodes[m_currentNodeIndex].ReturnNodePos()).normalized;
+        Vector3 nodeDirection = (transform.position - m_currentPos).normalized;
 
         float angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
 
@@ -69,6 +73,7 @@ public class AIMoveInputs : MonoBehaviour
         {
             m_speed = curve.Evaluate(angleRad / maxAngle);
         }
+
 
 
         m_controls.SetTurnMultipliers(-angleRad);
