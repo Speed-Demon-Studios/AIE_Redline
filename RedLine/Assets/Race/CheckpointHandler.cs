@@ -12,6 +12,12 @@ public class CheckpointHandler : MonoBehaviour
         return transform.GetChild(index);
     }
 
+    private void Awake()
+    {
+        GameManager.gManager.checkpointParent = this;
+    }
+
+
     /// <summary>
     /// Returns the next index.
     /// </summary>

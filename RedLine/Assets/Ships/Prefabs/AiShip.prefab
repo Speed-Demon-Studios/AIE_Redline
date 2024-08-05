@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enteredCheckpoint: 0
+  finalCheckpoint: 0
 --- !u!1 &2819560891356404108
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +274,7 @@ GameObject:
   - component: {fileID: 5609334039806038210}
   - component: {fileID: 5573208418150351537}
   - component: {fileID: 5582754433793503630}
+  - component: {fileID: 3908841940884711766}
   m_Layer: 0
   m_Name: AiShip
   m_TagString: Racer
@@ -389,7 +391,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
@@ -446,6 +448,7 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  distanceToCheckpoint: 0
 --- !u!135 &5573208418150351537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -472,6 +475,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1350665, y: 0.8140017, z: 3.6135154}
   m_Center: {x: 0.0047693253, y: 0.09299916, z: 0.25753617}
+--- !u!114 &3908841940884711766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819560891871692966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561dd817e7d91264883ebed85a49f235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementEnabled: 0
+  playerCamera: {fileID: 0}
+  pInput: {fileID: 0}
+  sControls: {fileID: 2819560891871692962}
+  aiInput: {fileID: 2819560891871692965}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0

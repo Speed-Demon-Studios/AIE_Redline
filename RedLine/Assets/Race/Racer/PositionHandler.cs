@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PositionHandler : MonoBehaviour
 {
-    public List<RacerDetails> racers = new List<RacerDetails>();
     public bool racersAdded = false;
+    public List<RacerDetails> racers = new List<RacerDetails>();
     private IList<RacerDetails> racerFinder = new List<RacerDetails>();
-    bool racersSorted = false;
+    private bool racersSorted = false;
 
-
-    private void Awake()
+    public void OnRaceLoaded()
     {
         // Find all the racers in the scene
+        racersAdded = false;
         racerFinder = FindObjectsOfType<RacerDetails>();
+        //racerFinder = new List<RacerDetails>();
+        //racerFinder.Clear();
+        //racers.Clear();
 
         foreach (RacerDetails rD in racerFinder)
         {
@@ -21,10 +24,17 @@ public class PositionHandler : MonoBehaviour
             racers.Add(rD);
         }
 
+
         foreach (RacerDetails rD in racers)
         {
             Debug.Log("FOUND RACERS");
         }
+
+        foreach (RacerDetails rD in racers)
+        {
+            GameManager.gManager.racerObjects.Add(rD.gameObject);
+        }
+
         if (racers.Count == racerFinder.Count)
         {
             racersAdded = true;
@@ -37,10 +47,6 @@ public class PositionHandler : MonoBehaviour
         {
             rD.placement = racers.IndexOf(rD) + 1;
         }
-        //for (int i = 0; i < racers.Count; i++)
-        //{
-        //    racers[i].placement = i + 1;
-        //}
         racersSorted = false;
         StopCoroutine(SortRacers());
         yield return new WaitForEndOfFrame();
@@ -49,43 +55,54 @@ public class PositionHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (racersAdded == true)
+        if (racersAdded == false)
         {
-            racers.Sort((r1, r2) =>
-            {
-                racersSorted = false;
-                if (r1.currentCheckpoint != r2.currentCheckpoint)
-                {
-                    return r1.currentCheckpoint.CompareTo(r2.currentLap);
-                }
-                if (r1.currentCheckpoint != r2.currentCheckpoint)
-                {
-                    return r1.currentLap.CompareTo(r2.currentCheckpoint);
-                }
+            OnRaceLoaded();
+        }
+        else if (racersAdded == true)
+        {
+             racers.Sort((r1, r2) =>
+             {
+                 racersSorted = false;
+                 //if (r1.currentLap != r2.currentCheckpoint)
+                 //{
+                 //    return r1.currentCheckpoint.CompareTo(r2.currentLap);
+                 //}
+                 //if (r1.currentCheckpoint != r2.currentCheckpoint)
+                 //{
+                 //    return r1.currentLap.CompareTo(r2.currentCheckpoint);
+                 //}
+                 //
+                 //if (r1.currentCheckpoint != r2.currentCheckpoint)
+                 //{
+                 //    return r1.currentLap.CompareTo(r2.currentLap);
+                 //}
+                 //
+                 //if (r1.currentLap != r2.currentLap)
+                 //{
+                 //    return r1.currentCheckpoint.CompareTo(r2.currentCheckpoint);
+                 //}
+                 //
+                 //if (r1.currentLap != r2.currentLap)
+                 //{
+                 //    return r1.currentCheckpoint.CompareTo(r2.currentLap);
+                 //}
+                 if (r1.currentCheckpoint != r2.currentCheckpoint)
+                 {
+                     return r1.currentCheckpoint;
+                     //return r1.currentCheckpoint.CompareTo(r2.currentLap);
+                 }
 
-                if (r1.currentCheckpoint != r2.currentCheckpoint)
-                {
-                    return r1.currentLap.CompareTo(r2.currentLap);
-                }
+                 if (r1.currentLap != r2.currentLap)
+                 {
+                     return r1.currentCheckpoint;
+                 }
 
-                if (r1.currentLap != r2.currentLap)
-                {
-                    return r1.currentLap.CompareTo(r2.currentLap);
-                }
-
-                if (r1.currentCheckpoint != r2.currentCheckpoint)
-                {
-                    return r1.currentCheckpoint.CompareTo(r2.currentCheckpoint);
-                }
-                racersSorted = true;
-
-                return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
-            });
-
-            if (racersSorted == true)
-            {
-                StartCoroutine(SortRacers());
-            }
+                 racersSorted = true;
+                 return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
+             });
+             
+             StartCoroutine(SortRacers());
         }
     }
 }

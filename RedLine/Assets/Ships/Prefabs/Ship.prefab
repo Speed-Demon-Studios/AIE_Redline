@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enteredCheckpoint: 0
+  finalCheckpoint: 0
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2868536069181459850}
+  - component: {fileID: 4394239317412869165}
   - component: {fileID: 2868536069181459849}
   - component: {fileID: 2868536069181459848}
   - component: {fileID: 2868536069181459851}
@@ -216,6 +218,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4394239317412869165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561dd817e7d91264883ebed85a49f235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 2868536069371765821}
+  pInput: {fileID: 2868536069181459849}
+  sControls: {fileID: 2868536069181459848}
 --- !u!114 &2868536069181459849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +395,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1615cb12-9f84-4737-af47-48b667560890
     m_ActionName: Player/Join[/XInputControllerWindows/start,/XInputControllerWindows1/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11c93e19-9ed8-4f57-b49a-6f3977c4c985
+    m_ActionName: Menus/UP
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7d1b06d-194b-4f96-a53c-b2c2070d44cf
+    m_ActionName: Menus/DOWN
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67c2ceef-da62-44b0-875f-d482022abcf7
+    m_ActionName: Menus/LEFT
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c9ae14b-50e0-4bf2-ab23-8641fedd4402
+    m_ActionName: Menus/RIGHT
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f999eb10-96ca-48ca-9a10-8045f4bb3c61
+    m_ActionName: Menus/CONFIRM
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
@@ -398,6 +435,7 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  distanceToCheckpoint: 0
 --- !u!135 &6267707172146090529
 SphereCollider:
   m_ObjectHideFlags: 0

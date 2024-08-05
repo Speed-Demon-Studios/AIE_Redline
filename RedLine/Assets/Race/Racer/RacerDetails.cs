@@ -18,7 +18,6 @@ public class RacerDetails : MonoBehaviour
     {
         m_cHandler = GameManager.gManager.checkpointParent;
         var nextCheckpoint = m_cHandler.GetCheckpoint(currentCheckpoint);
-        //TESTING ONLY
         distanceToCheckpoint = Vector3.Distance(transform.position, nextCheckpoint.transform.position);
         return distanceToCheckpoint;
     }

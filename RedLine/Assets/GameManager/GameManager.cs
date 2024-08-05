@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public CheckpointHandler checkpointParent;
     public GameObject[] StartingPoints;
+    public PositionHandler pHandler;
+    public IList<GameObject> playerObjects = new List<GameObject>();
+    public IList<GameObject> racerObjects = new List<GameObject>();
+    public bool raceStarted = false;
+
     public static GameManager gManager { get; private set; }
 
     // Start is called before the first frame update
@@ -25,11 +30,5 @@ public class GameManager : MonoBehaviour
         {
             gManager = this;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
