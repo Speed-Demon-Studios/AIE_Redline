@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Nodes : MonoBehaviour
 {
+    public Nodes nextNode;
+    //public Nodes prevNode;
     public Vector3 ReturnNodePos() { return transform.position; }
 
     public float radius;
@@ -21,5 +23,10 @@ public class Nodes : MonoBehaviour
         randDirection += origin;
 
         return randDirection;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 }

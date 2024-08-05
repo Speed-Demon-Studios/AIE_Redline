@@ -16,7 +16,7 @@ public class AIMoveInputs : MonoBehaviour
     private ShipsControls m_controls;
 
     private bool m_didISkipLastCheckPoint;
-    private Vector3 m_currentPos;
+    private Vector3 m_desiredNode;
     public float radius;
 
     // Start is called before the first frame update
@@ -36,7 +36,7 @@ public class AIMoveInputs : MonoBehaviour
             m_nodes.Add(nodeParent.transform.GetChild(i).gameObject.GetComponent<Nodes>());
         }
         m_currentNodeIndex = startNodeIndex;
-        m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+        m_desiredNode = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
     }
 
     // Update is called once per frame
@@ -44,22 +44,23 @@ public class AIMoveInputs : MonoBehaviour
     {
         Accelerate();
         Turning();
+        Debug.DrawLine(this.transform.position, m_desiredNode);
     }
 
     private void Turning()
     {
-        if (Vector3.Distance(this.gameObject.transform.position, m_currentPos) < distance)
+        if (Vector3.Distance(this.gameObject.transform.position, m_desiredNode) < distance)
         {
             m_currentNodeIndex += 1;
             if (m_currentNodeIndex > m_nodes.Count - 1)
                 m_currentNodeIndex = 0;
-            m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+            m_desiredNode = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
             m_didISkipLastCheckPoint = false;
         }
 
         Vector3 direction = (transform.position - m_controls.facingPoint.position).normalized;
 
-        Vector3 nodeDirection = (transform.position - m_currentPos).normalized;
+        Vector3 nodeDirection = (transform.position - m_desiredNode).normalized;
 
         float angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
 
@@ -70,11 +71,11 @@ public class AIMoveInputs : MonoBehaviour
             m_currentNodeIndex += 1;
             if (m_currentNodeIndex > m_nodes.Count - 1)
                 m_currentNodeIndex = 0;
-            m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+            m_desiredNode = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
 
             direction = (transform.position - m_controls.facingPoint.position).normalized;
 
-            nodeDirection = (transform.position - m_currentPos).normalized;
+            nodeDirection = (transform.position - m_desiredNode).normalized;
 
             angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
 
@@ -98,6 +99,5 @@ public class AIMoveInputs : MonoBehaviour
     private void Accelerate()
     {
         m_controls.SetSpeedMultiplier(m_speed);
-
     }
 }
