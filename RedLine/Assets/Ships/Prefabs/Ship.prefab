@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enteredCheckpoint: 0
+  finalCheckpoint: 0
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,8 +231,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAsset: {fileID: -944628639613478452, guid: 0d2f1facbfb4c9a4898ab92d8ea79090,
     type: 3}
-  minPOV: 0
-  maxPOV: 0
+  test: 0
+  lerpTime: 0.05
+  minPOV: 60
+  maxPOV: 125
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +401,7 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  distanceToCheckpoint: 0
 --- !u!135 &6267707172146090529
 SphereCollider:
   m_ObjectHideFlags: 0
