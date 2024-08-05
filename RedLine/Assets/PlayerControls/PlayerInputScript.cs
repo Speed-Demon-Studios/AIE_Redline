@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,12 @@ public class PlayerInputScript : MonoBehaviour
     [SerializeField] private InputActionAsset inputAsset;
     private InputActionMap player;
     private ShipsControls m_shipControls;
+    private Camera m_cam;
+    public bool test;
 
+    private float m_currentPOV;
+    private float m_desiredPOV;
+    public float lerpTime;
     public float minPOV;
     public float maxPOV;
 
@@ -16,16 +22,37 @@ public class PlayerInputScript : MonoBehaviour
     void Start()
     {
         m_shipControls = GetComponent<ShipsControls>();
+        m_cam = GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            test = !test;
+        }
+
+        if (test)
+        {
+            CalculatePOV();
+        }
     }
 
-    public void ShipPOV()
+    private void CalculatePOV()
     {
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.maxSpeed;
+        if(speedPercentage > 0.001)
+        {
+            m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
+        }
+        else
+        {
+            m_desiredPOV = minPOV;
+        }
+
+        m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
+        m_cam.fieldOfView = m_currentPOV;
 
     }
 
