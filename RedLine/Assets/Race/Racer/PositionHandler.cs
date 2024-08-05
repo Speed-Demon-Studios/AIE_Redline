@@ -7,6 +7,7 @@ public class PositionHandler : MonoBehaviour
     public List<RacerDetails> racers = new List<RacerDetails>();
     public bool racersAdded = false;
     private IList<RacerDetails> racerFinder = new List<RacerDetails>();
+    bool racersSorted = false;
 
 
     private void Awake()
@@ -40,6 +41,7 @@ public class PositionHandler : MonoBehaviour
         //{
         //    racers[i].placement = i + 1;
         //}
+        racersSorted = false;
         StopCoroutine(SortRacers());
         yield return new WaitForEndOfFrame();
     }
@@ -51,28 +53,39 @@ public class PositionHandler : MonoBehaviour
         {
             racers.Sort((r1, r2) =>
             {
-                //if (r1.currentLap == r2.currentLap)
-                //{
-                    if (r1.currentLap != r2.currentLap)
-                    {
-                        return r1.currentLap.CompareTo(r2.currentLap);
-                    }
-                    
-                    if (r1.currentCheckpoint != r2.currentCheckpoint)
-                    {
-                        return r1.currentCheckpoint.CompareTo(r2.currentCheckpoint);
-                    }
-                //}
+                racersSorted = false;
+                if (r1.currentCheckpoint != r2.currentCheckpoint)
+                {
+                    return r1.currentCheckpoint.CompareTo(r2.currentLap);
+                }
+                if (r1.currentCheckpoint != r2.currentCheckpoint)
+                {
+                    return r1.currentLap.CompareTo(r2.currentCheckpoint);
+                }
+
+                if (r1.currentCheckpoint != r2.currentCheckpoint)
+                {
+                    return r1.currentLap.CompareTo(r2.currentLap);
+                }
+
+                if (r1.currentLap != r2.currentLap)
+                {
+                    return r1.currentLap.CompareTo(r2.currentLap);
+                }
+
+                if (r1.currentCheckpoint != r2.currentCheckpoint)
+                {
+                    return r1.currentCheckpoint.CompareTo(r2.currentCheckpoint);
+                }
+                racersSorted = true;
 
                 return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
             });
 
-        StartCoroutine(SortRacers());
-
-            //for (int i = 0; i < racers.Count; i++)
-            //{
-            //    racers[i].placement = i + 1;
-            //}
+            if (racersSorted == true)
+            {
+                StartCoroutine(SortRacers());
+            }
         }
     }
 }

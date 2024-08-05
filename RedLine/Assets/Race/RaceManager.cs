@@ -9,7 +9,7 @@ public class RaceManager : MonoBehaviour
     
     public void LapComplete(RacerDetails racer)
     {
-        if (racer.currentLap < TotalLaps)
+        if (racer.currentLap < TotalLaps && racer.currentCheckpoint == 0)
         {
             racer.currentLap += 1;
         }

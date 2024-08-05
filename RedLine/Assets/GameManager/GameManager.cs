@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject checkpointParent;
+    public CheckpointHandler checkpointParent;
     public GameObject[] StartingPoints;
     public static GameManager gManager { get; private set; }
 
