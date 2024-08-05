@@ -230,9 +230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561dd817e7d91264883ebed85a49f235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementEnabled: 0
   playerCamera: {fileID: 2868536069371765821}
   pInput: {fileID: 2868536069181459849}
   sControls: {fileID: 2868536069181459848}
+  aiInput: {fileID: 0}
 --- !u!114 &2868536069181459849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +252,7 @@ MonoBehaviour:
   test: 0
   lerpTime: 0.05
   minPOV: 60
-  maxPOV: 125
+  maxPOV: 135
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +269,6 @@ MonoBehaviour:
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
-  text: {fileID: 0}
   downForce: 1500
   maxSpeed: 130
   acceleration: 2.5

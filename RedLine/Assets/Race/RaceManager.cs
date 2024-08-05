@@ -47,5 +47,12 @@ public class RaceManager : MonoBehaviour
                 //}
             }
         }
+        else if (GameManager.gManager.raceStarted == false)
+        {
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                GameManager.gManager.raceStarted = true;
+            }
+        }
     }
 }
