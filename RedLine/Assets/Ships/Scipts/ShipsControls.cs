@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
@@ -58,8 +59,8 @@ public class ShipsControls : MonoBehaviour
         m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.04f);
 
         // first it will look at facing position which in the empty object infront of the ship
-        transform.LookAt(facingPoint);
-
+        transform.LookAt(facingPoint, transform.up);
+        //transform.rotation = Quaternion.LookRotation((transform.position - facingPoint.position).normalized, m_targetPos);
         transform.rotation = Quaternion.FromToRotation(transform.up, m_currentPos) * transform.rotation;
     }
 

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enteredCheckpoint: 0
+  finalCheckpoint: 0
 --- !u!1 &2819560891356404108
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +317,7 @@ MonoBehaviour:
   rayCastPoint: {fileID: 4022018049878914855}
   downForce: 1000
   maxSpeed: 210
-  acceleration: 11
+  acceleration: 11.2
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -429,7 +430,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxAngle: 1.2
+  maxAngle: 1.25
   radius: 3
 --- !u!114 &5609334039806038210
 MonoBehaviour:
@@ -446,6 +447,7 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  distanceToCheckpoint: 0
 --- !u!135 &5573208418150351537
 SphereCollider:
   m_ObjectHideFlags: 0
