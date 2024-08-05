@@ -15,12 +15,15 @@ public class AIMoveInputs : MonoBehaviour
     public float maxAngle;
     private ShipsControls m_controls;
 
+    private bool m_didISkipLastCheckPoint;
     private Vector3 m_currentPos;
     public float radius;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_controls = GetComponent<ShipsControls>();
+
         float startNodeDistance = 5000;
         int startNodeIndex = 0;
         for(int i = 0; i < nodeParent.transform.childCount; i++)
@@ -33,7 +36,7 @@ public class AIMoveInputs : MonoBehaviour
             m_nodes.Add(nodeParent.transform.GetChild(i).gameObject.GetComponent<Nodes>());
         }
         m_currentNodeIndex = startNodeIndex;
-        m_controls = GetComponent<ShipsControls>();
+        m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
     }
 
     // Update is called once per frame
@@ -45,14 +48,13 @@ public class AIMoveInputs : MonoBehaviour
 
     private void Turning()
     {
-
-
         if (Vector3.Distance(this.gameObject.transform.position, m_currentPos) < distance)
         {
             m_currentNodeIndex += 1;
             if (m_currentNodeIndex > m_nodes.Count - 1)
                 m_currentNodeIndex = 0;
             m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+            m_didISkipLastCheckPoint = false;
         }
 
         Vector3 direction = (transform.position - m_controls.facingPoint.position).normalized;
@@ -63,6 +65,22 @@ public class AIMoveInputs : MonoBehaviour
 
         float angleRad = angle * Mathf.Deg2Rad;
 
+        if(angle > 100 || angle < -100 && !m_didISkipLastCheckPoint)
+        {
+            m_currentNodeIndex += 1;
+            if (m_currentNodeIndex > m_nodes.Count - 1)
+                m_currentNodeIndex = 0;
+            m_currentPos = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
+
+            direction = (transform.position - m_controls.facingPoint.position).normalized;
+
+            nodeDirection = (transform.position - m_currentPos).normalized;
+
+            angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
+
+            angleRad = angle * Mathf.Deg2Rad;
+            m_didISkipLastCheckPoint = true;
+        }
 
         if(angleRad < 0)
         {
@@ -73,8 +91,6 @@ public class AIMoveInputs : MonoBehaviour
         {
             m_speed = curve.Evaluate(angleRad / maxAngle);
         }
-
-
 
         m_controls.SetTurnMultipliers(-angleRad);
     }

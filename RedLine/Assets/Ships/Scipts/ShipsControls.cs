@@ -7,6 +7,7 @@ public class ShipsControls : MonoBehaviour
 {
     [Header("Refrences")]
     private Rigidbody m_rb;
+    public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
     public GameObject shipModel;

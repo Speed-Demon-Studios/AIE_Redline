@@ -7,8 +7,10 @@ public class PlayerInputScript : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputAsset;
     private InputActionMap player;
-    private PlayerInput _input;
     private ShipsControls m_shipControls;
+
+    public float minPOV;
+    public float maxPOV;
 
     // Start is called before the first frame update
     void Start()
@@ -16,16 +18,15 @@ public class PlayerInputScript : MonoBehaviour
         m_shipControls = GetComponent<ShipsControls>();
     }
 
-    private void Awake()
-    {
-        _input = GetComponent<PlayerInput>();
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ShipPOV()
+    {
+
     }
 
     public void Move(InputAction.CallbackContext context)
