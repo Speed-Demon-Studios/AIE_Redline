@@ -271,7 +271,8 @@ MonoBehaviour:
   rayCastPoint: {fileID: 8319451938726217151}
   downForce: 1500
   maxSpeed: 130
-  accelerationMultiplier: 0.5
+  maxAcceleration: 5
+  accelerationMultiplier: 2.5
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -296,7 +297,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  turnSpeed: 2.5
+  turnSpeed: 3
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -310,8 +311,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.2708333
     - serializedVersion: 3
-      time: 1.0041809
-      value: 0.4
+      time: 0.9916624
+      value: 0.41416812
       inSlope: -0.67641693
       outSlope: -0.67641693
       tangentMode: 0
