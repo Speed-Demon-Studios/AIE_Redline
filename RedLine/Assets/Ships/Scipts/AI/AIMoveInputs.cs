@@ -10,7 +10,7 @@ public class AIMoveInputs : MonoBehaviour
     public GameObject nodeParent;
     public float distance;
     private int m_currentNodeIndex;
-    public AnimationCurve curve;
+    public AnimationCurve neededSpeedCurve;
     private float m_speed;
     public float maxAngle;
     private ShipsControls m_controls;
@@ -55,7 +55,6 @@ public class AIMoveInputs : MonoBehaviour
             if (m_currentNodeIndex > m_nodes.Count - 1)
                 m_currentNodeIndex = 0;
             m_desiredNode = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
-            m_didISkipLastCheckPoint = false;
         }
 
         Vector3 direction = (transform.position - m_controls.facingPoint.position).normalized;
@@ -66,31 +65,18 @@ public class AIMoveInputs : MonoBehaviour
 
         float angleRad = angle * Mathf.Deg2Rad;
 
-        if(angle > 100 || angle < -100 && !m_didISkipLastCheckPoint)
-        {
-            m_currentNodeIndex += 1;
-            if (m_currentNodeIndex > m_nodes.Count - 1)
-                m_currentNodeIndex = 0;
-            m_desiredNode = m_nodes[m_currentNodeIndex].RandomNavSphere(m_nodes[m_currentNodeIndex].ReturnNodePos());
-
-            direction = (transform.position - m_controls.facingPoint.position).normalized;
-
-            nodeDirection = (transform.position - m_desiredNode).normalized;
-
-            angle = Vector3.SignedAngle(nodeDirection, direction, Vector3.up);
-
-            angleRad = angle * Mathf.Deg2Rad;
-            m_didISkipLastCheckPoint = true;
-        }
-
         if(angleRad < 0)
         {
             float tempAngleRad = -angleRad;
-            m_speed = curve.Evaluate(tempAngleRad / maxAngle);
+            float neededSpeed = neededSpeedCurve.Evaluate(tempAngleRad);
+            float currentSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.maxSpeed * 0.7f);
+            m_speed = neededSpeed - currentSpeedPercent;
         }
         else
         {
-            m_speed = curve.Evaluate(angleRad / maxAngle);
+            float neededSpeed = neededSpeedCurve.Evaluate(angleRad);
+            float currentSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.maxSpeed * 0.7f);
+            m_speed = neededSpeed - currentSpeedPercent;
         }
 
         m_controls.SetTurnMultipliers(-angleRad);
