@@ -272,9 +272,9 @@ MonoBehaviour:
   rayCastPoint: {fileID: 8319451938726217151}
   downForce: 1500
   maxSpeed: 130
-  maxAcceleration: 0
-  accelerationMultiplier: 0.5
-  breakMultiplier: 2.5
+  maxAcceleration: 5
+  accelerationMultiplier: 2.5
+  breakMultiplier: 3
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -787,6 +787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera_VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5707020642490148351, guid: 7c383de674d5ea74ab9690f663af737a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5707020642773547228, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
