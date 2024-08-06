@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.InputSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,6 +11,8 @@ public class UIControllerInput : MonoBehaviour
     [SerializeField] private int[] hMenuIndexes;
     [SerializeField] private GameObject InputControllerParentPrefab;
     private PlayerInputManager PIM;
+    private int playerCount = 0;
+    public TextMeshProUGUI playerCountText;
 
     // Testing
     private bool HasInitialized = false;
@@ -34,10 +34,16 @@ public class UIControllerInput : MonoBehaviour
 
     private void Update()
     {
-        if (PIM.playerCount == 4)
+        if (PIM != null)
         {
-            PIM.DisableJoining();
+            playerCount = PIM.playerCount;
+            if (PIM.playerCount == 4)
+            {
+                PIM.DisableJoining();
+            }
         }
+
+        playerCountText.text = "Number of Players: " + playerCount;
 
         if (HasInitialized == true)
         {

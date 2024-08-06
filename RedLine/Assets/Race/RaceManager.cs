@@ -42,9 +42,6 @@ public class RaceManager : MonoBehaviour
                 InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
 
                 ibr.EnableRacerMovement();
-                //if (ibr.movementEnabled == false)
-                //{
-                //}
             }
         }
         else if (GameManager.gManager.raceStarted == false)
