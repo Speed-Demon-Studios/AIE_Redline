@@ -21,7 +21,9 @@ public class ShipsControls : MonoBehaviour
     [Header("Speed Variables")]
     private float m_accelerateMultiplier;
     public float maxSpeed;
-    public float acceleration;
+    public float maxAcceleration;
+    public float accelerationMultiplier;
+    private float m_acceleration;
     public AnimationCurve speedCurve;
 
     [Header("Turning Varibles")]
@@ -60,7 +62,8 @@ public class ShipsControls : MonoBehaviour
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint, transform.up);
-        //transform.rotation = Quaternion.LookRotation((transform.position - facingPoint.position).normalized, m_targetPos);
+
+        // Rotate the ship to the normal of the track
         transform.rotation = Quaternion.FromToRotation(transform.up, m_currentPos) * transform.rotation;
     }
 
@@ -93,8 +96,15 @@ public class ShipsControls : MonoBehaviour
     private void Accelerate()
     {
         float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
-        Vector3 direction = (transform.position - facingPoint.position).normalized;
-        m_rb.velocity += acceleration * direction * -m_accelerateMultiplier * multiplier;
+
+        if (m_accelerateMultiplier == 0)
+            m_acceleration -= (accelerationMultiplier * 0.9f) * Time.deltaTime;
+        else
+            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
+
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, maxAcceleration);
+
+        m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
 
     /// <summary>
