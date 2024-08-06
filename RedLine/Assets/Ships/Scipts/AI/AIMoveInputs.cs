@@ -79,6 +79,13 @@ public class AIMoveInputs : MonoBehaviour
             m_speed = neededSpeed - currentSpeedPercent;
         }
 
+        if(m_speed < 0)
+        {
+            m_speed = m_speed * 2;
+        }
+
+        Debug.Log(m_speed);
+
         m_controls.SetTurnMultipliers(-angleRad);
     }
 
