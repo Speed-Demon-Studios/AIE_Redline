@@ -24,6 +24,7 @@ public class ShipsControls : MonoBehaviour
     public float maxAcceleration;
     public float accelerationMultiplier;
     private float m_acceleration;
+    public float breakMultiplier;
     public AnimationCurve speedCurve;
 
     [Header("Turning Varibles")]
@@ -98,9 +99,11 @@ public class ShipsControls : MonoBehaviour
         float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
 
         if (m_accelerateMultiplier == 0)
-            m_acceleration -= (accelerationMultiplier * 0.9f) * Time.deltaTime;
-        else
+            m_acceleration -= (accelerationMultiplier * 0.4f) * Time.deltaTime;
+        else if(m_accelerateMultiplier > 0)
             m_acceleration += accelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
+        else
+            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * breakMultiplier * Time.deltaTime;
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, maxAcceleration);
 
