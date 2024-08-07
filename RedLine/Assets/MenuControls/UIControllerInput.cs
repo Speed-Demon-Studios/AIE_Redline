@@ -56,7 +56,6 @@ public class UIControllerInput : MonoBehaviour
     {
         if (HasInitialized == true)
         {
-            //GameManager.gManager.raceStarted = true;
             Debug.Log("Loading Race Scene");
             Debug.Log("Ready To Start Race");
             SceneManager.LoadScene(1);

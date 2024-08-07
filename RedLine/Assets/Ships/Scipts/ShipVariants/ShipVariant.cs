@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ShipVariant", menuName = "Ship Variants/Player Ship Variant", order = 1)]
+[CreateAssetMenu(fileName = "ShipVariant", menuName = "Ship Variants/Ship Variant", order = 1)]
 public class ShipVariant : ScriptableObject
 {
     public string VariantName;
@@ -18,4 +18,10 @@ public class ShipVariant : ScriptableObject
     [Header("Turning Variables")]
     public float TurnSpeed;
     public AnimationCurve TurnSpeedCurve;
+    [Space]
+    [Header("Ai Movement Variables")]
+    public AnimationCurve NeededSpeedCurve;
+    public float MaxAngle;
+    public float Radius;
+    public float distance;
 }
