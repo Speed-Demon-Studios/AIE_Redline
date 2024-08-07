@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class CheckpointHandler : MonoBehaviour
@@ -12,6 +11,12 @@ public class CheckpointHandler : MonoBehaviour
     {
         return transform.GetChild(index);
     }
+
+    private void Awake()
+    {
+        GameManager.gManager.checkpointParent = this;
+    }
+
 
     /// <summary>
     /// Returns the next index.

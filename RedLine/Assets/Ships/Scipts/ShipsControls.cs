@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
     [Header("Refrences")]
     private Rigidbody m_rb;
+    public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
     public GameObject shipModel;
@@ -19,7 +21,10 @@ public class ShipsControls : MonoBehaviour
     [Header("Speed Variables")]
     private float m_accelerateMultiplier;
     public float maxSpeed;
-    public float acceleration;
+    public float maxAcceleration;
+    public float accelerationMultiplier;
+    private float m_acceleration;
+    public float breakMultiplier;
     public AnimationCurve speedCurve;
 
     [Header("Turning Varibles")]
@@ -57,8 +62,9 @@ public class ShipsControls : MonoBehaviour
         m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.04f);
 
         // first it will look at facing position which in the empty object infront of the ship
-        transform.LookAt(facingPoint);
+        transform.LookAt(facingPoint, transform.up);
 
+        // Rotate the ship to the normal of the track
         transform.rotation = Quaternion.FromToRotation(transform.up, m_currentPos) * transform.rotation;
     }
 
@@ -91,8 +97,17 @@ public class ShipsControls : MonoBehaviour
     private void Accelerate()
     {
         float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
-        Vector3 direction = (transform.position - facingPoint.position).normalized;
-        m_rb.velocity += acceleration * direction * -m_accelerateMultiplier * multiplier;
+
+        if (m_accelerateMultiplier == 0)
+            m_acceleration -= (accelerationMultiplier * 0.4f) * Time.deltaTime;
+        else if(m_accelerateMultiplier > 0)
+            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
+        else
+            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * breakMultiplier * Time.deltaTime;
+
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, maxAcceleration);
+
+        m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
 
     /// <summary>

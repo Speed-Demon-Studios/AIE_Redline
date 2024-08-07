@@ -31,26 +31,6 @@ public class PlayerManager : MonoBehaviour
         m_players.Add(player);
 
         Transform playerParent = player.transform.parent;
-        //if (gManager.StartingPoints[0] != null)
-        //{
-        //    playerParent.transform.position = gManager.StartingPoints[0].transform.position;
-        //}
-
         int layerToAdd = (int)Mathf.Log(m_playerLayers[m_players.Count - 1].value, 2);
-
-        //playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layerToAdd;
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
