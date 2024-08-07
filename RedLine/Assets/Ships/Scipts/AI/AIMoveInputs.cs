@@ -47,8 +47,12 @@ public class AIMoveInputs : MonoBehaviour
             randomPos = m_desiredNode.GetComponent<Nodes>().RandomNavSphere(m_desiredNode.transform.position);
         }
 
+        Vector3 nodeDirection = (transform.position - randomPos).normalized;
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
         Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
+
+        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, Vector3.up);
+        float angleRad = angle * Mathf.Deg2Rad;
 
         float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, Vector3.up);
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
@@ -74,9 +78,8 @@ public class AIMoveInputs : MonoBehaviour
         if (m_speed < 0)
             m_speed *= 5f;
         Debug.DrawLine(this.transform.position, randomPos);
-        Debug.Log(m_speed);
 
-        m_controls.SetTurnMultipliers(-secondAngleRad);
+        m_controls.SetTurnMultipliers(-angleRad);
     }
 
     private void Accelerate()
