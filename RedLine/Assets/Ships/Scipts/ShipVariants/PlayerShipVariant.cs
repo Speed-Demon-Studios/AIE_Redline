@@ -6,7 +6,6 @@ using UnityEngine;
 public class ShipVariant : ScriptableObject
 {
     public string VariantName;
-    [Space]
     public float DownForce;
     [Space]
     [Header("Speed Variables")]
@@ -15,12 +14,8 @@ public class ShipVariant : ScriptableObject
     public float AccelerationMultiplier;
     public float BreakMultiplier;
     public AnimationCurve SpeedCurve;
-
+    [Space]
     [Header("Turning Variables")]
     public float TurnSpeed;
     public AnimationCurve TurnSpeedCurve;
-
-    [Header("Ai Movement Variables")]
-    public AnimationCurve neededSpeedCurve;
-    
 }
