@@ -64,33 +64,9 @@ public class PositionHandler : MonoBehaviour
              racers.Sort((r1, r2) =>
              {
                  racersSorted = false;
-                 //if (r1.currentLap != r2.currentCheckpoint)
-                 //{
-                 //    return r1.currentCheckpoint.CompareTo(r2.currentLap);
-                 //}
-                 //if (r1.currentCheckpoint != r2.currentCheckpoint)
-                 //{
-                 //    return r1.currentLap.CompareTo(r2.currentCheckpoint);
-                 //}
-                 //
-                 //if (r1.currentCheckpoint != r2.currentCheckpoint)
-                 //{
-                 //    return r1.currentLap.CompareTo(r2.currentLap);
-                 //}
-                 //
-                 //if (r1.currentLap != r2.currentLap)
-                 //{
-                 //    return r1.currentCheckpoint.CompareTo(r2.currentCheckpoint);
-                 //}
-                 //
-                 //if (r1.currentLap != r2.currentLap)
-                 //{
-                 //    return r1.currentCheckpoint.CompareTo(r2.currentLap);
-                 //}
                  if (r1.currentCheckpoint != r2.currentCheckpoint)
                  {
                      return r1.currentCheckpoint;
-                     //return r1.currentCheckpoint.CompareTo(r2.currentLap);
                  }
 
                  if (r1.currentLap != r2.currentLap)

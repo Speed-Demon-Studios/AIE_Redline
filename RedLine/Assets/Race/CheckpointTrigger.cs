@@ -12,26 +12,4 @@ public class CheckpointTrigger : MonoBehaviour
     {
         racer = GetComponentInParent<RacerDetails>();
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag.ToLower() == "checkpoint")
-    //    {
-    //        CheckpointHandler cHandler = GameManager.gManager.checkpointParent.GetComponent<CheckpointHandler>();
-    //        if (other.transform == cHandler.GetCheckpoint(racer.currentCheckpoint))
-    //        {
-    //            racer.currentCheckpoint = cHandler.GetNextIndex(racer.currentCheckpoint);
-    //        }
-    //        enteredCheckpoint = true;
-    //    }
-    //}
-    //
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag.ToLower() == "checkpoint" || enteredCheckpoint == true)
-    //    {
-    //        
-    //        enteredCheckpoint = false;
-    //    }
-    //}
 }
