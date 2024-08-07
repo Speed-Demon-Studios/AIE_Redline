@@ -267,7 +267,7 @@ MonoBehaviour:
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
   downForce: 1500
-  maxSpeed: 100
+  maxSpeed: 90
   maxAcceleration: 5
   accelerationMultiplier: 2.5
   breakMultiplier: 2.5
@@ -275,27 +275,36 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.008483317
+      time: 0
       value: 1
-      inSlope: -0.114296824
-      outSlope: -0.114296824
+      inSlope: -0.01986102
+      outSlope: -0.01986102
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.22916669
+      outWeight: 0.2375
     - serializedVersion: 3
-      time: 1
-      value: 0.5
-      inSlope: -0.7089806
-      outSlope: -0.7089806
+      time: 0.64614314
+      value: 0.87849385
+      inSlope: -0.44632116
+      outSlope: -0.44632116
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.07916668
+      inWeight: 0.2068496
+      outWeight: 0.32745907
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.89900124
+      outSlope: -0.89900124
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11492259
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  turnSpeed: 4
+  turnSpeed: 3.5
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -308,6 +317,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0.2708333
+    - serializedVersion: 3
+      time: 0.34761378
+      value: 0.7036185
+      inSlope: -0.6551027
+      outSlope: -0.6551027
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1.0041809
       value: 0.4
