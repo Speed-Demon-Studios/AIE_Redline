@@ -9,6 +9,7 @@ public class RaceManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.gManager.rManager = this;
         GameManager.gManager.pHandler = this.gameObject.GetComponent<PositionHandler>();
         foreach (GameObject gObj in GameManager.gManager.playerObjects)
         {
@@ -20,7 +21,7 @@ public class RaceManager : MonoBehaviour
 
     public void LapComplete(RacerDetails racer)
     {
-        if (racer.currentLap < TotalLaps && racer.currentCheckpoint == 0)
+        if (racer.currentLap < TotalLaps)
         {
             racer.currentLap += 1;
         }

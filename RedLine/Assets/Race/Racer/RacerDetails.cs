@@ -35,7 +35,7 @@ public class RacerDetails : MonoBehaviour
                 {
                     if (trigger.finalCheckpoint)
                     {
-                        currentLap += 1;
+                        GameManager.gManager.rManager.LapComplete(this);
                     }
                 }
             }
