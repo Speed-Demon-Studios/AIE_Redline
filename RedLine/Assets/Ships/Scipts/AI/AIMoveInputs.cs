@@ -51,10 +51,10 @@ public class AIMoveInputs : MonoBehaviour
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
         Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
 
-        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, Vector3.up);
+        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, transform.up);
         float angleRad = angle * Mathf.Deg2Rad;
 
-        float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, Vector3.up);
+        float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, transform.up);
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
 
         float tempSpeed2;
