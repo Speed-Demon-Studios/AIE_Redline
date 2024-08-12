@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public IList<GameObject> playerObjects = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
     public bool raceStarted = false;
+    public int countdownIndex = 5;
 
     public static GameManager gManager { get; private set; }
 

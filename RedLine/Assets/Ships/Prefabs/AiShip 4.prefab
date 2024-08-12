@@ -272,9 +272,6 @@ GameObject:
   - component: {fileID: 2819560891871692965}
   - component: {fileID: 5609334039806038210}
   - component: {fileID: 5573208418150351537}
-  - component: {fileID: 5582754433793503630}
-  - component: {fileID: 5876458124700029697}
-  - component: {fileID: 5552176396559437749}
   - component: {fileID: 7244173973842047067}
   m_Layer: 0
   m_Name: AiShip 4
@@ -314,82 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variant: {fileID: 11400000, guid: cfbbef03839004f4893b1e74d8c2e060, type: 2}
   rotation: {fileID: 2819560892090638106}
   facingPoint: {fileID: 2819560891588230136}
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
-  downForce: 1500
-  maxSpeed: 220
-  maxAcceleration: 13
-  accelerationMultiplier: 3.5
-  breakMultiplier: 1.5
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.01986102
-      outSlope: -0.01986102
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.2375
-    - serializedVersion: 3
-      time: 0.4253097
-      value: 0.8148147
-      inSlope: -0.6621161
-      outSlope: -0.6621161
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.2693639
-      outWeight: 0.26555422
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.89900124
-      outSlope: -0.89900124
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11492259
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  turnSpeed: 3
-  turnSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.1401817
-      outSlope: -0.1401817
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.3807351
-    - serializedVersion: 3
-      time: 0.558132
-      value: 0.90214634
-      inSlope: -0.6712184
-      outSlope: -0.6712184
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.14894508
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.000002
-      value: 0.25703594
-      inSlope: -2.6809735
-      outSlope: -2.6809735
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.033333354
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!54 &2819560891871692963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -418,34 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variant: {fileID: 11400000, guid: cfbbef03839004f4893b1e74d8c2e060, type: 2}
   nodeParent: {fileID: 0}
-  distance: 15
-  neededSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -1.183014
-      outSlope: -1.183014
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.031007752
-    - serializedVersion: 3
-      time: 2
-      value: 0
-      inSlope: -0.105379865
-      outSlope: -0.105379865
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.10594314
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxAngle: 1.3
-  radius: 3
+  m_desiredNode: {fileID: 0}
 --- !u!114 &5609334039806038210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,45 +376,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &5582754433793503630
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3627895, y: 0.8140017, z: 4.9525204}
-  m_Center: {x: -0.0009352565, y: 0.09299916, z: 0.7144823}
---- !u!65 &5876458124700029697
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6868572, y: 1, z: 3.5498762}
-  m_Center: {x: -1.0870523, y: 0, z: 0.24603987}
---- !u!65 &5552176396559437749
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.74948597, y: 1, z: 3.5946107}
-  m_Center: {x: 1.1004727, y: 0, z: 0.26840758}
 --- !u!114 &7244173973842047067
 MonoBehaviour:
   m_ObjectHideFlags: 0

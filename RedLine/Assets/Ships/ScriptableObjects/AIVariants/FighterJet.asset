@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FighterJet
   m_EditorClassIdentifier: 
   VariantName: fighter jet
-  DownForce: 1500
+  DownForce: 2100
   MaxSpeed: 225
   MaxAcceleration: 14
   AccelerationMultiplier: 3.5
@@ -51,7 +51,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  TurnSpeed: 4
+  TurnSpeed: 3.5
   TurnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -65,13 +65,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.20918785
-      outSlope: -0.20918785
+      time: 0.77208394
+      value: 0.9083785
+      inSlope: -0.26637584
+      outSlope: -0.26637584
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.19166666
+      inWeight: 0.2390724
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.8301868
+      outSlope: -2.8301868
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08596005
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -81,7 +90,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 0.3
+      value: 0.18
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -108,7 +117,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.3
+      value: 0.18
       inSlope: 0
       outSlope: 0
       tangentMode: 0
