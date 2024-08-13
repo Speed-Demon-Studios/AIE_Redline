@@ -46,7 +46,7 @@ public class ShipsControls : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Turn();
         Accelerate();
