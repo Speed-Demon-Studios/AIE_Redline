@@ -43,12 +43,12 @@ public class PositionHandler : MonoBehaviour
 
     public IEnumerator SortRacers()
     {
-        racersSorted = false;
+        //racersSorted = false;
         foreach (RacerDetails rD in racers)
         {
             rD.placement = racers.IndexOf(rD) + 1;
         }
-        racersSorted = true;
+        //racersSorted = true;
         StopCoroutine(SortRacers());
         yield return new WaitForEndOfFrame();
     }
@@ -62,10 +62,10 @@ public class PositionHandler : MonoBehaviour
         }
         else if (racersAdded == true)
         {
+             GameManager.gManager.indexListSorted = true;
              racers.Sort((r1, r2) =>
              {
                  racersSorted = false;
-                 GameManager.gManager.indexListSorted = false;
                  if (r1.currentCheckpoint != r2.currentCheckpoint)
                  {
                      return r1.currentCheckpoint;
@@ -77,9 +77,9 @@ public class PositionHandler : MonoBehaviour
                  }
 
                  racersSorted = true;
-                 GameManager.gManager.indexListSorted = true;
                  return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
              });
+             GameManager.gManager.indexListSorted = true;
              
              StartCoroutine(SortRacers());
         }

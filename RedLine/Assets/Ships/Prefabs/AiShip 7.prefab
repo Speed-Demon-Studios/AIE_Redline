@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 5609334039806038210}
   - component: {fileID: 5573208418150351537}
   - component: {fileID: 7244173973842047067}
+  - component: {fileID: 1811895530}
   m_Layer: 0
   m_Name: AiShip 7
   m_TagString: Racer
@@ -311,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variant: {fileID: 11400000, guid: cfbbef03839004f4893b1e74d8c2e060, type: 2}
+  Variant: {fileID: 11400000, guid: afec871153bc9774b8a6e760af4d3e77, type: 2}
   rotation: {fileID: 2819560892090638106}
   facingPoint: {fileID: 2819560891588230136}
   shipModel: {fileID: 2819560891356404108}
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variant: {fileID: 11400000, guid: cfbbef03839004f4893b1e74d8c2e060, type: 2}
+  Variant: {fileID: 11400000, guid: afec871153bc9774b8a6e760af4d3e77, type: 2}
   nodeParent: {fileID: 0}
   m_desiredNode: {fileID: 0}
 --- !u!114 &5609334039806038210
@@ -393,6 +394,19 @@ MonoBehaviour:
   pInput: {fileID: 0}
   sControls: {fileID: 2819560891871692962}
   aiInput: {fileID: 2819560891871692965}
+--- !u!65 &1811895530
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819560891871692966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73, y: 0.67, z: 3.65}
+  m_Center: {x: 0, y: 0.04, z: -0.14}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0
