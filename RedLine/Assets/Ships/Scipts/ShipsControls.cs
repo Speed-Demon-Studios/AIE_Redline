@@ -126,7 +126,7 @@ public class ShipsControls : MonoBehaviour
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (Variant.TurnSpeed * multiplier), 0));
 
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
-        shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, m_shipAngle, -m_shipAngle * 0.4f));
+        shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
 
     /// <summary>
