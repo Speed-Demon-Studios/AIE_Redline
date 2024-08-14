@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class ColliderTrigger : MonoBehaviour
 {
-    public bool shipInTrigger;
-
-    public List<GameObject> shipsInTrigger = new();
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.GetComponent<ShipsControls>())
+        if (other.gameObject.layer == LayerMask.NameToLayer("RedlineCollider"))
         {
-            if (!shipsInTrigger.Contains(other.transform.parent.gameObject))
-                shipsInTrigger.Add(other.transform.parent.gameObject);
-
-            shipInTrigger = true;
+            this.GetComponentInParent<ShipsControls>().currentlyBoosting = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent.GetComponent<ShipsControls>())
+        if(other.gameObject.layer == LayerMask.NameToLayer("RedlineCollider"))
         {
-            shipsInTrigger.Remove(other.transform.parent.gameObject);
-            shipInTrigger = false;
+            this.GetComponentInParent<ShipsControls>().currentlyBoosting = false;
         }
     }
 }

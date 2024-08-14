@@ -39,6 +39,12 @@ public class ShipsControls : MonoBehaviour
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
 
+    [Header("Boost Variables")]
+    private float lastFrameBoost;
+    [SerializeField] private float currentBoost;
+    public bool currentlyBoosting;
+    [SerializeField, Range(0,3)] private int boostLevel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +58,51 @@ public class ShipsControls : MonoBehaviour
         Accelerate();
         DownForce();
         RotateShip();
+        CheckBoost();
+    }
+
+    private void CheckBoost()
+    {
+        if (!currentlyBoosting)
+        {
+            switch (currentBoost)
+            {
+                case < 1:
+                    currentBoost = 0;
+                    break;
+                case < 2:
+                    currentBoost = 1;
+                    break;
+                case < 3:
+                    currentBoost = 2;
+                    break;
+                case < 4:
+                    currentBoost = 3;
+                    break;
+            }
+        }
+        else
+            AddToBoost();
+    }
+
+    public void AddToBoost()
+    {
+        currentBoost += 0.5f * Time.deltaTime;
+        switch (currentBoost)
+        {
+            case < 1:
+                boostLevel = 0;
+                break;
+            case < 2:
+                boostLevel = 1;
+                break;
+            case < 3:
+                boostLevel = 2;
+                break;
+            case < 4:
+                boostLevel = 3;
+                break;
+        }
     }
 
     /// <summary>

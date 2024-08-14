@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class AIMoveInputs : MonoBehaviour
 {
@@ -15,7 +13,6 @@ public class AIMoveInputs : MonoBehaviour
     private Vector3 randomPos;
     public GameObject nodeParent;
     public GameObject m_desiredNode;
-    public Text testText;
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +53,6 @@ public class AIMoveInputs : MonoBehaviour
 
         float distance = Vector3.Distance(pointA.up, pointB.up);
 
-        Debug.Log(distance);
-
         Vector3 nodeDirection = (transform.position - randomPos).normalized;
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
         Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
@@ -68,31 +63,28 @@ public class AIMoveInputs : MonoBehaviour
         float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, up);
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
 
-        float tempSpeed2;
+        float tempSpeed;
 
         if (secondAngleRad < 0)
         {
             float secondTempAngleRad = -secondAngleRad;
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
             float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed2 = neededSpeedNextNode - nextSpeedPercent;
+            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
         else
         {
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
             float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed2 = neededSpeedNextNode - nextSpeedPercent;
+            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
 
-        m_speed = tempSpeed2;
+        m_speed = tempSpeed;
 
         if (m_speed < 0)
             m_speed *= 5f;
+
         Debug.DrawLine(this.transform.position, randomPos);
-
-        float test = -angleRad;
-
-        testText.text = test.ToString();
 
         m_controls.SetTurnMultipliers(-angleRad);
     }
