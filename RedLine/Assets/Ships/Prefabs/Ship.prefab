@@ -348,15 +348,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VariantObject: {fileID: 11400000, guid: 44c4fa50e1a70744694a64c3b5d0cb20, type: 2}
   variant: {fileID: 0}
+  VariantObject: {fileID: 11400000, guid: 44c4fa50e1a70744694a64c3b5d0cb20, type: 2}
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
-  currentBoost: 0
+  m_currentBoost: 0
   currentlyBoosting: 0
-  boostLevel: 0
+  forceMultiplier: 0
+  m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -455,6 +456,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f999eb10-96ca-48ca-9a10-8045f4bb3c61
     m_ActionName: Menus/CONFIRM
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b617d28-bd91-4f41-a191-4d46085aefc7
+    m_ActionName: Player/Boost[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
