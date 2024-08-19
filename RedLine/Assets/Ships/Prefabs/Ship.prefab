@@ -118,66 +118,6 @@ MonoBehaviour:
   placementText: {fileID: 9204992680974211021}
   lapText: {fileID: 7244293273604070874}
   rDetails: {fileID: -6679554185345550660}
---- !u!1 &2564297055330460400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5332014419945826883}
-  - component: {fileID: 1589746022389494995}
-  - component: {fileID: 5581664083832495049}
-  m_Layer: 11
-  m_Name: RedlineChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5332014419945826883
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2564297055330460400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.497, z: 2.209}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2868536069181459850}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1589746022389494995
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2564297055330460400}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.8
-  m_Height: 4.44
-  m_Direction: 0
-  m_Center: {x: 0, y: 0, z: -0.4}
---- !u!114 &5581664083832495049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2564297055330460400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1efa38653ab41e247933b29cda7a5c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +229,6 @@ Transform:
   - {fileID: 2868536068024986451}
   - {fileID: 8319451938726217151}
   - {fileID: 832864967374742937}
-  - {fileID: 5332014419945826883}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -345,9 +284,10 @@ MonoBehaviour:
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
-  currentBoost: 0
+  m_currentBoost: 0
   currentlyBoosting: 0
-  boostLevel: 0
+  forceMultiplier: 6
+  m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -446,6 +386,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f999eb10-96ca-48ca-9a10-8045f4bb3c61
     m_ActionName: Menus/CONFIRM
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2868536069181459849}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
+        m_MethodName: Boost
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0b617d28-bd91-4f41-a191-4d46085aefc7
+    m_ActionName: Player/Boost[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player

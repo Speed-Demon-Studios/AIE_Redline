@@ -12,10 +12,10 @@ public class ColliderTrigger : MonoBehaviour
             Debug.Log(other.gameObject);
             ShipsControls test;
             if (other.gameObject.TryGetComponent<ShipsControls>(out test))
-                spawner.ships.Add(test.gameObject);
+                spawner.m_allShipsInColliders.Add(test.gameObject);
             else
             {
-                spawner.ships.Add(other.transform.parent.gameObject);
+                spawner.m_allShipsInColliders.Add(other.transform.parent.gameObject);
             }
         }
     }
@@ -27,10 +27,10 @@ public class ColliderTrigger : MonoBehaviour
             Debug.Log(other.gameObject);
             ShipsControls test;
             if (other.gameObject.TryGetComponent<ShipsControls>(out test))
-                spawner.ships.Remove(test.gameObject);
+                spawner.m_allShipsInColliders.Remove(test.gameObject);
             else
             {
-                spawner.ships.Remove(other.transform.parent.gameObject);
+                spawner.m_allShipsInColliders.Remove(other.transform.parent.gameObject);
             }
         }
     }
