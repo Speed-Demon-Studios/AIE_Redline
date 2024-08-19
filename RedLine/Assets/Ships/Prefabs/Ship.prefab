@@ -160,7 +160,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 2564297055330460400}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.8
   m_Height: 4.44
   m_Direction: 0
@@ -256,13 +256,6 @@ GameObject:
   - component: {fileID: 8564616184365649272}
   - component: {fileID: -6679554185345550660}
   - component: {fileID: 6267707172146090529}
-  - component: {fileID: 1759211255279204102}
-  - component: {fileID: 8728817977261864381}
-  - component: {fileID: 3489014172936069507}
-  - component: {fileID: 7521793666203960602}
-  - component: {fileID: 805399507795340986}
-  - component: {fileID: 148312634803324841}
-  - component: {fileID: 6058674301654087972}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Racer
@@ -355,7 +348,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069181459855}
   serializedVersion: 2
-  m_Mass: 50
+  m_Mass: 90
   m_Drag: 1.5
   m_AngularDrag: 0.5
   m_UseGravity: 0
@@ -479,104 +472,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &1759211255279204102
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.24
-  m_Height: 4.34
-  m_Direction: 2
-  m_Center: {x: 0.61, y: 0.57, z: -0.3}
---- !u!136 &8728817977261864381
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.42
-  m_Height: 2.97
-  m_Direction: 2
-  m_Center: {x: 1.29, y: 0.57, z: -1.21}
---- !u!136 &3489014172936069507
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.18
-  m_Height: 1.11
-  m_Direction: 2
-  m_Center: {x: 1.92, y: 0.57, z: -2.29}
---- !u!136 &7521793666203960602
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.24
-  m_Height: 4.34
-  m_Direction: 2
-  m_Center: {x: -0.6, y: 0.57, z: -0.3}
---- !u!136 &805399507795340986
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.42
-  m_Height: 2.97
-  m_Direction: 2
-  m_Center: {x: -1.27, y: 0.57, z: -1.21}
---- !u!136 &148312634803324841
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.18
-  m_Height: 1.11
-  m_Direction: 2
-  m_Center: {x: -1.93, y: 0.57, z: -2.29}
---- !u!136 &6058674301654087972
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868536069181459855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.46
-  m_Height: 3.1
-  m_Direction: 2
-  m_Center: {x: -0.05, y: 0.57, z: -1.16}
 --- !u!1 &2868536069371765811
 GameObject:
   m_ObjectHideFlags: 0
