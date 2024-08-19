@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efa38653ab41e247933b29cda7a5c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +189,7 @@ GameObject:
   - component: {fileID: 2868536068024986451}
   m_Layer: 0
   m_Name: ShipModel
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,7 +708,7 @@ GameObject:
   - component: {fileID: 2868536069761448569}
   m_Layer: 0
   m_Name: Rotation
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -874,7 +875,7 @@ GameObject:
   - component: {fileID: 8319451938726217151}
   m_Layer: 0
   m_Name: Raycast
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1210,6 +1211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Colliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 236488307417939151, guid: cefd193856f6dc940bb55b098db30688,
+        type: 3}
+      propertyPath: m_TagString
+      value: Racer
       objectReference: {fileID: 0}
     - target: {fileID: 1276395294520914428, guid: cefd193856f6dc940bb55b098db30688,
         type: 3}
