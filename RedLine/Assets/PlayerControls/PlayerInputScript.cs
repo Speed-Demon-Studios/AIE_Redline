@@ -72,6 +72,16 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    public void Boost(InputAction.CallbackContext context)
+    {
+        if (m_shipControls != null)
+        {
+            if (context.ReadValue<float>() > 0)
+                m_shipControls.IsBoosting(true);
+            else
+                m_shipControls.IsBoosting(false);
+        }
+    }
 
     private void OnEnable()
     {

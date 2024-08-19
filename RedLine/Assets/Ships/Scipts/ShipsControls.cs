@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
@@ -43,9 +44,10 @@ public class ShipsControls : MonoBehaviour
 
     [Header("Boost Variables")]
     private float lastFrameBoost;
-    [SerializeField] private float currentBoost;
+    [SerializeField] private float m_currentBoost;
     public bool currentlyBoosting;
-    [SerializeField, Range(0,3)] private int boostLevel;
+    public float forceMultiplier;
+    [SerializeField, Range(0,3)] private int m_boostLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -65,49 +67,29 @@ public class ShipsControls : MonoBehaviour
         Accelerate();
         DownForce();
         RotateShip();
-        //CheckBoost();
-    }
-
-    private void CheckBoost()
-    {
-        if (!currentlyBoosting)
-        {
-            switch (currentBoost)
-            {
-                case < 1:
-                    currentBoost = 0;
-                    break;
-                case < 2:
-                    currentBoost = 1;
-                    break;
-                case < 3:
-                    currentBoost = 2;
-                    break;
-                case < 4:
-                    currentBoost = 3;
-                    break;
-            }
-        }
-        else
-            AddToBoost();
+        Boost();
     }
 
     public void AddToBoost()
     {
-        currentBoost += 0.5f * Time.deltaTime;
-        switch (currentBoost)
+        m_currentBoost += 0.5f * Time.deltaTime;
+        if(m_currentBoost > 3)
+        {
+            m_currentBoost = 3;
+        }
+        switch (m_currentBoost)
         {
             case < 1:
-                boostLevel = 0;
+                m_boostLevel = 0;
                 break;
             case < 2:
-                boostLevel = 1;
+                m_boostLevel = 1;
                 break;
             case < 3:
-                boostLevel = 2;
+                m_boostLevel = 2;
                 break;
             case < 4:
-                boostLevel = 3;
+                m_boostLevel = 3;
                 break;
         }
     }
@@ -148,6 +130,14 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
 
         m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
+    }
+
+    private void Boost()
+    {
+        if (currentlyBoosting)
+        {
+            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
+        }
     }
 
     /// <summary>
@@ -193,4 +183,6 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
+
+    public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
 }
