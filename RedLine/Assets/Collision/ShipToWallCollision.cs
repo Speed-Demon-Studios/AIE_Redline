@@ -11,7 +11,8 @@ public class ShipToWallCollision : MonoBehaviour
     private float changedAcceleration;
     private float defaultTopSpeed;
     private float defaultAcceleration;
-    bool intoWall = false;
+    private bool intoWall = false;
+    private bool detailsSet = false;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -38,25 +39,27 @@ public class ShipToWallCollision : MonoBehaviour
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        shipVariant = sControlScript.Variant;
-        defaultTopSpeed = shipVariant.MaxSpeed;
-        defaultAcceleration = shipVariant.MaxAcceleration;
-        changedTopSpeed = (defaultTopSpeed * 0.45f);
-        changedAcceleration = (defaultAcceleration * 0.35f);
+        if (detailsSet == false && sControlScript.variant != null)
+        {
+            detailsSet = true;
+            shipVariant = sControlScript.variant;
+            defaultTopSpeed = shipVariant.MaxSpeed;
+            defaultAcceleration = shipVariant.MaxAcceleration;
+            changedTopSpeed = (defaultTopSpeed * 0.45f);
+            changedAcceleration = (defaultAcceleration * 0.35f);
+        }
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (intoWall == false)
+        if (intoWall == false && detailsSet == true)
         {
             if (shipVariant.MaxSpeed < defaultTopSpeed)
             {
-                shipVariant.MaxSpeed += 20.0f * Time.deltaTime;
+                shipVariant.MaxSpeed += (defaultTopSpeed / 0.35f) * Time.deltaTime;
             }
             else if (shipVariant.MaxSpeed > defaultTopSpeed)
             {

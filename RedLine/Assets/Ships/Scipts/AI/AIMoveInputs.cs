@@ -69,13 +69,13 @@ public class AIMoveInputs : MonoBehaviour
         {
             float secondTempAngleRad = -secondAngleRad;
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
-            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
+            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.MaxSpeed * 0.7f); // ** Max Speed
             tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
         else
         {
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
-            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
+            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.MaxSpeed * 0.7f); // ** Max Speed
             tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
 

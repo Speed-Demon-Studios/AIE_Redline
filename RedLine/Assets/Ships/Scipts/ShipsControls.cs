@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,8 @@ public class ShipsControls : MonoBehaviour
     //|-public AnimationCurve turnSpeedCurve;
 
     [Header("Refrences")]
-    public ShipVariant Variant;
+    [HideInInspector] public ShipVariant variant;
+    public ShipVariant VariantObject;
     public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
@@ -49,6 +51,11 @@ public class ShipsControls : MonoBehaviour
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
+        if (VariantObject != null)
+        {
+            variant = new ShipVariant();
+            variant = Instantiate<ShipVariant>(VariantObject);
+        }
     }
 
     // Update is called once per frame
@@ -140,7 +147,7 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
 
-        m_rb.AddForce(-transform.up * Variant.DownForce, ForceMode.Force);
+        m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
     /// <summary>
@@ -148,16 +155,16 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
-        float multiplier = Variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / Variant.MaxSpeed);
+        float multiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / variant.MaxSpeed);
 
         if (m_accelerateMultiplier == 0)
-            m_acceleration -= (Variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
+            m_acceleration -= (variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
         else if(m_accelerateMultiplier > 0)
-            m_acceleration += Variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
+            m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
         else
-            m_acceleration += Variant.AccelerationMultiplier * m_accelerateMultiplier * Variant.BreakMultiplier * Time.deltaTime;
+            m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * variant.BreakMultiplier * Time.deltaTime;
 
-        m_acceleration = Mathf.Clamp(m_acceleration, 0, Variant.MaxAcceleration);
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.MaxAcceleration);
 
         m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
@@ -171,10 +178,10 @@ public class ShipsControls : MonoBehaviour
         m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.07f);
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
-        float multiplier = Variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / Variant.MaxSpeed);
+        float multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / variant.MaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
-        rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (Variant.TurnSpeed * multiplier), 0));
+        rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (variant.TurnSpeed * multiplier), 0));
 
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));

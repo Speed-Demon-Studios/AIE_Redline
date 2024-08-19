@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public RaceManager rManager;
     public IList<GameObject> playerObjects = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
+    public bool racersAdded = false;
     public bool raceStarted = false;
     public bool indexListSorted = true;
     public int countdownIndex = 5;

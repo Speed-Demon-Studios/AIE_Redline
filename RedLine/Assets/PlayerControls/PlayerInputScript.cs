@@ -41,7 +41,7 @@ public class PlayerInputScript : MonoBehaviour
 
     private void CalculatePOV()
     {
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.Variant.MaxSpeed;
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.MaxSpeed;
         if(speedPercentage > 0.001)
         {
             m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;

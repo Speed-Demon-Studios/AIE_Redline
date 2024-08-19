@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efa38653ab41e247933b29cda7a5c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,8 +301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sControlScript: {fileID: 2868536069181459848}
   knockbackPercentage: 1.3
-  changedTopSpeed: 45
-  changedAcceleration: 3.5
 --- !u!114 &4394239317412869165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +335,7 @@ MonoBehaviour:
   test: 0
   lerpTime: 0.08
   minPOV: 100
-  maxPOV: 125
+  maxPOV: 135
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variant: {fileID: 11400000, guid: 44c4fa50e1a70744694a64c3b5d0cb20, type: 2}
+  VariantObject: {fileID: 11400000, guid: 44c4fa50e1a70744694a64c3b5d0cb20, type: 2}
+  variant: {fileID: 0}
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
@@ -540,16 +540,16 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 7.068541
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 1000
-  field of view: 70.9
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: 100
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -1061,17 +1061,17 @@ PrefabInstance:
     - target: {fileID: 5707020642490148350, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5707020642490148350, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5707020642490148350, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5707020642490148350, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
@@ -1093,11 +1093,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera_VFX
       objectReference: {fileID: 0}
-    - target: {fileID: 5707020642490148351, guid: 7c383de674d5ea74ab9690f663af737a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5707020642773547228, guid: 7c383de674d5ea74ab9690f663af737a,
         type: 3}
       propertyPath: m_Camera
@@ -1108,11 +1103,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2868536069371765821}
-    - target: {fileID: 5707020643509736745, guid: 7c383de674d5ea74ab9690f663af737a,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: 885b122f77d6a7d489f003524d9f74f2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c383de674d5ea74ab9690f663af737a, type: 3}
 --- !u!4 &832864967374742937 stripped
