@@ -58,7 +58,7 @@ public class ShipsControls : MonoBehaviour
         Accelerate();
         DownForce();
         RotateShip();
-        CheckBoost();
+        //CheckBoost();
     }
 
     private void CheckBoost()
