@@ -5,30 +5,31 @@ using UnityEngine;
 
 public class RedlineColliderSpawner : MonoBehaviour
 {
-    public LineRenderer trail;
+    public TrailRenderer trailLine;
+    MeshCollider m_lineCollider = new();
+    public bool start;
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_lineCollider = GetComponent<MeshCollider>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GenerateMeshCollider();
     }
 
     public void GenerateMeshCollider()
     {
-        MeshCollider collider = GetComponent<MeshCollider>();
-
-        if(collider == null)
-            collider = gameObject.AddComponent<MeshCollider>();
+        if(m_lineCollider == null)
+            m_lineCollider = gameObject.AddComponent<MeshCollider>();
 
         Mesh mesh = new();
 
-        trail.BakeMesh(mesh, true);
-        collider.sharedMesh = mesh;
+        trailLine.BakeMesh(mesh, true);
+
+        m_lineCollider.sharedMesh = mesh;
     }
 
 }
