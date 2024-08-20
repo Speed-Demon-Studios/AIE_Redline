@@ -51,6 +51,7 @@ public class ShipsControls : MonoBehaviour
             variant = new ShipVariant();
             variant = Instantiate<ShipVariant>(VariantObject);
         }
+        m_currentMaxSpeed = variant.DefaultMaxSpeed;
     }
 
     // Update is called once per frame
@@ -58,14 +59,17 @@ public class ShipsControls : MonoBehaviour
     {
         Turn();
         Accelerate();
+        Boost();
         DownForce();
         RotateShip();
-        Boost();
     }
 
+    /// <summary>
+    /// Adding to the current boost when in a red line and changing the level of boost the character is at
+    /// </summary>
     public void AddToBoost()
     {
-        m_currentBoost += 0.5f * Time.deltaTime;
+        m_currentBoost += 1f * Time.deltaTime;
         if(m_currentBoost > 3)
         {
             m_currentBoost = 3;
@@ -125,16 +129,30 @@ public class ShipsControls : MonoBehaviour
         m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
+    /// <summary>
+    /// Boosting ship when boost button is pressed
+    /// </summary>
     private void Boost()
     {
-        if (currentlyBoosting)
+        if (currentlyBoosting && m_boostLevel > 0)
         {
-            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
+            m_rb.mass = 10;
+            m_rb.AddForce(transform.forward * (forceMultiplier), ForceMode.Impulse);
+            StartCoroutine(BoostTime(0.5f * m_boostLevel));
         }
     }
 
+    private IEnumerator BoostTime(float length)
+    {
+        yield return new WaitForSeconds(length);
+        m_boostLevel = 0;
+        m_currentBoost = 0;
+        m_rb.mass = 90;
+        currentlyBoosting = false;
+    }
+
     /// <summary>
-    /// Accelerate is very simple. It basicly makes the car go foward or back depending on what you press
+    /// Accelerate is very simple. It basicly makes the car go foward when you press the accelerator and brake when you press the brake
     /// </summary>
     private void Accelerate()
     {

@@ -70,8 +70,6 @@ public class PlayerInputScript : MonoBehaviour
         {
             if (context.ReadValue<float>() > 0)
                 m_shipControls.IsBoosting(true);
-            else
-                m_shipControls.IsBoosting(false);
         }
     }
 
