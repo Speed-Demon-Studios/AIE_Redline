@@ -26,7 +26,7 @@ public class ShipToWallCollision : MonoBehaviour
     {
         if (other.transform.tag.ToLower() == "walls" && intoWall == true)
         {
-            shipVariant.MaxSpeed = changedTopSpeed;
+            sControlScript.SetMaxSpeed(changedTopSpeed);
             shipVariant.MaxAcceleration = changedAcceleration;
         }
     }
@@ -45,7 +45,7 @@ public class ShipToWallCollision : MonoBehaviour
         {
             detailsSet = true;
             shipVariant = sControlScript.variant;
-            defaultTopSpeed = shipVariant.MaxSpeed;
+            defaultTopSpeed = shipVariant.DefaultMaxSpeed;
             defaultAcceleration = shipVariant.MaxAcceleration;
             changedTopSpeed = (defaultTopSpeed * 0.45f);
             changedAcceleration = (defaultAcceleration * 0.35f);
@@ -57,13 +57,13 @@ public class ShipToWallCollision : MonoBehaviour
     {
         if (intoWall == false && detailsSet == true)
         {
-            if (shipVariant.MaxSpeed < defaultTopSpeed)
+            if (sControlScript.GetMaxSpeed() < defaultTopSpeed)
             {
-                shipVariant.MaxSpeed += (defaultTopSpeed / 0.35f) * Time.deltaTime;
+                sControlScript.SetMaxSpeed((sControlScript.GetMaxSpeed() + (defaultTopSpeed / 0.35f) * Time.deltaTime));
             }
             else if (shipVariant.MaxSpeed > defaultTopSpeed)
             {
-                shipVariant.MaxSpeed = defaultTopSpeed;
+                sControlScript.SetMaxSpeed(defaultTopSpeed);
             }
             if (shipVariant.MaxAcceleration < defaultAcceleration)
             {

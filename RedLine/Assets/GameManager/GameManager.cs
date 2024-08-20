@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public UIControllerInput uiCInput;
     public CheckpointHandler checkpointParent;
     public GameObject[] StartingPoints;
     public PositionHandler pHandler;

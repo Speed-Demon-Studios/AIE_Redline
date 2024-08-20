@@ -15,9 +15,9 @@ public class UIControllerInput : MonoBehaviour
     [SerializeField] private Color buttonHighlightedColor;
     [SerializeField] private Color buttonPressedColor;
     [SerializeField] private Color buttonDefaultColor;
-    private bool menuOpen = false;
+    private bool menuOpen = true;
     private PlayerInputManager PIM;
-    private int currentMenuObjectIndex = 0;
+    [SerializeField] private int currentMenuObjectIndex = 0;
     public TextMeshProUGUI playerCountText;
 
     // Testing
@@ -29,6 +29,47 @@ public class UIControllerInput : MonoBehaviour
         {
             currentMenuObjectIndex -= 1;
         }
+        if (currentMenuObjectIndex - 1 < 0)
+        {
+            currentMenuObjectIndex = 0;
+        }
+        ButtonHighlights();
+    }
+
+    public void MenuDown()
+    {
+        if ((currentMenuObjectIndex + 1) < vMenuButtons.Count())
+        {
+            currentMenuObjectIndex += 1;
+        }
+        ButtonHighlights();
+    }
+
+    public void MenuConfirm()
+    {
+        MenuButtonPressed();
+        vMenuButtons[currentMenuObjectIndex].onClick.Invoke();
+    }
+
+    public void MenuButtonPressed()
+    {
+        foreach (Button menuButton in vMenuButtons)
+        {
+            menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+        }
+
+        vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonPressedColor;
+        return;
+    }
+
+    public void ButtonHighlights()
+    {
+        foreach (Button menuButton in vMenuButtons)
+        {
+            menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+        }
+
+        vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonHighlightedColor;
     }
 
 
@@ -76,7 +117,6 @@ public class UIControllerInput : MonoBehaviour
                 PIM.DisableJoining();
             }
         }
-
         playerCountText.text = "Number of Players: " + PIM.playerCount;
     }
 }

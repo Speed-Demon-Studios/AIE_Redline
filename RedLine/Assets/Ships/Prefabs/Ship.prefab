@@ -437,11 +437,35 @@ MonoBehaviour:
     m_ActionId: 1615cb12-9f84-4737-af47-48b667560890
     m_ActionName: Player/Join[/XInputControllerWindows/start,/XInputControllerWindows1/start]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -6679554185345550660}
+        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+        m_MethodName: UiControllerUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 11c93e19-9ed8-4f57-b49a-6f3977c4c985
     m_ActionName: Menus/UP
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -6679554185345550660}
+        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+        m_MethodName: UiControllerDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e7d1b06d-194b-4f96-a53c-b2c2070d44cf
     m_ActionName: Menus/DOWN
   - m_PersistentCalls:
@@ -453,7 +477,19 @@ MonoBehaviour:
     m_ActionId: 0c9ae14b-50e0-4bf2-ab23-8641fedd4402
     m_ActionName: Menus/RIGHT
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -6679554185345550660}
+        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+        m_MethodName: UiControllerConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f999eb10-96ca-48ca-9a10-8045f4bb3c61
     m_ActionName: Menus/CONFIRM
   - m_PersistentCalls:
@@ -462,7 +498,7 @@ MonoBehaviour:
     m_ActionName: Player/Boost[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Menus
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 2868536069371765821}
 --- !u!114 &-6679554185345550660
@@ -481,6 +517,8 @@ MonoBehaviour:
   placement: 0
   currentCheckpoint: 0
   distanceToCheckpoint: 0
+  uiCInput: {fileID: 0}
+  _playerInputActions: {fileID: 8564616184365649272}
 --- !u!135 &6267707172146090529
 SphereCollider:
   m_ObjectHideFlags: 0
