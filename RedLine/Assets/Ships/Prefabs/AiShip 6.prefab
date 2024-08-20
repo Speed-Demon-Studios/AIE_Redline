@@ -159,7 +159,7 @@ MonoBehaviour:
   m_allShipsInColliders: []
   colliderPrefab: {fileID: 5695694751950368063, guid: 1dd200e61d63f1c4d914e1d17c24efcd,
     type: 3}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 8938645251078766439}
   colliderParent: {fileID: 2819560891871692966}
 --- !u!1 &2819560891356404108
 GameObject:
@@ -437,6 +437,8 @@ MonoBehaviour:
   placement: 0
   currentCheckpoint: 0
   distanceToCheckpoint: 0
+  uiCInput: {fileID: 0}
+  _playerInputActions: {fileID: 0}
 --- !u!135 &5573208418150351537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -836,11 +838,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2819560891871692961}
     m_Modifications:
-    - target: {fileID: 2045786924339104938, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1.37
-      objectReference: {fileID: 0}
     - target: {fileID: 4373086566802477226, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}
       propertyPath: m_RootOrder
@@ -849,17 +846,17 @@ PrefabInstance:
     - target: {fileID: 4373086566802477226, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4373086566802477226, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4373086566802477226, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4373086566802477226, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}
@@ -895,16 +892,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912570332335730913, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912570332335730913, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1.37
       objectReference: {fileID: 0}
     - target: {fileID: 7795395143691013744, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
         type: 3}

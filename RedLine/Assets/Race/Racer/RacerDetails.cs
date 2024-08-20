@@ -62,18 +62,9 @@ public class RacerDetails : MonoBehaviour
             }
 
         }
-
-        //for (int i = 0; i < _playerInputActions.actions.actionMaps.Count; i++)
-        //{
-        //    _playerInputActions.actions.actionMaps[i].Disable();
-        //}
-
-        //_playerInputActions.actions.actionMaps[playerRacingActionMapIndex].Enable();
-        //_playerInputActions.currentActionMap = _playerInputActions.actions.actionMaps[playerRacingActionMapIndex];
         _playerInputActions.actions.FindActionMap("Player").Enable();
         _playerInputActions.actions.FindActionMap("Menus").Disable();
         _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("Player");
-        //_playerInputActions.SwitchCurrentActionMap("Player");
 
         Debug.Log("Current Action Map: " + _playerInputActions.currentActionMap.name);
 
@@ -84,14 +75,25 @@ public class RacerDetails : MonoBehaviour
         if (GameManager.gManager.raceStarted == true)
         {
             PlayerInputScript playerInput = this.gameObject.GetComponent<PlayerInputScript>();
-            if (controlMapChanged == false)
+            AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();
+            if (playerInput != null)
             {
-                controlMapChanged = true;
-                SwitchActionMapToPlayer();
+                if (controlMapChanged == false)
+                {
+                    controlMapChanged = true;
+                    SwitchActionMapToPlayer();
+                }
+                if (playerInput.enabled == false)
+                {
+                    playerInput.enabled = true;
+                }
             }
-            if (playerInput.enabled == false)
+            if (aiInput != null)
             {
-                playerInput.enabled = true;
+                if (aiInput.enabled == false)
+                {
+                    aiInput.enabled = true;
+                }
             }
         }
     }
