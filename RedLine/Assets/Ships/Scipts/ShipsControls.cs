@@ -140,6 +140,8 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(transform.forward * (forceMultiplier), ForceMode.Impulse);
             StartCoroutine(BoostTime(0.5f * m_boostLevel));
         }
+        else
+            currentlyBoosting = false;
     }
 
     private IEnumerator BoostTime(float length)
