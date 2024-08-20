@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ public class RaceManager : MonoBehaviour
 
     public void LapComplete(RacerDetails racer)
     {
+        if (racer.currentLap >= TotalLaps)
+        {
+            racer.finishedRacing = true;
+        }
         if (racer.currentLap < TotalLaps)
         {
             racer.currentLap += 1;

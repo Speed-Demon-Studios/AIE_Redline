@@ -43,9 +43,6 @@ public class PlayerInputScript : MonoBehaviour
             m_desiredPOV = minPOV;
         }
 
-        if (m_desiredPOV > (maxPOV + 30))
-            m_desiredPOV = maxPOV + 30;
-
         m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
         m_cam.fieldOfView = m_currentPOV;
 
@@ -73,6 +70,8 @@ public class PlayerInputScript : MonoBehaviour
         {
             if (context.ReadValue<float>() > 0)
                 m_shipControls.IsBoosting(true);
+            else
+                m_shipControls.IsBoosting(false);
         }
     }
 

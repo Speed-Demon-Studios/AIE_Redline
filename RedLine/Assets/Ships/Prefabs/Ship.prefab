@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 2868536069181459850}
   - component: {fileID: 6954287307719390781}
   - component: {fileID: 4394239317412869165}
+  - component: {fileID: 6138812736906276457}
   - component: {fileID: 2868536069181459849}
   - component: {fileID: 2868536069181459848}
   - component: {fileID: 2868536069181459851}
@@ -722,6 +723,19 @@ MonoBehaviour:
   pInput: {fileID: 2868536069181459849}
   sControls: {fileID: 2868536069181459848}
   aiInput: {fileID: 0}
+--- !u!114 &6138812736906276457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4815bec3247aea4683ae96efdeb9333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInputActions: {fileID: 8564616184365649272}
 --- !u!114 &2868536069181459849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,8 +856,8 @@ MonoBehaviour:
     m_ActionName: Player/Join[/XInputControllerWindows/start,/XInputControllerWindows1/start]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6679554185345550660}
-        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+      - m_Target: {fileID: 6138812736906276457}
+        m_TargetAssemblyTypeName: ActionMappingControl, Assembly-CSharp
         m_MethodName: UiControllerUP
         m_Mode: 1
         m_Arguments:
@@ -858,8 +872,8 @@ MonoBehaviour:
     m_ActionName: Menus/UP
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6679554185345550660}
-        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+      - m_Target: {fileID: 6138812736906276457}
+        m_TargetAssemblyTypeName: ActionMappingControl, Assembly-CSharp
         m_MethodName: UiControllerDown
         m_Mode: 1
         m_Arguments:
@@ -882,8 +896,8 @@ MonoBehaviour:
     m_ActionName: Menus/RIGHT
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6679554185345550660}
-        m_TargetAssemblyTypeName: RacerDetails, Assembly-CSharp
+      - m_Target: {fileID: 6138812736906276457}
+        m_TargetAssemblyTypeName: ActionMappingControl, Assembly-CSharp
         m_MethodName: UiControllerConfirm
         m_Mode: 1
         m_Arguments:
@@ -929,12 +943,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840388a9de0146a478eb8141513b1518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finishedRacing: 0
+  distanceToCheckpoint: 0
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
-  distanceToCheckpoint: 0
-  uiCInput: {fileID: 0}
-  _playerInputActions: {fileID: 8564616184365649272}
 --- !u!135 &6267707172146090529
 SphereCollider:
   m_ObjectHideFlags: 0
