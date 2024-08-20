@@ -25,22 +25,37 @@ public class UIControllerInput : MonoBehaviour
 
     public void MenuUP()
     {
-        if ((currentMenuObjectIndex - 1) >= 0)
+        if (vMenuButtons.Count() > 1)
         {
-            currentMenuObjectIndex -= 1;
+            if ((currentMenuObjectIndex - 1) >= 0)
+            {
+                currentMenuObjectIndex -= 1;
+            }
+            if (currentMenuObjectIndex - 1 < 0)
+            {
+                currentMenuObjectIndex = 0;
+            }
         }
-        if (currentMenuObjectIndex - 1 < 0)
+        else if (vMenuButtons.Count() == 1)
         {
             currentMenuObjectIndex = 0;
         }
+
         ButtonHighlights();
     }
 
     public void MenuDown()
     {
-        if ((currentMenuObjectIndex + 1) < vMenuButtons.Count())
+        if (vMenuButtons.Count() > 1)
         {
-            currentMenuObjectIndex += 1;
+            if ((currentMenuObjectIndex + 1) < vMenuButtons.Count())
+            {
+                currentMenuObjectIndex += 1;
+            }
+        }
+        else if (vMenuButtons.Count() == 1)
+        {
+            currentMenuObjectIndex = 0;
         }
         ButtonHighlights();
     }
@@ -53,23 +68,38 @@ public class UIControllerInput : MonoBehaviour
 
     public void MenuButtonPressed()
     {
-        foreach (Button menuButton in vMenuButtons)
+        if (vMenuButtons.Count() > 1)
         {
-            menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+            foreach (Button menuButton in vMenuButtons)
+            {
+                menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+            }
+
+            vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonPressedColor;
+        }
+        else if (vMenuButtons.Count() == 1)
+        {
+            vMenuButtons[0].GetComponentInChildren<Image>().color = buttonPressedColor;
         }
 
-        vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonPressedColor;
         return;
     }
 
     public void ButtonHighlights()
     {
-        foreach (Button menuButton in vMenuButtons)
+        if (vMenuButtons.Count() > 1)
         {
-            menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+            foreach (Button menuButton in vMenuButtons)
+            {
+                menuButton.GetComponentInChildren<Image>().color = buttonDefaultColor;
+            }
+            vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonHighlightedColor;
         }
-
-        vMenuButtons[currentMenuObjectIndex].GetComponentInChildren<Image>().color = buttonHighlightedColor;
+        else if (vMenuButtons.Count() == 1)
+        {
+            vMenuButtons[0].GetComponentInChildren<Image>().color = buttonHighlightedColor;
+        }
+        return;
     }
 
 

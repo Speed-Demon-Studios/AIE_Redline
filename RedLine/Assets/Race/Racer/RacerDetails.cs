@@ -1,45 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class RacerDetails : MonoBehaviour
 {
+    public bool finishedRacing = false;
+    public float distanceToCheckpoint;
     public int currentLap = 0;
     public int placement = 0;
     public int currentCheckpoint = 0;
-    private int playerRacingActionMapIndex;
-    public float distanceToCheckpoint;
-    bool controlMapChanged = false;
 
     private CheckpointHandler m_cHandler;
-
-    public UIControllerInput uiCInput;
-    [SerializeField] private PlayerInput _playerInputActions;
-
-    public void UiControllerUP()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuUP();
-        }
-    }
-
-    public void UiControllerDown()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuDown();
-        }
-    }
-
-    public void UiControllerConfirm()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuConfirm();
-        }
-    }
+    
 
     /// <summary>
     /// Calculates the distance to the next checkpoint
@@ -51,48 +21,25 @@ public class RacerDetails : MonoBehaviour
         distanceToCheckpoint = Vector3.Distance(transform.position, nextCheckpoint.transform.position);
         return distanceToCheckpoint;
     }
-    public void SwitchActionMapToPlayer()
-    {
-        for (int i = 0; i < _playerInputActions.actions.actionMaps.Count; i++)
-        {
-            Debug.Log("Action Map: " + _playerInputActions.actions.actionMaps[i].name);
-            if (_playerInputActions.actions.actionMaps[i].name.ToLower() == "player")
-            {
-                playerRacingActionMapIndex = i;
-            }
-
-        }
-        _playerInputActions.actions.FindActionMap("Player").Enable();
-        _playerInputActions.actions.FindActionMap("Menus").Disable();
-        _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("Player");
-
-        Debug.Log("Current Action Map: " + _playerInputActions.currentActionMap.name);
-
-    }
 
     private void Update()
     {
-        if (GameManager.gManager.raceStarted == true)
+        if (finishedRacing == true)
         {
-            PlayerInputScript playerInput = this.gameObject.GetComponent<PlayerInputScript>();
-            AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();
+            PlayerInputScript playerInput = this.GetComponent<PlayerInputScript>();
+            ShipsControls shipControls = this.GetComponent<ShipsControls>();
             if (playerInput != null)
             {
-                if (controlMapChanged == false)
+                if (playerInput.enabled == true)
                 {
-                    controlMapChanged = true;
-                    SwitchActionMapToPlayer();
-                }
-                if (playerInput.enabled == false)
-                {
-                    playerInput.enabled = true;
+                    playerInput.enabled = false;
                 }
             }
-            if (aiInput != null)
+            if (shipControls != null)
             {
-                if (aiInput.enabled == false)
+                if (shipControls.enabled == true)
                 {
-                    aiInput.enabled = true;
+                    shipControls.enabled = false;
                 }
             }
         }

@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 5573208418150351537}
   - component: {fileID: 7244173973842047067}
   - component: {fileID: 6828656243528405702}
+  - component: {fileID: 6123751117057579120}
   m_Layer: 0
   m_Name: AiShip 7
   m_TagString: Racer
@@ -719,12 +720,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840388a9de0146a478eb8141513b1518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finishedRacing: 0
+  distanceToCheckpoint: 0
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
-  distanceToCheckpoint: 0
-  uiCInput: {fileID: 0}
-  _playerInputActions: {fileID: 0}
 --- !u!135 &5573208418150351537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -768,9 +768,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_allShipsInColliders: []
-  colliderPrefab: {fileID: 0}
-  spawnPoint: {fileID: 0}
-  colliderParent: {fileID: 0}
+  colliderPrefab: {fileID: 5695694751950368063, guid: 1dd200e61d63f1c4d914e1d17c24efcd,
+    type: 3}
+  spawnPoint: {fileID: 8874408446224391303}
+  colliderParent: {fileID: 2819560891871692966}
+--- !u!114 &6123751117057579120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2819560891871692966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4815bec3247aea4683ae96efdeb9333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInputActions: {fileID: 0}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0
