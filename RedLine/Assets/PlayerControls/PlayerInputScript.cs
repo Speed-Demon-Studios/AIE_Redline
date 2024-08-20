@@ -43,6 +43,9 @@ public class PlayerInputScript : MonoBehaviour
             m_desiredPOV = minPOV;
         }
 
+        if (m_desiredPOV > (maxPOV + 30))
+            m_desiredPOV = maxPOV + 30;
+
         m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
         m_cam.fieldOfView = m_currentPOV;
 

@@ -25,9 +25,9 @@ public class RedlineColliderSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AddBoost();
         ChangePositions();
         CheckShipsInLine();
-        AddBoost();
     }
 
     private void AddBoost()
