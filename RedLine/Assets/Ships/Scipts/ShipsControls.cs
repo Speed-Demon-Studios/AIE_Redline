@@ -8,15 +8,6 @@ using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
-    //|**REMOVE!!**
-    //|-public float downForce;
-    //|-public float maxSpeed;
-    //|-public float maxAcceleration;
-    //|-public float accelerationMultiplier;
-    //|-public float breakMultiplier;
-    //|-public float turnSpeed;
-    //|-public AnimationCurve turnSpeedCurve;
-
     [Header("Refrences")]
     [HideInInspector] public ShipVariant variant;
     public ShipVariant VariantObject;
@@ -32,6 +23,9 @@ public class ShipsControls : MonoBehaviour
     //public AnimationCurve speedCurve;
     private float m_accelerateMultiplier;
     private float m_acceleration;
+    private float m_currentMaxSpeed;
+    public void SetMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
+    public float GetMaxSpeed() { return m_currentMaxSpeed; }
 
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -43,7 +37,6 @@ public class ShipsControls : MonoBehaviour
     private Vector3 m_currentPos;
 
     [Header("Boost Variables")]
-    private float lastFrameBoost;
     [SerializeField] private float m_currentBoost;
     public bool currentlyBoosting;
     public float forceMultiplier;
@@ -145,7 +138,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
-        float multiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / variant.MaxSpeed);
+        float multiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         if (m_accelerateMultiplier == 0)
             m_acceleration -= (variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
@@ -168,7 +161,7 @@ public class ShipsControls : MonoBehaviour
         m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.07f);
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
-        float multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / variant.MaxSpeed);
+        float multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (variant.TurnSpeed * multiplier), 0));

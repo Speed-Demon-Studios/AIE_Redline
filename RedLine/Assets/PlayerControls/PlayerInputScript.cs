@@ -28,20 +28,12 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // if (Input.GetKeyDown(KeyCode.T))
-       // {
-       //     test = !test;
-       // }
-       //
-       // if (test)
-       // {
-       // }
-            CalculatePOV();
+        CalculatePOV();
     }
 
     private void CalculatePOV()
     {
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.MaxSpeed;
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;
         if(speedPercentage > 0.001)
         {
             m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
