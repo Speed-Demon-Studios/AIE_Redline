@@ -18,7 +18,7 @@ public class RedlineColliderSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 25; i++)
+        for(int i = 0; i < 35; i++)
             SpawnCollider();
     }
 
@@ -77,7 +77,7 @@ public class RedlineColliderSpawner : MonoBehaviour
 
     public void SpawnCollider()
     {
-            GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform);
+            GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
 
             ColliderTrigger b = a.GetComponent<ColliderTrigger>();
             b.spawner = this;

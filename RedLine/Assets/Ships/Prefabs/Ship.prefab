@@ -356,7 +356,7 @@ MonoBehaviour:
   rayCastPoint: {fileID: 8319451938726217151}
   m_currentBoost: 0
   currentlyBoosting: 0
-  forceMultiplier: 0
+  forceMultiplier: 60
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
@@ -493,7 +493,19 @@ MonoBehaviour:
     m_ActionId: f999eb10-96ca-48ca-9a10-8045f4bb3c61
     m_ActionName: Menus/CONFIRM
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2868536069181459849}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
+        m_MethodName: Boost
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0b617d28-bd91-4f41-a191-4d46085aefc7
     m_ActionName: Player/Boost[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0

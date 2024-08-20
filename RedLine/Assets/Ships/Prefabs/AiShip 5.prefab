@@ -382,6 +382,7 @@ Transform:
   - {fileID: 2819560892090638106}
   - {fileID: 2819560891356404107}
   - {fileID: 4022018049878914855}
+  - {fileID: 2835519227998521524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -411,15 +412,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VariantObject: {fileID: 11400000, guid: 049db11f07f25594ab86e20810f7c9e2, type: 2}
   variant: {fileID: 0}
+  VariantObject: {fileID: 11400000, guid: 049db11f07f25594ab86e20810f7c9e2, type: 2}
   rotation: {fileID: 2819560892090638106}
   facingPoint: {fileID: 2819560891588230136}
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
-  currentBoost: 0
+  m_currentBoost: 0
   currentlyBoosting: 0
-  boostLevel: 0
+  forceMultiplier: 0
+  m_boostLevel: 0
 --- !u!54 &2819560891871692963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -509,8 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309f05b566d97784a811c446a80ea03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shipsInColliders: []
-  ships: []
+  m_allShipsInColliders: []
   colliderPrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
   colliderParent: {fileID: 0}
@@ -629,6 +630,55 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2970186464860564473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2835519227998521524}
+  - component: {fileID: 2653864896131115019}
+  m_Layer: 0
+  m_Name: Redline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2835519227998521524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970186464860564473}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2819560891871692961}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2653864896131115019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970186464860564473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309f05b566d97784a811c446a80ea03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allShipsInColliders: []
+  colliderPrefab: {fileID: 5695694751950368063, guid: 1dd200e61d63f1c4d914e1d17c24efcd,
+    type: 3}
+  spawnPoint: {fileID: 1546657135768187411}
+  colliderParent: {fileID: 2819560891871692966}
 --- !u!1 &4216970128126669320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,8 +5894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309f05b566d97784a811c446a80ea03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shipsInColliders: []
-  ships: []
+  m_allShipsInColliders: []
   colliderPrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
   colliderParent: {fileID: 0}
