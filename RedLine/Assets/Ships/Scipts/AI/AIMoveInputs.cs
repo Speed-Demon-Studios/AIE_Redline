@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AIMoveInputs : MonoBehaviour
 {
@@ -69,14 +70,14 @@ public class AIMoveInputs : MonoBehaviour
         {
             float secondTempAngleRad = -secondAngleRad;
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
-            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
+            //float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
+            tempSpeed = neededSpeedNextNode;
         }
         else
         {
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
-            float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
+            //float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
+            tempSpeed = neededSpeedNextNode;
         }
 
         m_speed = tempSpeed;

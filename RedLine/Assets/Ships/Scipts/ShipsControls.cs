@@ -42,6 +42,7 @@ public class ShipsControls : MonoBehaviour
     public float forceMultiplier;
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,11 +138,17 @@ public class ShipsControls : MonoBehaviour
         if (currentlyBoosting && m_boostLevel > 0)
         {
             m_rb.mass = 10;
-            m_rb.AddForce(transform.forward * (forceMultiplier), ForceMode.Impulse);
+            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.Impulse);
             StartCoroutine(BoostTime(0.5f * m_boostLevel));
         }
         else
             currentlyBoosting = false;
+    }
+
+    public void BoostPadBoost(float force)
+    {
+        Debug.Log("Boost pad speed");
+        m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
     }
 
     private IEnumerator BoostTime(float length)
