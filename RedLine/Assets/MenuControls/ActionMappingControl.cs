@@ -10,29 +10,29 @@ public class ActionMappingControl : MonoBehaviour
     private int playerRacingActionMapIndex;
     [SerializeField] private PlayerInput _playerInputActions;
 
-    public void UiControllerUP()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuUP();
-        }
-    }
+    //public void UiControllerUP()
+    //{
+    //    if (GameManager.gManager.uiCInput != null)
+    //    {
+    //        GameManager.gManager.uiCInput.MenuUP();
+    //    }
+    //}
 
-    public void UiControllerDown()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuDown();
-        }
-    }
+    //public void UiControllerDown()
+    //{
+    //    if (GameManager.gManager.uiCInput != null)
+    //    {
+    //        GameManager.gManager.uiCInput.MenuDown();
+    //    }
+    //}
 
-    public void UiControllerConfirm()
-    {
-        if (GameManager.gManager.uiCInput != null)
-        {
-            GameManager.gManager.uiCInput.MenuConfirm();
-        }
-    }
+    //public void UiControllerConfirm()
+    //{
+    //    if (GameManager.gManager.uiCInput != null)
+    //    {
+    //        GameManager.gManager.uiCInput.MenuConfirm();
+    //    }
+    //}
 
     public void SwitchActionMapToPlayer()
     {

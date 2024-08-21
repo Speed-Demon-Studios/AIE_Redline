@@ -19,7 +19,6 @@ public class InitializeBeforeRace : MonoBehaviour
         GameManager.gManager.playerObjects.Add(this.gameObject);
         if (pInput != null)
         {
-            pInput.enabled = false;
             sControls.enabled = false;
         }
 

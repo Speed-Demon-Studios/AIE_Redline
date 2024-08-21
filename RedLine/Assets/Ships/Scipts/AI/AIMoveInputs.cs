@@ -14,6 +14,7 @@ public class AIMoveInputs : MonoBehaviour
     private Vector3 randomPos;
     public GameObject nodeParent;
     public GameObject m_desiredNode;
+    public Text test;
 
     // Start is called before the first frame update
     void Start()
@@ -69,21 +70,31 @@ public class AIMoveInputs : MonoBehaviour
         if (secondAngleRad < 0)
         {
             float secondTempAngleRad = -secondAngleRad;
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
+            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad + distance);
             //float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
             tempSpeed = neededSpeedNextNode;
+            if (test != null)
+            {
+                test.text = "Neg" + (secondAngleRad - distance).ToString();
+            }
         }
         else
         {
             float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
             //float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.variant.DefaultMaxSpeed * 0.7f); // ** Max Speed
             tempSpeed = neededSpeedNextNode;
+            if (test != null)
+            {
+                test.text = "Pos" + (secondAngleRad - distance).ToString();
+            }
         }
 
         m_speed = tempSpeed;
 
         if (m_speed < 0)
             m_speed *= 5f;
+
+
 
         Debug.DrawLine(this.transform.position, randomPos);
 
