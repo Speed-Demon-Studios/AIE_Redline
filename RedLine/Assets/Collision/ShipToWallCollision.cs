@@ -47,8 +47,8 @@ public class ShipToWallCollision : MonoBehaviour
             shipVariant = sControlScript.variant;
             defaultTopSpeed = shipVariant.DefaultMaxSpeed;
             defaultAcceleration = shipVariant.MaxAcceleration;
-            changedTopSpeed = (defaultTopSpeed * 0.45f);
-            changedAcceleration = (defaultAcceleration * 0.35f);
+            changedTopSpeed = (defaultTopSpeed * 0.55f);
+            changedAcceleration = (defaultAcceleration * 0.4f);
         }
     }
 

@@ -26,6 +26,16 @@ public class InitializeBeforeRace : MonoBehaviour
         {
             playerCamera.enabled = false;
         }
+        
+    }
+
+    public void DisableShipControls()
+    {
+        sControls = this.GetComponent<ShipsControls>();
+        if (sControls != null)
+        {
+            sControls.enabled = false;
+        }
     }
 
     public void EnableRacerMovement()
@@ -62,6 +72,11 @@ public class InitializeBeforeRace : MonoBehaviour
             playerCamera.enabled = true;
         }
         sControls.enabled = true;
+        foreach (GameObject gObj in GameManager.gManager.racerObjects)
+        {
+
+        }
+        
         //pInput.enabled = true;
         if (GameManager.gManager.pHandler != null)
         {

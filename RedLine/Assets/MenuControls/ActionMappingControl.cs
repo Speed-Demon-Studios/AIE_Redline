@@ -44,7 +44,7 @@ public class ActionMappingControl : MonoBehaviour
             }
         }
         _playerInputActions.actions.FindActionMap("Player").Enable();
-        _playerInputActions.actions.FindActionMap("Menus").Disable();
+        //_playerInputActions.actions.FindActionMap("UI").Disable();
         _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("Player");
     }
 

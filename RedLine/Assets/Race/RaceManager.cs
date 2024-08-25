@@ -50,12 +50,14 @@ public class RaceManager : MonoBehaviour
                 ibr.EnableRacerMovement();
             }
         }
-        //else if (GameManager.gManager.raceStarted == false)
-        //{
-        //    if (Input.GetKeyUp(KeyCode.Space))
-        //    {
-        //        GameManager.gManager.raceStarted = true;
-        //    }
-        //}
+        else if (GameManager.gManager.raceStarted == false)
+        {
+            foreach (GameObject racer in GameManager.gManager.racerObjects)
+            {
+                InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
+
+                ibr.DisableShipControls();
+            }
+        }
     }
 }
