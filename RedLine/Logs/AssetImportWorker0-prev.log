@@ -15,7 +15,7 @@ C:/Users/s213611/Documents/GitHub/AIE_Redline/RedLine
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-59326
+61642
 Successfully changed project path to: C:/Users/s213611/Documents/GitHub/AIE_Redline/RedLine
 C:/Users/s213611/Documents/GitHub/AIE_Redline/RedLine
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,12 +47,12 @@ C:/Users/s213611/Documents/GitHub/AIE_Redline/RedLine
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [19528] Host "[IP] 10.118.35.70 [Port] 0 [Flags] 2 [Guid] 3670704435 [EditorId] 3670704435 [Version] 1048832 [Id] WindowsEditor(7,ADL-49F1A9) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [664] Host "[IP] 10.118.35.70 [Port] 0 [Flags] 2 [Guid] 4134135952 [EditorId] 4134135952 [Version] 1048832 [Id] WindowsEditor(7,ADL-49F1A9) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [19528] Host "[IP] 10.118.35.70 [Port] 0 [Flags] 2 [Guid] 3670704435 [EditorId] 3670704435 [Version] 1048832 [Id] WindowsEditor(7,ADL-49F1A9) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [664] Host "[IP] 10.118.35.70 [Port] 0 [Flags] 2 [Guid] 4134135952 [EditorId] 4134135952 [Version] 1048832 [Id] WindowsEditor(7,ADL-49F1A9) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
-Refreshing native plugins compatible for Editor in 253.47 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 141.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.31f1 (3409e2af086f)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/Resources/UnitySubsystems
@@ -68,7 +68,7 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56236
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56528
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
@@ -76,7 +76,7 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.31f1/
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.31f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.021293 seconds.
+Registered in 0.014596 seconds.
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 [usbmuxd] Start listen thread
@@ -84,88 +84,88 @@ Native extension for WindowsStandalone target not found
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 274.58 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 121.78 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.813 seconds
+- Completed reload, in  0.897 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1814ms)
-		BeginReloadAssembly (216ms)
+	ReloadAssembly (897ms)
+		BeginReloadAssembly (120ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (2ms)
-		EndReloadAssembly (1409ms)
-			LoadAssemblies (214ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (642ms)
+			LoadAssemblies (119ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (258ms)
+			SetupTypeCache (143ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (52ms)
-			SetupLoadedEditorAssemblies (1009ms)
+			RebuildScriptCaches (30ms)
+			SetupLoadedEditorAssemblies (411ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (195ms)
+				InitializePlatformSupportModulesInManaged (136ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (275ms)
-				BeforeProcessingInitializeOnLoad (4ms)
-				ProcessInitializeOnLoadAttributes (414ms)
-				ProcessInitializeOnLoadMethodAttributes (120ms)
+				RefreshPlugins (122ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (94ms)
+				ProcessInitializeOnLoadMethodAttributes (57ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.016472 seconds.
+Registered in 0.010741 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 171.70 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 136.13 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Completed reload, in  3.566 seconds
+- Completed reload, in  3.014 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3567ms)
-		BeginReloadAssembly (309ms)
+	ReloadAssembly (3014ms)
+		BeginReloadAssembly (159ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (17ms)
+			DisableScriptedObjects (7ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (3047ms)
-			LoadAssemblies (243ms)
+			CreateAndSetChildDomain (22ms)
+		EndReloadAssembly (2709ms)
+			LoadAssemblies (134ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (551ms)
+			SetupTypeCache (457ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (157ms)
-			SetupLoadedEditorAssemblies (2099ms)
+			RebuildScriptCaches (120ms)
+			SetupLoadedEditorAssemblies (1951ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (55ms)
+				InitializePlatformSupportModulesInManaged (38ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (172ms)
-				BeforeProcessingInitializeOnLoad (176ms)
-				ProcessInitializeOnLoadAttributes (1554ms)
-				ProcessInitializeOnLoadMethodAttributes (128ms)
-				AfterProcessingInitializeOnLoad (14ms)
+				RefreshPlugins (136ms)
+				BeforeProcessingInitializeOnLoad (139ms)
+				ProcessInitializeOnLoadAttributes (1537ms)
+				ProcessInitializeOnLoadMethodAttributes (90ms)
+				AfterProcessingInitializeOnLoad (10ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (11ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
-Refreshing native plugins compatible for Editor in 1.46 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.85 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5529 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 33 unused Assets / (1.5 MB). Loaded Objects now: 5983.
-Memory consumption went from 222.1 MB to 220.6 MB.
-Total: 52.589500 ms (FindLiveObjects: 3.746000 ms CreateObjectMapping: 3.741600 ms MarkObjects: 41.572600 ms  DeleteObjects: 3.527400 ms)
+Unloading 6107 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 49 unused Assets / (1.5 MB). Loaded Objects now: 6563.
+Memory consumption went from 245.4 MB to 243.9 MB.
+Total: 6.350700 ms (FindLiveObjects: 0.524600 ms CreateObjectMapping: 0.683300 ms MarkObjects: 4.301000 ms  DeleteObjects: 0.840500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -179,28 +179,112 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 281376.521738 seconds.
-  path: Assets/Scenes
-  artifactKey: Guid(4b16b2302eb95b5429a1d1ca21557ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 24192.850484 seconds.
+  path: Assets/Test2Walls.asset
+  artifactKey: Guid(888bfd1f54971394fbf40f4cfaed990f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes using Guid(4b16b2302eb95b5429a1d1ca21557ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '099632ebe109fd3a5cda6737e81a02a0') in 0.024415 seconds 
+Start importing Assets/Test2Walls.asset using Guid(888bfd1f54971394fbf40f4cfaed990f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '147807158b86dc170836f355b00ce2dd') in 0.172061 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Tube.asset
+  artifactKey: Guid(826c957d5ba739b4bb9beb83886736ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Tube.asset using Guid(826c957d5ba739b4bb9beb83886736ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3808c5c51c3ab214ce1e8fbbae1982df') in 0.054924 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/NoStick.physicMaterial
+  artifactKey: Guid(b4efa8e98f89cec4f93d73a7ae25f39d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/NoStick.physicMaterial using Guid(b4efa8e98f89cec4f93d73a7ae25f39d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '854f740a62fd052cde8ac46448e5a395') in 0.013131 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Test2Road.asset
+  artifactKey: Guid(a2c397c41c1c4c94db7c7189537dfd06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Test2Road.asset using Guid(a2c397c41c1c4c94db7c7189537dfd06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0815272f6817d44fd15a69a54038a509') in 0.085058 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/GoortrackRoad.asset
+  artifactKey: Guid(c53e05d5df531e0489c39fc969f5132d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/GoortrackRoad.asset using Guid(c53e05d5df531e0489c39fc969f5132d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7462b48368c5652b8e7e2eb769f96af') in 0.023463 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/GoodtrackWalls.asset
+  artifactKey: Guid(9795d4711e908c746b867bd94b0e576a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/GoodtrackWalls.asset using Guid(9795d4711e908c746b867bd94b0e576a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '642ca1cbb290c545d9059e1c55b7c01a') in 0.055669 seconds 
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.51 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 29 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (1.5 MB). Loaded Objects now: 6579.
+Memory consumption went from 115.3 MB to 113.8 MB.
+Total: 4.657300 ms (FindLiveObjects: 0.487800 ms CreateObjectMapping: 0.506200 ms MarkObjects: 3.240200 ms  DeleteObjects: 0.422200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 38.722765 seconds.
+  path: Assets/Art
+  artifactKey: Guid(41c7d8f502d88924ea255173d3a247eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Art using Guid(41c7d8f502d88924ea255173d3a247eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98cf4f52f5148588e907e6203ae7eaaf') in 0.013754 seconds 
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 1.585177 seconds.
-  path: Assets/Scenes/SampleScene.unity
-  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 15.554569 seconds.
+  path: Assets/Scenes/Chris Scene
+  artifactKey: Guid(7d0559b5f6de8614c9d6d89f6e8b08dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b773e12776492cc2c291c4c98904b7b') in 0.013301 seconds 
+Start importing Assets/Scenes/Chris Scene using Guid(7d0559b5f6de8614c9d6d89f6e8b08dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9181cea25cb6ba051b52c29fe8f67d3f') in 0.011608 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.873550 seconds.
+  path: Assets/Scenes/Chris Scene/ArtPrefabbing.unity
+  artifactKey: Guid(5092c43b41f065140add61a05d52ad54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Scenes/Chris Scene/ArtPrefabbing.unity using Guid(5092c43b41f065140add61a05d52ad54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37bbfa59326c780d4885c267b7284aca') in 0.009701 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 42.897339 seconds.
+  path: Assets/Environment
+  artifactKey: Guid(9410adec90579cf42b6a2bf4b4513e61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment using Guid(9410adec90579cf42b6a2bf4b4513e61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7423491d3c44ccab7b7ea3020ad75c4a') in 0.010728 seconds 
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Prepare
-Refreshing native plugins compatible for Editor in 8.45 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 5.44 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 26 unused Assets / (1.4 MB). Loaded Objects now: 5983.
-Memory consumption went from 103.8 MB to 102.4 MB.
-Total: 9.621500 ms (FindLiveObjects: 1.074400 ms CreateObjectMapping: 0.844500 ms MarkObjects: 7.057600 ms  DeleteObjects: 0.643500 ms)
+Unloading 28 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (1.5 MB). Loaded Objects now: 6579.
+Memory consumption went from 115.3 MB to 113.8 MB.
+Total: 4.294900 ms (FindLiveObjects: 0.487500 ms CreateObjectMapping: 0.566700 ms MarkObjects: 2.762500 ms  DeleteObjects: 0.477000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -216,201 +300,381 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1215.273036 seconds.
-  path: Assets/Scenes/Chris_Scenes
-  artifactKey: Guid(120d2a957733746418a91aa0b3f15ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 35.334997 seconds.
+  path: Assets/Environment/Textures/TestStreetSigns_MOD_MOD_StreetSign_BaseColour.png
+  artifactKey: Guid(aada3024660827944b270e1b3ffdfee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes using Guid(120d2a957733746418a91aa0b3f15ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '113ac197895e29fd2fa20f575c68c057') in 0.018073 seconds 
-Number of asset objects unloaded after import = 0
+Start importing Assets/Environment/Textures/TestStreetSigns_MOD_MOD_StreetSign_BaseColour.png using Guid(aada3024660827944b270e1b3ffdfee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79e144a619faa2255d0051751a94bb6b') in 0.047844 seconds 
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 17.526474 seconds.
-  path: Assets/Scenes/Chris_Scenes/SplineEnvironmentBlockout.unity
-  artifactKey: Guid(2ed195b2920c17342a9c9fed22867016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.000023 seconds.
+  path: Assets/Environment/Textures/TestStreetSigns_MOD_MOD_StreetSign_RMAE.png
+  artifactKey: Guid(8ff412d2b9654a7478cfd90cdca52271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/SplineEnvironmentBlockout.unity using Guid(2ed195b2920c17342a9c9fed22867016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b2c02619b3314fff75afb8dc57eafb9') in 0.009969 seconds 
-Number of asset objects unloaded after import = 0
+Start importing Assets/Environment/Textures/TestStreetSigns_MOD_MOD_StreetSign_RMAE.png using Guid(8ff412d2b9654a7478cfd90cdca52271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b0ea1e2e09b34033a7838b2273734bb') in 0.024522 seconds 
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 68.159015 seconds.
-  path: Assets/Scenes/Chris_Scenes/Blockouts
-  artifactKey: Guid(c2b09b4078b447747840a082a1c16639) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 2.832803 seconds.
+  path: Assets/Environment/Textures/BoostPanTexture_MAT_BoostGlow_BaseColour.png
+  artifactKey: Guid(3ceb593a6f93b2045bf6c8e1465407dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/Blockouts using Guid(c2b09b4078b447747840a082a1c16639) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e899b4c12f21a1427dccdbd90ee1e247') in 0.009890 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 11.638912 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting
-  artifactKey: Guid(c2b09b4078b447747840a082a1c16639) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting using Guid(c2b09b4078b447747840a082a1c16639) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38598fcef3191d48b21dc3c75613e7eb') in 0.010191 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 302.693002 seconds.
-  path: Assets/Dreamteck/Splines
-  artifactKey: Guid(866c3652f7eea9344891cd280b38c098) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines using Guid(866c3652f7eea9344891cd280b38c098) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb8fabaa223ce58c5312bc801c239fd9') in 0.010593 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 2.804243 seconds.
-  path: Assets/Dreamteck/Splines/User Manual.url
-  artifactKey: Guid(7c8796a444faa1b4c86171ed9be083e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/User Manual.url using Guid(7c8796a444faa1b4c86171ed9be083e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '690d22a31437ca557095646ea8648b75') in 0.069186 seconds 
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 236.470074 seconds.
-  path: Assets/Dreamteck/Splines/Presets
-  artifactKey: Guid(c2892344f19bfc04eb31794898658329) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Presets using Guid(c2892344f19bfc04eb31794898658329) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8289548c4a8c15fdf85ae86644615057') in 0.009494 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.847022 seconds.
-  path: Assets/Dreamteck/Splines/Core
-  artifactKey: Guid(2ad5bdd0ef82ba945ba1572f4e63c56e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Core using Guid(2ad5bdd0ef82ba945ba1572f4e63c56e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3340db1274690f707ef47304bb518f95') in 0.010398 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.408790 seconds.
-  path: Assets/Dreamteck/Splines/Components
-  artifactKey: Guid(829f5091cc4fe8941a75b10d0468e04d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Components using Guid(829f5091cc4fe8941a75b10d0468e04d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bc36f041d954130a99d3cfdbb9abd5f') in 0.010989 seconds 
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 125.071687 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_Spline_02.fbx
-  artifactKey: Guid(4baad473a32215f4f94ad9171fdb2882) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_Spline_02.fbx using Guid(4baad473a32215f4f94ad9171fdb2882) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d4cbd182f93074ab1ed7fa5f66872ee') in 2.163355 seconds 
-Number of asset objects unloaded after import = 19
-========================================================================
-Received Import Request.
-  Time since last request: 0.654516 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.fbx
-  artifactKey: Guid(5d5fddbb03205d04a8aa322434fe1e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.fbx using Guid(5d5fddbb03205d04a8aa322434fe1e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '040a08d9f151748fc7ffa9ee5022410a') in 0.036483 seconds 
-Number of asset objects unloaded after import = 9
+Start importing Assets/Environment/Textures/BoostPanTexture_MAT_BoostGlow_BaseColour.png using Guid(3ceb593a6f93b2045bf6c8e1465407dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6561b3fd213863718ba16b59b56daf37') in 0.029876 seconds 
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
   Time since last request: 0.000027 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineWall_01.fbx
-  artifactKey: Guid(bb8484969b1a4bb4091d50650840f915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  path: Assets/Environment/Textures/MOD_BoostPad_MAT_BoostPad_RMAE.png
+  artifactKey: Guid(1f328153b25c8cd42a38f909c4604e0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineWall_01.fbx using Guid(bb8484969b1a4bb4091d50650840f915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84c23e13ac184329c468b00f497e0f02') in 0.058875 seconds 
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 27.916238 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat
-  artifactKey: Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat using Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f2cdde75500c6c974009f8444772479') in 0.029909 seconds 
+Start importing Assets/Environment/Textures/MOD_BoostPad_MAT_BoostPad_RMAE.png using Guid(1f328153b25c8cd42a38f909c4604e0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f7acc7032f9cddbd9e27319e6b2198d') in 0.031635 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.113840 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat
-  artifactKey: Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 10.935855 seconds.
+  path: Assets/Environment/Meshes
+  artifactKey: Guid(f4ff894ef1453f64495458b803853813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat using Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '734fff8509d24ea7a51b3e26310213b5') in 0.021519 seconds 
+Start importing Assets/Environment/Meshes using Guid(f4ff894ef1453f64495458b803853813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0235874ec69023e3215263e00ce4d031') in 0.011403 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.047068 seconds.
+  path: Assets/Environment/Meshes/TestStreetSigns_MOD.fbx
+  artifactKey: Guid(001852a7f64a2a2459f29b73d43b09fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/TestStreetSigns_MOD.fbx using Guid(001852a7f64a2a2459f29b73d43b09fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+Given the current application state, request to unload unused assets is being delayed.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.EditorUtility:UnloadUnusedAssetsImmediate ()
+UnityEditor.VFX.VFXAssetManager:Build (bool) (at Library/PackageCache/com.unity.visualeffectgraph@12.1.12/Editor/Models/VFXGraph.cs:241)
+UnityEditor.VFX.VFXLibrary:SRPChanged () (at Library/PackageCache/com.unity.visualeffectgraph@12.1.12/Editor/Core/VFXLibrary.cs:613)
+UnityEngine.Rendering.RenderPipelineManager:OnActiveRenderPipelineTypeChanged ()
+UnityEditor.PreviewRenderUtility:Render (bool,bool)
+UnityEditor.GameObjectInspector:DoRenderPreview ()
+UnityEditor.GameObjectInspector:RenderStaticPreview (string,UnityEngine.Object[],int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreview (UnityEngine.Object,UnityEngine.Object[],string,int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset (UnityEngine.Object,UnityEngine.Object[],string)
+
+[Library/PackageCache/com.unity.visualeffectgraph@12.1.12/Editor/Models/VFXGraph.cs line 241]
+
+ -> (artifact id: 'd449f86241c0fa6d84c4f281ff288794') in 0.290931 seconds 
+Resuming delayed unloading of unused assets.
+Unloading 46 unused Assets / (Unknown). Loaded Objects now: 6709.
+Memory consumption went from 119.5 MB to 119.5 MB.
+Total: 4.748100 ms (FindLiveObjects: 0.514200 ms CreateObjectMapping: 0.435600 ms MarkObjects: 3.661600 ms  DeleteObjects: 0.135400 ms)
+
+Number of asset objects unloaded after import = 11
+========================================================================
+Received Import Request.
+  Time since last request: 6.925554 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad.fbx
+  artifactKey: Guid(6ce08a54251d9964784fbbfda2de398e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad.fbx using Guid(6ce08a54251d9964784fbbfda2de398e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53e2011a6c928fbd4731bc2cb2e35b1b') in 0.050056 seconds 
+Number of asset objects unloaded after import = 10
+========================================================================
+Received Import Request.
+  Time since last request: 10.693835 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(490c1828ea39e83458b158ab8a0f3195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(490c1828ea39e83458b158ab8a0f3195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a0fe2f9e2ce850b7ac963653f7b1d2c') in 0.021939 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 8.360023 seconds.
-  path: Assets/Dreamteck/Splines/Editor/Icons/add.png
-  artifactKey: Guid(7a5d15f3cf0772b4eaea6396d1733b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.213902 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(490c1828ea39e83458b158ab8a0f3195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Editor/Icons/add.png using Guid(7a5d15f3cf0772b4eaea6396d1733b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b669b87948ce6fcf87fe5384cc9ce7a') in 0.071508 seconds 
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(490c1828ea39e83458b158ab8a0f3195) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c40087180be7972c9a033bcc4285b78b') in 0.018227 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Dreamteck/Utilities/Editor/Images/discord.png
-  artifactKey: Guid(ca2ec96e04914514ca532b6d55c85db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 3.579530 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Utilities/Editor/Images/discord.png using Guid(ca2ec96e04914514ca532b6d55c85db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4224d65fad8ff77693eca381b1d909f') in 0.039217 seconds 
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc67d414530543ad8eeb7e703b063209') in 0.018108 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Dreamteck/Splines/Editor/Icons/add_on.png
-  artifactKey: Guid(e7c5e2732014d0841beb2e3da56410c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.121383 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Editor/Icons/add_on.png using Guid(e7c5e2732014d0841beb2e3da56410c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c038821d26098c7145f3f2f0970de71f') in 0.044504 seconds 
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a99837bbbcde323947dd44f693d5af5a') in 0.020921 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Dreamteck/Splines/Editor/Icons/add_on_dark.png
-  artifactKey: Guid(0fe44e4f40f01a944acc051bb6a386ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 13.108238 seconds.
+  path: Assets/Environment/Materials
+  artifactKey: Guid(6cd7858d3af327f4f9f96f3e8aee8088) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Dreamteck/Splines/Editor/Icons/add_on_dark.png using Guid(0fe44e4f40f01a944acc051bb6a386ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69bdff48ad6a501ac444079f8c7ab3c9') in 0.038904 seconds 
+Start importing Assets/Environment/Materials using Guid(6cd7858d3af327f4f9f96f3e8aee8088) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72b3d26f901bd03dd304ba3e7ec50104') in 0.009309 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.046397 seconds.
+  path: Assets/Environment/Materials/MAT_TestSign.mat
+  artifactKey: Guid(30b97b6dc0ba9a7449109926245ae18a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Materials/MAT_TestSign.mat using Guid(30b97b6dc0ba9a7449109926245ae18a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '585db2b64a611c635cac1d8adf027e5a') in 1.336215 seconds 
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 77.153412 seconds.
+  path: Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss
+  artifactKey: Guid(be32ccdc256bb5d46927748547e82d2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss using Guid(be32ccdc256bb5d46927748547e82d2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b38dfd70f45c955453da990a0a0c6901') in 0.157561 seconds 
+Number of asset objects unloaded after import = 23
+========================================================================
+Received Import Request.
+  Time since last request: 2.911005 seconds.
+  path: Assets/Art/Textures/Booster_Alpha.png
+  artifactKey: Guid(794acd0b6a72e03418afb79d4896bb69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Art/Textures/Booster_Alpha.png using Guid(794acd0b6a72e03418afb79d4896bb69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c405e2ea18c988a551015150853d208d') in 0.022459 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 3.556437 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/Spline_02/MOD_Spline_02_MAT_Spline_02_AlbedoTransparency.png
-  artifactKey: Guid(480f0e3bda1a0744582f8336d911f250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 20.643968 seconds.
+  path: Assets/Environment/Textures/MOD_BoostPad_MAT_BoostPad_Normal.png
+  artifactKey: Guid(3be181a46fca21b429ab7b1870639e36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/Spline_02/MOD_Spline_02_MAT_Spline_02_AlbedoTransparency.png using Guid(480f0e3bda1a0744582f8336d911f250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf8a1f28e76c57056c0ff9630cad15bc') in 0.037732 seconds 
+Start importing Assets/Environment/Textures/MOD_BoostPad_MAT_BoostPad_Normal.png using Guid(3be181a46fca21b429ab7b1870639e36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84cace905cfde069c8201616ec702950') in 0.032796 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/SplineWall/MOD_SplineWall_MAT_SplineWall_AlbedoTransparency.png
-  artifactKey: Guid(6bd883dde9fcd264697bbd5cbb26156c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 9.773961 seconds.
+  path: Assets/Dreamteck/Splines/Editor/Icons/mirror_on.png
+  artifactKey: Guid(d62abb75b50f1c641b791978603be177) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/SplineWall/MOD_SplineWall_MAT_SplineWall_AlbedoTransparency.png using Guid(6bd883dde9fcd264697bbd5cbb26156c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae542daa1c8455841dcaef3d4590c1ca') in 0.047119 seconds 
+Start importing Assets/Dreamteck/Splines/Editor/Icons/mirror_on.png using Guid(d62abb75b50f1c641b791978603be177) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e91993a202ea2e6e7be296cecc809e51') in 0.039421 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/SplineTest/MOD_SplineTest_MAT_SplineTest_AlbedoTransparency.png
-  artifactKey: Guid(fa2949ec457a07a40a239bef63aededc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.000029 seconds.
+  path: Assets/Track/Textures/Test track long/MOD_Spline_02_MAT_Spline_02_AlbedoTransparency.png
+  artifactKey: Guid(0dbbb31d97009fd4e96af435233bd60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/SplineTest/MOD_SplineTest_MAT_SplineTest_AlbedoTransparency.png using Guid(fa2949ec457a07a40a239bef63aededc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56e4af5dd8bf40c3668ac4973a581b2b') in 0.045870 seconds 
+Start importing Assets/Track/Textures/Test track long/MOD_Spline_02_MAT_Spline_02_AlbedoTransparency.png using Guid(0dbbb31d97009fd4e96af435233bd60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2191a1046b1fbea2282b1b379ab02f95') in 0.032202 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/Spline_02/MOD_Spline_02_MAT_Spline_02_Normal.png
-  artifactKey: Guid(a95600a0aa52ebc40abf05eaf047adf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 90.942057 seconds.
+  path: Assets/Shaders/Base.png
+  artifactKey: Guid(803b8dd73599ff742b46bfcd12909cc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/Spline_02/MOD_Spline_02_MAT_Spline_02_Normal.png using Guid(a95600a0aa52ebc40abf05eaf047adf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57ed1c7fc47b34b9988c3bdd0c87cdd9') in 0.043631 seconds 
+Start importing Assets/Shaders/Base.png using Guid(803b8dd73599ff742b46bfcd12909cc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5f9eb9e664bdb51ddd22706f90053ee') in 0.026187 seconds 
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 952.031425 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.prefab
-  artifactKey: Guid(94c27770b9806974ba59849f88177ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.000029 seconds.
+  path: Assets/Track/Textures/PlaceholderTurnSign/BMOD_SignTest_SignTest_BaseColour.png
+  artifactKey: Guid(78ada70348dcc8d4f8aa277b0d772fdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.prefab using Guid(94c27770b9806974ba59849f88177ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ac34c7d3bd8f4d3a9f584a6e0cc556d') in 0.026449 seconds 
-Number of asset objects unloaded after import = 9
+Start importing Assets/Track/Textures/PlaceholderTurnSign/BMOD_SignTest_SignTest_BaseColour.png using Guid(78ada70348dcc8d4f8aa277b0d772fdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03f14f77687ba6e58a1d2b117f6b6a79') in 0.027804 seconds 
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 242.907498 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat
-  artifactKey: Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 0.000031 seconds.
+  path: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+  artifactKey: Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MAT_SplineTest.mat using Guid(da4556554dc7f2c458c7141af689e0f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1799452582b92319b5a108cca248a182') in 0.027796 seconds 
+Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset using Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b56baf7011386b7d0b0bae12be5e8760') in 0.037730 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 51.198316 seconds.
+  path: Assets/Track/Textures/Test track long/MOD_Spline_02_MAT_Spline_02_Normal.png
+  artifactKey: Guid(059110a0450f61b428fa56983c861373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Track/Textures/Test track long/MOD_Spline_02_MAT_Spline_02_Normal.png using Guid(059110a0450f61b428fa56983c861373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27815860ab7e18d65b09fdc963a73db5') in 0.035205 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 270.480080 seconds.
+  path: Assets/Environment/Prefabs
+  artifactKey: Guid(3930f72bd5b0cb7438830e970a860f37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs using Guid(3930f72bd5b0cb7438830e970a860f37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c46ddf06570cb91db107f7b32a79597d') in 0.012234 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.170039 seconds.
+  path: Assets/Environment/Prefabs/TestSign.prefab
+  artifactKey: Guid(7f36f9084b95458469fbc97ef0b633f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs/TestSign.prefab using Guid(7f36f9084b95458469fbc97ef0b633f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ae51ab5fffa11c931fbfa6a1903e9a0') in 0.027836 seconds 
+Number of asset objects unloaded after import = 44
+========================================================================
+Received Import Request.
+  Time since last request: 8.669969 seconds.
+  path: Assets/Environment/Prefabs/BoostPad.prefab
+  artifactKey: Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs/BoostPad.prefab using Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc3d1d91a2180e1541a7d2ba7a088079') in 0.021316 seconds 
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 31.692164 seconds.
+  path: Assets/Environment/Prefabs/BoostPad.prefab
+  artifactKey: Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs/BoostPad.prefab using Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8411f59701083bc07fa3cf54ca94f6d3') in 0.826648 seconds 
+Number of asset objects unloaded after import = 22
+========================================================================
+Received Import Request.
+  Time since last request: 456.685259 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad.fbx
+  artifactKey: Guid(6ce08a54251d9964784fbbfda2de398e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad.fbx using Guid(6ce08a54251d9964784fbbfda2de398e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d95087e7d77c1bfadd1b1a6335522d4') in 0.036234 seconds 
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 4.850105 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad 1.fbx
+  artifactKey: Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad 1.fbx using Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4df162c8e56ae1fd3a9fe6aff88b47d4') in 0.048279 seconds 
+Number of asset objects unloaded after import = 10
+========================================================================
+Received Import Request.
+  Time since last request: 47.352369 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8eae91a573d6997df60d1c1278ad003') in 0.017469 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.125327 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c08187747adee4f103fc58da7dd2aa7b') in 0.015870 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 3.784343 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5533a7bca5905a3097b79020a33738ec') in 0.015518 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.141750 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ece00b95025148890bb97865365966be') in 0.017779 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 5.332988 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad 1.fbx
+  artifactKey: Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad 1.fbx using Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2caa87460b2cb8f2ae00ac28e67ff69b') in 0.041572 seconds 
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 127.852731 seconds.
+  path: Assets/Environment/Materials/MAT_BoostGlow.mat
+  artifactKey: Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Materials/MAT_BoostGlow.mat using Guid(3d0f778242efc8e40a521fa26a782d49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfa41b2641f43d178784efff0b74ff21') in 0.018655 seconds 
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.prefab
-  artifactKey: Guid(94c27770b9806974ba59849f88177ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+  Time since last request: 106.694024 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Number of updated assets reloaded before import = 0
-Start importing Assets/Scenes/Chris_Scenes/BlockoutsTesting/MOD_SplineTest.prefab using Guid(94c27770b9806974ba59849f88177ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7b80edbc9fc941e219e0f1ce570a841') in 0.023137 seconds 
-Number of asset objects unloaded after import = 10
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f501d2c0349b29956dbe1f47ad8cc90') in 0.018020 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 3.254525 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad 1.fbx
+  artifactKey: Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad 1.fbx using Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd080693a191750158478f797bd80b61b') in 0.033874 seconds 
+Number of asset objects unloaded after import = 9
+========================================================================
+Received Import Request.
+  Time since last request: 4.756099 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad 1.fbx
+  artifactKey: Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad 1.fbx using Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5548ad31a91f43e0fe2bb2e23b2c8e85') in 0.020380 seconds 
+Number of asset objects unloaded after import = 9
+========================================================================
+Received Import Request.
+  Time since last request: 0.098321 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4e7b7b94a5143b13c300632d7c4a67b') in 0.016308 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 2.382913 seconds.
+  path: Assets/Environment/Meshes/MOD_BoostPad 1.fbx
+  artifactKey: Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MOD_BoostPad 1.fbx using Guid(062c75c6a2363b84a915213574f8c820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c842f678df5bc831350732b1f147c6e') in 0.018413 seconds 
+Number of asset objects unloaded after import = 8
+========================================================================
+Received Import Request.
+  Time since last request: 77.541879 seconds.
+  path: Assets/Environment/Prefabs/BoostPad.prefab
+  artifactKey: Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs/BoostPad.prefab using Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ee45a133670cc23dbb0a01ce8fcc0fd') in 0.022275 seconds 
+Number of asset objects unloaded after import = 22
+========================================================================
+Received Import Request.
+  Time since last request: 768.231517 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostGlow.mat
+  artifactKey: Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostGlow.mat using Guid(a84e530bcc744c046827d39fb5b8e59d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3136e61c0dc33acc230f588c687072e9') in 0.020763 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 23.575823 seconds.
+  path: Assets/Environment/Meshes/MAT_BoostPad.mat
+  artifactKey: Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Meshes/MAT_BoostPad.mat using Guid(ba59ec11a1ed93c499f27b8f20b65bd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca47e8d310346ceeb55e390d37968d1d') in 0.016054 seconds 
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 70.433297 seconds.
+  path: Assets/Environment/Prefabs/BoostPad.prefab
+  artifactKey: Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Environment/Prefabs/BoostPad.prefab using Guid(77e1837212f308f4db4438a16d75a9eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f63f531d398092fa348fe539ab2bbcc2') in 0.028459 seconds 
+Number of asset objects unloaded after import = 22
+========================================================================
+Received Import Request.
+  Time since last request: 515.380199 seconds.
+  path: Assets/Scenes/Chris Scene/ArtPrefabbing.unity
+  artifactKey: Guid(5092c43b41f065140add61a05d52ad54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Scenes/Chris Scene/ArtPrefabbing.unity using Guid(5092c43b41f065140add61a05d52ad54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'facebada93c7bc82621e187692c7c962') in 0.003282 seconds 
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 9.007974 seconds.
+  path: Assets/Scenes/Chris_Scenes/SplineEnvironmentBlockout.unity
+  artifactKey: Guid(2ed195b2920c17342a9c9fed22867016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Scenes/Chris_Scenes/SplineEnvironmentBlockout.unity using Guid(2ed195b2920c17342a9c9fed22867016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e2d37b7d8931e3f44bfaab800434c23') in 0.012783 seconds 
+Number of asset objects unloaded after import = 0
