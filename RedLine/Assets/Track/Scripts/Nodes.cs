@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Nodes : MonoBehaviour
 {
     public Nodes nextNode;
-    //public Nodes prevNode;
+
     public Vector3 ReturnNodePos() { return transform.position; }
 
     public float radius;

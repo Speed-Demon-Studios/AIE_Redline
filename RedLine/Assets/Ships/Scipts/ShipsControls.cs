@@ -6,37 +6,44 @@ using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
+    //|**REMOVE!!**
+    //|-public float downForce;
+    //|-public float maxSpeed;
+    //|-public float maxAcceleration;
+    //|-public float accelerationMultiplier;
+    //|-public float breakMultiplier;
+    //|-public float turnSpeed;
+    //|-public AnimationCurve turnSpeedCurve;
+
     [Header("Refrences")]
-    private Rigidbody m_rb;
+    public ShipVariant Variant;
     public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
     public GameObject shipModel;
     public Transform rayCastPoint;
+    private Rigidbody m_rb;
 
     [Space]
-
-    public float downForce;
-
     [Header("Speed Variables")]
+    //public AnimationCurve speedCurve;
     private float m_accelerateMultiplier;
-    public float maxSpeed;
-    public float maxAcceleration;
-    public float accelerationMultiplier;
     private float m_acceleration;
-    public float breakMultiplier;
-    public AnimationCurve speedCurve;
 
     [Header("Turning Varibles")]
     private float m_targetAngle;
     private float m_currentAngle;
-    public float turnSpeed;
     private float m_shipAngle;
-    public AnimationCurve turnSpeedCurve;
 
     [Header("TrackStick")]
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
+
+    [Header("Boost Variables")]
+    private float lastFrameBoost;
+    [SerializeField] private float currentBoost;
+    public bool currentlyBoosting;
+    [SerializeField, Range(0,3)] private int boostLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -45,12 +52,57 @@ public class ShipsControls : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Turn();
         Accelerate();
         DownForce();
         RotateShip();
+        CheckBoost();
+    }
+
+    private void CheckBoost()
+    {
+        if (!currentlyBoosting)
+        {
+            switch (currentBoost)
+            {
+                case < 1:
+                    currentBoost = 0;
+                    break;
+                case < 2:
+                    currentBoost = 1;
+                    break;
+                case < 3:
+                    currentBoost = 2;
+                    break;
+                case < 4:
+                    currentBoost = 3;
+                    break;
+            }
+        }
+        else
+            AddToBoost();
+    }
+
+    public void AddToBoost()
+    {
+        currentBoost += 0.5f * Time.deltaTime;
+        switch (currentBoost)
+        {
+            case < 1:
+                boostLevel = 0;
+                break;
+            case < 2:
+                boostLevel = 1;
+                break;
+            case < 3:
+                boostLevel = 2;
+                break;
+            case < 4:
+                boostLevel = 3;
+                break;
+        }
     }
 
     /// <summary>
@@ -88,7 +140,7 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
 
-        m_rb.AddForce(-transform.up * downForce, ForceMode.Force);
+        m_rb.AddForce(-transform.up * Variant.DownForce, ForceMode.Force);
     }
 
     /// <summary>
@@ -96,16 +148,16 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
-        float multiplier = speedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
+        float multiplier = Variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / Variant.MaxSpeed);
 
         if (m_accelerateMultiplier == 0)
-            m_acceleration -= (accelerationMultiplier * 0.4f) * Time.deltaTime;
+            m_acceleration -= (Variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
         else if(m_accelerateMultiplier > 0)
-            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
+            m_acceleration += Variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
         else
-            m_acceleration += accelerationMultiplier * m_accelerateMultiplier * breakMultiplier * Time.deltaTime;
+            m_acceleration += Variant.AccelerationMultiplier * m_accelerateMultiplier * Variant.BreakMultiplier * Time.deltaTime;
 
-        m_acceleration = Mathf.Clamp(m_acceleration, 0, maxAcceleration);
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, Variant.MaxAcceleration);
 
         m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
@@ -119,13 +171,13 @@ public class ShipsControls : MonoBehaviour
         m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.07f);
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
-        float multiplier = turnSpeedCurve.Evaluate(m_rb.velocity.magnitude / maxSpeed);
+        float multiplier = Variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / Variant.MaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
-        rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (turnSpeed * multiplier), 0));
+        rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (Variant.TurnSpeed * multiplier), 0));
 
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
-        shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, m_shipAngle, -m_shipAngle * 0.4f));
+        shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
 
     /// <summary>
