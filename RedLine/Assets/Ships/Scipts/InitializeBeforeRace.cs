@@ -71,10 +71,6 @@ public class InitializeBeforeRace : MonoBehaviour
         //playerCamera.gameObject.SetActive(true);
         playerCamera.enabled = true;
         sControls.enabled = true;
-        foreach (GameObject gObj in GameManager.gManager.racerObjects)
-        {
-
-        }
         
         //pInput.enabled = true;
         if (GameManager.gManager.pHandler != null)
