@@ -10,7 +10,7 @@ public class PlayerInputScript : MonoBehaviour
     private InputActionMap player;
     private ShipsControls m_shipControls;
     private Camera m_cam;
-    public bool test;
+    public bool test = true;
 
     private float m_currentPOV;
     private float m_desiredPOV;
@@ -26,17 +26,17 @@ public class PlayerInputScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            test = !test;
-        }
-
-        if (test)
-        {
+       // if (Input.GetKeyDown(KeyCode.T))
+       // {
+       //     test = !test;
+       // }
+       //
+       // if (test)
+       // {
+       // }
             CalculatePOV();
-        }
     }
 
     private void CalculatePOV()

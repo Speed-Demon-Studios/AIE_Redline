@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class AIMoveInputs : MonoBehaviour
 {
@@ -33,7 +32,7 @@ public class AIMoveInputs : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Accelerate();
         Turning();
@@ -47,36 +46,44 @@ public class AIMoveInputs : MonoBehaviour
             randomPos = m_desiredNode.GetComponent<Nodes>().RandomNavSphere(m_desiredNode.transform.position);
         }
 
+        Transform pointA = m_desiredNode.transform;
+        Transform pointB = m_desiredNode.GetComponent<Nodes>().nextNode.transform;
+
+        Vector3 up = (pointB.up + pointA.up);
+
+        float distance = Vector3.Distance(pointA.up, pointB.up);
+
         Vector3 nodeDirection = (transform.position - randomPos).normalized;
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
         Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
 
-        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, Vector3.up);
+        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, up);
         float angleRad = angle * Mathf.Deg2Rad;
 
-        float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, Vector3.up);
+        float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, up);
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
 
-        float tempSpeed2;
+        float tempSpeed;
 
         if (secondAngleRad < 0)
         {
             float secondTempAngleRad = -secondAngleRad;
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad);
+            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
             float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed2 = neededSpeedNextNode - nextSpeedPercent;
+            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
         else
         {
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad);
+            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
             float nextSpeedPercent = m_controls.ReturnRB().velocity.magnitude / (m_controls.Variant.MaxSpeed * 0.7f); // ** Max Speed
-            tempSpeed2 = neededSpeedNextNode - nextSpeedPercent;
+            tempSpeed = neededSpeedNextNode - nextSpeedPercent;
         }
 
-        m_speed = tempSpeed2;
+        m_speed = tempSpeed;
 
         if (m_speed < 0)
             m_speed *= 5f;
+
         Debug.DrawLine(this.transform.position, randomPos);
 
         m_controls.SetTurnMultipliers(-angleRad);

@@ -56,6 +56,10 @@ public class UIControllerInput : MonoBehaviour
     {
         if (HasInitialized == true)
         {
+            if (PIM != null)
+            {
+                PIM.DisableJoining();
+            }
             Debug.Log("Loading Race Scene");
             Debug.Log("Ready To Start Race");
             SceneManager.LoadScene(1);

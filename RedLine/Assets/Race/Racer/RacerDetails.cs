@@ -33,9 +33,9 @@ public class RacerDetails : MonoBehaviour
 
                 if (other.TryGetComponent(out CheckpointTrigger trigger))
                 {
-                    if (trigger.finalCheckpoint)
+                    if (trigger.finalCheckpoint == true)
                     {
-                        currentLap += 1;
+                        GameManager.gManager.rManager.LapComplete(this);
                     }
                 }
             }
