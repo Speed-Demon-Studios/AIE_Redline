@@ -39,6 +39,10 @@ public class PositionHandler : MonoBehaviour
         {
             racersAdded = true;
         }
+        if (GameManager.gManager.racerObjects.Count == racers.Count)
+        {
+            GameManager.gManager.racersAdded = true;
+        }
     }
 
     public IEnumerator SortRacers()
