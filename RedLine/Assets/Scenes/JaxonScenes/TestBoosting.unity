@@ -2234,7 +2234,12 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 216932809}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774530760258941273, guid: a43fce2ff4fc38245a7f06e1321147d1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a43fce2ff4fc38245a7f06e1321147d1, type: 3}
 --- !u!1 &164567772
@@ -3725,12 +3730,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldRacer: {fileID: 0}
   SpotFilled: 0
---- !u!4 &216932809 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8938645251078766439, guid: a43fce2ff4fc38245a7f06e1321147d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 163589289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &228689725
 GameObject:
   m_ObjectHideFlags: 0
@@ -11558,7 +11557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &824967139
 Transform:
   m_ObjectHideFlags: 0
@@ -18338,7 +18337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1274813622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0280264c778bdb04387145a1b1fdaf06, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   startPositions:
@@ -18350,6 +18349,8 @@ MonoBehaviour:
   - {fileID: 207554478}
   - {fileID: 669886025}
   - {fileID: 1515791613}
+  racersPlaced: 0
+  placementIndexer: 0
 --- !u!4 &1274813624
 Transform:
   m_ObjectHideFlags: 0
