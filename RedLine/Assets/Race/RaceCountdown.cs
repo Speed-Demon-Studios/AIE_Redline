@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class RaceCountdown : MonoBehaviour
 {
-    private bool m_readyForCountdown = false;
-    private bool m_countdownCoroutineStarted = false;
-    private bool m_countdownFinished = false;
-    private bool m_countdownStarted = false;
+    [SerializeField] private int countdownLength = 5;
+    public bool m_readyForCountdown = false;
+    public bool m_countdownCoroutineStarted = false;
+    public bool m_countdownFinished = false;
+    public bool m_countdownStarted = false;
 
     private void Awake()
     {
+        GameManager.gManager.raceCountdown = this;
+        GameManager.gManager.countdownIndex = countdownLength;
         m_countdownStarted = false;
         m_countdownFinished = false;
         m_countdownCoroutineStarted = false;
@@ -46,21 +49,16 @@ public class RaceCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_readyForCountdown == true)
+        if (m_readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
         {
-            if (m_countdownFinished == false)
-            {
-                if (m_countdownCoroutineStarted == false)
-                {
-                    GameManager.gManager.raceStarted = false;
-                    StartCoroutine(RaceCountdownTimer());
-                }
-            }
+            GameManager.gManager.raceStarted = false;
+            StartCoroutine(RaceCountdownTimer());
         }
 
         if (m_countdownFinished == true)
         {
             GameManager.gManager.raceStarted = true;
+            GameManager.gManager.enableRacerMovement = true;
         }
     }
 }

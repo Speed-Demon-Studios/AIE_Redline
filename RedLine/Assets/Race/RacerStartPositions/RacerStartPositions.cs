@@ -9,6 +9,11 @@ public class RacerStartPositions : MonoBehaviour
     private bool racersPlaced = false;
     private int placementIndexer = 0;
 
+    private void Awake()
+    {
+        racersPlaced = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

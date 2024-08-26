@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -22,8 +23,12 @@ public class UIControllerInput : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.gManager.CurrentScene = "MainMenu";
+        GameManager.gManager.disablePlayerCams = true;
+        GameManager.gManager.resetRacerVariables = true;
         GameManager.gManager.m_startButtons[0] = firstButton;
         GameManager.gManager.mSL.SetPlayerUIInputMM();
+
     }
 
     public void InitializePlayerConnections()
@@ -52,6 +57,7 @@ public class UIControllerInput : MonoBehaviour
             }
             Debug.Log("Loading Race Scene");
             Debug.Log("Ready To Start Race");
+            GameManager.gManager.racerObjects = new List<GameObject>();
             SceneManager.LoadScene(1);
         }
     }

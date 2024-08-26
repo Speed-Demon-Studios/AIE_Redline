@@ -9,14 +9,19 @@ public class PositionHandler : MonoBehaviour
     public IList<RacerDetails> racerFinder = new List<RacerDetails>();
     private bool racersSorted = false;
 
+    private void Awake()
+    {
+        GameManager.gManager.pHandler = this;
+        racerFinder = new List<RacerDetails>();
+        racers = new List<RacerDetails>();
+        racersAdded = false;
+        racersSorted = false;
+    }
+
     public void OnRaceLoaded()
     {
         // Find all the racers in the scene
-        racersAdded = false;
         racerFinder = FindObjectsOfType<RacerDetails>();
-        //racerFinder = new List<RacerDetails>();
-        //racerFinder = new List<RacerDetails>();
-        //racers = new List<RacerDetails>();
 
         foreach (RacerDetails rD in racerFinder)
         {
@@ -24,35 +29,24 @@ public class PositionHandler : MonoBehaviour
             racers.Add(rD);
         }
 
-
-        foreach (RacerDetails rD in racers)
-        {
-            Debug.Log("FOUND RACERS");
-        }
-
         foreach (RacerDetails rD in racers)
         {
             GameManager.gManager.racerObjects.Add(rD.gameObject);
         }
 
-        if (racers.Count == racerFinder.Count)
+        if (GameManager.gManager.racerObjects.Count == racers.Count && racers.Count == racerFinder.Count)
         {
             racersAdded = true;
-        }
-        if (GameManager.gManager.racerObjects.Count == racers.Count)
-        {
             GameManager.gManager.racersAdded = true;
         }
     }
 
     public IEnumerator SortRacers()
     {
-        //racersSorted = false;
         foreach (RacerDetails rD in racers)
         {
             rD.placement = racers.IndexOf(rD) + 1;
         }
-        //racersSorted = true;
         StopCoroutine(SortRacers());
         yield return new WaitForEndOfFrame();
     }

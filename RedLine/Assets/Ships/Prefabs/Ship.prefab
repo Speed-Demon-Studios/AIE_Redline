@@ -719,10 +719,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementEnabled: 0
+  playerCamOBJECT: {fileID: 2868536069371765811}
+  sControls: {fileID: 2868536069181459848}
   playerCamera: {fileID: 2868536069371765821}
   pInput: {fileID: 2868536069181459849}
-  sControls: {fileID: 2868536069181459848}
   aiInput: {fileID: 0}
+  rb: {fileID: 2868536069181459851}
 --- !u!114 &6138812736906276457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3948600599449153757}
   eventSystem: {fileID: 3458273097799416325}
+  m_cam: {fileID: 2868536069371765821}
   lerpTime: 0.05
   minPOV: 100
   maxPOV: 135

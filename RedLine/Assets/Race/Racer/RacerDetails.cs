@@ -9,6 +9,7 @@ public class RacerDetails : MonoBehaviour
     public int currentCheckpoint = 0;
     public string RacerName = "";
 
+
     private CheckpointHandler m_cHandler;
     private bool nameSet = false;
     
@@ -21,6 +22,14 @@ public class RacerDetails : MonoBehaviour
         var nextCheckpoint = m_cHandler.GetCheckpoint(currentCheckpoint);
         distanceToCheckpoint = Vector3.Distance(transform.position, nextCheckpoint.transform.position);
         return distanceToCheckpoint;
+    }
+
+    public void ResetRacerVariables()
+    {
+        finishedRacing = false;
+        currentCheckpoint = 0;
+        currentLap = 0;
+        placement = 0;
     }
 
     private void Update()

@@ -9,26 +9,26 @@ public class ManageSceneLoading : MonoBehaviour
     bool reloadingmenu = false;
     public void InitializeForMainMenu()
     {
-        //reloadingmenu = true;
-        //foreach (GameObject playerOBJ in GameManager.gManager.players)
-        //{
-        //    InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
-        //    IBR.playerCamera.gameObject.SetActive(false);
-        //    RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
-        //    racerDeets.finishedRacing = false;
-        //    racerDeets.currentLap = 0;
-        //}
-        //GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
-        //GameManager.gManager.pHandler.racers = new List<RacerDetails>();
-        //GameManager.gManager.racerObjects = new List<GameObject>();
-        //GameManager.gManager.raceFinished = false;
-        //GameManager.gManager.raceStarted = false;
-        //GameManager.gManager.racersAdded = false;
-        //GameManager.gManager.pHandler.racersAdded = false;
-        //GameManager.gManager.countdownIndex = 5;
-        //
-        //SceneManager.UnloadSceneAsync(1);
-        //SceneManager.LoadScene(0);
+        reloadingmenu = true;
+        foreach (GameObject playerOBJ in GameManager.gManager.players)
+        {
+            InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
+            //IBR.playerCamera.gameObject.SetActive(false);
+            RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
+            racerDeets.finishedRacing = false;
+            racerDeets.currentLap = 0;
+        }
+        GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
+        GameManager.gManager.pHandler.racers = new List<RacerDetails>();
+        GameManager.gManager.racerObjects = new List<GameObject>();
+        GameManager.gManager.raceFinished = false;
+        GameManager.gManager.raceStarted = false;
+        GameManager.gManager.racersAdded = false;
+        GameManager.gManager.pHandler.racersAdded = false;
+        GameManager.gManager.countdownIndex = 5;
+        
+        SceneManager.UnloadSceneAsync(1);
+        SceneManager.LoadScene(0);
     }
 
     public void SetPlayerUIInputMM()

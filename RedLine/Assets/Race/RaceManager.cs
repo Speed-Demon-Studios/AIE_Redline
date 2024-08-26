@@ -11,7 +11,11 @@ public class RaceManager : MonoBehaviour
     private void Awake()
     {
         GameManager.gManager.rManager = this;
-        GameManager.gManager.pHandler = this.gameObject.GetComponent<PositionHandler>();
+        GameManager.gManager.CurrentScene = "Race";
+        GameManager.gManager.enablePlayerCams = true;
+
+        GameManager.gManager.pHandler.OnRaceLoaded();
+
         foreach (GameObject gObj in GameManager.gManager.playerObjects)
         {
             InitializeBeforeRace playerInit = gObj.GetComponent<InitializeBeforeRace>();
@@ -43,31 +47,31 @@ public class RaceManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
-        {
-            foreach (GameObject racer in GameManager.gManager.racerObjects)
-            {
-                RacerDetails rDeets = racer.GetComponent<RacerDetails>();
-                InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
-
-                if (rDeets.finishedRacing == false)
-                {
-                    ibr.EnableRacerMovement();
-                }
-                else
-                {
-                    ibr.DisableShipControls();
-                }
-            }
-        }
-        else if (GameManager.gManager.raceStarted == false && GameManager.gManager.raceFinished == false)
-        {
-            foreach (GameObject racer in GameManager.gManager.racerObjects)
-            {
-                InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
-
-                ibr.DisableShipControls();
-            }
-        }
+        //if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
+        //{
+        //    foreach (GameObject racer in GameManager.gManager.racerObjects)
+        //    {
+        //        RacerDetails rDeets = racer.GetComponent<RacerDetails>();
+        //        InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
+        //
+        //        if (rDeets.finishedRacing == false)
+        //        {
+        //            ibr.EnableRacerMovement();
+        //        }
+        //        else
+        //        {
+        //            ibr.DisableShipControls();
+        //        }
+        //    }
+        //}
+        //else if (GameManager.gManager.raceStarted == false && GameManager.gManager.raceFinished == false)
+        //{
+        //    foreach (GameObject racer in GameManager.gManager.racerObjects)
+        //    {
+        //        InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
+        //
+        //        ibr.DisableShipControls();
+        //    }
+        //}
     }
 }

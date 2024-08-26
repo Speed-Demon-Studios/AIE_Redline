@@ -2,81 +2,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InitializeBeforeRace : MonoBehaviour
 {
     public bool movementEnabled = false;
+    public GameObject playerCamOBJECT;
+    public ShipsControls sControls;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private PlayerInputScript pInput;
-    [SerializeField] private ShipsControls sControls;
     [SerializeField] private AIMoveInputs aiInput;
+    [SerializeField] private Rigidbody rb;
+
+    private void Update()
+    {
+        if (GameManager.gManager.CurrentScene == "MainMenu" || (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == false))
+        {
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
+            rb.isKinematic = true;
+        }
+        else if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == true)
+        {
+            rb.isKinematic = false;
+        }
+    }
 
     private void Awake()
     {
         this.gameObject.AddComponent<DontDestroy>();
+        sControls = this.GetComponent<ShipsControls>();
         GameManager.gManager.playerObjects.Add(this.gameObject);
-        if (pInput != null)
+
+        if (playerCamOBJECT != null)
         {
-            sControls.enabled = false;
+            playerCamOBJECT.SetActive(false);
         }
 
-        if (playerCamera != null)
-        {
-            playerCamera.enabled = false;
-        }
-        
     }
 
     public void DisableShipControls()
     {
-        sControls = this.GetComponent<ShipsControls>();
-        if (sControls != null)
-        {
-            sControls.enabled = false;
-        }
+        sControls.enabled = false;
     }
 
     public void EnableRacerMovement()
     {
-        movementEnabled = false;
-        if (aiInput != null)
-        {
-            aiInput.enabled = true;
-        }
-
-        if (pInput != null)
-        {
-            pInput.enabled = true;
-        }
-
-        if (playerCamera.gameObject != null)
-        {
-            //playerCamera.gameObject.SetActive(true);
-            playerCamera.enabled = true;
-        }
-
-        if (sControls.enabled == false)
-        {
-            sControls.enabled = true;
-        }
-
-
-        movementEnabled = true;
+        sControls.enabled = true;
     }
 
     public void InitializeForRace()
     {
-        //playerCamera.gameObject.SetActive(true);
-        playerCamera.enabled = true;
+        playerCamOBJECT.SetActive(true);
         sControls.enabled = true;
-        
-        //pInput.enabled = true;
-        if (GameManager.gManager.pHandler != null)
-        {
-            GameManager.gManager.pHandler.enabled = true;
-        }
-        //GameManager.gManager.pHandler.OnRaceLoaded();
     }
 }

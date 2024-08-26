@@ -422,6 +422,7 @@ MonoBehaviour:
   nodeParent: {fileID: 0}
   m_desiredNode: {fileID: 0}
   test: {fileID: 0}
+  test2: {fileID: 0}
 --- !u!114 &5609334039806038210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +440,7 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  RacerName: 
 --- !u!135 &5573208418150351537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -465,10 +467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementEnabled: 0
+  playerCamOBJECT: {fileID: 0}
+  sControls: {fileID: 2819560891871692962}
   playerCamera: {fileID: 0}
   pInput: {fileID: 0}
-  sControls: {fileID: 2819560891871692962}
   aiInput: {fileID: 2819560891871692965}
+  rb: {fileID: 2819560891871692963}
 --- !u!114 &1636644483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInputActions: {fileID: 0}
+  mES: {fileID: 0}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0

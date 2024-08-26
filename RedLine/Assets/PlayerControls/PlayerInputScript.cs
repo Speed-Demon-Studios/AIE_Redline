@@ -10,7 +10,7 @@ public class PlayerInputScript : MonoBehaviour
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
     private ShipsControls m_shipControls;
-    private Camera m_cam;
+    [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     private GameManager gMan;
 
@@ -24,28 +24,28 @@ public class PlayerInputScript : MonoBehaviour
     void Awake()
     {
         m_shipControls = GetComponentInParent<ShipsControls>();
-        m_cam = GetComponentInChildren<Camera>();
-        gMan = FindObjectOfType<GameManager>();
-
+        //m_cam = GetComponentInChildren<Camera>();
+        gMan = GameManager.gManager;
+    
         gMan.players.Add(gameObject);
-
+    
         m_playerNumber = gMan.numberOfPlayers;
-
+    
         eventSystem.firstSelectedGameObject = gMan.FindStartButton();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameManager.gManager.raceStarted == false && m_shipControls.enabled == true)
-        {
-            m_shipControls.enabled = false;
-        }
-
-        if (GameManager.gManager.raceStarted == true && m_shipControls.enabled == false)
-        {
-            m_shipControls.enabled = true;
-        }
+        //if (GameManager.gManager.raceStarted == false && m_shipControls.enabled == true)
+        //{
+        //    m_shipControls.enabled = false;
+        //}
+        //
+        //if (GameManager.gManager.raceStarted == true && m_shipControls.enabled == false)
+        //{
+        //    m_shipControls.enabled = true;
+        //}
         if(gMan.raceStarted)
             CalculatePOV();
     }
