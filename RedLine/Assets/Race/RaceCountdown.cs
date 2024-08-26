@@ -52,6 +52,7 @@ public class RaceCountdown : MonoBehaviour
             {
                 if (m_countdownCoroutineStarted == false)
                 {
+                    GameManager.gManager.raceStarted = false;
                     StartCoroutine(RaceCountdownTimer());
                 }
             }

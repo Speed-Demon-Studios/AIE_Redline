@@ -51,8 +51,9 @@ public class InitializeBeforeRace : MonoBehaviour
             pInput.enabled = true;
         }
 
-        if (playerCamera != null)
+        if (playerCamera.gameObject != null)
         {
+            //playerCamera.gameObject.SetActive(true);
             playerCamera.enabled = true;
         }
 
@@ -67,10 +68,8 @@ public class InitializeBeforeRace : MonoBehaviour
 
     public void InitializeForRace()
     {
-        if (playerCamera != null)
-        {
-            playerCamera.enabled = true;
-        }
+        //playerCamera.gameObject.SetActive(true);
+        playerCamera.enabled = true;
         sControls.enabled = true;
         foreach (GameObject gObj in GameManager.gManager.racerObjects)
         {

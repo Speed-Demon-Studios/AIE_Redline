@@ -7,10 +7,11 @@ public class RacerDetails : MonoBehaviour
     public int currentLap = 0;
     public int placement = 0;
     public int currentCheckpoint = 0;
+    public string RacerName = "";
 
     private CheckpointHandler m_cHandler;
+    private bool nameSet = false;
     
-
     /// <summary>
     /// Calculates the distance to the next checkpoint
     /// </summary>
@@ -24,25 +25,41 @@ public class RacerDetails : MonoBehaviour
 
     private void Update()
     {
-        if (finishedRacing == true)
+        if (GameManager.gManager.raceStarted == false && nameSet == false)
         {
-            PlayerInputScript playerInput = this.GetComponent<PlayerInputScript>();
-            ShipsControls shipControls = this.GetComponent<ShipsControls>();
-            if (playerInput != null)
+            nameSet = true;
+            for (int i = 0; i < GameManager.gManager.players.Count; i++)
             {
-                if (playerInput.enabled == true)
+                if (GameManager.gManager.players[i] == this.gameObject)
                 {
-                    playerInput.enabled = false;
-                }
-            }
-            if (shipControls != null)
-            {
-                if (shipControls.enabled == true)
-                {
-                    shipControls.enabled = false;
+                    //Debug.Log("Player Index: " + i);
+                    RacerName = ("Player" + (i + 1));
+                    Debug.Log("Racer name: " + RacerName);
+                    break;
                 }
             }
         }
+
+
+        //if (finishedRacing == true)
+        //{
+        //    PlayerInputScript playerInput = this.GetComponent<PlayerInputScript>();
+        //    ShipsControls shipControls = this.GetComponent<ShipsControls>();
+        //    if (playerInput != null)
+        //    {
+        //        if (playerInput.enabled == true)
+        //        {
+        //            playerInput.enabled = false;
+        //        }
+        //    }
+        //    if (shipControls != null)
+        //    {
+        //        if (shipControls.enabled == true)
+        //        {
+        //            shipControls.enabled = false;
+        //        }
+        //    }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)

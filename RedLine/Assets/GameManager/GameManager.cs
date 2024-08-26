@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
 {
     public UIControllerInput uiCInput;
     public CheckpointHandler checkpointParent;
-    public GameObject[] StartingPoints;
     public PositionHandler pHandler;
+    public ManageSceneLoading mSL;
     public RaceManager rManager;
+    public FinishRace raceFinisher;
+    public GameObject[] m_startButtons;
+    public GameObject[] StartingPoints;
+    public List<GameObject> players;
     public IList<GameObject> playerObjects = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
     public bool racersAdded = false;
@@ -21,8 +25,6 @@ public class GameManager : MonoBehaviour
     public bool indexListSorted = true;
     public int countdownIndex = 5;
     public int neededLaps = 0;
-    public List<GameObject> players;
-    public GameObject[] m_startButtons;
     public int numberOfPlayers = 0;
 
     public static GameManager gManager { get; private set; }

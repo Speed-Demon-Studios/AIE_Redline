@@ -2,37 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class ActionMappingControl : MonoBehaviour
 {
+    [SerializeField] private PlayerInput _playerInputActions;
+    public MultiplayerEventSystem mES;
+    private ShipsControls sControls;
     private RacerDetails racerInfo;
     private bool controlMapChanged = false;
     private int playerRacingActionMapIndex;
-    [SerializeField] private PlayerInput _playerInputActions;
-
-    //public void UiControllerUP()
-    //{
-    //    if (GameManager.gManager.uiCInput != null)
-    //    {
-    //        GameManager.gManager.uiCInput.MenuUP();
-    //    }
-    //}
-
-    //public void UiControllerDown()
-    //{
-    //    if (GameManager.gManager.uiCInput != null)
-    //    {
-    //        GameManager.gManager.uiCInput.MenuDown();
-    //    }
-    //}
-
-    //public void UiControllerConfirm()
-    //{
-    //    if (GameManager.gManager.uiCInput != null)
-    //    {
-    //        GameManager.gManager.uiCInput.MenuConfirm();
-    //    }
-    //}
 
     public void SwitchActionMapToPlayer()
     {
@@ -44,25 +23,49 @@ public class ActionMappingControl : MonoBehaviour
             }
         }
         _playerInputActions.actions.FindActionMap("Player").Enable();
-        //_playerInputActions.actions.FindActionMap("UI").Disable();
         _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("Player");
+    }
+
+    public void SwitchActionMapToUI()
+    {
+        for (int i = 0; i < _playerInputActions.actions.actionMaps.Count; i++)
+        {
+            if (_playerInputActions.actions.actionMaps[i].name.ToLower() == "UI")
+            {
+                playerRacingActionMapIndex = i;
+            }
+        }
+        _playerInputActions.actions.FindActionMap("UI").Enable();
+        _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("UI");
+
+        Debug.Log("Current ActionMap: " + _playerInputActions.currentActionMap.name);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         racerInfo = this.GetComponent<RacerDetails>();
+        sControls = this.gameObject.GetComponent<ShipsControls>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.raceStarted == true)
+        if (racerInfo.finishedRacing == true)
         {
-            if (racerInfo.finishedRacing == true)
+            //if (sControls != null)
+            //{
+            //_playerInputActions.DeactivateInput();
+            sControls.enabled = false;
+            Debug.Log("Disabling ShipControls Script.");
+            if (_playerInputActions.currentActionMap.name != "UI")
             {
-                _playerInputActions.DeactivateInput();
+                SwitchActionMapToUI();
             }
+            //}
+        }
+        if (GameManager.gManager.raceStarted == true && racerInfo.finishedRacing == false)
+        {
 
             PlayerInputScript playerInput = this.gameObject.GetComponent<PlayerInputScript>();
             AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();

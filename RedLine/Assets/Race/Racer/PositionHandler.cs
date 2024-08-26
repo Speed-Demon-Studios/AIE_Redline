@@ -6,7 +6,7 @@ public class PositionHandler : MonoBehaviour
 {
     public bool racersAdded = false;
     public List<RacerDetails> racers = new List<RacerDetails>();
-    private IList<RacerDetails> racerFinder = new List<RacerDetails>();
+    public IList<RacerDetails> racerFinder = new List<RacerDetails>();
     private bool racersSorted = false;
 
     public void OnRaceLoaded()
@@ -15,8 +15,8 @@ public class PositionHandler : MonoBehaviour
         racersAdded = false;
         racerFinder = FindObjectsOfType<RacerDetails>();
         //racerFinder = new List<RacerDetails>();
-        //racerFinder.Clear();
-        //racers.Clear();
+        //racerFinder = new List<RacerDetails>();
+        //racers = new List<RacerDetails>();
 
         foreach (RacerDetails rD in racerFinder)
         {
@@ -78,6 +78,16 @@ public class PositionHandler : MonoBehaviour
                  if (r1.currentLap != r2.currentLap)
                  {
                      return r1.currentCheckpoint;
+                 }
+
+                 if (r1.finishedRacing)
+                 {
+                     return r1.currentCheckpoint;
+                 }
+
+                 if (r2.finishedRacing)
+                 {
+                     return r2.currentCheckpoint;
                  }
 
                  racersSorted = true;
