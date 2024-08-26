@@ -771,6 +771,7 @@ MonoBehaviour:
   facingPoint: {fileID: 2868536069116041169}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
+  strafeStrength: 30
   m_currentBoost: 0
   currentlyBoosting: 0
   forceMultiplier: 60
@@ -10935,10 +10936,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cd176fca-e3ed-49a6-904d-8e973600b297
-    m_ActionName: Player/ForwardBackward[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2868536069181459849}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
@@ -11070,6 +11067,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 31de1e08-af70-4a44-82d4-7f045bc5b926
     m_ActionName: Player/Brake[/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2868536069181459849}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
+        m_MethodName: Straf
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cb59cd52-c3dc-4fdb-b82f-0f72481b3541
+    m_ActionName: Player/Straf[/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: UI
