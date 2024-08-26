@@ -67,9 +67,19 @@ public class PlayerInputScript : MonoBehaviour
 
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void Brake(InputAction.CallbackContext context)
     {
+        Debug.Log(context.ReadValue<float>());
         if (m_shipControls != null)
+        {
+            m_shipControls.SetBrakeMultiplier(context.ReadValue<float>());
+        }
+    }
+
+    public void Accelerate(InputAction.CallbackContext context)
+    {
+        Debug.Log(context.ReadValue<float>());
+        if(m_shipControls != null)
         {
             m_shipControls.SetSpeedMultiplier(context.ReadValue<float>());
         }
