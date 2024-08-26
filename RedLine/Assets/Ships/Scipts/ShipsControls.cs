@@ -31,8 +31,9 @@ public class ShipsControls : MonoBehaviour
     private float m_targetAngle;
     private float m_currentAngle;
     private float m_shipAngle;
-    private float m_straf;
-    private float m_strafMultiplier;
+    private float m_strafe;
+    private float m_strafeMultiplier;
+    public float strafeStrength;
 
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -61,6 +62,7 @@ public class ShipsControls : MonoBehaviour
     void FixedUpdate()
     {
         Turn();
+        Strafe();
         Brake();
         Accelerate();
         Boost();
@@ -207,9 +209,11 @@ public class ShipsControls : MonoBehaviour
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
 
-    private void Straf()
+    private void Strafe()
     {
-        m_rb.velocity += m_straf * transform.right * m_strafMultiplier;
+        m_strafe += m_strafeMultiplier * strafeStrength * Time.deltaTime;
+
+        m_rb.AddForce(transform.right * m_strafeMultiplier * strafeStrength, ForceMode.Acceleration);
     }
 
     /// <summary>
@@ -219,6 +223,6 @@ public class ShipsControls : MonoBehaviour
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
     public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
-
+    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; }
     public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
 }

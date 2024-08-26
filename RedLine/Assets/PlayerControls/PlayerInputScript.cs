@@ -93,6 +93,14 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    public void Strafe(InputAction.CallbackContext context)
+    {
+        if (m_shipControls != null)
+        {
+            m_shipControls.SetStrafeMultiplier(context.ReadValue<float>());
+        }
+    }
+
     public void Boost(InputAction.CallbackContext context)
     {
         if (m_shipControls != null)
