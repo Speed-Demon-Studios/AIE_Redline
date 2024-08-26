@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8c169529faa1eb40877067feeedb501, type: 3}
-  m_Name: Cutless
+  m_Name: Cutless 1
   m_EditorClassIdentifier: 
   VariantName: Cutless
-  DownForce: 5000
-  MaxSpeed: 172
+  DownForce: 10000
+  MaxSpeed: 0
   MaxAcceleration: 12.2
-  AccelerationMultiplier: 4.5
+  DefaultMaxSpeed: 178
+  AccelerationMultiplier: 5
   BreakMultiplier: 3.3
   SpeedCurve:
     serializedVersion: 2
@@ -51,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  TurnSpeed: 6.4
+  TurnSpeed: 8
   TurnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -90,7 +91,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 0.3
+      value: 0.25
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.3
+      value: 0.25
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -127,6 +128,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxAngle: 0
+  MaxAngle: 1.38
   Radius: 0
   distance: 20

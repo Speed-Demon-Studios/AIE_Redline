@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
 {
+    public bool finishedRacing = false;
+    public float distanceToCheckpoint;
     public int currentLap = 0;
     public int placement = 0;
     public int currentCheckpoint = 0;
-    public float distanceToCheckpoint;
 
     private CheckpointHandler m_cHandler;
+    
 
     /// <summary>
     /// Calculates the distance to the next checkpoint
@@ -20,6 +20,29 @@ public class RacerDetails : MonoBehaviour
         var nextCheckpoint = m_cHandler.GetCheckpoint(currentCheckpoint);
         distanceToCheckpoint = Vector3.Distance(transform.position, nextCheckpoint.transform.position);
         return distanceToCheckpoint;
+    }
+
+    private void Update()
+    {
+        if (finishedRacing == true)
+        {
+            PlayerInputScript playerInput = this.GetComponent<PlayerInputScript>();
+            ShipsControls shipControls = this.GetComponent<ShipsControls>();
+            if (playerInput != null)
+            {
+                if (playerInput.enabled == true)
+                {
+                    playerInput.enabled = false;
+                }
+            }
+            if (shipControls != null)
+            {
+                if (shipControls.enabled == true)
+                {
+                    shipControls.enabled = false;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +60,15 @@ public class RacerDetails : MonoBehaviour
                     {
                         GameManager.gManager.rManager.LapComplete(this);
                     }
+                    else
+                    {
+                        return;
+                    }
                 }
+            }
+            else
+            {
+                return;
             }
         }
     }
