@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,10 +21,6 @@ public class RaceManager : MonoBehaviour
 
     public void LapComplete(RacerDetails racer)
     {
-        if (racer.currentLap >= TotalLaps)
-        {
-            racer.finishedRacing = true;
-        }
         if (racer.currentLap < TotalLaps)
         {
             racer.currentLap += 1;
@@ -50,14 +45,12 @@ public class RaceManager : MonoBehaviour
                 ibr.EnableRacerMovement();
             }
         }
-        else if (GameManager.gManager.raceStarted == false)
-        {
-            foreach (GameObject racer in GameManager.gManager.racerObjects)
-            {
-                InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
-
-                ibr.DisableShipControls();
-            }
-        }
+        //else if (GameManager.gManager.raceStarted == false)
+        //{
+        //    if (Input.GetKeyUp(KeyCode.Space))
+        //    {
+        //        GameManager.gManager.raceStarted = true;
+        //    }
+        //}
     }
 }

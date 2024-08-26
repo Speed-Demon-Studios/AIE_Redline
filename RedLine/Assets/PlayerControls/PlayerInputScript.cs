@@ -3,16 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 
 public class PlayerInputScript : MonoBehaviour
 {
-    public PlayerInput player;
-    public MultiplayerEventSystem eventSystem;
+    [SerializeField] private InputActionAsset inputAsset;
+    private InputActionMap player;
     private ShipsControls m_shipControls;
     private Camera m_cam;
-    private int m_playerNumber;
-    private GameManager gMan;
+    public bool test = true;
 
     private float m_currentPOV;
     private float m_desiredPOV;
@@ -21,29 +19,29 @@ public class PlayerInputScript : MonoBehaviour
     public float maxPOV;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        m_shipControls = GetComponentInParent<ShipsControls>();
+        m_shipControls = GetComponent<ShipsControls>();
         m_cam = GetComponentInChildren<Camera>();
-        gMan = FindObjectOfType<GameManager>();
-
-        gMan.players.Add(gameObject);
-
-        m_playerNumber = gMan.numberOfPlayers;
-
-        eventSystem.firstSelectedGameObject = gMan.FindStartButton();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(gMan.raceStarted)
+       // if (Input.GetKeyDown(KeyCode.T))
+       // {
+       //     test = !test;
+       // }
+       //
+       // if (test)
+       // {
+       // }
             CalculatePOV();
     }
 
     private void CalculatePOV()
     {
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.Variant.MaxSpeed;
         if(speedPercentage > 0.001)
         {
             m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
@@ -58,19 +56,9 @@ public class PlayerInputScript : MonoBehaviour
 
     }
 
-    public void Brake(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<float>());
         if (m_shipControls != null)
-        {
-            m_shipControls.SetBrakeMultiplier(context.ReadValue<float>());
-        }
-    }
-
-    public void Accelerate(InputAction.CallbackContext context)
-    {
-        Debug.Log(context.ReadValue<float>());
-        if(m_shipControls != null)
         {
             m_shipControls.SetSpeedMultiplier(context.ReadValue<float>());
         }
@@ -84,46 +72,24 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
-    public void Strafe(InputAction.CallbackContext context)
+
+    private void OnEnable()
     {
-        if (m_shipControls != null)
+        if (player != null)
         {
-            m_shipControls.SetStrafeMultiplier(context.ReadValue<float>());
+            player.FindAction("Move").started += Move;
+            player.FindAction("Turn").started += Turn;
+            player.Enable();
         }
     }
-
-    public void Boost(InputAction.CallbackContext context)
+    
+    private void OnDisable()
     {
-        if (m_shipControls != null)
+        if (player != null)
         {
-            if (context.ReadValue<float>() > 0)
-                m_shipControls.IsBoosting(true);
-            else
-                m_shipControls.IsBoosting(false);
+            player.FindAction("Move").started -= Move;
+            player.FindAction("Turn").started -= Turn;
+            player.Disable();
         }
     }
-
-    public void ChangeActionMap(string map)
-    {
-        player.SwitchCurrentActionMap(map);
-    }
-    //private void OnEnable()
-    //{
-    //    if (player != null)
-    //    {
-    //        player.FindAction("Move").started += Move;
-    //        player.FindAction("Turn").started += Turn;
-    //        player.Enable();
-    //    }
-    //}
-    //
-    //private void OnDisable()
-    //{
-    //    if (player != null)
-    //    {
-    //        player.FindAction("Move").started -= Move;
-    //        player.FindAction("Turn").started -= Turn;
-    //        player.Disable();
-    //    }
-    //}
 }
