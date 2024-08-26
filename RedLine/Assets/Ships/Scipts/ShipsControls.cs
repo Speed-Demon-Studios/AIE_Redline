@@ -20,8 +20,8 @@ public class ShipsControls : MonoBehaviour
 
     [Space]
     [Header("Speed Variables")]
-    //public AnimationCurve speedCurve;
     private float m_accelerateMultiplier;
+    private float m_brakeMultiplier;
     private float m_acceleration;
     private float m_currentMaxSpeed;
     public void SetMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
@@ -31,6 +31,8 @@ public class ShipsControls : MonoBehaviour
     private float m_targetAngle;
     private float m_currentAngle;
     private float m_shipAngle;
+    private float m_straf;
+    private float m_strafMultiplier;
 
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -59,6 +61,7 @@ public class ShipsControls : MonoBehaviour
     void FixedUpdate()
     {
         Turn();
+        Brake();
         Accelerate();
         Boost();
         DownForce();
@@ -127,7 +130,8 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
 
-        m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
+        if(hit.distance > 1)
+            m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
     /// <summary>
@@ -161,6 +165,14 @@ public class ShipsControls : MonoBehaviour
     }
 
     /// <summary>
+    /// This activates the brake when the multiplier is more than zero
+    /// </summary>
+    private void Brake()
+    {
+        m_acceleration -= variant.AccelerationMultiplier * m_brakeMultiplier * variant.BreakMultiplier * Time.deltaTime;
+    }
+
+    /// <summary>
     /// Accelerate is very simple. It basicly makes the car go foward when you press the accelerator and brake when you press the brake
     /// </summary>
     private void Accelerate()
@@ -169,10 +181,8 @@ public class ShipsControls : MonoBehaviour
 
         if (m_accelerateMultiplier == 0)
             m_acceleration -= (variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
-        else if(m_accelerateMultiplier > 0)
-            m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
         else
-            m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * variant.BreakMultiplier * Time.deltaTime;
+            m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.MaxAcceleration);
 
@@ -197,11 +207,17 @@ public class ShipsControls : MonoBehaviour
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
 
+    private void Straf()
+    {
+        m_rb.velocity += m_straf * transform.right * m_strafMultiplier;
+    }
+
     /// <summary>
     /// both of these functions set the multipler when an input is sent
     /// </summary>
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
+    public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
     public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
 
     public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
