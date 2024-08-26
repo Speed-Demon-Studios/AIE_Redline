@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 public class ManageSceneLoading : MonoBehaviour
 {
     bool reloadingmenu = false;
+    bool coroutineStarted = false;
+
     public void InitializeForMainMenu()
     {
         reloadingmenu = true;
@@ -21,14 +23,29 @@ public class ManageSceneLoading : MonoBehaviour
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();
+        GameManager.gManager.racersPlaced = false;
         GameManager.gManager.raceFinished = false;
         GameManager.gManager.raceStarted = false;
         GameManager.gManager.racersAdded = false;
         GameManager.gManager.pHandler.racersAdded = false;
         GameManager.gManager.countdownIndex = 5;
-        
+        reloadingmenu = true;
+        if (coroutineStarted == false)
+        {
+            coroutineStarted = true;
+            StartCoroutine(LoadScene());
+        }
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForEndOfFrame();
+
+        SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);
-        SceneManager.LoadScene(0);
+
+        coroutineStarted = false;
+        StopCoroutine(LoadScene());
     }
 
     public void SetPlayerUIInputMM()

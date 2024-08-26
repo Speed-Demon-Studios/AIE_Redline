@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaceCountdown : MonoBehaviour
 {
     [SerializeField] private int countdownLength = 5;
-    public bool m_readyForCountdown = false;
+    //public bool m_readyForCountdown = false;
     public bool m_countdownCoroutineStarted = false;
     public bool m_countdownFinished = false;
     public bool m_countdownStarted = false;
@@ -17,7 +17,7 @@ public class RaceCountdown : MonoBehaviour
         m_countdownStarted = false;
         m_countdownFinished = false;
         m_countdownCoroutineStarted = false;
-        m_readyForCountdown = true;
+        //GameManager.gManager.readyForCountdown = true;
     }
 
     public IEnumerator RaceCountdownTimer()
@@ -49,7 +49,7 @@ public class RaceCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
+        if (GameManager.gManager.readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
         {
             GameManager.gManager.raceStarted = false;
             StartCoroutine(RaceCountdownTimer());

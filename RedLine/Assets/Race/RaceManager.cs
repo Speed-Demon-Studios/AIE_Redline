@@ -7,6 +7,7 @@ using UnityEngine;
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] private int TotalLaps;
+    bool coroutineStarted = false;
 
     private void Awake()
     {
@@ -16,12 +17,32 @@ public class RaceManager : MonoBehaviour
 
         GameManager.gManager.pHandler.OnRaceLoaded();
 
+        if (coroutineStarted == false)
+        {
+            coroutineStarted = true;
+            StartCoroutine(InitPlayers());
+        }
+    }
+
+    IEnumerator InitPlayers()
+    {
+        yield return new WaitForEndOfFrame();
+
         foreach (GameObject gObj in GameManager.gManager.playerObjects)
         {
-            InitializeBeforeRace playerInit = gObj.GetComponent<InitializeBeforeRace>();
+            if (gObj != null)
+            {
+                InitializeBeforeRace playerInit = gObj.GetComponent<InitializeBeforeRace>();
 
-            playerInit.InitializeForRace();
+                if (playerInit != null)
+                {
+                    playerInit.InitializeForRace();
+                }
+                yield return new WaitForEndOfFrame();
+            }
         }
+        coroutineStarted = false;
+        StopCoroutine(InitPlayers());
     }
 
     public void LapComplete(RacerDetails racer)

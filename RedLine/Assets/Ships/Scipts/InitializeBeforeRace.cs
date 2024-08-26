@@ -55,7 +55,10 @@ public class InitializeBeforeRace : MonoBehaviour
 
     public void InitializeForRace()
     {
-        playerCamOBJECT.SetActive(true);
+        if (playerCamOBJECT != null)
+        {
+            playerCamOBJECT.SetActive(true);
+        }
         sControls.enabled = true;
     }
 }

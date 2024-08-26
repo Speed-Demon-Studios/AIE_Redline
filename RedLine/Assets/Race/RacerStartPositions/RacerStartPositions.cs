@@ -6,21 +6,21 @@ using UnityEngine;
 public class RacerStartPositions : MonoBehaviour
 {
     [SerializeField] private GameObject[] startPositions;
-    private bool racersPlaced = false;
+    private bool placingRacers = false;
     private int placementIndexer = 0;
 
     private void Awake()
     {
-        racersPlaced = false;
+        GameManager.gManager.racersPlaced = false;
+        placingRacers = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaceRacersInSpots()
     {
         // If the race has started and the racers have been added to the list of racers
-        if (GameManager.gManager.raceStarted == false && GameManager.gManager.racersAdded == true)
+        if (GameManager.gManager.racersAdded == true)
         {
-            if (racersPlaced == false)
+            if (GameManager.gManager.racersPlaced == false)
             {
                 // Iterate through the list of racer objects, and the list of start positions, and assign racers to their respective starting positions.
                 for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
@@ -37,8 +37,23 @@ public class RacerStartPositions : MonoBehaviour
                             break;
                         }
                     }
+                    GameManager.gManager.racersPlaced = true;
+                    GameManager.gManager.readyForCountdown = true;
+
                 }
             }
         }
+        placingRacers = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.racersPlaced == false && GameManager.gManager.raceStarted == false)
+        {
+            placingRacers = true;
+            PlaceRacersInSpots();
+        }
+        
     }
 }

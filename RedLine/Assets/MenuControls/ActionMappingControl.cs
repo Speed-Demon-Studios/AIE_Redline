@@ -58,7 +58,7 @@ public class ActionMappingControl : MonoBehaviour
             //_playerInputActions.DeactivateInput();
             sControls.enabled = false;
             Debug.Log("Disabling ShipControls Script.");
-            if (_playerInputActions.currentActionMap.name != "UI")
+            if ( _playerInputActions != null && _playerInputActions.currentActionMap.name != "UI")
             {
                 SwitchActionMapToUI();
             }

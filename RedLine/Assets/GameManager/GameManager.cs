@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool disableRacerMovement = false;
     public bool enableRacerMovement = false;
     public bool resetRacerVariables = false;
+    public bool readyForCountdown = false;
+    public bool racersPlaced = false;
     public bool racersAdded = false;
     public bool raceStarted = false;
     public bool raceFinished = false;
