@@ -30,6 +30,7 @@ public class ManageSceneLoading : MonoBehaviour
         GameManager.gManager.pHandler.racersAdded = false;
         GameManager.gManager.countdownIndex = 5;
         GameManager.gManager.namesAssigned = false;
+        GameManager.gManager.redlineActivated = false;
         reloadingmenu = true;
         if (coroutineStarted == false)
         {

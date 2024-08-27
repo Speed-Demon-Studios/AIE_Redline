@@ -19,7 +19,9 @@ public class RedlineColliderSpawner : MonoBehaviour
     void Awake()
     {
         for(int i = 0; i < 35; i++)
+        {
             SpawnCollider();
+        }
     }
 
     // Update is called once per frame

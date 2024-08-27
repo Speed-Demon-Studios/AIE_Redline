@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public RedlineActivator rActivator;
     public NameRandomiser nRandomiser;
     public RaceCountdown raceCountdown;
     public UIControllerInput uiCInput;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public bool raceStarted = false;
     public bool raceFinished = false;
     public bool indexListSorted = true;
+    public bool redlineActivated = false;
     public int countdownIndex = 5;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
