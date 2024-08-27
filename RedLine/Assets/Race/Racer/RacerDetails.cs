@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
@@ -7,6 +9,12 @@ public class RacerDetails : MonoBehaviour
     public int currentLap = 0;
     public int placement = 0;
     public int currentCheckpoint = 0;
+
+    public List<float> lapTimesSECONDS = new List<float>();
+    public List<float> lapTimesMINUTES = new List<float>();
+    public float currentLapTimeSECONDS = 0;
+    public float currentLapTimeMINUTES = 0;
+
     public string RacerName = "";
 
 
@@ -34,6 +42,16 @@ public class RacerDetails : MonoBehaviour
 
     private void Update()
     {
+        if (currentLap > 0 && finishedRacing == false)
+        {
+            currentLapTimeSECONDS += Time.deltaTime;
+            if (currentLapTimeSECONDS >= 60.0f)
+            {
+                currentLapTimeSECONDS = 0.0f;
+                currentLapTimeMINUTES += 1;
+            }
+        }
+
         if (GameManager.gManager.raceStarted == false && nameSet == false)
         {
             nameSet = true;
@@ -84,6 +102,15 @@ public class RacerDetails : MonoBehaviour
                 {
                     if (trigger.finalCheckpoint == true)
                     {
+                        if (currentLap > 0)
+                        {
+                            GameManager.gManager.timingsListUpdated = false;
+                            lapTimesSECONDS.Add(currentLapTimeSECONDS);
+                            lapTimesMINUTES.Add(currentLapTimeMINUTES);
+                            currentLapTimeMINUTES = 0;
+                            currentLapTimeSECONDS = 0;
+                            GameManager.gManager.timingsListUpdated = true;
+                        } 
                         GameManager.gManager.rManager.LapComplete(this);
                     }
                     else

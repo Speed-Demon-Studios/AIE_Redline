@@ -18,5 +18,17 @@ public class RedlineActivator : MonoBehaviour
                 }    
             }
         }
+        else
+        {
+            foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
+            {
+                RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
+
+                if (redlineScript != null)
+                {
+                    redlineScript.enabled = false;
+                }
+            }
+        }
     }
 }
