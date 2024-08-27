@@ -31,7 +31,7 @@ public class AIMoveInputs : MonoBehaviour
     {
         Accelerate();
         Turn();
-        HowFastShouldIGo();
+        //HowFastShouldIGo();
     }
 
     private void Turn()
@@ -54,8 +54,10 @@ public class AIMoveInputs : MonoBehaviour
         // finding the angle between the ship and the current node then changing it to radians
         float angle = Vector3.SignedAngle(nodeDirection, directionFoward, transform.up);
 
+        m_speed = 1;
         Debug.DrawLine(this.transform.position, randomPos);
-        m_controls.SetStrafeMultiplier(-angle * 2);
+        angle = Mathf.Clamp(angle, -45, 45);
+        m_controls.SetStrafeMultiplier(-angle);
     }
 
     private void HowFastShouldIGo()
