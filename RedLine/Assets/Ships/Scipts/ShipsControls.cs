@@ -31,7 +31,6 @@ public class ShipsControls : MonoBehaviour
     private float m_targetAngle;
     private float m_currentAngle;
     private float m_shipAngle;
-    private float m_strafe;
     private float m_strafeMultiplier;
     public float strafeStrength;
 
@@ -41,13 +40,14 @@ public class ShipsControls : MonoBehaviour
 
     [Header("Boost Variables")]
     [SerializeField] private float m_currentBoost;
-    public bool currentlyBoosting;
+    public bool wantingToBoost;
+    private bool m_isBoosting;
     public float forceMultiplier;
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
     public void ResetAcceleration()
     {
-        currentlyBoosting = false;
+        wantingToBoost = false;
         m_boostLevel = 0;
         m_acceleration = 0;
     }
@@ -81,7 +81,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     public void AddToBoost()
     {
-        m_currentBoost += 1f * Time.deltaTime;
+        m_currentBoost += 2.5f * Time.deltaTime;
         if(m_currentBoost > 3)
         {
             m_currentBoost = 3;
@@ -147,14 +147,14 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Boost()
     {
-        if (currentlyBoosting && m_boostLevel > 0)
+        if (wantingToBoost && m_boostLevel > 0)
         {
             m_rb.mass = 10;
             m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.Impulse);
             StartCoroutine(BoostTime(0.5f * m_boostLevel));
         }
         else
-            currentlyBoosting = false;
+            wantingToBoost = false;
     }
 
     public void BoostPadBoost(float force)
@@ -169,7 +169,7 @@ public class ShipsControls : MonoBehaviour
         m_boostLevel = 0;
         m_currentBoost = 0;
         m_rb.mass = 90;
-        currentlyBoosting = false;
+        wantingToBoost = false;
     }
 
     /// <summary>
@@ -228,5 +228,5 @@ public class ShipsControls : MonoBehaviour
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
     public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.45f); }
     public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; SetTurnMultipliers(0); }
-    public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
+    public void IsBoosting(bool boosting) { wantingToBoost = boosting; }
 }
