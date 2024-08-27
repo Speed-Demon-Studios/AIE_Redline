@@ -16,6 +16,7 @@ public class RedlineActivator : MonoBehaviour
             GameManager.gManager.redlineActivated = true;
         }
 
+
         if (GameManager.gManager.raceStarted == false)
         {
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
