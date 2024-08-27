@@ -16,10 +16,10 @@ public class RedlineColliderSpawner : MonoBehaviour
     public GameObject colliderParent;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //for(int i = 0; i < 35; i++)
-            //SpawnCollider();
+        for(int i = 0; i < 35; i++)
+            SpawnCollider();
     }
 
     // Update is called once per frame
