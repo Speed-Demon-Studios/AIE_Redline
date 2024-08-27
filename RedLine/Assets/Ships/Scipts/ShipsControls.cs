@@ -67,8 +67,8 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Turn();
         Strafe();
+        Turn();
         Brake();
         Accelerate();
         Boost();
@@ -109,7 +109,7 @@ public class ShipsControls : MonoBehaviour
     private void RotateShip()
     {
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
-        m_shipAngle = Mathf.Lerp(m_shipAngle, m_currentAngle * Mathf.Rad2Deg, 0.04f);
+        m_shipAngle = Mathf.Lerp(m_shipAngle, (m_currentAngle * 2f) * Mathf.Rad2Deg, 0.03f);
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint, transform.up);
@@ -217,9 +217,8 @@ public class ShipsControls : MonoBehaviour
 
     private void Strafe()
     {
-        m_strafe += m_strafeMultiplier * strafeStrength * Time.deltaTime;
 
-        m_rb.AddForce(transform.right * m_strafeMultiplier * strafeStrength, ForceMode.Acceleration);
+        m_rb.AddForce(transform.right * m_strafeMultiplier * strafeStrength, ForceMode.VelocityChange);
     }
 
     /// <summary>
@@ -228,7 +227,11 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
-    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier; }
-    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; }
+    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.3f); }
+    public void SetStrafeMultiplier(float multiplier) 
+    { 
+        m_strafeMultiplier = multiplier; 
+        SetTurnMultipliers(0); 
+    }
     public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
 }
