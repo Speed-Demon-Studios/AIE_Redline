@@ -13,9 +13,10 @@ public class RaceCountdown : MonoBehaviour
     private void Awake()
     {
         GameManager.gManager.raceCountdown = this;
+        GameManager.gManager.raceStarted = false;
         GameManager.gManager.countdownIndex = countdownLength;
-        m_countdownStarted = false;
         m_countdownFinished = false;
+        m_countdownStarted = false;
         m_countdownCoroutineStarted = false;
         //GameManager.gManager.readyForCountdown = true;
     }
@@ -49,7 +50,7 @@ public class RaceCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
+        if (GameManager.gManager.racersPlaced == true && GameManager.gManager.readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
         {
             GameManager.gManager.raceStarted = false;
             StartCoroutine(RaceCountdownTimer());

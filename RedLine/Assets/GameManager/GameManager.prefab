@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7813179349627151421}
   - component: {fileID: 7813179349627151420}
+  - component: {fileID: 1016200759}
+  - component: {fileID: 1016200761}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,14 +46,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad4cc8de7559674298dc75a8215b8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nRandomiser: {fileID: 1016200761}
+  raceCountdown: {fileID: 0}
   uiCInput: {fileID: 0}
   checkpointParent: {fileID: 0}
-  StartingPoints: []
   pHandler: {fileID: 0}
+  mSL: {fileID: 1016200759}
   rManager: {fileID: 0}
+  raceFinisher: {fileID: 0}
+  m_startButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  StartingPoints: []
+  players: []
+  CurrentScene: 
+  namesAssigned: 0
+  disablePlayerCams: 0
+  enablePlayerCams: 0
+  disableRacerMovement: 0
+  enableRacerMovement: 0
+  resetRacerVariables: 0
+  readyForCountdown: 0
+  racersPlaced: 0
   racersAdded: 0
   raceStarted: 0
   raceFinished: 0
   indexListSorted: 1
   countdownIndex: 3
   neededLaps: 0
+  numberOfPlayers: 0
+--- !u!114 &1016200759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813179349627151418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11fe935c6b1fc4e8bff25c3260b8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1016200761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813179349627151418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8857e87ccb9d74c86a01e4e7d85823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameList:
+  - Jaxon H.
+  - Jackson V.
+  - Emmanuel W.
+  - Connor B.
+  - Daniel D.
+  - Henry C.
+  - Ben E.
+  - Callum L.
+  - Christpher M.
+  - James F.
+  - Sean T.
+  - Orion .C
+  - Adam S.
+  usedNames: []

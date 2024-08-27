@@ -1,13 +1,9 @@
-using Pixelplacement;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public NameRandomiser nRandomiser;
     public RaceCountdown raceCountdown;
     public UIControllerInput uiCInput;
     public CheckpointHandler checkpointParent;
@@ -21,6 +17,7 @@ public class GameManager : MonoBehaviour
     public IList<GameObject> playerObjects = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
     public string CurrentScene;
+    public bool namesAssigned = false;
     public bool disablePlayerCams = false;
     public bool enablePlayerCams = false;
     public bool disableRacerMovement = false;

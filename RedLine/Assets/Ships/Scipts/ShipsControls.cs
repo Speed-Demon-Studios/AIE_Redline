@@ -45,6 +45,12 @@ public class ShipsControls : MonoBehaviour
     public float forceMultiplier;
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
+    public void ResetAcceleration()
+    {
+        currentlyBoosting = false;
+        m_boostLevel = 0;
+        m_acceleration = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
