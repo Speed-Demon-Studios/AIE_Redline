@@ -12,7 +12,7 @@ public class RacerDetails : MonoBehaviour
 
     private CheckpointHandler m_cHandler;
     private bool nameSet = false;
-    
+
     /// <summary>
     /// Calculates the distance to the next checkpoint
     /// </summary>

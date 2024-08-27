@@ -22,6 +22,7 @@ public class InitializeBeforeRace : MonoBehaviour
         {
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
+            sControls.ResetAcceleration();
             rb.isKinematic = true;
         }
         else if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == true)

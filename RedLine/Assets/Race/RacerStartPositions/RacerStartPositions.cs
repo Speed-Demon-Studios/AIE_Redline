@@ -12,6 +12,7 @@ public class RacerStartPositions : MonoBehaviour
     private void Awake()
     {
         GameManager.gManager.racersPlaced = false;
+        GameManager.gManager.readyForCountdown = false;
         placingRacers = false;
     }
 
@@ -49,7 +50,7 @@ public class RacerStartPositions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.racersPlaced == false && GameManager.gManager.raceStarted == false)
+        if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.racersPlaced == false && GameManager.gManager.raceStarted == false && placingRacers == false)
         {
             placingRacers = true;
             PlaceRacersInSpots();

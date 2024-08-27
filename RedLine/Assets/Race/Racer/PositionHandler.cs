@@ -60,36 +60,39 @@ public class PositionHandler : MonoBehaviour
         }
         else if (racersAdded == true)
         {
-             GameManager.gManager.indexListSorted = true;
-             racers.Sort((r1, r2) =>
-             {
-                 racersSorted = false;
-                 if (r1.currentCheckpoint != r2.currentCheckpoint)
-                 {
-                     return r1.currentCheckpoint;
-                 }
-
-                 if (r1.currentLap != r2.currentLap)
-                 {
-                     return r1.currentCheckpoint;
-                 }
-
-                 if (r1.finishedRacing)
-                 {
-                     return r1.currentCheckpoint;
-                 }
-
-                 if (r2.finishedRacing)
-                 {
-                     return r2.currentCheckpoint;
-                 }
-
-                 racersSorted = true;
-                 return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
-             });
-             GameManager.gManager.indexListSorted = true;
-             
-             StartCoroutine(SortRacers());
+            GameManager.gManager.indexListSorted = false;
+            if(GameManager.gManager.raceFinished == false)
+            {
+                racers.Sort((r1, r2) =>
+                {
+                    racersSorted = false;
+                    if (r1.currentCheckpoint != r2.currentCheckpoint)
+                    {
+                        return r1.currentCheckpoint;
+                    }
+            
+                    if (r1.currentLap != r2.currentLap)
+                    {
+                        return r1.currentCheckpoint;
+                    }
+            
+                    if (r1.finishedRacing)
+                    {
+                        return r1.currentCheckpoint;
+                    }
+            
+                    if (r2.finishedRacing)
+                    {
+                        return r2.currentCheckpoint;
+                    }
+            
+                    racersSorted = true;
+                    return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
+                });
+                GameManager.gManager.indexListSorted = true;
+                
+                StartCoroutine(SortRacers());
+            }
         }
     }
 }

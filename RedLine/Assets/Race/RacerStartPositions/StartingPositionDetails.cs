@@ -6,6 +6,10 @@ public class StartingPositionDetails : MonoBehaviour
 {
     public GameObject HeldRacer;
     public bool SpotFilled = false;
+    private void Awake()
+    {
+        HeldRacer = null;
+    }
 
     // Update is called once per frame
     void Update()
@@ -13,6 +17,10 @@ public class StartingPositionDetails : MonoBehaviour
         if (HeldRacer != null)
         {
             SpotFilled = true;
+        }
+        else
+        {
+            SpotFilled = false;
         }
     }
 }
