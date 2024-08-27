@@ -489,7 +489,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2252993564218213463}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 309f05b566d97784a811c446a80ea03d, type: 3}
   m_Name: 
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 2868536068024986451}
   m_Layer: 0
   m_Name: ShipModel
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -827,6 +827,10 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  lapTimesSECONDS: []
+  lapTimesMINUTES: []
+  currentLapTimeSECONDS: 0
+  currentLapTimeMINUTES: 0
   RacerName: 
 --- !u!135 &6267707172146090529
 SphereCollider:
