@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public string CurrentScene;
+
     public RedlineActivator rActivator;
     public NameRandomiser nRandomiser;
     public RaceCountdown raceCountdown;
@@ -12,25 +14,37 @@ public class GameManager : MonoBehaviour
     public ManageSceneLoading mSL;
     public RaceManager rManager;
     public FinishRace raceFinisher;
+
     public GameObject[] m_startButtons;
     public GameObject[] StartingPoints;
+
     public List<GameObject> players;
     public IList<GameObject> playerObjects = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
-    public string CurrentScene;
-    public bool namesAssigned = false;
-    public bool disablePlayerCams = false;
-    public bool enablePlayerCams = false;
-    public bool disableRacerMovement = false;
-    public bool enableRacerMovement = false;
+
     public bool resetRacerVariables = false;
+    public bool namesAssigned = false;
+
     public bool readyForCountdown = false;
-    public bool racersPlaced = false;
-    public bool racersAdded = false;
+
     public bool raceStarted = false;
     public bool raceFinished = false;
-    public bool indexListSorted = true;
+
+    public bool racersAdded = false;
+    public bool racersPlaced = false;
+
+    public bool disablePlayerCams = false;
+    public bool enablePlayerCams = false;
+
+    public bool disableRacerMovement = false;
+    public bool enableRacerMovement = false;
+
     public bool redlineActivated = false;
+    
+    public bool indexListSorted = true;
+
+    public bool timingsListUpdated = false;
+
     public int countdownIndex = 5;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;

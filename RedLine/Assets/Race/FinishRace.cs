@@ -13,6 +13,8 @@ public class FinishRace : MonoBehaviour
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
     private bool readyToSetSelected = false;
+    private bool readyToDisplay = false;
+    private bool timingsListsUpdated = false;
 
     private void Awake()
     {
@@ -53,7 +55,44 @@ public class FinishRace : MonoBehaviour
 
                 if ((i + 1) == racerDeets.placement)
                 {
-                    placementText.text = "(" + (i + 1) + ") " + racerDeets.RacerName;
+                    float bestLapTimeSEC = 0f;
+                    float bestLapTimeMIN = 0f;
+                    bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
+                    bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
+                    for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
+                    {
+                        foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
+                        {
+                            if (lapSECONDS > racerDeets.lapTimesSECONDS[a])
+                            {
+                                bestLapTimeSEC = lapSECONDS;
+                            }
+                        }
+                    }
+                    for (int a = 0; a < racerDeets.lapTimesMINUTES.Count; a++)
+                    {
+                        foreach (float lapMINUTES in racerDeets.lapTimesMINUTES)
+                        {
+                            if (lapMINUTES > racerDeets.lapTimesMINUTES[a])
+                            {
+                                bestLapTimeMIN = lapMINUTES;
+                            }
+                        }
+
+                    }
+                    readyToDisplay = true;
+
+                    if (readyToDisplay == true)
+                    {
+                        while(GameManager.gManager.timingsListUpdated == false)
+                        {
+                            if (GameManager.gManager.timingsListUpdated == true)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    placementText.text = "(" + (i + 1) + ") " + racerDeets.RacerName + "    ||   " + bestLapTimeMIN + " : " + bestLapTimeSEC;
                 }
             }
 
