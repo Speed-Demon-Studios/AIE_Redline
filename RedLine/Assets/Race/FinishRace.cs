@@ -57,8 +57,11 @@ public class FinishRace : MonoBehaviour
                 {
                     float bestLapTimeSEC = 0f;
                     float bestLapTimeMIN = 0f;
-                    bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
-                    bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
+                    if (racerDeets.lapTimesMINUTES.Count > 0 && racerDeets.lapTimesSECONDS.Count > 0)
+                    {
+                        bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
+                        bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
+                    }
                     for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
                     {
                         foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
