@@ -89,7 +89,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.SetTurnMultipliers(context.ReadValue<float>());
+            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.75f);
         }
     }
 

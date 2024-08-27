@@ -197,7 +197,7 @@ public class ShipsControls : MonoBehaviour
     private void Turn()
     {
         // this script has a targetAngle which is where the empty position wants to be but to make it smooth it lerps the current pos to the target pos
-        m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.07f);
+        m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.06f);
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
         float multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
@@ -211,7 +211,6 @@ public class ShipsControls : MonoBehaviour
 
     private void Strafe()
     {
-
         m_rb.AddForce(transform.right * m_strafeMultiplier * strafeStrength, ForceMode.VelocityChange);
     }
 
@@ -221,11 +220,7 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
-    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.3f); }
-    public void SetStrafeMultiplier(float multiplier) 
-    { 
-        m_strafeMultiplier = multiplier; 
-        SetTurnMultipliers(0); 
-    }
+    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.45f); }
+    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; SetTurnMultipliers(0); }
     public void IsBoosting(bool boosting) { currentlyBoosting = boosting; }
 }
