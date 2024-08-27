@@ -7,27 +7,21 @@ public class RedlineActivator : MonoBehaviour
     {
         if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.redlineActivated == false && GameManager.gManager.raceStarted == true)
         {
-            GameManager.gManager.redlineActivated = true;
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
             {
                 RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
 
-                if (redlineScript != null)
-                {
-                    redlineScript.enabled = true;
-                }    
+                redlineScript.enabled = true;
             }
+            GameManager.gManager.redlineActivated = true;
         }
-        else
+
+        if (GameManager.gManager.raceStarted == false)
         {
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
             {
                 RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
-
-                if (redlineScript != null)
-                {
-                    redlineScript.enabled = false;
-                }
+                redlineScript.enabled = true;
             }
         }
     }
