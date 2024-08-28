@@ -156,8 +156,6 @@ public class ShipsControls : MonoBehaviour
 
         Debug.DrawLine(pointOfCast.position, hit.point);
 
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.05f);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
     }
 
