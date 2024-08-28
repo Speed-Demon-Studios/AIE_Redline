@@ -195,8 +195,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7942898738213427517, guid: 492c65929d98ff84e86c7bd4c23fd9e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 492c65929d98ff84e86c7bd4c23fd9e8, type: 3}
+--- !u!1 &120224281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7813179349627151418, guid: 492c65929d98ff84e86c7bd4c23fd9e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 120224280}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &120224282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120224281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2c23a28c5f51f44a64e221fc933e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &663240023
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,19 +649,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cea8dd0f67efc94cb5324b2609883d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuButtonsHOLDER:
-  - {fileID: 2139123914}
-  vMenuButtons:
-  - {fileID: 2139123916}
-  hMenuButtons: []
-  hMenuIndexes: 
   InputControllerParentPrefab: {fileID: 771965587047612032, guid: 107d99716c49f4043a36bef9425e04d1,
     type: 3}
-  buttonHighlightedColor: {r: 1, g: 0, b: 0.017929077, a: 1}
-  buttonPressedColor: {r: 0.5660378, g: 0, b: 0.021717595, a: 1}
-  buttonDefaultColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   currentMenuObjectIndex: 1
   playerCountText: {fileID: 663240024}
+  firstButton: {fileID: 0}
 --- !u!1 &1984473598
 GameObject:
   m_ObjectHideFlags: 0
