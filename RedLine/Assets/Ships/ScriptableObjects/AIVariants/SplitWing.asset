@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SplitWing
   m_EditorClassIdentifier: 
   VariantName: Splitwing
-  DownForce: 5000
-  MaxSpeed: 170
-  MaxAcceleration: 12
-  AccelerationMultiplier: 4.5
-  BreakMultiplier: 2.6
+  DownForce: 10000
+  MaxSpeed: 0
+  MaxAcceleration: 6
+  DefaultMaxSpeed: 137.5
+  AccelerationMultiplier: 2.8
+  BreakMultiplier: 5
   SpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -31,8 +32,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.2375
     - serializedVersion: 3
-      time: 0.61173034
-      value: 0.89264476
+      time: 0.64614314
+      value: 0.87849385
       inSlope: -0.44632116
       outSlope: -0.44632116
       tangentMode: 0
@@ -51,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  TurnSpeed: 6.45
+  TurnSpeed: 4
   TurnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -65,22 +66,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.77208394
-      value: 0.9083785
-      inSlope: -0.26637584
-      outSlope: -0.26637584
+      time: 0.74142396
+      value: 0.8066368
+      inSlope: -0.66472214
+      outSlope: -0.66472214
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2390724
+      inWeight: 0.21341988
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.8301868
-      outSlope: -2.8301868
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -7.1258426
+      outSlope: -7.1258426
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08596005
+      inWeight: 0.042731863
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -89,44 +90,44 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1
-      value: 0.4
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.5587354
-    - serializedVersion: 3
-      time: -0.03
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.24654706
-      outWeight: 0.1776805
-    - serializedVersion: 3
-      time: 0.03
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.46422288
+      inWeight: 0
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.39256975
+      value: 0.4845149
+      inSlope: -3.4706986
+      outSlope: -3.4706986
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14424354
+      outWeight: 0.10389212
+    - serializedVersion: 3
+      time: 0.7154064
+      value: 0.020244852
+      inSlope: -0.1809222
+      outSlope: -0.1809222
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25566167
+      outWeight: 0.39276052
     - serializedVersion: 3
       time: 1
-      value: 0.4
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: -0.07964377
+      outSlope: -0.07964377
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.38848042
-      outWeight: 0.33333334
+      inWeight: 0.1177963
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxAngle: 0
+  MaxAngle: 1.65
   Radius: 0
-  distance: 20
+  distance: 17
