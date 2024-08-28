@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class RaceCountdown : MonoBehaviour
 {
-    private bool m_readyForCountdown = false;
-    private bool m_countdownCoroutineStarted = false;
-    private bool m_countdownFinished = false;
-    private bool m_countdownStarted = false;
+    [SerializeField] private int countdownLength = 5;
+    //public bool m_readyForCountdown = false;
+    public bool m_countdownCoroutineStarted = false;
+    public bool m_countdownFinished = false;
+    public bool m_countdownStarted = false;
 
     private void Awake()
     {
-        m_countdownStarted = false;
+        GameManager.gManager.raceCountdown = this;
+        GameManager.gManager.raceStarted = false;
+        GameManager.gManager.countdownIndex = countdownLength;
         m_countdownFinished = false;
+        m_countdownStarted = false;
         m_countdownCoroutineStarted = false;
-        m_readyForCountdown = true;
+        //GameManager.gManager.readyForCountdown = true;
     }
 
     public IEnumerator RaceCountdownTimer()
@@ -46,20 +50,16 @@ public class RaceCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_readyForCountdown == true)
+        if (GameManager.gManager.racersPlaced == true && GameManager.gManager.readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
         {
-            if (m_countdownFinished == false)
-            {
-                if (m_countdownCoroutineStarted == false)
-                {
-                    StartCoroutine(RaceCountdownTimer());
-                }
-            }
+            GameManager.gManager.raceStarted = false;
+            StartCoroutine(RaceCountdownTimer());
         }
 
         if (m_countdownFinished == true)
         {
             GameManager.gManager.raceStarted = true;
+            GameManager.gManager.enableRacerMovement = true;
         }
     }
 }

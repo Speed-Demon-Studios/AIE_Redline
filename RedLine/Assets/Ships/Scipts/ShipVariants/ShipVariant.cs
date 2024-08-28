@@ -11,6 +11,7 @@ public class ShipVariant : ScriptableObject
     [Header("Speed Variables")]
     public float MaxSpeed;
     public float MaxAcceleration;
+    public float DefaultMaxSpeed;
     public float AccelerationMultiplier;
     public float BreakMultiplier;
     public AnimationCurve SpeedCurve;

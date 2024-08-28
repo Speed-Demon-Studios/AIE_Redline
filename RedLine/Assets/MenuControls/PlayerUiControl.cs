@@ -13,12 +13,12 @@ public class PlayerUiControl : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gManager.raceStarted == false)
+        if (GameManager.gManager.raceStarted == false )
         {
             placementText.text = " ";
             lapText.text = " ";
         }
-        else if (GameManager.gManager.raceStarted == true)
+        else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
         {
             if (rDetails.currentLap > 0)
             {

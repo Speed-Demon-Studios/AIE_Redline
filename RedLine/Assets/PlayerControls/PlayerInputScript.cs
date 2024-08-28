@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class PlayerInputScript : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset inputAsset;
-    private InputActionMap player;
+    public PlayerInput player;
+    public MultiplayerEventSystem eventSystem;
     private ShipsControls m_shipControls;
-    private Camera m_cam;
-    public bool test = true;
+    [SerializeField] private Camera m_cam;
+    private int m_playerNumber;
+    private GameManager gMan;
 
     private float m_currentPOV;
     private float m_desiredPOV;
@@ -19,29 +21,38 @@ public class PlayerInputScript : MonoBehaviour
     public float maxPOV;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        m_shipControls = GetComponent<ShipsControls>();
-        m_cam = GetComponentInChildren<Camera>();
+        m_shipControls = GetComponentInParent<ShipsControls>();
+        //m_cam = GetComponentInChildren<Camera>();
+        gMan = GameManager.gManager;
+    
+        gMan.players.Add(gameObject);
+    
+        m_playerNumber = gMan.numberOfPlayers;
+    
+        eventSystem.firstSelectedGameObject = gMan.FindStartButton();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       // if (Input.GetKeyDown(KeyCode.T))
-       // {
-       //     test = !test;
-       // }
-       //
-       // if (test)
-       // {
-       // }
+        //if (GameManager.gManager.raceStarted == false && m_shipControls.enabled == true)
+        //{
+        //    m_shipControls.enabled = false;
+        //}
+        //
+        //if (GameManager.gManager.raceStarted == true && m_shipControls.enabled == false)
+        //{
+        //    m_shipControls.enabled = true;
+        //}
+        if(gMan.raceStarted)
             CalculatePOV();
     }
 
     private void CalculatePOV()
     {
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.Variant.MaxSpeed;
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;
         if(speedPercentage > 0.001)
         {
             m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
@@ -56,9 +67,19 @@ public class PlayerInputScript : MonoBehaviour
 
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void Brake(InputAction.CallbackContext context)
     {
+        Debug.Log(context.ReadValue<float>());
         if (m_shipControls != null)
+        {
+            m_shipControls.SetBrakeMultiplier(context.ReadValue<float>());
+        }
+    }
+
+    public void Accelerate(InputAction.CallbackContext context)
+    {
+        Debug.Log(context.ReadValue<float>());
+        if(m_shipControls != null)
         {
             m_shipControls.SetSpeedMultiplier(context.ReadValue<float>());
         }
@@ -68,28 +89,50 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.SetTurnMultipliers(context.ReadValue<float>());
+            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.75f);
         }
     }
 
+    public void Strafe(InputAction.CallbackContext context)
+    {
+        if (m_shipControls != null)
+        {
+            m_shipControls.SetStrafeMultiplier(context.ReadValue<float>());
+        }
+    }
 
-    private void OnEnable()
+    public void Boost(InputAction.CallbackContext context)
     {
-        if (player != null)
+        if (m_shipControls != null)
         {
-            player.FindAction("Move").started += Move;
-            player.FindAction("Turn").started += Turn;
-            player.Enable();
+            if (context.ReadValue<float>() > 0)
+                m_shipControls.IsBoosting(true);
+            else
+                m_shipControls.IsBoosting(false);
         }
     }
-    
-    private void OnDisable()
+
+    public void ChangeActionMap(string map)
     {
-        if (player != null)
-        {
-            player.FindAction("Move").started -= Move;
-            player.FindAction("Turn").started -= Turn;
-            player.Disable();
-        }
+        player.SwitchCurrentActionMap(map);
     }
+    //private void OnEnable()
+    //{
+    //    if (player != null)
+    //    {
+    //        player.FindAction("Move").started += Move;
+    //        player.FindAction("Turn").started += Turn;
+    //        player.Enable();
+    //    }
+    //}
+    //
+    //private void OnDisable()
+    //{
+    //    if (player != null)
+    //    {
+    //        player.FindAction("Move").started -= Move;
+    //        player.FindAction("Turn").started -= Turn;
+    //        player.Disable();
+    //    }
+    //}
 }
