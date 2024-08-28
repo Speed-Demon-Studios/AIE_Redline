@@ -387,7 +387,7 @@ MonoBehaviour:
   rayCastPoint: {fileID: 4022018049878914855}
   strafeStrength: 0
   m_currentBoost: 0
-  currentlyBoosting: 0
+  wantingToBoost: 0
   forceMultiplier: 0
   m_boostLevel: 0
 --- !u!54 &2819560891871692963
@@ -440,6 +440,10 @@ MonoBehaviour:
   currentLap: 0
   placement: 0
   currentCheckpoint: 0
+  lapTimesSECONDS: []
+  lapTimesMINUTES: []
+  currentLapTimeSECONDS: 0
+  currentLapTimeMINUTES: 0
   RacerName: 
 --- !u!135 &5573208418150351537
 SphereCollider:
@@ -851,6 +855,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Collision
+      objectReference: {fileID: 0}
+    - target: {fileID: 7795395143691013744, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36,
+        type: 3}
+      propertyPath: m_TagString
+      value: Racer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c95a3bfa1e37b04fac40a5cbf90ff36, type: 3}
