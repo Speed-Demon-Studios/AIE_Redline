@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 public class FinishRace : MonoBehaviour
 {
     public GameObject mainButton;
-    private bool m_allRacersFinished = false;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
+    private bool m_allRacersFinished = false;
     private bool readyToSetSelected = false;
     private bool readyToDisplay = false;
     private bool timingsListsUpdated = false;
@@ -87,7 +87,7 @@ public class FinishRace : MonoBehaviour
 
                     if (readyToDisplay == true)
                     {
-                        while(GameManager.gManager.timingsListUpdated == false)
+                        while (GameManager.gManager.timingsListUpdated == false)
                         {
                             if (GameManager.gManager.timingsListUpdated == true)
                             {
@@ -106,19 +106,33 @@ public class FinishRace : MonoBehaviour
     public void CheckAllRacersFinished()
     {
         // Iterate through all of the racer objects.
-        for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
+        foreach (GameObject racerOBJ in GameManager.gManager.playerObjects)
         {
-            RacerDetails racerDeets = GameManager.gManager.racerObjects[i].GetComponent<RacerDetails>(); // Get a referemce to the racers RacerDetails script.
+            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
 
-            if (racerDeets.finishedRacing == true && i == (GameManager.gManager.racerObjects.Count - 1))
+            if (rDeets.finishedRacing == true)
             {
                 m_allRacersFinished = true;
             }
-            else if (racerDeets.finishedRacing == false)
+
+            if (rDeets.finishedRacing == false)
             {
                 m_allRacersFinished = false;
             }
         }
+        //for (int i = 0; i < GameManager.gManager.playerObjects.Count; i++)
+        //{
+        //    RacerDetails racerDeets = GameManager.gManager.playerObjects[i].GetComponent<RacerDetails>(); // Get a referemce to the racers RacerDetails script.
+        //
+        //    if (racerDeets.finishedRacing == true && i == (GameManager.gManager.racerObjects.Count - 1))
+        //    {
+        //        m_allRacersFinished = true;
+        //    }
+        //    else if (racerDeets.finishedRacing == false)
+        //    {
+        //        m_allRacersFinished = false;
+        //    }
+        //}
 
         if (m_allRacersFinished == true)
         {
