@@ -30,7 +30,7 @@ public class AIMoveInputs : MonoBehaviour
     void FixedUpdate()
     {
         Accelerate();
-        Turning();
+        Turn();
         //HowFastShouldIGo();
     }
 
