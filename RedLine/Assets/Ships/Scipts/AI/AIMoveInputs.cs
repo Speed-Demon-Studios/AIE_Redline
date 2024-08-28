@@ -30,7 +30,7 @@ public class AIMoveInputs : MonoBehaviour
     void FixedUpdate()
     {
         Accelerate();
-        Turn();
+        Turning();
         //HowFastShouldIGo();
     }
 
@@ -189,7 +189,7 @@ public class AIMoveInputs : MonoBehaviour
 
         Debug.DrawLine(this.transform.position, randomPos);
 
-        m_controls.SetTurnMultipliers(-angleRad * 2);
+        m_controls.SetStrafeMultiplier(-angleRad * 4);
     }
 
     private void Accelerate()
