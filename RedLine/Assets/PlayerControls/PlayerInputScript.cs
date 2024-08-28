@@ -89,7 +89,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.75f);
+            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.6f);
         }
     }
 
@@ -97,7 +97,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.SetStrafeMultiplier(context.ReadValue<float>());
+            m_shipControls.SetStrafeMultiplier(context.ReadValue<float>() * 0.45f);
         }
     }
 

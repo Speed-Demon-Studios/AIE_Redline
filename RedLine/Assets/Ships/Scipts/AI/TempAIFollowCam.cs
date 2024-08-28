@@ -21,15 +21,15 @@ public class TempAIFollowCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 tempAverage = Vector3.zero;
-        for (int i = 0; i < AIParent.transform.childCount; i++)
-        {
-            tempAverage += m_aiships[i].transform.position;
-        }
+        //Vector3 tempAverage = Vector3.zero;
+        //for (int i = 0; i < AIParent.transform.childCount; i++)
+        //{
+        //    tempAverage += m_aiships[i].transform.position;
+        //}
 
-        average = tempAverage / m_aiships.Count;
+        //average = tempAverage / m_aiships.Count;
 
-        transform.position = average;
+        //transform.position = average;
 
         transform.Rotate(new Vector3(0, yAngle, 0));
     }

@@ -33,6 +33,7 @@ public class ShipsControls : MonoBehaviour
     private float m_shipAngle;
     private float m_strafeMultiplier;
     public float strafeStrength;
+    private float m_turningAngle;
 
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -142,6 +143,24 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
+    public void SetRotationToTrack(Transform pointOfCast)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(pointOfCast.position, -pointOfCast.up, out hit))
+        {
+            if (hit.transform.tag == "Road")
+            {
+                m_targetPos = hit.normal;
+            }
+        }
+
+        Debug.DrawLine(pointOfCast.position, hit.point);
+
+        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.05f);
+        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
+        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
+    }
+
     /// <summary>
     /// Boosting ship when boost button is pressed
     /// </summary>
@@ -226,7 +245,8 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
-    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.45f); }
-    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; SetTurnMultipliers(0); }
+    public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
+    private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
+    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     public void IsBoosting(bool boosting) { wantingToBoost = boosting; }
 }
