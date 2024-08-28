@@ -142,6 +142,24 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
+    public void SetRotation(Transform pointOfCast)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -pointOfCast.up, out hit))
+        {
+            if (hit.transform.tag == "Road")
+            {
+                m_targetPos = hit.normal;
+            }
+        }
+
+        Debug.DrawLine(pointOfCast.position, hit.point);
+
+        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.1f);
+        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.1f);
+        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.1f);
+    }
+
     /// <summary>
     /// Boosting ship when boost button is pressed
     /// </summary>
