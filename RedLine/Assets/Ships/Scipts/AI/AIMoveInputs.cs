@@ -2,35 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class AIMoveInputs : MonoBehaviour
 {
     [SerializeField] private ShipVariant Variant;
-    private List<Nodes> m_nodes = new();
     private float m_speed;
     private ShipsControls m_controls;
-    private Vector3 randomPos;
+    private Vector3 m_randomPos;
+    private float m_firstDistanceToNode;
+    private float m_currentDistanceToNode;
+    private float m_targetTurnAngle;
+    private float m_currentTurnAngle;
+
+    public float turnSpeed;
+
+    public GameObject desiredNode;
     public GameObject nodeParent;
-    public GameObject m_desiredNode;
-    public Text test;
-    public Text test2;
+    public TMP_Text test;
+    public TMP_Text test2;
 
     // Start is called before the first frame update
     void Start()
     {
         m_controls = GetComponent<ShipsControls>();
 
-        randomPos = m_desiredNode.GetComponent<Nodes>().RandomNavSphere(m_desiredNode.transform.position);
+        m_randomPos = desiredNode.GetComponent<Nodes>().RandomNavSphere(desiredNode.transform.position);
+
+        m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Accelerate();
-        Turn();
+        Turning();
         //HowFastShouldIGo();
     }
 
@@ -39,23 +49,24 @@ public class AIMoveInputs : MonoBehaviour
         // checks if it is at the current node
         // if so then it will change the current node to the next node
         // if not then it will continue
-        if (Vector3.Distance(this.gameObject.transform.position, m_desiredNode.transform.position) < Variant.distance)
+        if (Vector3.Distance(this.gameObject.transform.position, desiredNode.transform.position) < Variant.distance)
         {
-            m_desiredNode = m_desiredNode.GetComponent<Nodes>().nextNode.gameObject;
-            randomPos = m_desiredNode.GetComponent<Nodes>().RandomNavSphere(m_desiredNode.transform.position);
+            desiredNode = desiredNode.GetComponent<Nodes>().nextNode.gameObject;
+            m_randomPos = desiredNode.GetComponent<Nodes>().RandomNavSphere(desiredNode.transform.position);
+            m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos);
         }
 
         // nodeDirection is finding the direction to the current node
         // directionFoward is the forward facing of the ship
         // nodeDirectionNext is the direction from the ship to the next node
-        Vector3 nodeDirection = (transform.position - randomPos).normalized;
+        Vector3 nodeDirection = (transform.position - m_randomPos).normalized;
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
 
         // finding the angle between the ship and the current node then changing it to radians
         float angle = Vector3.SignedAngle(nodeDirection, directionFoward, transform.up);
 
         m_speed = 1;
-        Debug.DrawLine(this.transform.position, randomPos);
+        Debug.DrawLine(this.transform.position, m_randomPos);
         angle = Mathf.Clamp(angle, -45, 45);
         m_controls.SetStrafeMultiplier(-angle);
     }
@@ -65,12 +76,12 @@ public class AIMoveInputs : MonoBehaviour
         // directionFoward is the forward facing of the ship
         // nodeDirectionNext is the direction from the ship to the next node
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
-        Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
+        Vector3 nodeDirectionNext = (transform.position - desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
 
         // this chunk is finding both current nodes up and next nodes up and getting the difference between them
         // this will be used later
-        Transform pointA = m_desiredNode.transform;
-        Transform pointB = m_desiredNode.GetComponent<Nodes>().nextNode.transform;
+        Transform pointA = desiredNode.transform;
+        Transform pointB = desiredNode.GetComponent<Nodes>().nextNode.transform;
         Vector3 up = (pointB.up + pointA.up);
         float distance = Vector3.Distance(pointA.up, pointB.up);
 
@@ -111,12 +122,12 @@ public class AIMoveInputs : MonoBehaviour
             m_speed = neededSpeed;
         }
 
-        if(test != null)
+        if (test != null)
         {
             test.text = neededSpeed.ToString();
         }
 
-        if(test2 != null)
+        if (test2 != null)
         {
             test2.text = currentSpeedPer.ToString();
         }
@@ -127,32 +138,33 @@ public class AIMoveInputs : MonoBehaviour
         // checks if it is at the current node
         // if so then it will change the current node to the next node
         // if not then it will continue
-        if (Vector3.Distance(this.gameObject.transform.position, m_desiredNode.transform.position) < Variant.distance)
+        if (Vector3.Distance(this.gameObject.transform.position, desiredNode.transform.position) < Variant.distance || Vector3.Distance(this.gameObject.transform.position, desiredNode.GetComponent<Nodes>().nextNode.transform.position) < Variant.distance)
         {
-            m_desiredNode = m_desiredNode.GetComponent<Nodes>().nextNode.gameObject;
-            randomPos = m_desiredNode.GetComponent<Nodes>().RandomNavSphere(m_desiredNode.transform.position);
+            desiredNode = desiredNode.GetComponent<Nodes>().nextNode.gameObject;
+            m_randomPos = desiredNode.GetComponent<Nodes>().RandomNavSphere(desiredNode.transform.position);
+            m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos);
         }
+        m_currentDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos);
 
         // this chunk is finding both current nodes up and next nodes up and getting the difference between them
         // this will be used later
-        Transform pointA = m_desiredNode.transform;
-        Transform pointB = m_desiredNode.GetComponent<Nodes>().nextNode.transform;
+        Transform pointA = desiredNode.transform;
+        Transform pointB = desiredNode.GetComponent<Nodes>().nextNode.transform;
         Vector3 up = (pointB.up + pointA.up);
         float distance = Vector3.Distance(pointA.up, pointB.up);
 
         // nodeDirection is finding the direction to the current node
         // directionFoward is the forward facing of the ship
         // nodeDirectionNext is the direction from the ship to the next node
-        Vector3 nodeDirection = (transform.position - randomPos).normalized;
+        Vector3 nodeDirection = (transform.position - m_randomPos).normalized;
         Vector3 directionFoward = (transform.position - m_controls.facingPoint.position).normalized;
-        Vector3 nodeDirectionNext = (transform.position - m_desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
+        Vector3 nodeDirectionNext = (transform.position - desiredNode.GetComponent<Nodes>().nextNode.transform.position).normalized;
 
-        // finding the angle between the ship and the current node then changing it to radians
-        float angle = Vector3.SignedAngle(nodeDirection, directionFoward, up);
-        float angleRad = angle * Mathf.Deg2Rad;
         // finding the angle between the ship and the next node and changing it to radians
         float secondAngle = Vector3.SignedAngle(nodeDirectionNext, directionFoward, up);
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
+
+        m_targetTurnAngle = secondAngleRad;
 
         float neededSpeed;
 
@@ -187,9 +199,28 @@ public class AIMoveInputs : MonoBehaviour
             m_speed = neededSpeed;
         }
 
-        Debug.DrawLine(this.transform.position, randomPos);
+        float percentage = CalculatePercentage();
 
-        m_controls.SetStrafeMultiplier(-angleRad * 4);
+        if(test != null)
+        {
+            test.text = percentage.ToString();
+        }
+
+        m_currentTurnAngle = m_targetTurnAngle * percentage / 100;
+
+        Debug.DrawLine(this.transform.position, desiredNode.GetComponent<Nodes>().nextNode.transform.position);
+
+        m_controls.SetStrafeMultiplier(-m_currentTurnAngle * turnSpeed);
+    }
+
+    private float CalculatePercentage()
+    {
+        float maxTakeMin = m_firstDistanceToNode - Variant.distance;
+        float customPieNumber = 100 / maxTakeMin;
+        float differnceOfMaxNX = m_firstDistanceToNode - m_currentDistanceToNode;
+        float extraPercentage = maxTakeMin - differnceOfMaxNX;
+        float percentage = extraPercentage * customPieNumber;
+        return percentage;
     }
 
     private void Accelerate()

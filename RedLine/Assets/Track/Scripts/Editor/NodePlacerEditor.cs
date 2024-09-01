@@ -19,6 +19,13 @@ public class NodePlacerEditor : Editor
             nodePlacer.SpawnNode();
         }
 
+        nodePlacer.nodeParent = EditorGUILayout.ObjectField("Parent", nodePlacer.nodeParent, typeof(GameObject), false) as GameObject;
+
+        if (GUILayout.Button("Reorder Nodes"))
+        {
+            nodePlacer.OrderNodes();
+        }
+
         //if (GUILayout.Button("Reset node position to 1"))
         //{
         //    nodePlacer.ResetPos();

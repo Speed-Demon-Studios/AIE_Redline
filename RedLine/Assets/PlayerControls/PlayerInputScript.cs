@@ -26,12 +26,13 @@ public class PlayerInputScript : MonoBehaviour
         m_shipControls = GetComponentInParent<ShipsControls>();
         //m_cam = GetComponentInChildren<Camera>();
         gMan = GameManager.gManager;
-    
-        gMan.players.Add(gameObject);
-    
-        m_playerNumber = gMan.numberOfPlayers;
-    
-        eventSystem.firstSelectedGameObject = gMan.FindStartButton();
+
+        if(gMan != null)
+            gMan.players.Add(gameObject);
+        if (gMan != null)
+            m_playerNumber = gMan.numberOfPlayers;
+        if (gMan != null)
+            eventSystem.firstSelectedGameObject = gMan.FindStartButton();
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class PlayerInputScript : MonoBehaviour
         //{
         //    m_shipControls.enabled = true;
         //}
-        if(gMan.raceStarted)
+        //if(gMan.raceStarted)
             CalculatePOV();
     }
 
