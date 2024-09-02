@@ -67,4 +67,9 @@ public class UIControllerInput : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }

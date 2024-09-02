@@ -9,6 +9,7 @@ public class PlayerUiControl : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI placementText;
     [SerializeField] private TextMeshProUGUI lapText;
+    [SerializeField] private TextMeshProUGUI m_speed;
     [SerializeField] private RacerDetails rDetails;
 
     private void Update()
@@ -22,7 +23,7 @@ public class PlayerUiControl : MonoBehaviour
         {
             if (rDetails.currentLap > 0)
             {
-                lapText.text = rDetails.currentLap.ToString();
+                lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString();
             }
 
             if (GameManager.gManager.indexListSorted == true)
@@ -31,10 +32,12 @@ public class PlayerUiControl : MonoBehaviour
                 {
                     if (GameManager.gManager.pHandler.racers[i] == rDetails)
                     {
-                        placementText.text = (i + 1).ToString();
+                        placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();
                     }
                 }
             }
+
+            m_speed.text = GetComponentInParent<ShipsControls>().ReturnRB().velocity.magnitude.ToString() + " Km/h";
         }
     }
 }

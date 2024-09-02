@@ -10,6 +10,7 @@ public class CamManager : MonoBehaviour
     private int m_trackIndex;
     private GameObject m_currentTrack;
 
+    public Animator anim;
     private float m_trackPos = 0;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class CamManager : MonoBehaviour
         m_trackPos += 0.1f * Time.deltaTime;
         if(m_trackPos > 1)
         {
+            anim.SetTrigger("0");
             m_currentTrack.gameObject.SetActive(false);
             m_trackIndex += 1;
             if(m_trackIndex > tracks.Count - 1)
