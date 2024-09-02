@@ -6,6 +6,8 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private int TotalLaps;
     bool coroutineStarted = false;
 
+    public float GetTotalLaps() { return TotalLaps; }
+
     private void Awake()
     {
         GameManager.gManager.rManager = this;
