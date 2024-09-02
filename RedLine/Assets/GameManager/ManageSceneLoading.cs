@@ -36,11 +36,11 @@ public class ManageSceneLoading : MonoBehaviour
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
-            StartCoroutine(LoadScene());
+            StartCoroutine(LoadMenuScene());
         }
     }
 
-    IEnumerator LoadScene()
+    IEnumerator LoadMenuScene()
     {
         yield return new WaitForEndOfFrame();
 
@@ -48,7 +48,7 @@ public class ManageSceneLoading : MonoBehaviour
         SceneManager.UnloadSceneAsync(1);
 
         coroutineStarted = false;
-        StopCoroutine(LoadScene());
+        StopCoroutine(LoadMenuScene());
     }
 
     public void SetPlayerUIInputMM()
