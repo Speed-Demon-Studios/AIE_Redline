@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891588230137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.975}
+  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.85}
   m_LocalScale: {x: 0.82958, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -398,9 +398,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
   serializedVersion: 2
-  m_Mass: 90
-  m_Drag: 1.5
-  m_AngularDrag: 0.5
+  m_Mass: 92.5
+  m_Drag: 1.8
+  m_AngularDrag: 0.7
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -419,8 +419,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Variant: {fileID: 11400000, guid: fe1774934f8a4e345981a28eb2af67a7, type: 2}
+  turnSpeed: 9
+  desiredNode: {fileID: 0}
   nodeParent: {fileID: 0}
-  m_desiredNode: {fileID: 0}
   test: {fileID: 0}
   test2: {fileID: 0}
 --- !u!114 &5609334039806038210
@@ -435,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840388a9de0146a478eb8141513b1518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rCS: {fileID: 4138396035580576210}
   finishedRacing: 0
   distanceToCheckpoint: 0
   currentLap: 0
@@ -444,6 +446,8 @@ MonoBehaviour:
   lapTimesMINUTES: []
   currentLapTimeSECONDS: 0
   currentLapTimeMINUTES: 0
+  totalRaceTimeSeconds: 0
+  totalRaceTimeMinutes: 0
   RacerName: 
 --- !u!135 &5573208418150351537
 SphereCollider:
@@ -625,22 +629,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 90b173658d6cfc540acfcab89d0b1524, type: 2}
+      objectReference: {fileID: 2100000, guid: e2c5fdb1785e9724c8cb30ea0a90e814, type: 2}
     - target: {fileID: -2629589546813886484, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c31cd2ccd879c6e4d994ddcc01d5bfb2, type: 2}
+      objectReference: {fileID: 2100000, guid: e2c5fdb1785e9724c8cb30ea0a90e814, type: 2}
     - target: {fileID: -982065328737844710, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c31cd2ccd879c6e4d994ddcc01d5bfb2, type: 2}
+      objectReference: {fileID: 2100000, guid: ab11428ef1072c046baf304da53f4686, type: 2}
     - target: {fileID: 569169282116888178, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7423f368fba3ffc41a981e91ba36f846, type: 2}
+      objectReference: {fileID: 2100000, guid: e2c5fdb1785e9724c8cb30ea0a90e814, type: 2}
     - target: {fileID: 919132149155446097, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Name
@@ -655,7 +659,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c31cd2ccd879c6e4d994ddcc01d5bfb2, type: 2}
+      objectReference: {fileID: 2100000, guid: 3f1edca5ecf7dd5408e343820ce864cb, type: 2}
     - target: {fileID: 3783679286434157976, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -665,12 +669,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c31cd2ccd879c6e4d994ddcc01d5bfb2, type: 2}
+      objectReference: {fileID: 2100000, guid: ab11428ef1072c046baf304da53f4686, type: 2}
     - target: {fileID: 8885329061251328210, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c31cd2ccd879c6e4d994ddcc01d5bfb2, type: 2}
+      objectReference: {fileID: 2100000, guid: e2c5fdb1785e9724c8cb30ea0a90e814, type: 2}
     - target: {fileID: 8913987742362513620, guid: a496c3d1daf6ce64a8b3cbe943c6d9e2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -739,7 +743,7 @@ PrefabInstance:
     - target: {fileID: 6028544671434352075, guid: d7ad23f20fbeacd499582a0a18d8fa62,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.863
+      value: -2.344
       objectReference: {fileID: 0}
     - target: {fileID: 6028544671434352075, guid: d7ad23f20fbeacd499582a0a18d8fa62,
         type: 3}

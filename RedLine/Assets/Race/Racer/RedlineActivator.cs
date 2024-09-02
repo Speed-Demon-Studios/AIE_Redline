@@ -5,13 +5,19 @@ public class RedlineActivator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.redlineActivated == false && GameManager.gManager.raceStarted == true)
+        if (GameManager.gManager.raceStarted == true)
         {
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
             {
-                RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
+                RedlineColliderSpawner redlineScript = racerOBJ.GetComponent<RacerDetails>().rCS;
 
-                redlineScript.enabled = true;
+                if (redlineScript != null)
+                {
+                    if (redlineScript.enabled == false)
+                    {
+                        redlineScript.enabled = true;
+                    }
+                }
             }
             GameManager.gManager.redlineActivated = true;
         }

@@ -33,6 +33,7 @@ public class ShipsControls : MonoBehaviour
     private float m_shipAngle;
     private float m_strafeMultiplier;
     public float strafeStrength;
+    private float m_turningAngle;
 
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -109,7 +110,7 @@ public class ShipsControls : MonoBehaviour
     private void RotateShip()
     {
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
-        m_shipAngle = Mathf.Lerp(m_shipAngle, (m_currentAngle * 2f) * Mathf.Rad2Deg, 0.03f);
+        m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, 0.03f);
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint, transform.up);
@@ -142,6 +143,22 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
+    public void SetRotationToTrack(Transform pointOfCast)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(pointOfCast.position, -pointOfCast.up, out hit))
+        {
+            if (hit.transform.tag == "Road")
+            {
+                m_targetPos = hit.normal;
+            }
+        }
+
+        Debug.DrawLine(pointOfCast.position, hit.point);
+
+        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.01f);
+    }
+
     /// <summary>
     /// Boosting ship when boost button is pressed
     /// </summary>
@@ -159,17 +176,17 @@ public class ShipsControls : MonoBehaviour
 
     public void BoostPadBoost(float force)
     {
-        Debug.Log("Boost pad speed");
+        m_isBoosting = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
+        StartCoroutine(BoostTime(1f));
     }
 
     private IEnumerator BoostTime(float length)
     {
         yield return new WaitForSeconds(length);
-        m_boostLevel = 0;
-        m_currentBoost = 0;
-        m_rb.mass = 90;
         wantingToBoost = false;
+        m_currentBoost = 0f;
+        m_boostLevel = 0;
     }
 
     /// <summary>
@@ -206,7 +223,9 @@ public class ShipsControls : MonoBehaviour
         m_currentAngle = Mathf.Lerp(m_currentAngle, m_targetAngle, 0.06f);
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
-        float multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
+        float multiplier = 0.5f;
+        if (!m_isBoosting)
+            multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (variant.TurnSpeed * multiplier), 0));
@@ -226,7 +245,8 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
-    public void SetTurnMultipliers(float multiplier) { m_targetAngle = multiplier + (m_strafeMultiplier * 0.45f); }
-    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; SetTurnMultipliers(0); }
+    public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
+    private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
+    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     public void IsBoosting(bool boosting) { wantingToBoost = boosting; }
 }

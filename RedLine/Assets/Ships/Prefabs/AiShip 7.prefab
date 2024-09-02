@@ -255,7 +255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b40769b1976ecf148b65348abacaf68a, type: 2}
+  - {fileID: 2100000, guid: e355dff202d287f4198c671581aa9a24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891588230137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.975}
+  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.9}
   m_LocalScale: {x: 0.82958, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -398,9 +398,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
   serializedVersion: 2
-  m_Mass: 90
-  m_Drag: 1.5
-  m_AngularDrag: 0.5
+  m_Mass: 95
+  m_Drag: 2
+  m_AngularDrag: 0.7
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -419,8 +419,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Variant: {fileID: 11400000, guid: afec871153bc9774b8a6e760af4d3e77, type: 2}
+  turnSpeed: 8
+  desiredNode: {fileID: 0}
   nodeParent: {fileID: 0}
-  m_desiredNode: {fileID: 0}
   test: {fileID: 0}
   test2: {fileID: 0}
 --- !u!114 &5609334039806038210
@@ -435,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840388a9de0146a478eb8141513b1518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rCS: {fileID: 4658324295721962571}
   finishedRacing: 0
   distanceToCheckpoint: 0
   currentLap: 0
@@ -444,6 +446,8 @@ MonoBehaviour:
   lapTimesMINUTES: []
   currentLapTimeSECONDS: 0
   currentLapTimeMINUTES: 0
+  totalRaceTimeSeconds: 0
+  totalRaceTimeMinutes: 0
   RacerName: 
 --- !u!135 &5573208418150351537
 SphereCollider:
@@ -547,7 +551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8131761574654952997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.157, z: 0}
+  m_LocalPosition: {x: 0, y: -0.157, z: 2.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

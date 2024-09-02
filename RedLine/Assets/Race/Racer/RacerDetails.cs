@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
 {
+    public RedlineColliderSpawner rCS;
     public bool finishedRacing = false;
     public float distanceToCheckpoint;
     public int currentLap = 0;
@@ -12,8 +13,12 @@ public class RacerDetails : MonoBehaviour
 
     public List<float> lapTimesSECONDS = new List<float>();
     public List<float> lapTimesMINUTES = new List<float>();
+
     public float currentLapTimeSECONDS = 0;
     public float currentLapTimeMINUTES = 0;
+
+    public float totalRaceTimeSeconds = 0;
+    public float totalRaceTimeMinutes = 0;
 
     public string RacerName = "";
 
@@ -45,6 +50,14 @@ public class RacerDetails : MonoBehaviour
         if (currentLap > 0 && finishedRacing == false)
         {
             currentLapTimeSECONDS += Time.deltaTime;
+            totalRaceTimeSeconds += 1 * Time.deltaTime;
+
+            if (totalRaceTimeSeconds >= 60.0f)
+            {
+                totalRaceTimeSeconds = 0.0f;
+                totalRaceTimeMinutes += 1.0f;
+            }
+
             if (currentLapTimeSECONDS >= 60.0f)
             {
                 currentLapTimeSECONDS = 0.0f;

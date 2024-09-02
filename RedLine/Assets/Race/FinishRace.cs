@@ -9,12 +9,14 @@ using UnityEngine.SceneManagement;
 public class FinishRace : MonoBehaviour
 {
     public GameObject mainButton;
-    private bool m_allRacersFinished = false;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
+    private TextMeshProUGUI[] tempSortingTextList;
+    private bool m_allRacersFinished = false;
     private bool readyToSetSelected = false;
     private bool readyToDisplay = false;
     private bool timingsListsUpdated = false;
+    private bool textListSorted = false;
 
     private void Awake()
     {
@@ -32,6 +34,15 @@ public class FinishRace : MonoBehaviour
     /// </summary>
     public void ShowFinalPlacements()
     {
+        foreach (GameObject racer in GameManager.gManager.racerObjects)
+        {
+            if (GameManager.gManager.players.Contains(racer) == false)
+            {
+                RacerDetails rDeets = racer.GetComponent<RacerDetails>();
+
+                rDeets.finishedRacing = true;
+            }
+        }
         // Enable the race placement display window and its child objects.
         if (placementWindow.activeSelf == false)
         {
@@ -47,55 +58,71 @@ public class FinishRace : MonoBehaviour
         {
             placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
             TextMeshProUGUI placementText = placementTexts[i].GetComponent<TextMeshProUGUI>(); // Get a reference to the text object.
+            //foreach (GameObject textOBJ in placementTexts)
+            //{
+            //
+            //}
 
             // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
             {
+
                 RacerDetails racerDeets = racerOBJ.GetComponent<RacerDetails>();
 
                 if ((i + 1) == racerDeets.placement)
                 {
-                    float bestLapTimeSEC = 0f;
-                    float bestLapTimeMIN = 0f;
-                    if (racerDeets.lapTimesMINUTES.Count > 0 && racerDeets.lapTimesSECONDS.Count > 0)
-                    {
-                        bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
-                        bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
-                    }
-                    for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
-                    {
-                        foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
-                        {
-                            if (lapSECONDS > racerDeets.lapTimesSECONDS[a])
-                            {
-                                bestLapTimeSEC = lapSECONDS;
-                            }
-                        }
-                    }
-                    for (int a = 0; a < racerDeets.lapTimesMINUTES.Count; a++)
-                    {
-                        foreach (float lapMINUTES in racerDeets.lapTimesMINUTES)
-                        {
-                            if (lapMINUTES > racerDeets.lapTimesMINUTES[a])
-                            {
-                                bestLapTimeMIN = lapMINUTES;
-                            }
-                        }
-
-                    }
+                    //float bestLapTimeSEC = 0f;
+                    //float bestLapTimeMIN = 0f;
+                    //if (racerDeets.lapTimesMINUTES.Count > 0 && racerDeets.lapTimesSECONDS.Count > 0)
+                    //{
+                    //    bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
+                    //    bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
+                    //}
+                    //for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
+                    //{
+                    //    foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
+                    //    {
+                    //        if (lapSECONDS > racerDeets.lapTimesSECONDS[a])
+                    //        {
+                    //            bestLapTimeSEC = lapSECONDS;
+                    //        }
+                    //    }
+                    //}
+                    //for (int a = 0; a < racerDeets.lapTimesMINUTES.Count; a++)
+                    //{
+                    //    foreach (float lapMINUTES in racerDeets.lapTimesMINUTES)
+                    //    {
+                    //        if (lapMINUTES > racerDeets.lapTimesMINUTES[a])
+                    //        {
+                    //            bestLapTimeMIN = lapMINUTES;
+                    //        }
+                    //    }
+                    //
+                    //}
                     readyToDisplay = true;
 
-                    if (readyToDisplay == true)
+                    //if (readyToDisplay == true)
+                    //{
+                    //    while (GameManager.gManager.timingsListUpdated == false)
+                    //    {
+                    //        if (GameManager.gManager.timingsListUpdated == true)
+                    //        {
+                    //            break;
+                    //        }
+                    //    }
+                    //}
+
+                    if (GameManager.gManager.players.Contains(racerOBJ))
                     {
-                        while(GameManager.gManager.timingsListUpdated == false)
+                        if (racerDeets.finishedRacing == true)
                         {
-                            if (GameManager.gManager.timingsListUpdated == true)
-                            {
-                                break;
-                            }
+                            placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
                         }
                     }
-                    placementText.text = "(" + (i + 1) + ") " + racerDeets.RacerName + "    ||   " + bestLapTimeMIN + " : " + bestLapTimeSEC;
+                    else
+                    {
+                        placementText.text = racerDeets.RacerName + "||   DNF";
+                    }
                 }
             }
 
@@ -105,16 +132,17 @@ public class FinishRace : MonoBehaviour
 
     public void CheckAllRacersFinished()
     {
-        // Iterate through all of the racer objects.
-        for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
+        // Iterate through all of the PLAYER objects.
+        foreach (GameObject racerOBJ in GameManager.gManager.players)
         {
-            RacerDetails racerDeets = GameManager.gManager.racerObjects[i].GetComponent<RacerDetails>(); // Get a referemce to the racers RacerDetails script.
+            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
 
-            if (racerDeets.finishedRacing == true && i == (GameManager.gManager.racerObjects.Count - 1))
+            if (rDeets.finishedRacing == true)
             {
                 m_allRacersFinished = true;
             }
-            else if (racerDeets.finishedRacing == false)
+
+            if (rDeets.finishedRacing == false)
             {
                 m_allRacersFinished = false;
             }

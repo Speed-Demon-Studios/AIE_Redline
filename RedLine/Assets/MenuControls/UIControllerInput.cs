@@ -15,12 +15,18 @@ public class UIControllerInput : MonoBehaviour
     private PlayerInputManager PIM;
     [SerializeField] private int currentMenuObjectIndex = 0;
     public TextMeshProUGUI playerCountText;
-
+    private int m_numberOfPalyers;
     [SerializeField] private GameObject firstButton;
 
     // Testing
     private bool HasInitialized = true;
 
+    public void AddToPlayers()
+    {
+        m_numberOfPalyers += 1;
+        if(playerCountText != null)
+            playerCountText.text = "Player Count: " + m_numberOfPalyers;
+    }
     private void Awake()
     {
         GameManager.gManager.CurrentScene = "MainMenu";

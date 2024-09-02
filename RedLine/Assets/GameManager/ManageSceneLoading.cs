@@ -30,16 +30,17 @@ public class ManageSceneLoading : MonoBehaviour
         GameManager.gManager.pHandler.racersAdded = false;
         GameManager.gManager.countdownIndex = 5;
         GameManager.gManager.namesAssigned = false;
+        GameManager.gManager.nRandomiser.usedNames = new List<string>();
         GameManager.gManager.redlineActivated = false;
         reloadingmenu = true;
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
-            StartCoroutine(LoadScene());
+            StartCoroutine(LoadMenuScene());
         }
     }
 
-    IEnumerator LoadScene()
+    IEnumerator LoadMenuScene()
     {
         yield return new WaitForEndOfFrame();
 
@@ -47,7 +48,7 @@ public class ManageSceneLoading : MonoBehaviour
         SceneManager.UnloadSceneAsync(1);
 
         coroutineStarted = false;
-        StopCoroutine(LoadScene());
+        StopCoroutine(LoadMenuScene());
     }
 
     public void SetPlayerUIInputMM()
