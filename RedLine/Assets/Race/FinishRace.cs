@@ -11,10 +11,12 @@ public class FinishRace : MonoBehaviour
     public GameObject mainButton;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
+    private TextMeshProUGUI[] tempSortingTextList;
     private bool m_allRacersFinished = false;
     private bool readyToSetSelected = false;
     private bool readyToDisplay = false;
     private bool timingsListsUpdated = false;
+    private bool textListSorted = false;
 
     private void Awake()
     {
@@ -32,6 +34,15 @@ public class FinishRace : MonoBehaviour
     /// </summary>
     public void ShowFinalPlacements()
     {
+        foreach (GameObject racer in GameManager.gManager.racerObjects)
+        {
+            if (GameManager.gManager.players.Contains(racer) == false)
+            {
+                RacerDetails rDeets = racer.GetComponent<RacerDetails>();
+
+                rDeets.finishedRacing = true;
+            }
+        }
         // Enable the race placement display window and its child objects.
         if (placementWindow.activeSelf == false)
         {
@@ -47,10 +58,15 @@ public class FinishRace : MonoBehaviour
         {
             placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
             TextMeshProUGUI placementText = placementTexts[i].GetComponent<TextMeshProUGUI>(); // Get a reference to the text object.
+            //foreach (GameObject textOBJ in placementTexts)
+            //{
+            //
+            //}
 
             // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
             foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
             {
+
                 RacerDetails racerDeets = racerOBJ.GetComponent<RacerDetails>();
 
                 if ((i + 1) == racerDeets.placement)
@@ -95,7 +111,15 @@ public class FinishRace : MonoBehaviour
                             }
                         }
                     }
-                    placementText.text = "(" + (i + 1) + ") " + racerDeets.RacerName + "    ||   " + bestLapTimeMIN + " : " + bestLapTimeSEC;
+
+                    if (racerDeets.finishedRacing == true)
+                    {
+                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
+                    }
+                    else
+                    {
+                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   ";
+                    }
                 }
             }
 
@@ -106,7 +130,7 @@ public class FinishRace : MonoBehaviour
     public void CheckAllRacersFinished()
     {
         // Iterate through all of the racer objects.
-        foreach (GameObject racerOBJ in GameManager.gManager.playerObjects)
+        foreach (GameObject racerOBJ in GameManager.gManager.players)
         {
             RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
 
