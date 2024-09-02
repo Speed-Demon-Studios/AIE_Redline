@@ -185,6 +185,8 @@ public class ShipsControls : MonoBehaviour
     {
         yield return new WaitForSeconds(length);
         wantingToBoost = false;
+        m_currentBoost = 0f;
+        m_boostLevel = 0;
     }
 
     /// <summary>
