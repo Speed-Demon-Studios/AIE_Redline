@@ -112,13 +112,16 @@ public class FinishRace : MonoBehaviour
                     //    }
                     //}
 
-                    if (racerDeets.finishedRacing == true)
+                    if (GameManager.gManager.players.Contains(racerOBJ))
                     {
-                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
+                        if (racerDeets.finishedRacing == true)
+                        {
+                            placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
+                        }
                     }
                     else
                     {
-                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   ";
+                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "||   DNF";
                     }
                 }
             }
