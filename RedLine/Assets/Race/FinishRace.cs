@@ -121,7 +121,7 @@ public class FinishRace : MonoBehaviour
                     }
                     else
                     {
-                        placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "||   DNF";
+                        placementText.text = racerDeets.RacerName + "||   DNF";
                     }
                 }
             }
