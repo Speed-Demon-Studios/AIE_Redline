@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
 {
+    public RedlineColliderSpawner rCS;
     public bool finishedRacing = false;
     public float distanceToCheckpoint;
     public int currentLap = 0;

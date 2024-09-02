@@ -71,46 +71,46 @@ public class FinishRace : MonoBehaviour
 
                 if ((i + 1) == racerDeets.placement)
                 {
-                    float bestLapTimeSEC = 0f;
-                    float bestLapTimeMIN = 0f;
-                    if (racerDeets.lapTimesMINUTES.Count > 0 && racerDeets.lapTimesSECONDS.Count > 0)
-                    {
-                        bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
-                        bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
-                    }
-                    for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
-                    {
-                        foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
-                        {
-                            if (lapSECONDS > racerDeets.lapTimesSECONDS[a])
-                            {
-                                bestLapTimeSEC = lapSECONDS;
-                            }
-                        }
-                    }
-                    for (int a = 0; a < racerDeets.lapTimesMINUTES.Count; a++)
-                    {
-                        foreach (float lapMINUTES in racerDeets.lapTimesMINUTES)
-                        {
-                            if (lapMINUTES > racerDeets.lapTimesMINUTES[a])
-                            {
-                                bestLapTimeMIN = lapMINUTES;
-                            }
-                        }
-
-                    }
+                    //float bestLapTimeSEC = 0f;
+                    //float bestLapTimeMIN = 0f;
+                    //if (racerDeets.lapTimesMINUTES.Count > 0 && racerDeets.lapTimesSECONDS.Count > 0)
+                    //{
+                    //    bestLapTimeSEC = racerDeets.lapTimesSECONDS[0];
+                    //    bestLapTimeMIN = racerDeets.lapTimesMINUTES[0];
+                    //}
+                    //for (int a = 0; a < racerDeets.lapTimesSECONDS.Count; a++)
+                    //{
+                    //    foreach (float lapSECONDS in racerDeets.lapTimesSECONDS)
+                    //    {
+                    //        if (lapSECONDS > racerDeets.lapTimesSECONDS[a])
+                    //        {
+                    //            bestLapTimeSEC = lapSECONDS;
+                    //        }
+                    //    }
+                    //}
+                    //for (int a = 0; a < racerDeets.lapTimesMINUTES.Count; a++)
+                    //{
+                    //    foreach (float lapMINUTES in racerDeets.lapTimesMINUTES)
+                    //    {
+                    //        if (lapMINUTES > racerDeets.lapTimesMINUTES[a])
+                    //        {
+                    //            bestLapTimeMIN = lapMINUTES;
+                    //        }
+                    //    }
+                    //
+                    //}
                     readyToDisplay = true;
 
-                    if (readyToDisplay == true)
-                    {
-                        while (GameManager.gManager.timingsListUpdated == false)
-                        {
-                            if (GameManager.gManager.timingsListUpdated == true)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    //if (readyToDisplay == true)
+                    //{
+                    //    while (GameManager.gManager.timingsListUpdated == false)
+                    //    {
+                    //        if (GameManager.gManager.timingsListUpdated == true)
+                    //        {
+                    //            break;
+                    //        }
+                    //    }
+                    //}
 
                     if (racerDeets.finishedRacing == true)
                     {
@@ -129,7 +129,7 @@ public class FinishRace : MonoBehaviour
 
     public void CheckAllRacersFinished()
     {
-        // Iterate through all of the racer objects.
+        // Iterate through all of the PLAYER objects.
         foreach (GameObject racerOBJ in GameManager.gManager.players)
         {
             RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
@@ -144,19 +144,6 @@ public class FinishRace : MonoBehaviour
                 m_allRacersFinished = false;
             }
         }
-        //for (int i = 0; i < GameManager.gManager.playerObjects.Count; i++)
-        //{
-        //    RacerDetails racerDeets = GameManager.gManager.playerObjects[i].GetComponent<RacerDetails>(); // Get a referemce to the racers RacerDetails script.
-        //
-        //    if (racerDeets.finishedRacing == true && i == (GameManager.gManager.racerObjects.Count - 1))
-        //    {
-        //        m_allRacersFinished = true;
-        //    }
-        //    else if (racerDeets.finishedRacing == false)
-        //    {
-        //        m_allRacersFinished = false;
-        //    }
-        //}
 
         if (m_allRacersFinished == true)
         {
