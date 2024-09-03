@@ -18,7 +18,7 @@ public class RedlineColliderSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 35; i++)
         {
             SpawnCollider();
         }
