@@ -18,14 +18,14 @@ public class RedlineColliderSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        for(int i = 0; i < 35; i++)
+        for(int i = 0; i < 15; i++)
         {
             SpawnCollider();
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         AddBoost();
         ChangePositions();
@@ -40,6 +40,8 @@ public class RedlineColliderSpawner : MonoBehaviour
 
             Debug.Log(m_shipsInColliders[i].gameObject + "Add to boosting");
 
+            m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(true);
+
             controls.AddToBoost();
         }
     }
@@ -48,21 +50,19 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         for (int i = 0; i < m_shipsInColliders.Count; i++)
         {
-            if (m_allShipsInColliders.Contains(m_shipsInColliders[i]))
-                return;
-            else
+            if (!m_allShipsInColliders.Contains(m_shipsInColliders[i]))
             {
+                m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(false);
                 m_shipsInColliders.Remove(m_shipsInColliders[i]);
             }
         }
         for (int i = 0; i < m_allShipsInColliders.Count; i++)
         {
-            if (m_shipsInColliders.Contains(m_allShipsInColliders[i]))
-                return;
-            else
+            if (!m_shipsInColliders.Contains(m_allShipsInColliders[i]))
             {
                 m_shipsInColliders.Add(m_allShipsInColliders[i]);
             }
+
         }
     }
 
@@ -79,11 +79,12 @@ public class RedlineColliderSpawner : MonoBehaviour
 
     public void SpawnCollider()
     {
-            GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
+        GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
 
-            ColliderTrigger b = a.GetComponent<ColliderTrigger>();
-            b.spawner = this;
+        ColliderTrigger b = a.GetComponent<ColliderTrigger>();
+        b.spawner = this;
+        b.ship = colliderParent;
 
-            m_lineColliders.Add(a);
+        m_lineColliders.Add(a);
     }
 }
