@@ -1,14 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RaceCountdown : MonoBehaviour
 {
-    [SerializeField] private int countdownLength = 5;
+    [SerializeField] private int countdownLength = 2;
+    private TextMeshProUGUI m_countdownText;
+
     //public bool m_readyForCountdown = false;
     public bool m_countdownCoroutineStarted = false;
     public bool m_countdownFinished = false;
     public bool m_countdownStarted = false;
+
+    public void SetCountdownTextObj(TextMeshProUGUI textOBJ)
+    {
+        m_countdownText = textOBJ;
+        return;
+    }
+
+    public TextMeshProUGUI GetCountdownTextOBJ()
+    {
+        return m_countdownText;
+    }
+
 
     private void Awake()
     {
@@ -23,13 +38,19 @@ public class RaceCountdown : MonoBehaviour
 
     public IEnumerator RaceCountdownTimer()
     {
+        // Tell the rest of the script that the coroutine has started.
+        m_countdownCoroutineStarted = true;
         if (m_countdownStarted == false)
         {
             m_countdownStarted = true;
         }
+        if (m_countdownText.enabled == false)
+        {
+            m_countdownText.enabled = true;
+        }
 
-        // Tell the rest of the script that the coroutine has started.
-        m_countdownCoroutineStarted = true;
+        m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
+
 
         if (GameManager.gManager.countdownIndex > 0)
         {
@@ -40,9 +61,12 @@ public class RaceCountdown : MonoBehaviour
         {
             m_countdownFinished = true;
             m_countdownCoroutineStarted = false;
+            m_countdownText.enabled = false;
             StopCoroutine(RaceCountdownTimer());
         }
         yield return new WaitForSecondsRealtime(1);
+
+        m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
         m_countdownCoroutineStarted = false;
         StopCoroutine(RaceCountdownTimer());
     }
