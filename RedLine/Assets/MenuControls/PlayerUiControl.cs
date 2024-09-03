@@ -11,6 +11,7 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lapText;
     [SerializeField] private TextMeshProUGUI m_speed;
     [SerializeField] private RacerDetails rDetails;
+    [SerializeField] private ShipsControls m_shipsControls;
 
     private void Update()
     {
@@ -37,7 +38,7 @@ public class PlayerUiControl : MonoBehaviour
                 }
             }
 
-            m_speed.text = GetComponentInParent<ShipsControls>().ReturnRB().velocity.magnitude.ToString() + " Km/h";
+            m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 3f).ToString();
         }
     }
 }
