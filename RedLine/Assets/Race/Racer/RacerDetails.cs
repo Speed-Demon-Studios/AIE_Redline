@@ -6,6 +6,7 @@ public class RacerDetails : MonoBehaviour
 {
     public RedlineColliderSpawner rCS;
     public bool finishedRacing = false;
+    public bool crossedFinishLine = false;
     public float distanceToCheckpoint;
     public int currentLap = 0;
     public int placement = 0;
