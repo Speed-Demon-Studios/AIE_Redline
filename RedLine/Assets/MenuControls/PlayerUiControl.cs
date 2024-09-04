@@ -40,7 +40,7 @@ public class PlayerUiControl : MonoBehaviour
                     }
                 }
 
-                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 3f).ToString();
+                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
             }
         }
     }
