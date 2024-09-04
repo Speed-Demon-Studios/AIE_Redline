@@ -48,6 +48,7 @@ public class RaceManager : MonoBehaviour
     {
         if (racer.currentLap >= TotalLaps)
         {
+            racer.crossedFinishLine = true;
             racer.finishedRacing = true;
         }
         if (racer.currentLap < TotalLaps)

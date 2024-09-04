@@ -121,7 +121,14 @@ public class FinishRace : MonoBehaviour
                     }
                     else
                     {
-                        placementText.text = racerDeets.RacerName + "||   DNF";
+                        if (racerDeets.crossedFinishLine == false)
+                        {
+                            placementText.text = racerDeets.RacerName + "   ||   DNF";
+                        }
+                        else
+                        {
+                            placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
+                        }
                     }
                 }
             }

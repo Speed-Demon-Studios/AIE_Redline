@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public bool timingsListUpdated = false;
 
-    public int countdownIndex = 5;
+    public int countdownIndex = 2;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
 

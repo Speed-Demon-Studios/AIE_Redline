@@ -64,7 +64,7 @@ public class UIControllerInput : MonoBehaviour
             Debug.Log("Loading Race Scene");
             Debug.Log("Ready To Start Race");
             GameManager.gManager.racerObjects = new List<GameObject>();
-            SceneManager.LoadScene(1);
+            SceneManager.LoadSceneAsync(1);
         }
     }
 
