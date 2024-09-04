@@ -15,30 +15,33 @@ public class PlayerUiControl : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gManager.raceStarted == false )
+        if (GameManager.gManager)
         {
-            placementText.text = " ";
-            lapText.text = " ";
-        }
-        else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
-        {
-            if (rDetails.currentLap > 0)
+            if (GameManager.gManager.raceStarted == false)
             {
-                lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString();
+                placementText.text = " ";
+                lapText.text = " ";
             }
-
-            if (GameManager.gManager.indexListSorted == true)
+            else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
             {
-                for (int i = 0; i < GameManager.gManager.pHandler.racers.Count; i++)
+                if (rDetails.currentLap > 0)
                 {
-                    if (GameManager.gManager.pHandler.racers[i] == rDetails)
+                    lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString();
+                }
+
+                if (GameManager.gManager.indexListSorted == true)
+                {
+                    for (int i = 0; i < GameManager.gManager.pHandler.racers.Count; i++)
                     {
-                        placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();
+                        if (GameManager.gManager.pHandler.racers[i] == rDetails)
+                        {
+                            placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();
+                        }
                     }
                 }
-            }
 
-            m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
+                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 3f).ToString();
+            }
         }
     }
 }
