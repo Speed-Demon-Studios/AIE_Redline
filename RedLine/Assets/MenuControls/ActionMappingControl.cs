@@ -51,43 +51,46 @@ public class ActionMappingControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (racerInfo.finishedRacing == true)
+        if (racerInfo)
         {
-            //if (sControls != null)
-            //{
-            //_playerInputActions.DeactivateInput();
-            sControls.enabled = false;
-            Debug.Log("Disabling ShipControls Script.");
-            if ( _playerInputActions != null && _playerInputActions.currentActionMap.name != "UI")
+            if (racerInfo.finishedRacing == true)
             {
-                SwitchActionMapToUI();
-            }
-            //}
-        }
-        if (GameManager.gManager.raceStarted == true && racerInfo.finishedRacing == false)
-        {
-
-            PlayerInputScript playerInput = this.gameObject.GetComponent<PlayerInputScript>();
-            AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();
-            if (racerInfo.finishedRacing == false)
-            {
-                if (playerInput != null)
+                //if (sControls != null)
+                //{
+                //_playerInputActions.DeactivateInput();
+                sControls.enabled = false;
+                Debug.Log("Disabling ShipControls Script.");
+                if (_playerInputActions != null && _playerInputActions.currentActionMap.name != "UI")
                 {
-                    if (controlMapChanged == false && _playerInputActions != null)
-                    {
-                        controlMapChanged = true;
-                        SwitchActionMapToPlayer();
-                    }
-                    if (playerInput.enabled == false)
-                    {
-                        playerInput.enabled = true;
-                    }
+                    SwitchActionMapToUI();
                 }
-                if (aiInput != null)
+                //}
+            }
+            if (GameManager.gManager.raceStarted == true && racerInfo.finishedRacing == false)
+            {
+
+                PlayerInputScript playerInput = this.gameObject.GetComponent<PlayerInputScript>();
+                AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();
+                if (racerInfo.finishedRacing == false)
                 {
-                    if (aiInput.enabled == false)
+                    if (playerInput != null)
                     {
-                        aiInput.enabled = true;
+                        if (controlMapChanged == false && _playerInputActions != null)
+                        {
+                            controlMapChanged = true;
+                            SwitchActionMapToPlayer();
+                        }
+                        if (playerInput.enabled == false)
+                        {
+                            playerInput.enabled = true;
+                        }
+                    }
+                    if (aiInput != null)
+                    {
+                        if (aiInput.enabled == false)
+                        {
+                            aiInput.enabled = true;
+                        }
                     }
                 }
             }
