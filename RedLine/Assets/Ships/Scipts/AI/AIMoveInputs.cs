@@ -188,16 +188,18 @@ public class AIMoveInputs : MonoBehaviour
 
         float currentSpeedPer = m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed();
 
-        if(neededSpeed < currentSpeedPer)
-        {
-            m_controls.SetBrakeMultiplier(currentSpeedPer - neededSpeed);
-            m_speed = 0;
-        }
-        else
-        {
-            m_controls.SetBrakeMultiplier(0);
-            m_speed = neededSpeed;
-        }
+        //if(neededSpeed < currentSpeedPer)
+        //{
+        //    m_controls.SetBrakeMultiplier(currentSpeedPer - neededSpeed);
+        //    m_speed = 0;
+        //}
+        //else
+        //{
+        //    m_controls.SetBrakeMultiplier(0);
+        //    m_speed = neededSpeed;
+        //}
+
+        m_speed = 0.90f;
 
         float percentage = CalculatePercentage();
 

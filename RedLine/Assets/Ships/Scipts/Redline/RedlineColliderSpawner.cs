@@ -15,10 +15,9 @@ public class RedlineColliderSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameObject colliderParent;
 
-    // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
-        for(int i = 0; i < 35; i++)
+        for (int i = 0; i < 35; i++)
         {
             SpawnCollider();
         }
@@ -36,13 +35,16 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         for (int i = 0; i < m_shipsInColliders.Count; i++)
         {
-            ShipsControls controls = m_shipsInColliders[i].GetComponent<ShipsControls>();
+            if (m_shipsInColliders[i] != transform.parent.gameObject)
+            {
+                ShipsControls controls = m_shipsInColliders[i].GetComponent<ShipsControls>();
 
-            Debug.Log(m_shipsInColliders[i].gameObject + "Add to boosting");
+                Debug.Log(m_shipsInColliders[i].gameObject + "Add to boosting");
 
-            m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(true);
+                m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(true);
 
-            controls.AddToBoost();
+                controls.AddToBoost();
+            }
         }
     }
 
@@ -80,6 +82,7 @@ public class RedlineColliderSpawner : MonoBehaviour
     public void SpawnCollider()
     {
         GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
+        a.transform.parent = null;
 
         ColliderTrigger b = a.GetComponent<ColliderTrigger>();
         b.spawner = this;

@@ -74,6 +74,7 @@ public class ShipsControls : MonoBehaviour
     void FixedUpdate()
     {
         SwitchFire();
+        CheckBoost();
         Strafe();
         Turn();
         Brake();
