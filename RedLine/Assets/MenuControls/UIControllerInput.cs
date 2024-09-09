@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using TMPro;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -35,6 +36,7 @@ public class UIControllerInput : MonoBehaviour
         GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);
         m_selectionMenuButtons.Add(a);
         a.GetComponent<ShipSelection>().texture = textures[m_numberOfPalyers - 1];
+        a.GetComponent<ShipSelection>().playerNum = m_numberOfPalyers - 1;
     }
     private void Awake()
     {
@@ -64,6 +66,19 @@ public class UIControllerInput : MonoBehaviour
             foreach(GameObject player in GameManager.gManager.players)
             {
                 player.GetComponent<PlayerInputScript>().player.SwitchCurrentActionMap("Player");
+                RedlineColliderSpawner redline = null;
+                foreach (Transform child in player.transform)
+                {
+                    if (child.GetComponent<RedlineColliderSpawner>())
+                        redline = child.GetComponent<RedlineColliderSpawner>();
+                }
+
+                    AttachModels(player.GetComponent<ShipsControls>());
+
+                foreach (Transform child in player.transform)
+                {
+                    FindEveryChild(child, redline);
+                }
 
                 ActionMappingControl aMC = player.GetComponent<ActionMappingControl>();
                 aMC.mES.firstSelectedGameObject = null;
@@ -74,6 +89,26 @@ public class UIControllerInput : MonoBehaviour
             Debug.Log("Ready To Start Race");
             GameManager.gManager.racerObjects = new List<GameObject>();
             SceneManager.LoadSceneAsync(1);
+
+
+        }
+    }
+
+    public void AttachModels(ShipsControls ship)
+    {
+        Instantiate(ship.VariantObject.model, ship.shipModel.transform);
+        Instantiate(ship.VariantObject.collision, ship.collisionParent);
+    }
+
+    public void FindEveryChild(Transform parent, RedlineColliderSpawner redline)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.CompareTag("TrailSpawn"))
+                redline.spawnPoint = child;
+
+            if (child.transform.childCount > 0)
+                FindEveryChild(child, redline);
         }
     }
 
@@ -92,16 +127,10 @@ public class UIControllerInput : MonoBehaviour
                 playersReady += 1;
         }
 
-        if(playersReady == GameManager.gManager.playerObjects.Count - 1)
+        if(playersReady >= GameManager.gManager.playerObjects.Count)
         {
-            StartCoroutine(ReadyPlayers());
+            GoToRace();
         }
-    }
-
-    IEnumerator ReadyPlayers()
-    {
-        yield return new WaitForSeconds(1);
-        GoToRace();
     }
 
     public void ResetFirstButtonSelect()
@@ -112,6 +141,7 @@ public class UIControllerInput : MonoBehaviour
         {
             player.GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
             player.GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
+            m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(player);
             index += 1;
         }
     }

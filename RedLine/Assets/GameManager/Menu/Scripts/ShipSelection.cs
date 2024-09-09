@@ -13,6 +13,10 @@ public class ShipSelection : MonoBehaviour
     private float m_y;
     public RenderTexture texture;
     public RawImage image;
+    private GameObject m_ship;
+    public int playerNum;
+    public void SetShip(GameObject ship) { m_ship = ship; }
+
     private void Start()
     {
         m_currentShips = ships[0];
@@ -48,5 +52,13 @@ public class ShipSelection : MonoBehaviour
         }
         m_currentShips = ships[m_shipIndex];
         m_currentShips.SetActive(true);
+    }
+
+    public void Ready()
+    {
+        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
+        m_ship.GetComponent<ShipsControls>().variant = variants[m_shipIndex];
+        m_ship.GetComponent<ShipsControls>().enabled = true;
+        FindObjectOfType<UIControllerInput>().ReadyPlayer(playerNum);
     }
 }

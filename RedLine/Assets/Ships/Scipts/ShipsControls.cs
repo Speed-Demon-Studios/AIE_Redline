@@ -57,7 +57,7 @@ public class ShipsControls : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
         if (VariantObject != null)
@@ -65,20 +65,24 @@ public class ShipsControls : MonoBehaviour
             variant = new ShipVariant();
             variant = Instantiate<ShipVariant>(VariantObject);
         }
-        m_currentMaxSpeed = variant.DefaultMaxSpeed;
+        if(variant != null)
+            m_currentMaxSpeed = variant.DefaultMaxSpeed;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        SwitchFire();
-        CheckBoost();
-        Strafe();
-        Turn();
-        Brake();
-        Accelerate();
-        DownForce();
-        RotateShip();
+        if (GameManager.gManager.raceStarted)
+        {
+            SwitchFire();
+            CheckBoost();
+            Strafe();
+            Turn();
+            Brake();
+            Accelerate();
+            DownForce();
+            RotateShip();
+        }
     }
 
     private void SwitchFire()

@@ -51,7 +51,7 @@ public class PlayerInputScript : MonoBehaviour
         //{
         //    m_shipControls.enabled = true;
         //}
-        //if(gMan.raceStarted)
+        if(gMan.raceStarted)
             CalculatePOV();
     }
 
