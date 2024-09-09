@@ -19,8 +19,6 @@ public class AIMoveInputs : MonoBehaviour
     private float m_targetTurnAngle;
     private float m_currentTurnAngle;
 
-    public float turnSpeed;
-
     public GameObject desiredNode;
     public GameObject nodeParent;
     public TMP_Text test;
@@ -181,7 +179,7 @@ public class AIMoveInputs : MonoBehaviour
 
         Debug.DrawLine(this.transform.position, desiredNode.GetComponent<Nodes>().nextNode.transform.position);
 
-        m_controls.SetStrafeMultiplier(-m_currentTurnAngle * turnSpeed);
+        m_controls.SetStrafeMultiplier(-m_currentTurnAngle * Variant.turnMultiplier);
     }
 
     private float CalculatePercentage()

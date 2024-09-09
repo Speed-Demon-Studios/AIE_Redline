@@ -8,6 +8,9 @@ public class ShipVariant : ScriptableObject
     public string VariantName;
     public float DownForce;
     [Space]
+    [Header("Ship Model")]
+    public GameObject model;
+    [Space]
     [Header("Speed Variables")]
     public float MaxSpeed;
     public float MaxAcceleration;
@@ -22,7 +25,6 @@ public class ShipVariant : ScriptableObject
     [Space]
     [Header("Ai Movement Variables")]
     public AnimationCurve NeededSpeedCurve;
-    public float MaxAngle;
-    public float Radius;
     public float distance;
+    public float turnMultiplier;
 }
