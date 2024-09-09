@@ -320,6 +320,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NavigateRight",
+                    "type": "Button",
+                    "id": "97670ba9-e65b-4ab6-897a-797ca8fa5815",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NavigateLeft",
+                    "type": "Button",
+                    "id": "e4bf073e-d564-40d6-a1fc-94cb5d965e7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1057,6 +1075,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d17ef85-0523-464a-befb-0e485e3af9ef",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b58b87bc-c1b1-4071-ac34-0778cbe69b40",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

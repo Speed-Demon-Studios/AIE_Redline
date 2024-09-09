@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
@@ -14,6 +15,8 @@ public class PlayerInputScript : MonoBehaviour
     private int m_playerNumber;
     private GameManager gMan;
     public bool playerReadyInMenu;
+    private ShipSelection m_selection;
+    public void SetSelection(ShipSelection selection) { m_selection = selection; }
 
     private float m_currentPOV;
     private float m_desiredPOV;
@@ -48,7 +51,7 @@ public class PlayerInputScript : MonoBehaviour
         //{
         //    m_shipControls.enabled = true;
         //}
-        //if(gMan.raceStarted)
+        if(gMan.raceStarted)
             CalculatePOV();
     }
 
@@ -67,6 +70,24 @@ public class PlayerInputScript : MonoBehaviour
         m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
         m_cam.fieldOfView = m_currentPOV;
 
+    }
+
+    public void OnRight(InputAction.CallbackContext context)
+    {
+        if(m_selection != null)
+        {
+            if(context.performed)
+                m_selection.OnNext();
+        }
+    }
+
+    public void OnLeft(InputAction.CallbackContext context)
+    {
+        if (m_selection != null)
+        {
+            if (context.performed)
+                m_selection.OnPrev();
+        }
     }
 
     public void Brake(InputAction.CallbackContext context)
