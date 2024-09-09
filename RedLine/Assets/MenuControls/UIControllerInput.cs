@@ -18,6 +18,11 @@ public class UIControllerInput : MonoBehaviour
     public TextMeshProUGUI playerCountText;
     private int m_numberOfPalyers;
     [SerializeField] private GameObject firstButton;
+    public Transform selectionMenuGrid;
+    public GameObject SelectionMenu;
+    private List<GameObject> m_selectionMenuButtons = new();
+    public List<RenderTexture> textures = new();
+    public bool OnShipSelection = false;
 
     // Testing
     private bool HasInitialized = true;
@@ -27,6 +32,9 @@ public class UIControllerInput : MonoBehaviour
         m_numberOfPalyers += 1;
         if(playerCountText != null)
             playerCountText.text = "Player Count: " + m_numberOfPalyers;
+        GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);
+        m_selectionMenuButtons.Add(a);
+        a.GetComponent<ShipSelection>().texture = textures[m_numberOfPalyers - 1];
     }
     private void Awake()
     {
@@ -94,5 +102,17 @@ public class UIControllerInput : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         GoToRace();
+    }
+
+    public void ResetFirstButtonSelect()
+    {
+        OnShipSelection = true;
+        int index = 0;
+        foreach(GameObject player in GameManager.gManager.playerObjects)
+        {
+            player.GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
+            player.GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
+            index += 1;
+        }
     }
 }
