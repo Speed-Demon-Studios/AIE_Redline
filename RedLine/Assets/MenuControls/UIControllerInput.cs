@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
@@ -71,5 +72,27 @@ public class UIControllerInput : MonoBehaviour
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void ReadyPlayer(int playerNumber)
+    {
+        GameManager.gManager.playerObjects[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu = true;
+        int playersReady = 0;
+        foreach(GameObject player in GameManager.gManager.playerObjects)
+        {
+            if (player.GetComponent<PlayerInputScript>().playerReadyInMenu)
+                playersReady += 1;
+        }
+
+        if(playersReady == GameManager.gManager.playerObjects.Count - 1)
+        {
+            StartCoroutine(ReadyPlayers());
+        }
+    }
+
+    IEnumerator ReadyPlayers()
+    {
+        yield return new WaitForSeconds(1);
+        GoToRace();
     }
 }

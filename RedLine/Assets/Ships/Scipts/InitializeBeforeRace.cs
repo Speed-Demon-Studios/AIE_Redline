@@ -69,4 +69,12 @@ public class InitializeBeforeRace : MonoBehaviour
         }
         //sControls.enabled = true;
     }
+
+    public void AttachModels()
+    {
+        ShipVariant variant = sControls.variant;
+
+        Instantiate(variant.model, sControls.shipModel.transform);
+        Instantiate(variant.collision, sControls.collisionParent);
+    }
 }

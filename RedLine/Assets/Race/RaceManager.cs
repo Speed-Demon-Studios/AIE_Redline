@@ -35,6 +35,7 @@ public class RaceManager : MonoBehaviour
 
                 if (playerInit != null)
                 {
+
                     playerInit.InitializeForRace();
                 }
                 yield return new WaitForEndOfFrame();
