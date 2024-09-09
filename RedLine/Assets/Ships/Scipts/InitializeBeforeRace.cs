@@ -41,7 +41,6 @@ public class InitializeBeforeRace : MonoBehaviour
         {
             playerCamOBJECT.SetActive(false);
         }
-
     }
 
     public void DisableShipControls()
@@ -59,6 +58,14 @@ public class InitializeBeforeRace : MonoBehaviour
         if (playerCamOBJECT != null)
         {
             playerCamOBJECT.SetActive(true);
+        }
+
+        foreach (GameObject racerOBJ in GameManager.gManager.players)
+        {
+            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
+
+            rDeets.finishedRacing = false;
+            rDeets.crossedFinishLine = false;
         }
         //sControls.enabled = true;
     }

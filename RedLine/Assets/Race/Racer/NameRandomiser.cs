@@ -13,6 +13,7 @@ public class NameRandomiser : MonoBehaviour
     {
         assigningNames = false;
         usedNames = new List<string>();
+        GameManager.gManager.nRandomiser = this;
     }
 
     public void AssignRacerNames()
