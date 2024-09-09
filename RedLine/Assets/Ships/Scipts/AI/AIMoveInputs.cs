@@ -166,40 +166,7 @@ public class AIMoveInputs : MonoBehaviour
 
         m_targetTurnAngle = secondAngleRad;
 
-        float neededSpeed;
-
-        // finding out if it left of right less than 0 if left, more than 0 is right
-        if (secondAngleRad < 0)
-        {
-            // changing the radian to a non-negative
-            float secondTempAngleRad = -secondAngleRad;
-            // finding out how much speed you need basd on the curve
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
-            // setting tempSpeed to that speed found by the curve
-            neededSpeed = neededSpeedNextNode;
-        }
-        else
-        {
-            // finding out how much speed you need basd on the curve
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
-            // setting tempSpeed to that speed found by the curve
-            neededSpeed = neededSpeedNextNode;
-        }
-
-        float currentSpeedPer = m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed();
-
-        //if(neededSpeed < currentSpeedPer)
-        //{
-        //    m_controls.SetBrakeMultiplier(currentSpeedPer - neededSpeed);
-        //    m_speed = 0;
-        //}
-        //else
-        //{
-        //    m_controls.SetBrakeMultiplier(0);
-        //    m_speed = neededSpeed;
-        //}
-
-        m_speed = 0.90f;
+        m_speed = 1;
 
         float percentage = CalculatePercentage();
 
@@ -208,7 +175,9 @@ public class AIMoveInputs : MonoBehaviour
             test.text = percentage.ToString();
         }
 
-        m_currentTurnAngle = m_targetTurnAngle * percentage / 100;
+        float turnAnglePer = m_targetTurnAngle * percentage / 100; ;
+
+        m_currentTurnAngle = m_targetTurnAngle - turnAnglePer;
 
         Debug.DrawLine(this.transform.position, desiredNode.GetComponent<Nodes>().nextNode.transform.position);
 
