@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
@@ -14,6 +11,7 @@ public class ShipsControls : MonoBehaviour
     public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
+    public Transform collisionParent;
     public GameObject shipModel;
     public Transform rayCastPoint;
     private Rigidbody m_rb;

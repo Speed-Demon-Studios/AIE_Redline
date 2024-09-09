@@ -13,6 +13,7 @@ public class PlayerInputScript : MonoBehaviour
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     private GameManager gMan;
+    public bool playerReadyInMenu;
 
     private float m_currentPOV;
     private float m_desiredPOV;
