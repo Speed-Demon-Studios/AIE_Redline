@@ -17,9 +17,26 @@ public class ManageSceneLoading : MonoBehaviour
             InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
             //IBR.playerCamera.gameObject.SetActive(false);
             RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
+            ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
+            playerOBJ.GetComponent<ShipsControls>().enabled = false;
+            playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+            controls.variant = null;
+            controls.VariantObject = null;
+            GameObject a = controls.collisionParent.GetChild(0).gameObject;
+            GameObject b = controls.shipModel.transform.GetChild(3).gameObject;
+            a.transform.parent = null;
+            b.transform.parent = null;
+            Destroy(a);
+            Destroy(b);
+            playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
             racerDeets.finishedRacing = false;
             racerDeets.currentLap = 0;
+            foreach (GameObject obj in playerOBJ.GetComponentInChildren<RedlineColliderSpawner>().GetColliders())
+            {
+                Destroy(obj);
+            }
         }
+
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();

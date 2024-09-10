@@ -33,7 +33,14 @@ public class InitializeBeforeRace : MonoBehaviour
 
     private void Awake()
     {
-        this.gameObject.AddComponent<DontDestroy>();
+        foreach (GameObject playerOBJ in GameManager.gManager.players)
+        {
+            if (this.gameObject == playerOBJ)
+            {
+                this.gameObject.AddComponent<DontDestroy>();
+                break;
+            }
+        }
         sControls = this.GetComponent<ShipsControls>();
         GameManager.gManager.playerObjects.Add(this.gameObject);
         if (playerCamOBJECT != null)

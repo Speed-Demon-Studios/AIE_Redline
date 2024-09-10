@@ -118,15 +118,15 @@ public class UIControllerInput : MonoBehaviour
 
     public void ReadyPlayer(int playerNumber)
     {
-        GameManager.gManager.playerObjects[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu = true;
+        GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu = true;
         int playersReady = 0;
-        foreach(GameObject player in GameManager.gManager.playerObjects)
+        foreach(GameObject player in GameManager.gManager.players)
         {
             if (player.GetComponent<PlayerInputScript>().playerReadyInMenu)
                 playersReady += 1;
         }
 
-        if(playersReady >= GameManager.gManager.playerObjects.Count)
+        if(playersReady >= GameManager.gManager.players.Count)
         {
             GoToRace();
         }
@@ -136,7 +136,7 @@ public class UIControllerInput : MonoBehaviour
     {
         OnShipSelection = true;
         int index = 0;
-        foreach(GameObject player in GameManager.gManager.playerObjects)
+        foreach(GameObject player in GameManager.gManager.players)
         {
             player.GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
             player.GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());

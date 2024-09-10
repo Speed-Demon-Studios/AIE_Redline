@@ -8,6 +8,7 @@ public class RedlineColliderSpawner : MonoBehaviour
 {
     List<GameObject> m_lineColliders = new();
     private List<GameObject> m_shipsInColliders = new();
+    public List<GameObject> GetColliders() { return m_shipsInColliders; }
     public List<GameObject> m_allShipsInColliders;
     private int childIndex;
 
@@ -84,7 +85,6 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
         a.transform.parent = null;
-
 
         ColliderTrigger b = a.GetComponent<ColliderTrigger>();
         b.spawner = this;
