@@ -62,7 +62,7 @@ public class ShipToWallCollision : MonoBehaviour
             {
                 sControlScript.SetMaxSpeed((sControlScript.GetMaxSpeed() + (defaultTopSpeed / 0.35f) * Time.deltaTime));
             }
-            else if (shipVariant.MaxSpeed > defaultTopSpeed)
+            else if (shipVariant.DefaultMaxAcceleration > defaultTopSpeed)
             {
                 sControlScript.SetMaxSpeed(defaultTopSpeed);
             }

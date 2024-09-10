@@ -255,7 +255,7 @@ public class ShipsControls : MonoBehaviour
         else
             m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
 
-        m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.MaxSpeed);
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.DefaultMaxAcceleration);
 
         m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
