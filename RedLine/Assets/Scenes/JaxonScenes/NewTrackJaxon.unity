@@ -1442,7 +1442,7 @@ PrefabInstance:
         type: 3}
       propertyPath: desiredNode
       value: 
-      objectReference: {fileID: 673926524}
+      objectReference: {fileID: 5559273346001804440}
     - target: {fileID: 2819560891871692966, guid: 030c0c89b2fa7f843857b9b18d5e0e46,
         type: 3}
       propertyPath: m_Name
@@ -1517,6 +1517,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819560891871692965, guid: a43fce2ff4fc38245a7f06e1321147d1,
+        type: 3}
+      propertyPath: nodeParent
+      value: 
+      objectReference: {fileID: 807075058}
+    - target: {fileID: 2819560891871692965, guid: a43fce2ff4fc38245a7f06e1321147d1,
+        type: 3}
+      propertyPath: desiredNode
+      value: 
+      objectReference: {fileID: 5559273346001804440}
     - target: {fileID: 2819560891871692966, guid: a43fce2ff4fc38245a7f06e1321147d1,
         type: 3}
       propertyPath: m_Name
@@ -5248,12 +5258,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &673926524 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1484737673268945063, guid: d6ccf7e8000b67048b6304b471616888,
-    type: 3}
-  m_PrefabInstance: {fileID: 5559273346001804439}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &678888808
 GameObject:
   m_ObjectHideFlags: 0
@@ -6931,6 +6935,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819560891871692965, guid: 47bac00161d88c543aaf6c3f86085634,
+        type: 3}
+      propertyPath: nodeParent
+      value: 
+      objectReference: {fileID: 807075058}
+    - target: {fileID: 2819560891871692965, guid: 47bac00161d88c543aaf6c3f86085634,
+        type: 3}
+      propertyPath: desiredNode
+      value: 
+      objectReference: {fileID: 5559273346001804440}
     - target: {fileID: 2819560891871692966, guid: 47bac00161d88c543aaf6c3f86085634,
         type: 3}
       propertyPath: m_Name
@@ -44106,6 +44120,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6ccf7e8000b67048b6304b471616888, type: 3}
+--- !u!1 &5559273346001804440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1484737674561095972, guid: d6ccf7e8000b67048b6304b471616888,
+    type: 3}
+  m_PrefabInstance: {fileID: 5559273346001804439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &5577297060053242648
 MeshFilter:
   m_ObjectHideFlags: 0
