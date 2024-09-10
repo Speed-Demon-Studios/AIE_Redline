@@ -13,7 +13,10 @@ public class ControllerHaptics : MonoBehaviour
 
     public void ConfigureRumble(Gamepad controller)
     {
-        controller.SetMotorSpeeds(0.25f, 0.75f);
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            Gamepad.all[i].SetMotorSpeeds(0.25f, 0.75f);
+        }
     }
 
     // Update is called once per frame

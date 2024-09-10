@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
@@ -10,6 +11,8 @@ public class PlayerInputScript : MonoBehaviour
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
     private ShipsControls m_shipControls;
+    private Gamepad m_playerGamepad;
+
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     private GameManager gMan;
@@ -36,6 +39,33 @@ public class PlayerInputScript : MonoBehaviour
             m_playerNumber = gMan.numberOfPlayers;
         if (gMan != null)
             eventSystem.firstSelectedGameObject = gMan.FindStartButton();
+
+
+        if (player != null)
+        {
+            AssignController();
+        }
+        
+        //GameManager.gManager.hapticsController.ConfigureRumble(thisGamepad);
+    }
+
+    public Gamepad GetPlayerGamepad()
+    {
+        return m_playerGamepad;
+    }
+
+    private void AssignController()
+    {
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            if (Gamepad.all[i].deviceId == player.GetDevice<Gamepad>().deviceId)
+            {
+                Debug.Log("FOUND CONTROLLER (Device ID: " + player.GetDevice<Gamepad>().deviceId + ")");
+                m_playerGamepad = Gamepad.all[i];
+                break;
+            }
+        }
+        return;
     }
 
     // Update is called once per frame
