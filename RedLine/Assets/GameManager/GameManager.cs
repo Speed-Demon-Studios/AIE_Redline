@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public ManageSceneLoading mSL;
     public RaceManager rManager;
     public FinishRace raceFinisher;
+    public ControllerHaptics hapticsController;
 
     public GameObject[] m_startButtons;
     public GameObject[] StartingPoints;
