@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
+using Random = UnityEngine.Random;
 
 public class AIMoveInputs : MonoBehaviour
 {
@@ -32,6 +30,8 @@ public class AIMoveInputs : MonoBehaviour
         m_randomPos = desiredNode.GetComponent<Nodes>().RandomNavSphere(desiredNode.transform.position);
 
         m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos);
+
+        m_speed = Random.Range(0.6f, 1f);
     }
 
     // Update is called once per frame
@@ -163,8 +163,6 @@ public class AIMoveInputs : MonoBehaviour
         float secondAngleRad = secondAngle * Mathf.Deg2Rad;
 
         m_targetTurnAngle = secondAngleRad;
-
-        m_speed = 1;
 
         float percentage = CalculatePercentage();
 
