@@ -72,8 +72,6 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameManager.gManager.raceStarted)
-        {
             SwitchFire();
             CheckBoost();
             Strafe();
@@ -82,7 +80,6 @@ public class ShipsControls : MonoBehaviour
             Accelerate();
             DownForce();
             RotateShip();
-        }
     }
 
     private void SwitchFire()
