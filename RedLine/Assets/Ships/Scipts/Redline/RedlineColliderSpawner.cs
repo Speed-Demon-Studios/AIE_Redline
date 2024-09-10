@@ -37,13 +37,14 @@ public class RedlineColliderSpawner : MonoBehaviour
         {
             if (m_shipsInColliders[i] != transform.parent.gameObject)
             {
-                ShipsControls controls = m_shipsInColliders[i].GetComponent<ShipsControls>();
 
-                Debug.Log(m_shipsInColliders[i].gameObject + "Add to boosting");
-
-                m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(true);
-
-                controls.AddToBoost();
+                ShipsControls outTest;
+                if (m_shipsInColliders[i].TryGetComponent<ShipsControls>(out outTest))
+                {
+                    Debug.Log(outTest.gameObject + "Add to boosting");
+                    outTest.GetComponent<ShipsControls>().SwitchRedlineBool(true);
+                    outTest.AddToBoost();
+                }
             }
         }
     }
@@ -83,6 +84,7 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
         a.transform.parent = null;
+
 
         ColliderTrigger b = a.GetComponent<ColliderTrigger>();
         b.spawner = this;
