@@ -146,7 +146,7 @@ public class AIMoveInputs : MonoBehaviour
 
         // this chunk is finding both current nodes up and next nodes up and getting the difference between them
         // this will be used later
-        Transform pointA = desiredNode.transform;
+        Transform pointA = this.transform;
         Transform pointB = desiredNode.GetComponent<Nodes>().nextNode.transform;
         Vector3 up = (pointB.up + pointA.up);
         float distance = Vector3.Distance(pointA.up, pointB.up);
