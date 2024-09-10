@@ -35,6 +35,8 @@ public class ShipsControls : MonoBehaviour
     public float strafeStrength;
     private float m_turningAngle;
 
+    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
+
     [Header("TrackStick")]
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
@@ -72,6 +74,8 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (this.enabled)
+        {
             SwitchFire();
             CheckBoost();
             Strafe();
@@ -80,6 +84,7 @@ public class ShipsControls : MonoBehaviour
             Accelerate();
             DownForce();
             RotateShip();
+        }
     }
 
     private void SwitchFire()

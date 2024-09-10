@@ -60,5 +60,8 @@ public class ShipSelection : MonoBehaviour
         m_ship.GetComponent<ShipsControls>().variant = variants[m_shipIndex];
         m_ship.GetComponent<ShipsControls>().enabled = true;
         FindObjectOfType<UIControllerInput>().ReadyPlayer(playerNum);
+        if(m_ship.GetComponent<ShipBlendAnimations>())
+            m_ship.GetComponent<ShipBlendAnimations>().enabled = true;
+
     }
 }
