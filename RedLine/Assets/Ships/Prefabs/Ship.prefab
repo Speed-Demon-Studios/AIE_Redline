@@ -132,7 +132,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8236907399089162767}
   - component: {fileID: 8627608583750150117}
-  m_Layer: 0
+  - component: {fileID: 9222878364501116291}
+  - component: {fileID: 5946350572343921017}
+  m_Layer: 12
   m_Name: RedlineMechanic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +173,31 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 0}
   colliderParent: {fileID: 2252993564218213463}
+--- !u!65 &9222878364501116291
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252993564218213463}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.11657, y: 1.4577441, z: 5.1536365}
+  m_Center: {x: 0, y: 1.1124926, z: 0.4585874}
+--- !u!114 &5946350572343921017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252993564218213463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1758868ee4f3f241aecc05c4d03bd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0

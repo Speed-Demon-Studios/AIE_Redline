@@ -118,22 +118,11 @@ public class ShipsControls : MonoBehaviour
 
     private void CheckBoost()
     {
-        if (!m_isInRedline)
+        if (!m_isInRedline && m_currentBoost > 0)
         {
-            switch (m_currentBoost)
-            {
-                case < 1:
-                    m_currentBoost = 0;
-                    break;
-                case < 2:
-                    m_currentBoost = 1;
-                    break;
-                case < 3:
-                    m_currentBoost = 2;
-                    break;
-            }
-            SwitchFire();
+            m_currentBoost -= 1f * Time.deltaTime;
         }
+        SwitchFire();
     }
 
     /// <summary>
@@ -142,7 +131,7 @@ public class ShipsControls : MonoBehaviour
     public void AddToBoost()
     {
         int multiplier = m_boostLevel + 1;
-        m_currentBoost += 0.75f / multiplier * Time.deltaTime;
+        m_currentBoost += 1f / multiplier * Time.deltaTime;
         if(m_currentBoost > 3)
         {
             m_currentBoost = 3;
