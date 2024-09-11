@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -111,25 +112,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-        if (CurrentScene == "Race" && enableRacerMovement == true)
-        {
-            enableRacerMovement = false;
-            EnableRMovement();
-        }
-
-        if (CurrentScene == "Race" && raceStarted == false)
-        {
-            foreach (GameObject racerOBJ in racerObjects)
-            {
-                InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-
-                if (rDeets.sControls.enabled == true)
-                {
-                    rDeets.DisableShipControls();
-                }
-            }
-        }
     }
 
     public void EnableRMovement()
@@ -137,7 +119,27 @@ public class GameManager : MonoBehaviour
         foreach (GameObject racerOBJ in racerObjects)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
             rDeets.EnableRacerMovement();
+            rB.isKinematic = false;
+        }
+    }
+
+    public void DisableRMovement()
+    {
+        foreach (GameObject racerOBJ in racerObjects)
+        {
+            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+            ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
+
+            rB.velocity = new Vector3(0, 0, 0);
+            rB.angularVelocity = new Vector3(0, 0, 0);
+
+            sControls.ResetAcceleration();
+            rB.isKinematic = true;
+
+            rDeets.DisableShipControls();
         }
     }
 

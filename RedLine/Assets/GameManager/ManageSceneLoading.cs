@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -22,7 +23,8 @@ public class ManageSceneLoading : MonoBehaviour
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
             controls.variant = null;
             controls.VariantObject = null;
-            GameObject a = controls.collisionParent.GetChild(0).gameObject;
+            IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
+            GameObject a = shipCollider.gameObject;
             GameObject b = controls.shipModel.transform.GetChild(3).gameObject;
             a.transform.parent = null;
             b.transform.parent = null;
@@ -31,10 +33,6 @@ public class ManageSceneLoading : MonoBehaviour
             playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
             racerDeets.finishedRacing = false;
             racerDeets.currentLap = 0;
-            foreach (GameObject obj in playerOBJ.GetComponentInChildren<RedlineColliderSpawner>().GetColliders())
-            {
-                Destroy(obj);
-            }
         }
 
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
@@ -60,6 +58,11 @@ public class ManageSceneLoading : MonoBehaviour
     IEnumerator LoadMenuScene()
     {
         yield return new WaitForEndOfFrame();
+
+        foreach (ColliderTrigger collider in GameObject.FindObjectsOfType<ColliderTrigger>())
+        {
+            DestroyImmediate(collider.gameObject);
+        }
 
         SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);

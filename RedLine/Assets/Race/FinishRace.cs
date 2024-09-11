@@ -37,7 +37,7 @@ public class FinishRace : MonoBehaviour
 
     private void Update()
     {
-        CheckAllRacersFinished();
+        //CheckAllRacersFinished();
 
         
     }
@@ -110,6 +110,59 @@ public class FinishRace : MonoBehaviour
         }
     }
 
+    public bool AllRacersFinishedCheck()
+    {
+        m_checkingRacersFinished = true;
+        m_racersFinishedChecked = false;
+
+        m_allRacersFinished = true;
+        m_allRacersCrosedLine = true;
+
+        // Iterate through all of the PLAYER objects.
+        foreach (GameObject racerOBJ in GameManager.gManager.players)
+        {
+            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
+            if (rDeets.crossedFinishLine == false)
+            {
+                m_allRacersCrosedLine = false;
+            }
+
+            if (rDeets.finishedRacing == false)
+            {
+                m_allRacersFinished = false;
+                break;
+            }
+        }
+
+        for (int i = 0; i < GameManager.gManager.players.Count; i++)
+        {
+            m_allRacersFinished = true;
+            RacerDetails rDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
+
+            if (rDeets.crossedFinishLine == false)
+            {
+                m_allRacersCrosedLine = false;
+            }
+
+            if (rDeets.finishedRacing == false)
+            {
+                m_allRacersFinished = false;
+                break;
+            }
+        }
+
+        m_racersFinishedChecked = true;
+        m_checkingRacersFinished = false;
+
+        if (m_allRacersFinished == true && m_alreadyShowingPlacements == false && m_allRacersCrosedLine == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void CheckAllRacersFinished()
     {

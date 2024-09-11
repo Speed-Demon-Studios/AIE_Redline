@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 7813179349627151421}
   - component: {fileID: 7813179349627151420}
   - component: {fileID: 1016200759}
-  - component: {fileID: 1016200761}
-  - component: {fileID: 5566559295758826628}
+  - component: {fileID: 5235126512527840914}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentScene: 
-  rActivator: {fileID: 5566559295758826628}
-  nRandomiser: {fileID: 1016200761}
+  rActivator: {fileID: 0}
+  nRandomiser: {fileID: 0}
   raceCountdown: {fileID: 0}
   uiCInput: {fileID: 0}
   checkpointParent: {fileID: 0}
@@ -57,6 +56,7 @@ MonoBehaviour:
   mSL: {fileID: 1016200759}
   rManager: {fileID: 0}
   raceFinisher: {fileID: 0}
+  hapticsController: {fileID: 0}
   m_startButtons:
   - {fileID: 0}
   - {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d11fe935c6b1fc4e8bff25c3260b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1016200761
+--- !u!114 &5235126512527840914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,33 +100,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7813179349627151418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b8857e87ccb9d74c86a01e4e7d85823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameList:
-  - Jaxon H.
-  - Jackson V.
-  - Emmanuel W.
-  - Connor B.
-  - Daniel D.
-  - Henry C.
-  - Ben E.
-  - Callum L.
-  - Christpher M.
-  - James F.
-  - Sean T.
-  - Orion .C
-  - Adam S.
-  usedNames: []
---- !u!114 &5566559295758826628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7813179349627151418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed2c23a28c5f51f44a64e221fc933e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f42ca4c8c621e349b551b1d353a19e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

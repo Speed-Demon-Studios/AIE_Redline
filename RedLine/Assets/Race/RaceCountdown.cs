@@ -51,7 +51,6 @@ public class RaceCountdown : MonoBehaviour
 
         m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
 
-
         if (GameManager.gManager.countdownIndex > 0)
         {
             GameManager.gManager.countdownIndex -= 1;
@@ -62,6 +61,7 @@ public class RaceCountdown : MonoBehaviour
             m_countdownFinished = true;
             m_countdownCoroutineStarted = false;
             m_countdownText.enabled = false;
+            GameManager.gManager.rManager.StartRace();
             StopCoroutine(RaceCountdownTimer());
         }
         yield return new WaitForSecondsRealtime(1);
@@ -82,8 +82,8 @@ public class RaceCountdown : MonoBehaviour
 
         if (m_countdownFinished == true)
         {
-            GameManager.gManager.raceStarted = true;
-            GameManager.gManager.enableRacerMovement = true;
+            //GameManager.gManager.raceStarted = true;
+            //GameManager.gManager.enableRacerMovement = true;
         }
     }
 }

@@ -2,35 +2,30 @@ using UnityEngine;
 
 public class RedlineActivator : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    public void ActivateRedline()
     {
-        if (GameManager.gManager.raceStarted == true)
+        foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
         {
-            foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
-            {
-                RedlineColliderSpawner redlineScript = racerOBJ.GetComponent<RacerDetails>().rCS;
+            RedlineColliderSpawner redlineScript = racerOBJ.GetComponent<RacerDetails>().rCS;
 
-                if (redlineScript != null)
+            if (redlineScript != null)
+            {
+                if (redlineScript.enabled == false)
                 {
-                    if (redlineScript.enabled == false)
-                    {
-                        redlineScript.enabled = true;
-                    }
+                    redlineScript.enabled = true;
                 }
             }
-            GameManager.gManager.redlineActivated = true;
         }
+        GameManager.gManager.redlineActivated = true;
+    }
 
-
-        if (GameManager.gManager.raceStarted == false)
+    public void DeactivateRedline()
+    {
+        foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
         {
-            foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
-            {
-                RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
-                redlineScript.enabled = false;
-
-            }
+            RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
+            redlineScript.enabled = false;
         }
+        GameManager.gManager.redlineActivated = false;
     }
 }
