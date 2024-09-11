@@ -19,8 +19,6 @@ public class AIMoveInputs : MonoBehaviour
     private float m_targetTurnAngle;
     private float m_currentTurnAngle;
 
-    public float turnSpeed;
-
     public GameObject desiredNode;
     public GameObject nodeParent;
     public TMP_Text test;
@@ -148,7 +146,7 @@ public class AIMoveInputs : MonoBehaviour
 
         // this chunk is finding both current nodes up and next nodes up and getting the difference between them
         // this will be used later
-        Transform pointA = desiredNode.transform;
+        Transform pointA = this.transform;
         Transform pointB = desiredNode.GetComponent<Nodes>().nextNode.transform;
         Vector3 up = (pointB.up + pointA.up);
         float distance = Vector3.Distance(pointA.up, pointB.up);
@@ -166,38 +164,7 @@ public class AIMoveInputs : MonoBehaviour
 
         m_targetTurnAngle = secondAngleRad;
 
-        float neededSpeed;
-
-        // finding out if it left of right less than 0 if left, more than 0 is right
-        if (secondAngleRad < 0)
-        {
-            // changing the radian to a non-negative
-            float secondTempAngleRad = -secondAngleRad;
-            // finding out how much speed you need basd on the curve
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondTempAngleRad - distance);
-            // setting tempSpeed to that speed found by the curve
-            neededSpeed = neededSpeedNextNode;
-        }
-        else
-        {
-            // finding out how much speed you need basd on the curve
-            float neededSpeedNextNode = Variant.NeededSpeedCurve.Evaluate(secondAngleRad - distance);
-            // setting tempSpeed to that speed found by the curve
-            neededSpeed = neededSpeedNextNode;
-        }
-
-        float currentSpeedPer = m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed();
-
-        if(neededSpeed < currentSpeedPer)
-        {
-            m_controls.SetBrakeMultiplier(currentSpeedPer - neededSpeed);
-            m_speed = 0;
-        }
-        else
-        {
-            m_controls.SetBrakeMultiplier(0);
-            m_speed = neededSpeed;
-        }
+        m_speed = 1;
 
         float percentage = CalculatePercentage();
 
@@ -206,11 +173,13 @@ public class AIMoveInputs : MonoBehaviour
             test.text = percentage.ToString();
         }
 
-        m_currentTurnAngle = m_targetTurnAngle * percentage / 100;
+        float turnAnglePer = m_targetTurnAngle * percentage / 100; ;
+
+        m_currentTurnAngle = m_targetTurnAngle - turnAnglePer;
 
         Debug.DrawLine(this.transform.position, desiredNode.GetComponent<Nodes>().nextNode.transform.position);
 
-        m_controls.SetStrafeMultiplier(-m_currentTurnAngle * turnSpeed);
+        m_controls.SetStrafeMultiplier(-m_currentTurnAngle * Variant.turnMultiplier);
     }
 
     private float CalculatePercentage()

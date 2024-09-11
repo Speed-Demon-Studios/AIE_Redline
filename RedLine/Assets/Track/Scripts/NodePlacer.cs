@@ -38,18 +38,18 @@ public class NodePlacer : MonoBehaviour
 
     public void OrderNodes()
     {
-        currentIndex = 0;
-        GameObject startNode = nodeParent.transform.GetChild(currentIndex).gameObject;
-        maxIndex = nodeParent.transform.childCount;
-        currentIndex += 1;
-
-        while (currentIndex != maxIndex)
-        {
-            GameObject tempNode = startNode.GetComponent<Nodes>().nextNode.gameObject;
-            tempNode.transform.SetSiblingIndex(currentIndex);
-
-            startNode = tempNode;
-            currentIndex += 1;
-        }
+       //currentIndex = 0;
+       //GameObject startNode = nodeParent.transform.GetChild(currentIndex).gameObject;
+       //maxIndex = nodeParent.transform.childCount;
+       //currentIndex += 1;
+       //
+       //while (currentIndex != maxIndex)
+       //{
+       //    GameObject tempNode = startNode.GetComponent<Nodes>().nextNode.gameObject;
+       //    tempNode.transform.SetSiblingIndex(currentIndex);
+       //
+       //    startNode = tempNode;
+       //    currentIndex += 1;
+       //}
     }
 }

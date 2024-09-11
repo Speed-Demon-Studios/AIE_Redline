@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariantName: Hyperion
   DownForce: 20000
-  MaxSpeed: 0
+  model: {fileID: 0}
+  collision: {fileID: 0}
+  DefaultMaxAcceleration: 6.15
   MaxAcceleration: 6
   DefaultMaxSpeed: 140
   AccelerationMultiplier: 2.6
@@ -128,6 +130,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxAngle: 1.5
-  Radius: 0
   distance: 20
+  turnMultiplier: 12

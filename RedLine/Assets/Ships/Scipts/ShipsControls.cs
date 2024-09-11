@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class ShipsControls : MonoBehaviour
 {
@@ -14,6 +11,7 @@ public class ShipsControls : MonoBehaviour
     public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
+    public Transform collisionParent;
     public GameObject shipModel;
     public Transform rayCastPoint;
     private Rigidbody m_rb;
@@ -37,6 +35,8 @@ public class ShipsControls : MonoBehaviour
     public float strafeStrength;
     private float m_turningAngle;
 
+    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
+
     [Header("TrackStick")]
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
@@ -59,7 +59,7 @@ public class ShipsControls : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
         if (VariantObject != null)
@@ -67,19 +67,24 @@ public class ShipsControls : MonoBehaviour
             variant = new ShipVariant();
             variant = Instantiate<ShipVariant>(VariantObject);
         }
-        m_currentMaxSpeed = variant.DefaultMaxSpeed;
+        if(variant != null)
+            m_currentMaxSpeed = variant.DefaultMaxSpeed;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        SwitchFire();
-        Strafe();
-        Turn();
-        Brake();
-        Accelerate();
-        DownForce();
-        RotateShip();
+        if (this.enabled)
+        {
+            SwitchFire();
+            CheckBoost();
+            Strafe();
+            Turn();
+            Brake();
+            Accelerate();
+            DownForce();
+            RotateShip();
+        }
     }
 
     private void SwitchFire()
@@ -255,7 +260,7 @@ public class ShipsControls : MonoBehaviour
         else
             m_acceleration += variant.AccelerationMultiplier * m_accelerateMultiplier * Time.deltaTime;
 
-        m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.MaxAcceleration);
+        m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.DefaultMaxAcceleration);
 
         m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }

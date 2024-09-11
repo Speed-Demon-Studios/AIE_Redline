@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4938915579142391947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.53, y: 3.03, z: 0}
-  m_LocalScale: {x: 1, y: 6.32113, z: 1}
+  m_LocalPosition: {x: -10.53, y: -0.67000055, z: 0}
+  m_LocalScale: {x: 1, y: 14.128989, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4938915580000829230}
@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 4938915580000829229}
   - component: {fileID: 1317672514}
   - component: {fileID: 8994611534484805400}
+  - component: {fileID: 6449084294705531474}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: Untagged
@@ -382,6 +383,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed26f5eeb314ded43a0c06742885c729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countdownLength: 5
+  m_countdownCoroutineStarted: 0
+  m_countdownFinished: 0
+  m_countdownStarted: 0
+--- !u!114 &6449084294705531474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938915580000829231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8857e87ccb9d74c86a01e4e7d85823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameList:
+  - Jaxon H.
+  - Jackson V.
+  - Emmanuel W.
+  - Connor B.
+  - Daniel D.
+  - Henry C.
+  - Ben E.
+  - Callum L.
+  - Christpher M.
+  - James F.
+  - Sean T.
+  - Orion .C
+  - Adam S.
+  usedNames: []
 --- !u!1 &4938915580052506877
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,8 +441,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4938915580052506877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.73, y: 3.03, z: 0}
-  m_LocalScale: {x: 1, y: 6.32113, z: 1}
+  m_LocalPosition: {x: 8.73, y: -0.67, z: 0}
+  m_LocalScale: {x: 1, y: 14.128989, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4938915580000829230}

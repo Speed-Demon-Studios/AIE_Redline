@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariantName: Splitwing
   DownForce: 20000
-  MaxSpeed: 0
+  model: {fileID: 0}
+  collision: {fileID: 0}
+  DefaultMaxAcceleration: 6.05
   MaxAcceleration: 6
   DefaultMaxSpeed: 137.5
   AccelerationMultiplier: 3
@@ -128,6 +130,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxAngle: 1.65
-  Radius: 0
-  distance: 15
+  distance: 22.5
+  turnMultiplier: 14

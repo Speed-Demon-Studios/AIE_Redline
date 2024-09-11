@@ -36,12 +36,10 @@ public class InitializeBeforeRace : MonoBehaviour
         this.gameObject.AddComponent<DontDestroy>();
         sControls = this.GetComponent<ShipsControls>();
         GameManager.gManager.playerObjects.Add(this.gameObject);
-
         if (playerCamOBJECT != null)
         {
             playerCamOBJECT.SetActive(false);
         }
-
     }
 
     public void DisableShipControls()
@@ -60,6 +58,16 @@ public class InitializeBeforeRace : MonoBehaviour
         {
             playerCamOBJECT.SetActive(true);
         }
+
+        foreach (GameObject racerOBJ in GameManager.gManager.players)
+        {
+            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
+
+            rDeets.finishedRacing = false;
+            rDeets.crossedFinishLine = false;
+        }
         //sControls.enabled = true;
     }
+
+
 }
