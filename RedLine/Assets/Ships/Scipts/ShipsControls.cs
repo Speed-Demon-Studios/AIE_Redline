@@ -74,7 +74,7 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (this.enabled)
+        if (this.enabled && GameManager.gManager.raceStarted)
         {
             AddToBoost();
             SwitchFire();

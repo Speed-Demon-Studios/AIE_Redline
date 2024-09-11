@@ -32,7 +32,7 @@ public class ShipBlendAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.enabled)
+        if (this.enabled && m_controller != null)
         {
             m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed());
 
