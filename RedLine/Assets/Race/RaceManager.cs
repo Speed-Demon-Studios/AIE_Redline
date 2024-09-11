@@ -78,6 +78,19 @@ public class RaceManager : MonoBehaviour
         StopCoroutine(InitPlayers());
     }
 
+    public void DisableFinishedRacerMovement()
+    {
+        for (int i = 0; i < GameManager.gManager.players.Count; i++)
+        {
+            RacerDetails racerDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
+
+            if (racerDeets.finishedRacing == true && racerDeets.crossedFinishLine == true)
+            {
+                GameManager.gManager.DisableRMovement(GameManager.gManager.players[i]);
+            }
+        }
+    }
+
     public void LapComplete(RacerDetails racer)
     {
         if (racer.currentLap >= TotalLaps)
@@ -99,6 +112,9 @@ public class RaceManager : MonoBehaviour
         {
             FinishRace();
         }
+
+        DisableFinishedRacerMovement();
+
         //GameManager.gManager.raceFinisher.CheckAllRacersFinished();
 
         return;

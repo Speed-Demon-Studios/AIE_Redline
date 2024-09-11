@@ -59,7 +59,7 @@ public class ManageSceneLoading : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        foreach (ColliderTrigger collider in GameObject.FindObjectsOfType<ColliderTrigger>())
+        foreach (GameObject collider in GameObject.FindGameObjectsWithTag("Redline"))
         {
             DestroyImmediate(collider.gameObject);
         }

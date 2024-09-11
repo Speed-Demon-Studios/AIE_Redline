@@ -124,13 +124,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DisableRMovement()
+    public void DisableRMovement(GameObject racer = null)
     {
-        foreach (GameObject racerOBJ in racerObjects)
+        if (racer != null)
         {
-            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-            ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
+            InitializeBeforeRace rDeets = racer.GetComponent<InitializeBeforeRace>();
+            Rigidbody rB = racer.GetComponent<Rigidbody>();
+            ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
             rB.velocity = new Vector3(0, 0, 0);
             rB.angularVelocity = new Vector3(0, 0, 0);
@@ -139,6 +139,23 @@ public class GameManager : MonoBehaviour
             rB.isKinematic = true;
 
             rDeets.DisableShipControls();
+        }
+        else if (racer == null)
+        {
+            foreach (GameObject racerOBJ in racerObjects)
+            {
+                InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+                Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+                ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
+
+                rB.velocity = new Vector3(0, 0, 0);
+                rB.angularVelocity = new Vector3(0, 0, 0);
+
+                sControls.ResetAcceleration();
+                rB.isKinematic = true;
+
+                rDeets.DisableShipControls();
+            }
         }
     }
 
