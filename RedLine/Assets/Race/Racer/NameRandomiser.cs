@@ -18,6 +18,7 @@ public class NameRandomiser : MonoBehaviour
 
     public void AssignRacerNames()
     {
+        assigningNames = true;
         usedNames = new List<string>();
         bool isPlayer = false;
         foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
@@ -93,10 +94,9 @@ public class NameRandomiser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.racersAdded == true && GameManager.gManager.raceStarted == false && assigningNames == false && GameManager.gManager.namesAssigned == false)
-        {
-            assigningNames = true;
-            GameManager.gManager.nRandomiser.AssignRacerNames();
-        }
+        //if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.racersAdded == true && GameManager.gManager.raceStarted == false && assigningNames == false && GameManager.gManager.namesAssigned == false)
+        //{
+        //    GameManager.gManager.nRandomiser.AssignRacerNames();
+        //}
     }
 }
