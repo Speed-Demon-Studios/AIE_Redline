@@ -16,20 +16,20 @@ public class InitializeBeforeRace : MonoBehaviour
     [SerializeField] private AIMoveInputs aiInput;
     [SerializeField] private Rigidbody rb;
 
-    private void Update()
-    {
-        if (GameManager.gManager.CurrentScene == "MainMenu" || (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == false))
-        {
-            rb.velocity = new Vector3(0, 0, 0);
-            rb.angularVelocity = new Vector3(0, 0, 0);
-            sControls.ResetAcceleration();
-            rb.isKinematic = true;
-        }
-        else if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == true)
-        {
-            rb.isKinematic = false;
-        }
-    }
+    //private void Update()
+    //{
+    //    if (GameManager.gManager.CurrentScene == "MainMenu" || (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == false))
+    //    {
+    //        rb.velocity = new Vector3(0, 0, 0);
+    //        rb.angularVelocity = new Vector3(0, 0, 0);
+    //        sControls.ResetAcceleration();
+    //        rb.isKinematic = true;
+    //    }
+    //    else if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == true)
+    //    {
+    //        rb.isKinematic = false;
+    //    }
+    //}
 
     private void Awake()
     {
@@ -37,10 +37,18 @@ public class InitializeBeforeRace : MonoBehaviour
         {
             if (this.gameObject == playerOBJ)
             {
-                this.gameObject.AddComponent<DontDestroy>();
+                DontDestroy ddol;
+
+                this.gameObject.TryGetComponent<DontDestroy>(out ddol);
+
+                if (ddol == null)
+                {
+                    this.gameObject.AddComponent<DontDestroy>();
+                }
                 break;
             }
         }
+
         sControls = this.GetComponent<ShipsControls>();
         GameManager.gManager.playerObjects.Add(this.gameObject);
         if (playerCamOBJECT != null)
@@ -66,15 +74,18 @@ public class InitializeBeforeRace : MonoBehaviour
             playerCamOBJECT.SetActive(true);
         }
 
+        GameManager.gManager.raceStarted = false;
         foreach (GameObject racerOBJ in GameManager.gManager.players)
         {
             RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
 
             rDeets.finishedRacing = false;
             rDeets.crossedFinishLine = false;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
+            sControls.ResetAcceleration();
+            rb.isKinematic = true;
+            DisableShipControls();
         }
-        //sControls.enabled = true;
     }
-
-
 }

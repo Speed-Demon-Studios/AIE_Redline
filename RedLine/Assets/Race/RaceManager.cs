@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class RaceManager : MonoBehaviour
@@ -21,6 +22,39 @@ public class RaceManager : MonoBehaviour
             coroutineStarted = true;
             StartCoroutine(InitPlayers());
         }
+    }
+
+    public void StartRace()
+    {
+        GameManager gMAN = GameManager.gManager;
+        gMAN.raceStarted = true;
+        
+        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        {
+            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+
+            AMC.UpdateActionMapForRace();
+        }
+
+        gMAN.rActivator.ActivateRedline();
+        gMAN.EnableRMovement();
+    }
+
+    public void FinishRace()
+    {
+        GameManager gMAN = GameManager.gManager;
+        gMAN.DisableRMovement();
+        gMAN.raceFinished = true;
+
+        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        {
+            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+            
+
+            AMC.UpdateActionMapForUI();
+        }
+
+        gMAN.raceFinisher.ShowFinalPlacements();
     }
 
     IEnumerator InitPlayers()
@@ -62,38 +96,12 @@ public class RaceManager : MonoBehaviour
             Debug.Log("Lap " + (racer.currentLap - 1) + " Completed!");
         }
 
-        GameManager.gManager.raceFinisher.CheckAllRacersFinished();
+        if (GameManager.gManager.raceFinisher.AllRacersFinishedCheck() == true)
+        {
+            FinishRace();
+        }
+        //GameManager.gManager.raceFinisher.CheckAllRacersFinished();
 
         return;
-    }
-
-    private void Update()
-    {
-        //if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
-        //{
-        //    foreach (GameObject racer in GameManager.gManager.racerObjects)
-        //    {
-        //        RacerDetails rDeets = racer.GetComponent<RacerDetails>();
-        //        InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
-        //
-        //        if (rDeets.finishedRacing == false)
-        //        {
-        //            ibr.EnableRacerMovement();
-        //        }
-        //        else
-        //        {
-        //            ibr.DisableShipControls();
-        //        }
-        //    }
-        //}
-        //else if (GameManager.gManager.raceStarted == false && GameManager.gManager.raceFinished == false)
-        //{
-        //    foreach (GameObject racer in GameManager.gManager.racerObjects)
-        //    {
-        //        InitializeBeforeRace ibr = racer.GetComponent<InitializeBeforeRace>();
-        //
-        //        ibr.DisableShipControls();
-        //    }
-        //}
     }
 }
