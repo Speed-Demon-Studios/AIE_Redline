@@ -105,7 +105,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if(m_selection != null)
         {
-            if(context.performed)
+            if(context.performed && !playerReadyInMenu)
                 m_selection.OnNext();
         }
     }
@@ -114,7 +114,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_selection != null)
         {
-            if (context.performed)
+            if (context.performed && !playerReadyInMenu)
                 m_selection.OnPrev();
         }
     }
