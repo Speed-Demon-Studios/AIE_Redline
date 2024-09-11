@@ -26,6 +26,7 @@ public class RaceManager : MonoBehaviour
     public void StartRace()
     {
         GameManager gMAN = GameManager.gManager;
+        gMAN.nRandomiser.AssignRacerNames();
         gMAN.raceStarted = true;
         
         for (int i = 0; i < gMAN.racerObjects.Count; i++)
