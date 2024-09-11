@@ -13,15 +13,6 @@ public class RedlineChecker : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        ShipsControls tryTest = this.GetComponentInParent<ShipsControls>(); ;
-        if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
-        {
-        
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>(); ;

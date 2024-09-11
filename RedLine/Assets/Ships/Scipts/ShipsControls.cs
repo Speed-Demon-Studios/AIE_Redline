@@ -122,10 +122,14 @@ public class ShipsControls : MonoBehaviour
         if (!m_isInRedline && m_currentBoost > 0)
         {
             if(m_currentBoost > m_boostLevel)
+            {
                 m_currentBoost -= 0.8f * Time.deltaTime;
+                if(m_currentBoost < m_boostLevel)
+                {
+                    m_currentBoost = m_boostLevel;
+                }
+            }
 
-            if (m_currentBoost < m_boostLevel)
-                m_currentBoost = m_boostLevel;
         }
         SwitchFire();
     }
@@ -137,7 +141,7 @@ public class ShipsControls : MonoBehaviour
     {
         if (m_isInRedline)
         {
-            int multiplier = 1 / m_boostLevel + 1;
+            float multiplier = 1f / (m_boostLevel + 1);
             m_currentBoost += 1f * multiplier * Time.deltaTime;
             if (m_currentBoost > 3)
             {
@@ -197,9 +201,9 @@ public class ShipsControls : MonoBehaviour
             }
         }
 
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.05f);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.05f);
-        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.05f);
+        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.1f);
+        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.1f);
+        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.1f);
 
         if(hit.distance > 1)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
