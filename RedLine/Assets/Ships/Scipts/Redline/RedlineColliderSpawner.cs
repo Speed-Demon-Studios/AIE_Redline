@@ -86,10 +86,6 @@ public class RedlineColliderSpawner : MonoBehaviour
         GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);
         a.transform.parent = null;
 
-        ColliderTrigger b = a.GetComponent<ColliderTrigger>();
-        b.spawner = this;
-        b.ship = colliderParent;
-
         m_lineColliders.Add(a);
     }
 }

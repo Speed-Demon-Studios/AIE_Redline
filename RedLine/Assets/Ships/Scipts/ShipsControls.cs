@@ -76,6 +76,7 @@ public class ShipsControls : MonoBehaviour
     {
         if (this.enabled)
         {
+            AddToBoost();
             SwitchFire();
             CheckBoost();
             Strafe();
@@ -120,7 +121,11 @@ public class ShipsControls : MonoBehaviour
     {
         if (!m_isInRedline && m_currentBoost > 0)
         {
-            m_currentBoost -= 1f * Time.deltaTime;
+            if(m_currentBoost > m_boostLevel)
+                m_currentBoost -= 0.8f * Time.deltaTime;
+
+            if (m_currentBoost < m_boostLevel)
+                m_currentBoost = m_boostLevel;
         }
         SwitchFire();
     }
@@ -130,32 +135,35 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     public void AddToBoost()
     {
-        int multiplier = m_boostLevel + 1;
-        m_currentBoost += 1f / multiplier * Time.deltaTime;
-        if(m_currentBoost > 3)
+        if (m_isInRedline)
         {
-            m_currentBoost = 3;
+            int multiplier = 1 / m_boostLevel + 1;
+            m_currentBoost += 1f * multiplier * Time.deltaTime;
+            if (m_currentBoost > 3)
+            {
+                m_currentBoost = 3;
+            }
+            switch (m_currentBoost)
+            {
+                case < 1:
+                    m_boostLevel = 0;
+                    m_fireIndex = 0;
+                    break;
+                case < 2:
+                    m_boostLevel = 1;
+                    m_fireIndex = 1;
+                    break;
+                case < 3:
+                    m_boostLevel = 2;
+                    m_fireIndex = 2;
+                    break;
+                case < 4:
+                    m_boostLevel = 3;
+                    m_fireIndex = 3;
+                    break;
+            }
+            CheckBoost();
         }
-        switch (m_currentBoost)
-        {
-            case < 1:
-                m_boostLevel = 0;
-                m_fireIndex = 0;
-                break;
-            case < 2:
-                m_boostLevel = 1;
-                m_fireIndex = 1;
-                break;
-            case < 3:
-                m_boostLevel = 2;
-                m_fireIndex = 2;
-                break;
-            case < 4:
-                m_boostLevel = 3;
-                m_fireIndex = 3;
-                break;
-        }
-        CheckBoost();
     }
 
     /// <summary>
