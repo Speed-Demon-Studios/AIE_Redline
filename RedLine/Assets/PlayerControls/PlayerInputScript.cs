@@ -58,11 +58,14 @@ public class PlayerInputScript : MonoBehaviour
     {
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
-            if (Gamepad.all[i].deviceId == player.GetDevice<Gamepad>().deviceId)
+            if (Gamepad.all[i] != null && player.GetDevice<Gamepad>() != null)
             {
-                Debug.Log("FOUND CONTROLLER (Device ID: " + player.GetDevice<Gamepad>().deviceId + ")");
-                m_playerGamepad = Gamepad.all[i];
-                break;
+                if (Gamepad.all[i].deviceId == player.GetDevice<Gamepad>().deviceId)
+                {
+                    Debug.Log("FOUND CONTROLLER (Device ID: " + player.GetDevice<Gamepad>().deviceId + ")");
+                    m_playerGamepad = Gamepad.all[i];
+                    break;
+                }
             }
         }
         return;
