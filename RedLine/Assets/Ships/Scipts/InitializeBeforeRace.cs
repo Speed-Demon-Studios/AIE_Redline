@@ -81,6 +81,7 @@ public class InitializeBeforeRace : MonoBehaviour
 
             rDeets.finishedRacing = false;
             rDeets.crossedFinishLine = false;
+            
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
             sControls.ResetAcceleration();
