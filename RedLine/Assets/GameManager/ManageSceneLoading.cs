@@ -33,6 +33,12 @@ public class ManageSceneLoading : MonoBehaviour
             playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
             racerDeets.finishedRacing = false;
             racerDeets.currentLap = 0;
+            racerDeets.totalRaceTimeSeconds = 0;
+            racerDeets.totalRaceTimeMinutes = 0;
+            racerDeets.currentLapTimeSECONDS = 0;
+            racerDeets.currentLapTimeMINUTES = 0;
+            racerDeets.lapTimesSECONDS = new List<float>();
+            racerDeets.lapTimesMINUTES = new List<float>();
         }
 
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
