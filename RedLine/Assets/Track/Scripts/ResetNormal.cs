@@ -11,7 +11,7 @@ public class ResetNormal : MonoBehaviour
             other.transform.parent.gameObject.GetComponentInParent<ShipsControls>().SetRotationToTrack(point);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Racer"))
             other.transform.parent.gameObject.GetComponentInParent<ShipsControls>().SetRotationToTrack(point);

@@ -14,6 +14,26 @@ public class ShipToWallCollision : MonoBehaviour
     private bool intoWall = false;
     private bool detailsSet = false;
 
+    public void ResetDetails()
+    {
+        defaultTopSpeed = 0f;
+        defaultAcceleration = 0f;
+        changedTopSpeed = 0f;
+        changedAcceleration = 0f;
+        detailsSet = false;
+    }
+
+    public void UpdateDetails()
+    {
+        detailsSet = true;
+        shipVariant = sControlScript.variant;
+        defaultTopSpeed = shipVariant.DefaultMaxSpeed;
+        defaultAcceleration = shipVariant.MaxAcceleration;
+
+        changedTopSpeed = (defaultTopSpeed * 0.55f); // The speed that ships will be capped at while colliding with walls.
+        changedAcceleration = (defaultAcceleration * 0.4f); // The acceleration that ships will be capped at while colliding with walls.
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag.ToLower() == "walls")
@@ -43,13 +63,7 @@ public class ShipToWallCollision : MonoBehaviour
     {
         if (detailsSet == false && sControlScript.variant != null)
         {
-            detailsSet = true;
-            shipVariant = sControlScript.variant;
-            defaultTopSpeed = shipVariant.DefaultMaxSpeed;
-            defaultAcceleration = shipVariant.MaxAcceleration;
-
-            changedTopSpeed = (defaultTopSpeed * 0.55f); // The speed that ships will be capped at while colliding with walls.
-            changedAcceleration = (defaultAcceleration * 0.4f); // The acceleration that ships will be capped at while colliding with walls.
+            UpdateDetails();
         }
     }
 

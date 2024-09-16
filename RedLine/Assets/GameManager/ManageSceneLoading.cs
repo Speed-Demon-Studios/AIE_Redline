@@ -39,6 +39,8 @@ public class ManageSceneLoading : MonoBehaviour
             racerDeets.currentLapTimeMINUTES = 0;
             racerDeets.lapTimesSECONDS = new List<float>();
             racerDeets.lapTimesMINUTES = new List<float>();
+
+            ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         }
 
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
