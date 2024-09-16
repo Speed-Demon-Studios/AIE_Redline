@@ -12,6 +12,8 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_speed;
     [SerializeField] private RacerDetails rDetails;
     [SerializeField] private ShipsControls m_shipsControls;
+    public List<Slider> sliders = new();
+    private int m_sliderNumber;
 
     private void Update()
     {
@@ -39,6 +41,22 @@ public class PlayerUiControl : MonoBehaviour
                         }
                     }
                 }
+
+                switch (m_shipsControls.ReturnBoost())
+                {
+                    case > 3:
+                        m_sliderNumber = 2;
+                        break;
+                    case > 2:
+                        m_sliderNumber = 1;
+                        break;
+                    case > 1:
+                        m_sliderNumber = 0;
+                        break;
+                }
+
+                if(m_shipsControls.ReturnBoostLevel() < sliders.Count)
+                    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();
 
                 m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
             }

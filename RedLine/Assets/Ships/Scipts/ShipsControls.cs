@@ -43,6 +43,8 @@ public class ShipsControls : MonoBehaviour
 
     [Header("Boost Variables")]
     [SerializeField] private float m_currentBoost;
+    public float ReturnBoost() { return m_currentBoost; }
+    public int ReturnBoostLevel() { return m_boostLevel; }
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
@@ -123,7 +125,7 @@ public class ShipsControls : MonoBehaviour
         {
             if(m_currentBoost > m_boostLevel)
             {
-                m_currentBoost -= 0.8f * Time.deltaTime;
+                m_currentBoost -= 0.15f * Time.deltaTime;
                 if(m_currentBoost < m_boostLevel)
                 {
                     m_currentBoost = m_boostLevel;

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Nodes : MonoBehaviour
 {
-    public Nodes nextNode;
+    public List<Nodes> nextNode;
 
     public Vector3 ReturnNodePos() { return transform.position; }
 

@@ -16,7 +16,8 @@ public class TempCameraScript : MonoBehaviour
     {
         for (int i = 0; i < camerasParent.transform.childCount; i++)
         {
-            cameras.Add(camerasParent.transform.GetChild(i).gameObject);
+            if(camerasParent.transform.GetChild(i).GetComponent<Camera>())
+                cameras.Add(camerasParent.transform.GetChild(i).gameObject);
         }
     }
 
