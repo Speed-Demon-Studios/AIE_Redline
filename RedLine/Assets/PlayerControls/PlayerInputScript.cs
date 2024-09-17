@@ -90,14 +90,16 @@ public class PlayerInputScript : MonoBehaviour
     private void CalculatePOV()
     {
         float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;
-        if(speedPercentage > 0.001)
-        {
-            m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
-        }
-        else
-        {
-            m_desiredPOV = minPOV;
-        }
+        //if(speedPercentage > 0.001)
+        //{
+        //    
+        //    //m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
+        //}
+        //else
+        //{
+        //    m_desiredPOV = minPOV;
+        //}
+        m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);
 
         m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
         m_cam.fieldOfView = m_currentPOV;
