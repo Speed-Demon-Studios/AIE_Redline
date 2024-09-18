@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Net;
-using static UnityEditor.PlayerSettings;
 
 public class FinishRace : MonoBehaviour
 {
