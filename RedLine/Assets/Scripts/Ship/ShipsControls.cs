@@ -258,7 +258,8 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void ShipBoost()
     {
-        m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
+        if(m_boostLevel > 0)
+            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
 
         StartCoroutine(ShipBoostAcceleration());
     }

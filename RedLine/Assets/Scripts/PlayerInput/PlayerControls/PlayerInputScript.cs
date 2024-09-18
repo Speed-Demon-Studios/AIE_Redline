@@ -39,6 +39,8 @@ public class PlayerInputScript : MonoBehaviour
             m_playerNumber = gMan.numberOfPlayers;
         if (gMan != null)
             eventSystem.firstSelectedGameObject = gMan.FindStartButton();
+        if (gMan != null && m_playerNumber != 1)
+            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1);
 
 
         if (player != null)
