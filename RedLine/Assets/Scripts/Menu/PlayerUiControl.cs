@@ -14,6 +14,7 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private ShipsControls m_shipsControls;
     public List<Slider> sliders = new();
     private int m_sliderNumber;
+    public TextMeshProUGUI test;
 
     private void Update()
     {
@@ -54,6 +55,9 @@ public class PlayerUiControl : MonoBehaviour
                         m_sliderNumber = 0;
                         break;
                 }
+
+                if (test != null)
+                    test.text = m_shipsControls.ReturnRB().velocity.y.ToString();
 
                 if(m_shipsControls.ReturnBoostLevel() < sliders.Count)
                     sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();

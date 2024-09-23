@@ -210,17 +210,20 @@ public class ShipsControls : MonoBehaviour
             if (hit.transform.tag == "Road")
             {
                 m_targetPos = hit.normal;
+
+                if (hit.distance < 1f)
+                    m_rb.AddForce(transform.up * 4000, ForceMode.Force);
             }
         }
 
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.1f);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.1f);
-        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.1f);
+        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, 0.05f);
+        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, 0.05f);
+        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, 0.05f);
 
-        if(hit.distance < 5)
-            m_rb.AddForce(transform.up * variant.DownForce, ForceMode.Force);
-        else if (hit.distance > 7)
+        if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
+
+
     }
 
     /// <summary>
@@ -260,10 +263,11 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void ShipBoost()
     {
-        if(m_boostLevel > 0)
+        if (m_boostLevel > 0)
+        {
             m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
-
-        StartCoroutine(ShipBoostAcceleration());
+            StartCoroutine(ShipBoostAcceleration());
+        }
     }
      /// <summary>
      /// after the first jolt the ship will maintain the the speed for a bit depending on the level of boost
