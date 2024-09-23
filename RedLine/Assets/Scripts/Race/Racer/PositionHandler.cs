@@ -8,7 +8,6 @@ public class PositionHandler : MonoBehaviour
     public List<RacerDetails> racers = new List<RacerDetails>();
     public IList<RacerDetails> racerFinder = new List<RacerDetails>();
     private bool racersSorted = false;
-    private bool m_playerCamsActive = false;
 
     private void Awake()
     {

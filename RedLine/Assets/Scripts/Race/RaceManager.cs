@@ -12,52 +12,15 @@ public class RaceManager : MonoBehaviour
     {
         GameManager.gManager.rManager = this;
         GameManager.gManager.CurrentScene = "Race";
-        coroutineStarted = false;
         GameManager.gManager.enablePlayerCams = true;
+
+        GameManager.gManager.pHandler.OnRaceLoaded();
+
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
             StartCoroutine(InitPlayers());
         }
-        //if (GameManager.gManager.pHandler == null)
-        //{
-        //    WaitForReference();
-        //}
-        //else
-        //{
-
-
-
-        //}
-        //StartCoroutine(CheckForReference());
-    }
-
-    private void WaitForReference()
-    {
-        if (GameManager.gManager.pHandler != null)
-        {
-            GameManager.gManager.enablePlayerCams = true;
-
-            GameManager.gManager.pHandler.OnRaceLoaded();
-
-
-            if (coroutineStarted == false)
-            {
-                coroutineStarted = true;
-                StartCoroutine(InitPlayers());
-            }
-        }
-        else
-        {
-            WaitForReference();
-        }
-    }
-
-    private IEnumerator CheckForReference()
-    {
-        
-        yield return new WaitForFixedUpdate();
-        StopCoroutine(CheckForReference());
     }
 
     public void StartRace()

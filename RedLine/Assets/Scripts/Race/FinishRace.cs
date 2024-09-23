@@ -90,32 +90,18 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
-                                if (racerDeets.totalRaceTimeMinutes >= 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
-                                }
-                                else if (racerDeets.totalRaceTimeMinutes < 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
-                                }
+                                placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
                             }
                         }
                         else
                         {
                             if (racerDeets.crossedFinishLine == false)
                             {
-                                placementText.text = racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + "DNF";
+                                placementText.text = racerDeets.RacerName + "   ||   DNF";
                             }
                             else
                             {
-                                if (racerDeets.totalRaceTimeMinutes >= 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
-                                }
-                                else if (racerDeets.totalRaceTimeMinutes < 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
-                                }
+                                placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "    ||   " + racerDeets.totalRaceTimeMinutes + ":" + racerDeets.totalRaceTimeSeconds;
                             }
                         }
                     }

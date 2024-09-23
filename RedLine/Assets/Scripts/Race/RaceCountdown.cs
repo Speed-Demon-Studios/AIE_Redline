@@ -55,7 +55,6 @@ public class RaceCountdown : MonoBehaviour
         {
             GameManager.gManager.countdownIndex -= 1;
             Debug.Log("Countdown: " + GameManager.gManager.countdownIndex);
-            StopCoroutine(RaceCountdownTimer());
         }
         else if (GameManager.gManager.countdownIndex <= 0)
         {

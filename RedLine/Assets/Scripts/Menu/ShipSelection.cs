@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,11 @@ public class ShipSelection : MonoBehaviour
     public RawImage image;
     private GameObject m_ship;
     public int playerNum;
+    public TextMeshProUGUI shipName;
+    public List<Slider> sliders;
+    public Color readyColor;
+    public Color notReady;
+    public GameObject border;
     public void SetShip(GameObject ship) { m_ship = ship; }
 
     private void Start()
@@ -40,6 +46,11 @@ public class ShipSelection : MonoBehaviour
         }
         m_currentShips = ships[m_shipIndex];
         m_currentShips.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(NameChange(variants[m_shipIndex].VariantName));
+        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
+        sliders[1].value = variants[m_shipIndex].TurnSpeed;
+        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
     }
 
     public void OnPrev()
@@ -52,6 +63,11 @@ public class ShipSelection : MonoBehaviour
         }
         m_currentShips = ships[m_shipIndex];
         m_currentShips.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(NameChange(variants[m_shipIndex].VariantName));
+        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
+        sliders[1].value = variants[m_shipIndex].TurnSpeed;
+        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
     }
 
     public void Ready()
@@ -62,6 +78,47 @@ public class ShipSelection : MonoBehaviour
         FindObjectOfType<UIControllerInput>().ReadyPlayer(playerNum);
         if(m_ship.GetComponent<ShipBlendAnimations>())
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true;
+        border.GetComponent<RawImage>().color = readyColor;
 
+    }
+
+    IEnumerator NameChange(string shipName)
+    {
+        string aToZ = "abcdefghijklmnopqrstuvwxyz";
+
+        int stringLength = shipName.Length;
+
+        string tempName = shipName;
+
+        for (int j = 0; j < stringLength; j++)
+        {
+            yield return new WaitForSeconds(0.005f);
+
+            char randomLetter = aToZ[Random.Range(0, 24)];
+
+            tempName = tempName.Remove(j, 1);
+            tempName = tempName.Insert(j, randomLetter.ToString());
+
+            this.shipName.text = tempName;
+        }
+
+        for (int i = 0; i < stringLength; i++)
+        {
+            tempName = tempName.Remove(i, 1);
+            tempName = tempName.Insert(i, shipName.ToCharArray()[i].ToString());
+
+            for (int j = i + 1; j < stringLength; j++)
+            {
+                yield return new WaitForSeconds(0.001f);
+
+                char randomLetter = aToZ[Random.Range(0, 24)];
+
+                tempName = tempName.Remove(j, 1);
+                tempName = tempName.Insert(j, randomLetter.ToString());
+            }
+            this.shipName.text = tempName;
+            yield return new WaitForSeconds(0.008f);
+
+        }
     }
 }
