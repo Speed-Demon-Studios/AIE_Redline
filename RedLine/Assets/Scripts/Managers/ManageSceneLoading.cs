@@ -17,12 +17,9 @@ public class ManageSceneLoading : MonoBehaviour
         {
             InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
             //IBR.playerCamera.gameObject.SetActive(false);
-            RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
-            ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
-            controls.variant = null;
-            controls.VariantObject = null;
+            ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
             GameObject a = shipCollider.gameObject;
             GameObject b = controls.shipModel.transform.GetChild(3).gameObject;
@@ -30,7 +27,10 @@ public class ManageSceneLoading : MonoBehaviour
             b.transform.parent = null;
             Destroy(a);
             Destroy(b);
+            controls.VariantObject = null;
+            controls.variant = null;
             playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
+            RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
             racerDeets.finishedRacing = false;
             racerDeets.currentLap = 0;
             racerDeets.totalRaceTimeSeconds = 0;
