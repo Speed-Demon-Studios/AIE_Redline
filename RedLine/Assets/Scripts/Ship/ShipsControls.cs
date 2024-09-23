@@ -42,17 +42,13 @@ public class ShipsControls : MonoBehaviour
     private Vector3 m_currentPos;
 
     [Header("Boost Variables")]
-    private float m_currentBoost;
+    [SerializeField] private float m_currentBoost;
     public float ReturnBoost() { return m_currentBoost; }
     public int ReturnBoostLevel() { return m_boostLevel; }
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
     public float forceMultiplier;
-    public float accelerationForce;
-    public float howFastYouGetBoost;
-    public float howFastYouLooseBoost;
-    public float boostTime;
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
@@ -94,9 +90,6 @@ public class ShipsControls : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// switches the fire
-    /// </summary>
     private void SwitchFire()
     {
         m_fireIndex = m_boostLevel;
@@ -126,16 +119,13 @@ public class ShipsControls : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// this will check if you are currently boosting and if not then slowly take away from the current boost
-    /// </summary>
     private void CheckBoost()
     {
         if (!m_isInRedline && m_currentBoost > 0)
         {
             if(m_currentBoost > m_boostLevel)
             {
-                m_currentBoost -= howFastYouLooseBoost * Time.deltaTime;
+                m_currentBoost -= 0.15f * Time.deltaTime;
                 if(m_currentBoost < m_boostLevel)
                 {
                     m_currentBoost = m_boostLevel;
@@ -154,7 +144,7 @@ public class ShipsControls : MonoBehaviour
         if (m_isInRedline)
         {
             float multiplier = 1f / (m_boostLevel + 1);
-            m_currentBoost += howFastYouGetBoost * multiplier * Time.deltaTime;
+            m_currentBoost += 1f * multiplier * Time.deltaTime;
             if (m_currentBoost > 3)
             {
                 m_currentBoost = 3;
@@ -221,10 +211,6 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
-    /// <summary>
-    /// this is only for the reset box thats used outside the tunnel incase the player comes out upside down
-    /// </summary>
-    /// <param name="pointOfCast"></param>
     public void SetRotationToTrack(Transform pointOfCast)
     {
         RaycastHit hit;
@@ -241,54 +227,20 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.01f);
     }
 
-    /// <summary>
-    /// This is only for the boost pad. its called from when you hit the boost pad
-    /// </summary>
-    /// <param name="force"> How strong the boost is </param>
-    /// <param name="resetBoostLevel"> </param>
     public void BoostPadBoost(float force, bool resetBoostLevel)
     {
         m_isBoosting = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
-        SwitchFire();
-    }
-
-    /// <summary>
-    /// When the player hits boost you get the first jolt of boost which feels fast
-    /// </summary>
-    private void ShipBoost()
-    {
-        if(m_boostLevel > 0)
-            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
-
-        StartCoroutine(ShipBoostAcceleration());
-    }
-     /// <summary>
-     /// after the first jolt the ship will maintain the the speed for a bit depending on the level of boost
-     /// </summary>
-     /// <returns></returns>
-    IEnumerator ShipBoostAcceleration()
-    {
-        float time = m_boostLevel * boostTime;
-
-        while (time > 0)
+        if (resetBoostLevel)
         {
-            if (time > 0)
-            {
-                time -= 1f * Time.deltaTime;
-            }
-
-            m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
+            fire[0].SetActive(false);
+            fire[1].SetActive(false);
+            fire[2].SetActive(false);
+            wantingToBoost = false;
+            m_currentBoost = 0f;
+            m_boostLevel = 0;
         }
-
-        fire[0].SetActive(false);
-        fire[1].SetActive(false);
-        fire[2].SetActive(false);
-        wantingToBoost = false;
-        m_currentBoost = 0f;
-        m_boostLevel = 0;
-
-        return null;
+        SwitchFire();
     }
 
     /// <summary>
@@ -350,5 +302,5 @@ public class ShipsControls : MonoBehaviour
     public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
     public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
-    public void IsBoosting() { ShipBoost(); }
+    public void IsBoosting() { BoostPadBoost(m_boostLevel * forceMultiplier, true); }
 }
