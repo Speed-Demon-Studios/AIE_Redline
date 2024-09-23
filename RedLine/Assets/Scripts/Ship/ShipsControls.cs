@@ -216,9 +216,9 @@ public class ShipsControls : MonoBehaviour
             }
         }
 
-        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, 0.1f);
-        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, 0.1f);
-        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, 0.1f);
+        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, 0.05f);
+        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, 0.05f);
+        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, 0.05f);
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
