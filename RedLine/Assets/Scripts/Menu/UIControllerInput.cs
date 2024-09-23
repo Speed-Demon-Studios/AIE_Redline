@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -132,16 +133,22 @@ public class UIControllerInput : MonoBehaviour
         }
     }
 
-    public void ResetFirstButtonSelect()
+    public void ResetFirstButtonSelect(int playerNumber)
+    {
+        OnShipSelection = true;
+        GameManager.gManager.playerObjects[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[playerNumber].GetComponentInChildren<Button>().gameObject);
+        GameManager.gManager.playerObjects[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
+        m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[playerNumber]);
+
+    }
+
+    public void ResetFirstButtonSelectForPlayerOne()
     {
         OnShipSelection = true;
         int index = 0;
-        foreach(GameObject player in GameManager.gManager.players)
-        {
-            player.GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
-            player.GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
-            m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(player);
-            index += 1;
-        }
+        GameManager.gManager.playerObjects[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
+        GameManager.gManager.playerObjects[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
+        m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[index]);
+
     }
 }
