@@ -207,7 +207,9 @@ public class ShipsControls : MonoBehaviour
         m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.1f);
         m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.1f);
 
-        if(hit.distance > 1)
+        if(hit.distance < 5)
+            m_rb.AddForce(transform.up * variant.DownForce, ForceMode.Force);
+        else if (hit.distance > 7)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
     }
 
