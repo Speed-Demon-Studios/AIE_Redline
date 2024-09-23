@@ -222,6 +222,8 @@ public class ShipsControls : MonoBehaviour
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
+
+
     }
 
     /// <summary>
