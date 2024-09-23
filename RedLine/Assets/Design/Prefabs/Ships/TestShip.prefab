@@ -121,6 +121,7 @@ MonoBehaviour:
   m_speed: {fileID: 8370063527241296903}
   rDetails: {fileID: 0}
   m_shipsControls: {fileID: 2868536069181459848}
+  sliders: []
 --- !u!1 &2356065098281578392
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +372,7 @@ MonoBehaviour:
   player: {fileID: 3948600599449153757}
   eventSystem: {fileID: 0}
   m_cam: {fileID: 2868536069371765821}
+  playerReadyInMenu: 0
   lerpTime: 0.05
   minPOV: 90
   maxPOV: 135
@@ -390,6 +392,7 @@ MonoBehaviour:
   VariantObject: {fileID: 11400000, guid: 44c4fa50e1a70744694a64c3b5d0cb20, type: 2}
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
+  collisionParent: {fileID: 0}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
   fire:
@@ -397,9 +400,12 @@ MonoBehaviour:
   - {fileID: 7230363856535853717}
   - {fileID: 2918860219381749840}
   strafeStrength: 1.4
-  m_currentBoost: 0
   wantingToBoost: 0
   forceMultiplier: 60
+  accelerationForce: 10
+  howFastYouGetBoost: 1
+  howFastYouLooseBoost: 0.15
+  boostTime: 2
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
