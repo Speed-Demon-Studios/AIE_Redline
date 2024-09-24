@@ -55,6 +55,7 @@ public class ShipsControls : MonoBehaviour
     public float boostTime;
     private bool m_isBoostingOnBoostPad;
     public bool ReturnIsBoosting() { return m_isBoosting; }
+    public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
