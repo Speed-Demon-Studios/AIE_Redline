@@ -72,6 +72,17 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
+        int index = 0;
+        foreach(GameObject player in GameManager.gManager.players)
+        {
+            if(index != 0)
+            {
+                GameManager.gManager.uiCInput.ResetFirstButtonSelect(index);
+            }
+
+            index++;
+        }
+
         SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);
 

@@ -18,6 +18,8 @@ public class UIControllerInput : MonoBehaviour
     [SerializeField] private int currentMenuObjectIndex = 0;
     public TextMeshProUGUI playerCountText;
     private int m_numberOfPalyers;
+    public void SetNumberOfPlayers(int number) { m_numberOfPalyers = number; }
+    public int GetNumberOfPlayers() { return m_numberOfPalyers; }
     [SerializeField] private GameObject firstButton;
     public Transform selectionMenuGrid;
     public GameObject SelectionMenu;
@@ -35,6 +37,7 @@ public class UIControllerInput : MonoBehaviour
             playerCountText.text = "Player Count: " + m_numberOfPalyers;
         GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);
         m_selectionMenuButtons.Add(a);
+        GameManager.gManager.m_startButtons.Add(a.GetComponentInChildren<Button>().gameObject);
         a.GetComponent<ShipSelection>().texture = textures[m_numberOfPalyers - 1];
         a.GetComponent<ShipSelection>().playerNum = m_numberOfPalyers - 1;
     }
@@ -46,6 +49,24 @@ public class UIControllerInput : MonoBehaviour
         GameManager.gManager.m_startButtons[0] = firstButton;
         GameManager.gManager.mSL.SetPlayerUIInputMM();
 
+    }
+
+    private void Update()
+    {
+        if (playerCountText != null)
+            playerCountText.text = "Player Count: " + m_numberOfPalyers;
+    }
+
+    public void DeleteSelection(GameObject selection)
+    {
+        if (m_selectionMenuButtons.Contains(selection))
+        {
+            m_selectionMenuButtons.Remove(selection);
+        }
+        else
+        {
+            Debug.Log("Does not contain " + selection + " in the list");
+        }
     }
 
     public void InitializePlayerConnections()
@@ -136,8 +157,8 @@ public class UIControllerInput : MonoBehaviour
     public void ResetFirstButtonSelect(int playerNumber)
     {
         OnShipSelection = true;
-        GameManager.gManager.playerObjects[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[playerNumber].GetComponentInChildren<Button>().gameObject);
-        GameManager.gManager.playerObjects[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
+        GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[playerNumber].GetComponentInChildren<Button>().gameObject);
+        GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
         m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[playerNumber]);
 
     }
@@ -146,8 +167,8 @@ public class UIControllerInput : MonoBehaviour
     {
         OnShipSelection = true;
         int index = 0;
-        GameManager.gManager.playerObjects[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
-        GameManager.gManager.playerObjects[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
+        GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
+        GameManager.gManager.players[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
         m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[index]);
 
     }

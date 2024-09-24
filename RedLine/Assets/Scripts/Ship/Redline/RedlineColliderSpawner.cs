@@ -28,7 +28,8 @@ public class RedlineColliderSpawner : MonoBehaviour
     void FixedUpdate()
     {
         //AddBoost();
-        ChangePositions();
+        if(!GameManager.gManager.raceFinished)
+            ChangePositions();
         //CheckShipsInLine();
     }
 

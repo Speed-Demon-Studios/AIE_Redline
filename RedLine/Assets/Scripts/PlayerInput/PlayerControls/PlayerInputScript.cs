@@ -15,6 +15,8 @@ public class PlayerInputScript : MonoBehaviour
 
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
+    public void SetPlayerNumber(int number) { m_playerNumber = number; }
+    public int GetPlayerNumber() { return m_playerNumber; }
     private GameManager gMan;
     public bool playerReadyInMenu;
     private ShipSelection m_selection;
@@ -49,6 +51,30 @@ public class PlayerInputScript : MonoBehaviour
         }
         
         //GameManager.gManager.hapticsController.ConfigureRumble(thisGamepad);
+    }
+
+    public void PlayerDisconnect()
+    {
+        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject);
+        Destroy(m_selection.gameObject);
+        for(int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
+        {
+            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() != m_playerNumber)
+            {
+                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
+            }
+        }
+        if (GameManager.gManager.players.Contains(this.gameObject))
+        {
+            GameManager.gManager.players.Remove(this.gameObject);
+        }
+        if (GameManager.gManager.playerObjects.Contains(this.gameObject))
+        {
+            GameManager.gManager.playerObjects.Remove(this.gameObject);
+        }
+        gMan.numberOfPlayers -= 1;
+        gMan.uiCInput.SetNumberOfPlayers(gMan.uiCInput.GetNumberOfPlayers() - 1);
+        Destroy(this.gameObject);
     }
 
     public Gamepad GetPlayerGamepad()
