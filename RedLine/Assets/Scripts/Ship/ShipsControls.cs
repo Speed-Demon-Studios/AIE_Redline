@@ -265,6 +265,29 @@ public class ShipsControls : MonoBehaviour
     {
         if (m_boostLevel > 0)
         {
+            ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
+            PlayerInputScript pInput = this.gameObject.GetComponent<PlayerInputScript>();
+            if (cRumble != null && pInput != null)
+            {
+                switch (m_boostLevel)
+                {
+                    case 1:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 1, 0.3f);
+                            break;
+                        }
+                    case 2:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 2, 0.5f);
+                            break;
+                        }
+                    case 3:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 3, 0.8f);
+                            break;
+                        }
+                }
+            }
             m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }

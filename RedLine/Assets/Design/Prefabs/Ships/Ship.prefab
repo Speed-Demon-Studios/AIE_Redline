@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 6267707172146090529}
   - component: {fileID: 4720046132730105080}
   - component: {fileID: 2447601818090787841}
+  - component: {fileID: 3912247603490323102}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Racer
@@ -827,6 +828,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79e31d69104d0e4fa962900acbff1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3912247603490323102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f89808d46c0844786c5a748be72649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_defaultRumble: 0
+  m_boost1Rumble: 0.012
+  m_boost2Rumble: 0.15
+  m_boost3Rumble: 0.45
+  rumbleDurationAtTarget: 0
 --- !u!1 &2868536069371765811
 GameObject:
   m_ObjectHideFlags: 0
