@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public FinishRace raceFinisher;
     public ControllerHaptics hapticsController;
 
-    public GameObject[] m_startButtons;
+    public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
