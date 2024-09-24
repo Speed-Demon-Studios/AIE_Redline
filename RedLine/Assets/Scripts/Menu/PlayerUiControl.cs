@@ -56,6 +56,14 @@ public class PlayerUiControl : MonoBehaviour
                         break;
                 }
 
+                if (m_shipsControls.ReturnIsBoosting())
+                {
+                    for (int i = 0; i < sliders.Count; i++)
+                    {
+                        sliders[i].value = 0;
+                    }
+                }
+                
                 if (test != null)
                     test.text = m_shipsControls.ReturnRB().velocity.y.ToString();
 
@@ -65,5 +73,10 @@ public class PlayerUiControl : MonoBehaviour
                 m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
             }
         }
+    }
+
+    public void ResetSliders()
+    {
+
     }
 }

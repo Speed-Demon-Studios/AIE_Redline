@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "dfd4d290-7850-49eb-a1cf-47700a0bebaf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Join",
                     "type": "Button",
                     "id": "1615cb12-9f84-4737-af47-48b667560890",
@@ -280,6 +289,17 @@
                     "action": "Straf",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ca197470-bfb3-470d-91fa-8a8901ccd60a",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -444,15 +464,6 @@
                     "name": "NavigateLeft",
                     "type": "Button",
                     "id": "e4bf073e-d564-40d6-a1fc-94cb5d965e7b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "12302fe8-d34d-4ee7-b88e-d2bd97a471a8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1238,17 +1249,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "NavigateLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6c80f354-9d63-4c90-9e52-2653e5cb15e3",
-                    "path": "<XInputController>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

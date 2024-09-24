@@ -14,8 +14,6 @@ public class RaceManager : MonoBehaviour
         GameManager.gManager.CurrentScene = "Race";
         GameManager.gManager.enablePlayerCams = true;
 
-        GameManager.gManager.pHandler.OnRaceLoaded();
-
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
