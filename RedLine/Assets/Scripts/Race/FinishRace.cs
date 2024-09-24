@@ -50,6 +50,7 @@ public class FinishRace : MonoBehaviour
         if (m_allRacersFinished == true && m_allRacersCrosedLine == true)
         {
             m_alreadyShowingPlacements = true;
+            GameManager.gManager.raceFinished = true;
 
             foreach (GameObject racer in GameManager.gManager.racerObjects)
             {

@@ -18,7 +18,7 @@ public class ShipVariantInspector : Editor
         EditorGUILayout.LabelField("Down Force");
 
         GUILayout.BeginHorizontal();
-        variant.DownForce = EditorGUILayout.FloatField(variant.DefaultMaxAcceleration, GUILayout.Width(80), GUILayout.Height(25));
+        variant.DownForce = EditorGUILayout.FloatField(variant.DownForce, GUILayout.Width(80), GUILayout.Height(25));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(15f);

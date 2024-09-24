@@ -493,9 +493,12 @@ MonoBehaviour:
   - {fileID: 2144079528063685160}
   - {fileID: 2348777090680578936}
   strafeStrength: 0
-  m_currentBoost: 0
   wantingToBoost: 0
   forceMultiplier: 0
+  accelerationForce: 0
+  howFastYouGetBoost: 0
+  howFastYouLooseBoost: 0
+  boostTime: 0
   m_boostLevel: 0
 --- !u!54 &2819560891871692963
 Rigidbody:
@@ -510,9 +513,9 @@ Rigidbody:
   m_AngularDrag: 0.7
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &2819560891871692965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25999,7 +26002,7 @@ PrefabInstance:
     - target: {fileID: 6746312845375566541, guid: cefd193856f6dc940bb55b098db30688,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.554
+      value: 0.546
       objectReference: {fileID: 0}
     - target: {fileID: 6746312845375566541, guid: cefd193856f6dc940bb55b098db30688,
         type: 3}
