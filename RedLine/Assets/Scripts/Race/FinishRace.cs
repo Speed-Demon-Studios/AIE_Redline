@@ -32,14 +32,12 @@ public class FinishRace : MonoBehaviour
     public void DebugForFunction()
     {
         GameManager.gManager.mSL.InitializeForMainMenu();
-        Debug.Log("button clicked.");
     }
 
     private void Update()
     {
         //CheckAllRacersFinished();
 
-        
     }
 
     /// <summary>
