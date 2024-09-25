@@ -17,13 +17,15 @@ public class ActionMappingControl : MonoBehaviour
     {
         for (int i = 0; i < _playerInputActions.actions.actionMaps.Count; i++)
         {
-            if (_playerInputActions.actions.actionMaps[i].name.ToLower() == "player")
+            if (_playerInputActions.actions.actionMaps[i].name.ToLower() == "Player")
             {
                 playerRacingActionMapIndex = i;
             }
         }
         _playerInputActions.actions.FindActionMap("Player").Enable();
         _playerInputActions.currentActionMap = _playerInputActions.actions.FindActionMap("Player");
+
+        Debug.Log("Current: " + _playerInputActions.currentActionMap.name);
     }
 
     public void SwitchActionMapToUI()
@@ -54,9 +56,8 @@ public class ActionMappingControl : MonoBehaviour
         AIMoveInputs aiInput = this.gameObject.GetComponent<AIMoveInputs>();
         if (playerInput != null)
         {
-            if (controlMapChanged == false && _playerInputActions != null)
+            if (_playerInputActions != null)
             {
-                controlMapChanged = true;
                 SwitchActionMapToPlayer();
             }
             if (playerInput.enabled == false)
@@ -76,9 +77,8 @@ public class ActionMappingControl : MonoBehaviour
 
     public void UpdateActionMapForUI()
     {
-        sControls.enabled = false;
         Debug.Log("Disabling ShipControls Script.");
-        if (_playerInputActions != null && _playerInputActions.currentActionMap.name != "UI")
+        if (_playerInputActions != null)
         {
             SwitchActionMapToUI();
         }

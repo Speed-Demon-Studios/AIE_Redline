@@ -79,9 +79,15 @@ public class ShipVariantInspector : Editor
 
         variant.TurnSpeed = EditorGUILayout.FloatField(variant.TurnSpeed, GUILayout.Width(100), GUILayout.Height(25));
 
-        EditorGUILayout.LabelField("Turn Speed Curve", GUILayout.Width(125));
+        EditorGUILayout.LabelField("Turn Based On Speed Curve", GUILayout.Width(125));
 
-        variant.TurnSpeedCurve = EditorGUILayout.CurveField(variant.TurnSpeedCurve, GUILayout.Height(80));
+        variant.TurnBasedSpeedCurve = EditorGUILayout.CurveField(variant.TurnBasedSpeedCurve, GUILayout.Height(80));
+
+        GUILayout.Space(5f);
+        
+        EditorGUILayout.LabelField("Speed Based On Turn Curve", GUILayout.Width(125));
+
+        variant.SpeedBasedTurnCurve = EditorGUILayout.CurveField(variant.SpeedBasedTurnCurve, GUILayout.Height(80));
 
         GUILayout.Space(10f);
 

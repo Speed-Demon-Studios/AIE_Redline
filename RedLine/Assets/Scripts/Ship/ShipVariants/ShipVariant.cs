@@ -19,10 +19,11 @@ public class ShipVariant : ScriptableObject
     public float AccelerationMultiplier;
     public float BreakMultiplier;
     public AnimationCurve SpeedCurve;
+    public AnimationCurve SpeedBasedTurnCurve;
     [Space]
     [Header("Turning Variables")]
     public float TurnSpeed;
-    public AnimationCurve TurnSpeedCurve;
+    public AnimationCurve TurnBasedSpeedCurve;
     [Space]
     [Header("Ai Movement Variables")]
     public AnimationCurve NeededSpeedCurve;
