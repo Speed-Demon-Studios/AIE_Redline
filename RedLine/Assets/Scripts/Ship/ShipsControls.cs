@@ -345,8 +345,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
-        float accelerateMultiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
-        float turnMultiplier = variant.SpeedBasedTurnCurve.Evaluate(m_targetAngle / 1f);
+        float multiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         if (m_accelerateMultiplier == 0)
             m_acceleration -= (variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
@@ -355,7 +354,7 @@ public class ShipsControls : MonoBehaviour
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.DefaultMaxAcceleration);
 
-        m_rb.velocity += m_acceleration * transform.forward * accelerateMultiplier * turnMultiplier;
+        m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
 
     /// <summary>
@@ -369,7 +368,7 @@ public class ShipsControls : MonoBehaviour
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
         float multiplier = 0.5f;
         if (!m_isBoosting && !m_isBoostingOnBoostPad)
-            multiplier = variant.TurnBasedSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
+            multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (variant.TurnSpeed * multiplier), 0));
