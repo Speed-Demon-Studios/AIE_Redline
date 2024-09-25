@@ -53,9 +53,6 @@ public class ShipsControls : MonoBehaviour
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
     public float boostTime;
-    private bool m_isBoostingOnBoostPad;
-    public bool ReturnIsBoosting() { return m_isBoosting; }
-    public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
@@ -253,19 +250,12 @@ public class ShipsControls : MonoBehaviour
     /// This is only for the boost pad. its called from when you hit the boost pad
     /// </summary>
     /// <param name="force"> How strong the boost is </param>
-    public void BoostPadBoost(float force)
+    /// <param name="resetBoostLevel"> </param>
+    public void BoostPadBoost(float force, bool resetBoostLevel)
     {
-        m_isBoostingOnBoostPad = true;
+        m_isBoosting = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
         SwitchFire();
-        StartCoroutine(StopBoosting());
-    }
-
-    IEnumerator StopBoosting()
-    {
-        yield return new WaitForSeconds(2f);
-
-        m_isBoostingOnBoostPad = false;
     }
 
     /// <summary>
@@ -275,30 +265,6 @@ public class ShipsControls : MonoBehaviour
     {
         if (m_boostLevel > 0)
         {
-            m_isBoosting = true;
-            ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
-            PlayerInputScript pInput = this.gameObject.GetComponent<PlayerInputScript>();
-            if (cRumble != null && pInput != null)
-            {
-                switch (m_boostLevel)
-                {
-                    case 1:
-                        {
-                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 1, 0.3f);
-                            break;
-                        }
-                    case 2:
-                        {
-                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 2, 0.5f);
-                            break;
-                        }
-                    case 3:
-                        {
-                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 3, 0.8f);
-                            break;
-                        }
-                }
-            }
             m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }
@@ -328,8 +294,7 @@ public class ShipsControls : MonoBehaviour
         m_currentBoost = 0f;
         m_boostLevel = 0;
 
-        yield return new WaitForSeconds(1f);
-        m_isBoosting = false;
+        return null;
     }
 
     /// <summary>
@@ -345,8 +310,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
-        float accelerateMultiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
-        float turnMultiplier = variant.SpeedBasedTurnCurve.Evaluate(m_targetAngle / 1f);
+        float multiplier = variant.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         if (m_accelerateMultiplier == 0)
             m_acceleration -= (variant.AccelerationMultiplier * 0.4f) * Time.deltaTime;
@@ -355,7 +319,7 @@ public class ShipsControls : MonoBehaviour
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, variant.DefaultMaxAcceleration);
 
-        m_rb.velocity += m_acceleration * transform.forward * accelerateMultiplier * turnMultiplier;
+        m_rb.velocity += m_acceleration * transform.forward * multiplier;
     }
 
     /// <summary>
@@ -368,8 +332,8 @@ public class ShipsControls : MonoBehaviour
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
         float multiplier = 0.5f;
-        if (!m_isBoosting && !m_isBoostingOnBoostPad)
-            multiplier = variant.TurnBasedSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
+        if (!m_isBoosting)
+            multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (variant.TurnSpeed * multiplier), 0));
