@@ -102,6 +102,15 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //if (GameManager.gManager.raceStarted == false && m_shipControls.enabled == true)
+        //{
+        //    m_shipControls.enabled = false;
+        //}
+        //
+        //if (GameManager.gManager.raceStarted == true && m_shipControls.enabled == false)
+        //{
+        //    m_shipControls.enabled = true;
+        //}
         if(gMan.raceStarted)
             CalculatePOV();
     }
@@ -140,14 +149,6 @@ public class PlayerInputScript : MonoBehaviour
         {
             if (context.performed && !playerReadyInMenu)
                 m_selection.OnPrev();
-        }
-    }
-
-    public void Pause(InputAction.CallbackContext context)
-    {
-        if(GameManager.gManager != null)
-        {
-            GameManager.gManager.StopTime();
         }
     }
 
