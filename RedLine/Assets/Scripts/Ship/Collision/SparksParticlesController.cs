@@ -8,20 +8,21 @@ public class SparksParticlesController : MonoBehaviour
     public SparksTrigger[] sparksList;
     public ParticleSystem[] sparksParticles;
 
-    public void ActivateSparks(int particleToActivate)
+    public void ActivateSparks(ParticleSystem particleToActivate)
     {
-        ParticleSystem.MainModule mainModule = sparksParticles[particleToActivate - 1].main;
-        if (sparksParticles[particleToActivate - 1].isPlaying == false)
+        ParticleSystem.MainModule mainModule = particleToActivate.main;
+        mainModule.loop = true;
+        if (particleToActivate.isPlaying == false)
         {
             mainModule.duration = 0.08f;
-            sparksParticles[particleToActivate - 1].Play();
+            particleToActivate.Play();
         }
     }
 
-    public void DeactivateSparks(int particleToDeactivate)
+    public void DeactivateSparks(ParticleSystem particleToActivate)
     {
-        ParticleSystem.MainModule mainModule = sparksParticles[particleToDeactivate - 1].main;
-        sparksParticles[particleToDeactivate].Stop();
+        ParticleSystem.MainModule mainModule = particleToActivate.main;
+        particleToActivate.Stop();
         mainModule.loop = false;
     }
     
@@ -53,10 +54,10 @@ public class SparksParticlesController : MonoBehaviour
                 {
                     if (sT.isColliding == true)
                     {
-                        for (int i = 0; i < sT.colliderIndexes.Length; i++)
+                        foreach (ParticleSystem sparksPE in sT.sparks)
                         {
-                            ActivateSparks(i);
-                        }
+                            ActivateSparks(sparksPE);
+                        }    
                     }
                 }
             }

@@ -8,7 +8,8 @@ public class SparksTrigger : MonoBehaviour
     private SparksParticlesController m_spc;
 
 
-    public int[] colliderIndexes;
+    //public int[] colliderIndexes;
+    public ParticleSystem[] sparks;
     public bool isColliding = false;
 
     public void SetSPC(SparksParticlesController spcScript)
@@ -25,38 +26,38 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            if (colliderIndexes.Length < 2)
+            //if (colliderIndexes.Length < 2)
+            //{
+            //    m_spc.ActivateSparks(colliderIndexes[0]);
+            //}
+            //else if (colliderIndexes.Length >= 2)
+            //{
+            foreach (ParticleSystem sparkParticle in sparks)
             {
-                m_spc.ActivateSparks(colliderIndexes[0]);
+                m_spc.ActivateSparks(sparkParticle);
             }
-            else if (colliderIndexes.Length >= 2)
-            {
-                foreach (int colIndx in colliderIndexes)
-                {
-                    m_spc.ActivateSparks(colIndx);
-                }
-            }
+            //}
             isColliding = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (colliderIndexes.Length < 2)
-        {
+        //if (colliderIndexes.Length < 2)
+        //{
             if (other.tag.ToLower() == "walls")
             {
-                m_spc.DeactivateSparks(colliderIndexes[0]);
-            }
-            else if (colliderIndexes.Length >= 2)
-            {
-                foreach (int colIndx in colliderIndexes)
+            //    m_spc.DeactivateSparks(colliderIndexes[0]);
+            //}
+            //else if (colliderIndexes.Length >= 2)
+            //{
+                foreach (ParticleSystem sparkParticle in sparks)
                 {
-                    m_spc.DeactivateSparks(colIndx);
+                    m_spc.DeactivateSparks(sparkParticle);
                 }
+                isColliding = false;
             }
-            isColliding = false;
-        }    
+        //}    
     }
 
 

@@ -778,18 +778,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCS: {fileID: 8627608583750150117}
-  finishedRacing: 0
-  crossedFinishLine: 0
-  distanceToCheckpoint: 0
-  currentLap: 0
-  placement: 0
-  currentCheckpoint: 0
   lapTimesSECONDS: []
   lapTimesMINUTES: []
-  currentLapTimeSECONDS: 0
-  currentLapTimeMINUTES: 0
+  placement: 0
+  currentLap: 0
+  currentCheckpoint: 0
+  distanceToCheckpoint: 0
   totalRaceTimeSeconds: 0
   totalRaceTimeMinutes: 0
+  currentLapTimeSECONDS: 0
+  currentLapTimeMINUTES: 0
+  finishedRacing: 0
+  crossedFinishLine: 0
   RacerName: 
 --- !u!135 &6267707172146090529
 SphereCollider:
@@ -840,10 +840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f89808d46c0844786c5a748be72649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_defaultRumble: 0
-  m_boost1Rumble: 0.012
-  m_boost2Rumble: 0.15
-  m_boost3Rumble: 0.45
   rumbleDurationAtTarget: 0
 --- !u!1 &2868536069371765811
 GameObject:
@@ -2149,7 +2145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241893629016962924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.56, z: 0}
+  m_LocalPosition: {x: 0, y: 1.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
