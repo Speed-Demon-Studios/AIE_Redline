@@ -8,6 +8,8 @@ public class ShipVariantInspector : Editor
 {
     public override void OnInspectorGUI()
     {
+        EditorGUI.BeginChangeCheck();
+
         ShipVariant variant = (ShipVariant)target;
 
         EditorGUILayout.LabelField("Ship Name");
@@ -18,7 +20,9 @@ public class ShipVariantInspector : Editor
         EditorGUILayout.LabelField("Down Force");
 
         GUILayout.BeginHorizontal();
-        variant.DownForce = EditorGUILayout.FloatField(variant.DownForce, GUILayout.Width(80), GUILayout.Height(25));
+
+        float DownForce = EditorGUILayout.FloatField(variant.DownForce, GUILayout.Width(80), GUILayout.Height(25));
+
         GUILayout.EndHorizontal();
 
         GUILayout.Space(15f);
@@ -32,11 +36,12 @@ public class ShipVariantInspector : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        variant.model = (GameObject)EditorGUILayout.ObjectField(variant.model, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
+
+        GameObject model = (GameObject)EditorGUILayout.ObjectField(variant.model, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
 
         GUILayout.Space(45f);
+        GameObject collision = (GameObject)EditorGUILayout.ObjectField(variant.collision, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
 
-        variant.collision = (GameObject)EditorGUILayout.ObjectField(variant.collision, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(15f);
@@ -49,9 +54,9 @@ public class ShipVariantInspector : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        variant.DefaultMaxAcceleration = EditorGUILayout.FloatField(variant.DefaultMaxAcceleration, GUILayout.Width(80), GUILayout.Height(25));
+        float DeafaultMaxAcceleration = EditorGUILayout.FloatField(variant.DefaultMaxAcceleration, GUILayout.Width(80), GUILayout.Height(25));
         GUILayout.Space(80f);
-        variant.MaxAcceleration = EditorGUILayout.FloatField(variant.MaxAcceleration, GUILayout.Width(80), GUILayout.Height(25));
+        float MaxAcceleration = EditorGUILayout.FloatField(variant.MaxAcceleration, GUILayout.Width(80), GUILayout.Height(25));
         GUILayout.EndHorizontal();
         EditorGUILayout.Space();
 
@@ -62,26 +67,26 @@ public class ShipVariantInspector : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        variant.DefaultMaxSpeed = EditorGUILayout.FloatField(variant.DefaultMaxSpeed, GUILayout.Width(100), GUILayout.Height(25));
+        float DefaultMaxSpeed = EditorGUILayout.FloatField(variant.DefaultMaxSpeed, GUILayout.Width(100), GUILayout.Height(25));
         GUILayout.Space(35f);
-        variant.AccelerationMultiplier = EditorGUILayout.FloatField(variant.AccelerationMultiplier, GUILayout.Width(100), GUILayout.Height(25));
+        float AccelerationMultiplier = EditorGUILayout.FloatField(variant.AccelerationMultiplier, GUILayout.Width(100), GUILayout.Height(25));
         GUILayout.Space(35f);
-        variant.BreakMultiplier = EditorGUILayout.FloatField(variant.BreakMultiplier, GUILayout.Width(100), GUILayout.Height(25));
+        float breakMultiplier = EditorGUILayout.FloatField(variant.BreakMultiplier, GUILayout.Width(100), GUILayout.Height(25));
         GUILayout.EndHorizontal();
 
         EditorGUILayout.LabelField("Speed Curve", GUILayout.Width(125));
 
-        variant.SpeedCurve = EditorGUILayout.CurveField(variant.SpeedCurve, GUILayout.Height(80));
+        AnimationCurve speedCurve = EditorGUILayout.CurveField(variant.SpeedCurve, GUILayout.Height(80));
 
         GUILayout.Space(5f);
 
         EditorGUILayout.LabelField("Turn Speed", GUILayout.Width(125));
 
-        variant.TurnSpeed = EditorGUILayout.FloatField(variant.TurnSpeed, GUILayout.Width(100), GUILayout.Height(25));
+        float turnSpeed = EditorGUILayout.FloatField(variant.TurnSpeed, GUILayout.Width(100), GUILayout.Height(25));
 
         EditorGUILayout.LabelField("Turn Speed Curve", GUILayout.Width(125));
 
-        variant.TurnSpeedCurve = EditorGUILayout.CurveField(variant.TurnSpeedCurve, GUILayout.Height(80));
+        AnimationCurve TurnSpeedCurve = EditorGUILayout.CurveField(variant.TurnSpeedCurve, GUILayout.Height(80));
 
         GUILayout.Space(10f);
 
@@ -93,13 +98,31 @@ public class ShipVariantInspector : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        variant.distance = EditorGUILayout.FloatField(variant.distance, GUILayout.Width(100), GUILayout.Height(25));
+        float Distance = EditorGUILayout.FloatField(variant.distance, GUILayout.Width(100), GUILayout.Height(25));
         GUILayout.Space(35f);
-        variant.turnMultiplier = EditorGUILayout.FloatField(variant.turnMultiplier, GUILayout.Width(100), GUILayout.Height(25));
+        float turnMultiplier = EditorGUILayout.FloatField(variant.turnMultiplier, GUILayout.Width(100), GUILayout.Height(25));
         GUILayout.EndHorizontal();
 
         EditorGUILayout.LabelField("Needed Speed Curve", GUILayout.Width(125));
+        AnimationCurve neededSpeedCurve = EditorGUILayout.CurveField(variant.NeededSpeedCurve, GUILayout.Height(80));
 
-        variant.NeededSpeedCurve = EditorGUILayout.CurveField(variant.NeededSpeedCurve, GUILayout.Height(80));
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(variant, "Changed Script");
+
+            variant.DownForce = DownForce;
+            variant.model = model;
+            variant.distance = Distance;
+            variant.turnMultiplier = turnMultiplier;
+            variant.SpeedCurve = speedCurve;
+            variant.TurnSpeedCurve = TurnSpeedCurve;
+            variant.AccelerationMultiplier = AccelerationMultiplier;
+            variant.BreakMultiplier = breakMultiplier;
+            variant.DefaultMaxAcceleration = DeafaultMaxAcceleration;
+            variant.TurnSpeed = turnSpeed;
+            variant.NeededSpeedCurve = neededSpeedCurve;
+            variant.DefaultMaxSpeed = DefaultMaxSpeed;
+            variant.MaxAcceleration = MaxAcceleration;
+        }
     }
 }
