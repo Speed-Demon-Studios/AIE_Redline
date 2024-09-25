@@ -111,11 +111,11 @@ public class FinishRace : MonoBehaviour
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=15%>||" + "<pos=30%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                                 else if (racerDeets.totalRaceTimeMinutes < 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=15%>||" + "<pos=30%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                             }
                         }
@@ -123,7 +123,7 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.crossedFinishLine == false)
                             {
-                                placementText.text = racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + "DNF";
+                                placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=15%>||" + "<pos=30%>" + "DNF" + "<pos=45%>||" + "<pos=70%>" + "DNF";
                             }
                             else
                             {
@@ -149,11 +149,11 @@ public class FinishRace : MonoBehaviour
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=15%>||" + "<pos=30%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                                 else if (racerDeets.totalRaceTimeMinutes < 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=15%>||" + "<pos=30%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                             }
                         }
