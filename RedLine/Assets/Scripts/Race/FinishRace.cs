@@ -89,8 +89,8 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+                                float totalMinutes = racerDeets.totalRaceTimeSeconds / 60f;
+                                float totalSeconds = racerDeets.totalRaceTimeSeconds % 60f;
                                 float quickestTime = 0;
 
                                 foreach(float time in racerDeets.lapTimesSECONDS)
@@ -106,8 +106,8 @@ public class FinishRace : MonoBehaviour
                                     }
                                 }
 
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
+                                float quickestMiuntes = quickestTime / 60f;
+                                float quickestSeconds = quickestTime % 60f;
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
@@ -127,8 +127,8 @@ public class FinishRace : MonoBehaviour
                             }
                             else
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+                                float totalMinutes = racerDeets.totalRaceTimeSeconds / 60f;
+                                float totalSeconds = racerDeets.totalRaceTimeSeconds % 60f;
                                 float quickestTime = 0;
 
                                 foreach (float time in racerDeets.lapTimesSECONDS)
@@ -144,8 +144,8 @@ public class FinishRace : MonoBehaviour
                                     }
                                 }
 
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
+                                float quickestMiuntes = quickestTime / 60f;
+                                float quickestSeconds = quickestTime % 60f;
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {

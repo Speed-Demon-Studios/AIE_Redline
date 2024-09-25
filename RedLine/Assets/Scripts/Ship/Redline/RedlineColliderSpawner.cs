@@ -7,9 +7,6 @@ using UnityEngine;
 public class RedlineColliderSpawner : MonoBehaviour
 {
     List<GameObject> m_lineColliders = new();
-    private List<GameObject> m_shipsInColliders = new();
-    public List<GameObject> GetColliders() { return m_shipsInColliders; }
-    public List<GameObject> m_allShipsInColliders;
     private int childIndex;
 
     public GameObject colliderPrefab;
@@ -22,6 +19,11 @@ public class RedlineColliderSpawner : MonoBehaviour
         {
             SpawnCollider();
         }
+    }
+
+    public void ClearList()
+    {
+        m_lineColliders.Clear();
     }
 
     // Update is called once per frame

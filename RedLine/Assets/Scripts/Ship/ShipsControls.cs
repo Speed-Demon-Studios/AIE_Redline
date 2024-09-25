@@ -135,6 +135,11 @@ public class ShipsControls : MonoBehaviour
         }
     }
 
+    public void ClearList()
+    {
+        m_fire.Clear();
+    }
+
     /// <summary>
     /// switches the fire
     /// </summary>
