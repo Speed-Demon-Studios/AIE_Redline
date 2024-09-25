@@ -14,7 +14,7 @@ public class SparksParticlesController : MonoBehaviour
         mainModule.loop = true;
         if (particleToActivate.isPlaying == false)
         {
-            mainModule.duration = 0.08f;
+            mainModule.duration = 0.1f;
             particleToActivate.Play();
         }
     }
@@ -22,8 +22,8 @@ public class SparksParticlesController : MonoBehaviour
     public void DeactivateSparks(ParticleSystem particleToActivate)
     {
         ParticleSystem.MainModule mainModule = particleToActivate.main;
-        particleToActivate.Stop();
         mainModule.loop = false;
+        //particleToActivate.Stop();
     }
     
     private IEnumerator DeactivateSPRKS(int particleToDeactivate)

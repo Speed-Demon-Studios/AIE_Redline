@@ -54,8 +54,8 @@ public class SparksTrigger : MonoBehaviour
                 foreach (ParticleSystem sparkParticle in sparks)
                 {
                     m_spc.DeactivateSparks(sparkParticle);
+                    isColliding = false;
                 }
-                isColliding = false;
             }
         //}    
     }
