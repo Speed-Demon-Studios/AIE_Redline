@@ -15,6 +15,7 @@ public class PlayerUiControl : MonoBehaviour
     public List<Slider> sliders = new();
     private int m_sliderNumber;
     public TextMeshProUGUI test;
+    public List<Animator> anim;
 
     private void Update()
     {
@@ -56,6 +57,19 @@ public class PlayerUiControl : MonoBehaviour
                         break;
                 }
 
+                if (m_shipsControls.ReturnIsBoosting())
+                {
+
+                    for (int i = 0; i < sliders.Count; i++)
+                    {
+                        sliders[i].value = 0;
+                    }
+                }
+
+                anim[0].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
+                anim[1].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
+                anim[2].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
+
                 if (test != null)
                     test.text = m_shipsControls.ReturnRB().velocity.y.ToString();
 
@@ -65,5 +79,10 @@ public class PlayerUiControl : MonoBehaviour
                 m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
             }
         }
+    }
+
+    public void ResetSliders()
+    {
+
     }
 }
