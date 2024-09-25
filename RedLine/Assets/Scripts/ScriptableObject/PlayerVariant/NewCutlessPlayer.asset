@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c169529faa1eb40877067feeedb501, type: 3}
+  m_Name: NewCutlessPlayer
+  m_EditorClassIdentifier: 
+  VariantName: Cutlass
+  DownForce: 15000
+  model: {fileID: 7024027080776050394, guid: 2cda5571071459642a92b9dce428c7ba, type: 3}
+  collision: {fileID: 1682898037148015143, guid: 60b03d62a3486304fb081daa446cf7f4,
+    type: 3}
+  DefaultMaxAcceleration: 6.2
+  MaxAcceleration: 0.18272
+  DefaultMaxSpeed: 148
+  AccelerationMultiplier: 2.4
+  BreakMultiplier: 4
+  SpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.01986102
+      outSlope: -0.01986102
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2375
+    - serializedVersion: 3
+      time: 0.69299114
+      value: 0.86434287
+      inSlope: -0.44632116
+      outSlope: -0.44632116
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2068496
+      outWeight: 0.32745907
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.89900124
+      outSlope: -0.89900124
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11492259
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnSpeed: 3.25
+  TurnSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.55079377
+      outSlope: -0.55079377
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13539399
+    - serializedVersion: 3
+      time: 0.53510106
+      value: 0.6375574
+      inSlope: -1.0180639
+      outSlope: -1.0180639
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13532472
+      outWeight: 0.16459629
+    - serializedVersion: 3
+      time: 0.95336914
+      value: 0.0047302246
+      inSlope: -1.7474887
+      outSlope: -1.7474887
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15654783
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  NeededSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  distance: 0
+  turnMultiplier: 0
