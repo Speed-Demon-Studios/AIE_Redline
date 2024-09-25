@@ -22,7 +22,7 @@ public class ManageSceneLoading : MonoBehaviour
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
             GameObject a = shipCollider.gameObject;
-            GameObject b = controls.shipModel.transform.GetChild(3).gameObject;
+            GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
             a.transform.parent = null;
             b.transform.parent = null;
             Destroy(a);

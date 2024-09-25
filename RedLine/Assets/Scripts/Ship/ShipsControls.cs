@@ -60,6 +60,19 @@ public class ShipsControls : MonoBehaviour
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
 
+    public void ResetAngles(float angle1, float angle2, float angle3)
+    {
+        m_currentAngle = angle1;
+        m_targetAngle = angle2;
+        m_shipAngle = angle3;
+    }
+
+    public void ResetPositions(Vector3 position)
+    {
+        m_currentPos = position;
+        m_targetPos = position;
+    }
+
     public void ResetAcceleration()
     {
         wantingToBoost = false;
