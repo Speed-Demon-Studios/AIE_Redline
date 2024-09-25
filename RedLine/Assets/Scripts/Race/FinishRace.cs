@@ -89,13 +89,33 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
+                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+                                float quickestTime = 0;
+
+                                foreach(float time in racerDeets.lapTimesSECONDS)
+                                {
+                                    if(quickestTime == 0)
+                                    {
+                                        quickestTime = time;
+                                    }
+
+                                    if(time < quickestTime)
+                                    {
+                                        quickestTime = time;
+                                    }
+                                }
+
+                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
+                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
+
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                                 else if (racerDeets.totalRaceTimeMinutes < 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                             }
                         }
@@ -107,13 +127,33 @@ public class FinishRace : MonoBehaviour
                             }
                             else
                             {
+                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+                                float quickestTime = 0;
+
+                                foreach (float time in racerDeets.lapTimesSECONDS)
+                                {
+                                    if (quickestTime == 0)
+                                    {
+                                        quickestTime = time;
+                                    }
+
+                                    if (time < quickestTime)
+                                    {
+                                        quickestTime = time;
+                                    }
+                                }
+
+                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
+                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
+
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                                 else if (racerDeets.totalRaceTimeMinutes < 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                             }
                         }

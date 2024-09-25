@@ -70,17 +70,17 @@ public class RacerDetails : MonoBehaviour
             currentLapTimeSECONDS += Time.deltaTime;
             totalRaceTimeSeconds += 1 * Time.deltaTime;
 
-            if (totalRaceTimeSeconds >= 60.0f)
-            {
-                totalRaceTimeSeconds = 0.0f;
-                totalRaceTimeMinutes += 1.0f;
-            }
-
-            if (currentLapTimeSECONDS >= 60.0f)
-            {
-                currentLapTimeSECONDS = 0.0f;
-                currentLapTimeMINUTES += 1;
-            }
+            //if (totalRaceTimeSeconds >= 60.0f)
+            //{
+            //    totalRaceTimeSeconds = 0.0f;
+            //    totalRaceTimeMinutes += 1.0f;
+            //}
+            //
+            //if (currentLapTimeSECONDS >= 60.0f)
+            //{
+            //    currentLapTimeSECONDS = 0.0f;
+            //    currentLapTimeMINUTES += 1;
+            //}
         }
 
         if (GameManager.gManager.raceStarted == false && nameSet == false)
@@ -115,8 +115,8 @@ public class RacerDetails : MonoBehaviour
                         {
                             GameManager.gManager.timingsListUpdated = false;
                             lapTimesSECONDS.Add(currentLapTimeSECONDS);
-                            lapTimesMINUTES.Add(currentLapTimeMINUTES);
-                            currentLapTimeMINUTES = 0;
+                            //lapTimesMINUTES.Add(currentLapTimeMINUTES);
+                            //currentLapTimeMINUTES = 0;
                             currentLapTimeSECONDS = 0;
                             GameManager.gManager.timingsListUpdated = true;
                         } 
