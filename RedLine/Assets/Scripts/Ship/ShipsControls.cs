@@ -95,6 +95,7 @@ public class ShipsControls : MonoBehaviour
 
     private void OnEnable()
     {
+        ClearList();
         if (variant != null && shipModel != null)
         {
             FindChildWithTag(shipModel.transform);

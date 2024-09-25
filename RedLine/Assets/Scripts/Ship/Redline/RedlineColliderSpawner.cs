@@ -9,12 +9,15 @@ public class RedlineColliderSpawner : MonoBehaviour
     List<GameObject> m_lineColliders = new();
     private int childIndex;
 
+    public List<GameObject> ReturnList() { return m_lineColliders; }
+
     public GameObject colliderPrefab;
     public Transform spawnPoint;
     public GameObject colliderParent;
 
     void OnEnable()
     {
+        ClearList();
         for (int i = 0; i < 35; i++)
         {
             SpawnCollider();
@@ -77,10 +80,13 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         if (childIndex < m_lineColliders.Count)
         {
-            m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
-            childIndex += 1;
-            if (childIndex > m_lineColliders.Count - 1)
-                childIndex = 0;
+            if (m_lineColliders[childIndex] != null)
+            {
+                m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
+                childIndex += 1;
+                if (childIndex > m_lineColliders.Count - 1)
+                    childIndex = 0;
+            }
         }
     }
 

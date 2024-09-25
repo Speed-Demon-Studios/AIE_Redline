@@ -115,6 +115,11 @@ public class UIControllerInput : MonoBehaviour
         }
     }
 
+    public void ResetPlayersButtons()
+    {
+        GameManager.gManager.ResetForEachPlayer();
+    }
+
     public void AttachModels(ShipsControls ship)
     {
         Instantiate(ship.VariantObject.model, ship.shipModel.transform);
@@ -150,6 +155,7 @@ public class UIControllerInput : MonoBehaviour
 
         if(playersReady >= GameManager.gManager.players.Count)
         {
+            GameManager.gManager.EmptyStartButtonList();
             GoToRace();
         }
     }
@@ -157,8 +163,9 @@ public class UIControllerInput : MonoBehaviour
     public void ResetFirstButtonSelect(int playerNumber)
     {
         OnShipSelection = true;
-        GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[playerNumber].GetComponentInChildren<Button>().gameObject);
-        GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
+        if(GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().GetShipSelection() == null)
+            GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
+        GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().GetShipSelection().gameObject.GetComponentInChildren<Button>().gameObject);
         m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[playerNumber]);
 
     }
