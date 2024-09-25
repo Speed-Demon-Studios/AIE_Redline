@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class RacerDetails : MonoBehaviour
 {
+    [Header("References & Variables")]
+    [Header("Script References")]
     public RedlineColliderSpawner rCS;
-    public bool finishedRacing = false;
-    public bool crossedFinishLine = false;
-    public float distanceToCheckpoint;
-    public int currentLap = 0;
-    public int placement = 0;
-    public int currentCheckpoint = 0;
 
+    [Space]
+    [Header("LapTime Lists")]
     public List<float> lapTimesSECONDS = new List<float>();
     public List<float> lapTimesMINUTES = new List<float>();
 
+    [Space]
+    [Header("Integer Variables")]
+    public int placement = 0;
+    public int currentLap = 0;
+    public int currentCheckpoint = 0;
+
+    [Space]
+    [Header("Float Variables")]
+    public float distanceToCheckpoint;
+    public float totalRaceTimeSeconds = 0;
+    public float totalRaceTimeMinutes = 0;
     public float currentLapTimeSECONDS = 0;
     public float currentLapTimeMINUTES = 0;
 
-    public float totalRaceTimeSeconds = 0;
-    public float totalRaceTimeMinutes = 0;
+    [Space]
+    [Header("Bool Variables")]
+    public bool finishedRacing = false;
+    public bool crossedFinishLine = false;
 
+    [Space]
+    [Header("String Variables")]
     public string RacerName = "";
 
+    // !!********************************************************!!
+    // !! Only PRIVATE variables and references past this point. !!
+    // !!********************************************************!!
 
-    private CheckpointHandler m_cHandler;
-    private bool nameSet = false;
+    private CheckpointHandler m_cHandler; // Reference to the CheckpointHandler.cs script.
+
+    private bool nameSet = false;         // Whether or not the racers name has been set.
 
     /// <summary>
     /// Calculates the distance to the next checkpoint
@@ -75,32 +92,10 @@ public class RacerDetails : MonoBehaviour
                 {
                     //Debug.Log("Player Index: " + i);
                     RacerName = ("Player" + (i + 1));
-                    Debug.Log("Racer name: " + RacerName);
                     break;
                 }
             }
         }
-
-
-        //if (finishedRacing == true)
-        //{
-        //    PlayerInputScript playerInput = this.GetComponent<PlayerInputScript>();
-        //    ShipsControls shipControls = this.GetComponent<ShipsControls>();
-        //    if (playerInput != null)
-        //    {
-        //        if (playerInput.enabled == true)
-        //        {
-        //            playerInput.enabled = false;
-        //        }
-        //    }
-        //    if (shipControls != null)
-        //    {
-        //        if (shipControls.enabled == true)
-        //        {
-        //            shipControls.enabled = false;
-        //        }
-        //    }
-        //}
     }
 
     private void OnTriggerEnter(Collider other)

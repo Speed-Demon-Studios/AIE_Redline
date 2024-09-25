@@ -48,7 +48,6 @@ public class RaceManager : MonoBehaviour
         {
             ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
             
-
             AMC.UpdateActionMapForUI();
         }
 

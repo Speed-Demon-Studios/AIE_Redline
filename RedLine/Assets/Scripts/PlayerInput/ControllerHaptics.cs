@@ -5,26 +5,38 @@ using UnityEngine.InputSystem;
 
 public class ControllerHaptics : MonoBehaviour
 {
-    private PlayerInputScript m_pInputScript;
-
-    [SerializeField] private float m_defaultRumble = 0.0f;
-    [SerializeField] private float m_boost1Rumble = 0.012f;
-    [SerializeField] private float m_boost2Rumble = 0.15f;
-    [SerializeField] private float m_boost3Rumble = 0.45f;
-
+    [Header("References")]
+    [Space]
+    [Header("Public Variables")]
+    [Header("Public floats")]
     public float rumbleDurationAtTarget = 0.0f;
-    private float currentRumble = 0.0f;
-    private float targetRumble = 0.0f;
 
-    private bool rumbling = false;
+    // !!********************************************************!!
+    // !! Only PRIVATE variables and references past this point. !!
+    // !!********************************************************!!
+
+    private PlayerInputScript m_pInputScript;   // Reference to PlayerInputScript.cs
+    private Gamepad m_playerGamepad;            // Gamepad/Controller Input Device
+
+    // Float Variables
+    // ------------------------------------------------------
+    private float m_boost1Rumble = 0.012f;      // High-Frequency Motor Speed For Boost LVL1
+    private float m_boost2Rumble = 0.15f;       // High-Frequency Motor Speed For Boost LVL2
+    private float m_boost3Rumble = 0.45f;       // High-Frequency Motor Speed For Boost LVL3
+    private float currentRumble = 0.0f;         // Current High-Frequency Motor Speed For Rumble Scaling
+    private float targetRumble = 0.0f;          // Target High-Frequency Motor Speed For Rumble Scaling
+    // ------------------------------------------------------
+
+    // Bool Variables
+    private bool m_rumbling = false;
     private bool m_rumbleReady = false;
     private bool m_stopRumble = false;
-    private bool chargeUpRumble = false;
+    private bool m_chargeUpRumble = false;
+    // ------------------------------------------------------
 
 
     private void Awake()
     {
-        //GameManager.gManager.hapticsController = this;
         m_pInputScript = this.gameObject.GetComponent<PlayerInputScript>();
     }
 
@@ -34,13 +46,6 @@ public class ControllerHaptics : MonoBehaviour
         {
             controller.SetMotorSpeeds(rumbleLevel, rumbleLevel);
         }
-        //else if (controller == null) // If a gamepad is NOT passed through into this function, this will configure the rumble for ALL connected gamepads.
-        //{
-        //    for (int i = 0; i < Gamepad.all.Count; i++)
-        //    {
-        //        Gamepad.all[i].SetMotorSpeeds(0.012f, m_defaultRumble);
-        //    }
-        //}
     }
 
     public void RumbleTiming(Gamepad controller = null, int rumbleType = 0, float duration = 0)
@@ -51,21 +56,21 @@ public class ControllerHaptics : MonoBehaviour
 
         switch (rumbleType)
         {
-            case 0:
+            case 0: // DO NOTHING
                 {
                     break;
                 }
-            case 1:
+            case 1: // Boost LVL1
                 {
                     targetRumble = m_boost1Rumble;
                     break;
                 }
-            case 2:
+            case 2: // Boost LVL2
                 {
                     targetRumble = m_boost2Rumble;
                     break;
                 }
-            case 3:
+            case 3: // Boost LVL3
                 {
                     targetRumble = m_boost3Rumble;
                     break;
@@ -75,66 +80,61 @@ public class ControllerHaptics : MonoBehaviour
         if (rumbleType > 0)
         {
             m_rumbleReady = true;
-            chargeUpRumble = true;
+            m_chargeUpRumble = true;
         }
         return;
     }
 
     private IEnumerator WaitRumbleDuration()
     {
-        Debug.Log("Waiting Rumble Duration");
         yield return new WaitForSecondsRealtime(rumbleDurationAtTarget);
         m_stopRumble = true;
-        Debug.Log("Rumble Powering Down");
         StopCoroutine(WaitRumbleDuration());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (m_pInputScript != null && m_pInputScript.GetPlayerGamepad() != null)
-        {
-            if (m_rumbleReady == true)
-            {
-                if (chargeUpRumble == true)
-                {
-                    ConfigureRumble(m_pInputScript.GetPlayerGamepad(), targetRumble);
-                    //if (currentRumble < targetRumble)
-                    //{
-                    //    currentRumble = targetRumble;
-                    //}
-                    //if (currentRumble >= targetRumble)
-                    //{
-                        //currentRumble = targetRumble;
-                        chargeUpRumble = false;
-                        rumbling = true;
-                        Debug.Log("Rumble Charged");
-                        StartCoroutine(WaitRumbleDuration());
-                    //}
-                }
-                else if (chargeUpRumble == false && m_stopRumble == true)
-                {
-                    targetRumble = 0.0f;
-                    if (currentRumble > targetRumble)
-                    {
-                        currentRumble -= 1.1f * Time.deltaTime;
-                        ConfigureRumble(m_pInputScript.GetPlayerGamepad(), currentRumble);
-                        Debug.Log("Powering Down Rumble: " + currentRumble);
-                    }
-                    if (currentRumble <= targetRumble)
-                    {
-                        currentRumble = targetRumble;
-                        rumbling = false;
-                        m_stopRumble = false;
-                        m_pInputScript.GetPlayerGamepad().PauseHaptics();
-                        ConfigureRumble(m_pInputScript.GetPlayerGamepad(), currentRumble);
-                    }
-                }
-            }
-        }
-        else
-        {
-            m_rumbleReady = false;
-        }
+    void Update() // Update Function, Called every frame. ---------------------------------------------------------------------------------------------------------------------------------||
+    { //                                                                                                                                                                                   ||
+        if (m_pInputScript != null && m_pInputScript.GetPlayerGamepad() != null) // If the PlayerInputScript.cs reference has been set, and the controller information has been assigned   ||
+        {     //                                                                                                                                                                           ||
+            if (m_playerGamepad == null) // If the reference to the players gamepad/controller input device has NOT been set                                                               ||
+            { //                                                                                                                                                                           ||
+                m_playerGamepad = m_pInputScript.GetPlayerGamepad();        // Set the reference to the players gamepad/controller input device.                                           ||
+            } // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------||
+            if (m_rumbleReady == true)          // <-\                                                                                                                                     ||
+            {                                   //    }---{ If the 'RumbleTiming()' function has been called, & has finished running }                                                     ||
+                if (m_chargeUpRumble == true)   // <-/                                                                                                                                     ||
+                { //                                                                                                                                                                       ||
+                    ConfigureRumble(m_playerGamepad, targetRumble); // Activate the controller rumble.                                                                                     ||
+                                                                    //                                                                                                                     ||
+                    m_chargeUpRumble = false;                               // Rumble is no longer "charging up" (AKA: Controller is now rumbling).                                        ||
+                    m_rumbling = true;                                      // Controller is currently rumbling.                                                                           ||
+                                                                            //                                                                                                             ||
+                    StartCoroutine(WaitRumbleDuration());                   // Start the Coroutine 'WaitRumbleDuration()'.                                                                 ||
+                }                                                           // ------------------------------------------------------------------------------------------------------------||
+                else if (m_chargeUpRumble == false && m_stopRumble == true) // If the controller is finished charging up & the 'WaitRumbleDuration()' Coroutine has finished               ||
+                {                                                           //                                                                                                             ||
+                    targetRumble = 0.0f;                                    // Set the current target high-frequency motor speed to zero (0).                                              ||
+                                                                            //                                                                                                             ||
+                    if (currentRumble > targetRumble) // While the current high-frequency motor speed is GREATER than the target motor speed                                               ||
+                    {                                                       //                                                                                                             ||
+                        currentRumble -= 1.1f * Time.deltaTime;             // Decrease the current high-frequency motor speed over time.                                                  ||
+                        ConfigureRumble(m_playerGamepad, currentRumble);    // Apply the new current high-frequency motor speed to the controllers rumble.                                 ||
+                    }                                                       // ------------------------------------------------------------------------------------------------------------||
+                    if (currentRumble <= targetRumble) // If the current high-frequency motor speed has reached the target motor speed                                                     ||
+                    {                                                       //                                                                                                             ||
+                        currentRumble = targetRumble;                       // Set the current high-frequency motor speed to the target motor speed as a precaution.                       ||
+                        m_rumbling = false;                                 // The controller is no longer rumbling.                                                                       ||
+                        m_stopRumble = false;                               // The controller is no longer stopping rumbling.                                                              ||
+                                                                            //                                                                                                             ||
+                        ConfigureRumble(m_playerGamepad, currentRumble);    // Apply the high-frequency motor speed changes to the controller.                                             ||
+                        m_playerGamepad.PauseHaptics();                     // Fully stop the rumble haptics for the controller.                                                           ||
+                    } // ------------------------------------------------------------------------------------------------------------------------------------------------------------------||
+                } // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------||
+            } // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------||
+        } // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------||
+        else // Otherwise, if either the reference to PlayerInputScript has NOT been set, AND/OR the reference to the players gamepad/controller input device hasnt been set               ||
+        { //                                                                                                                                                                               ||
+            m_rumbleReady = false;                                          // The controller is NOT ready to rumble. DO NOTHING.                                                          ||
+        } // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------||
     }
 }
