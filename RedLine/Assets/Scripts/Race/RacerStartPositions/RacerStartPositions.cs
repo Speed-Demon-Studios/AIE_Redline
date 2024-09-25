@@ -32,7 +32,13 @@ public class RacerStartPositions : MonoBehaviour
                         if (thisPosition.SpotFilled == false)
                         {
                             thisPosition.HeldRacer = GameManager.gManager.racerObjects[i];
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = true;
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.racerObjects[i].transform);
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
                             GameManager.gManager.racerObjects[i].transform.position = startPositions[a].transform.position;
+                            GameManager.gManager.racerObjects[i].transform.rotation = startPositions[a].transform.rotation;
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = false;
                             thisPosition.SpotFilled = true;
                             a = startPositions.Count();
                             break;
