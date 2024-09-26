@@ -18,6 +18,9 @@ public class ShipSelection : MonoBehaviour
     public int playerNum;
     public TextMeshProUGUI shipName;
     public List<Slider> sliders;
+    public Color readyColor;
+    public Color notReady;
+    public GameObject border;
     public void SetShip(GameObject ship) { m_ship = ship; }
 
     private void Start()
@@ -75,6 +78,7 @@ public class ShipSelection : MonoBehaviour
         FindObjectOfType<UIControllerInput>().ReadyPlayer(playerNum);
         if(m_ship.GetComponent<ShipBlendAnimations>())
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true;
+        border.GetComponent<RawImage>().color = readyColor;
 
     }
 

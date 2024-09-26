@@ -30,7 +30,7 @@ public class ShipToWallCollision : MonoBehaviour
         defaultTopSpeed = shipVariant.DefaultMaxSpeed;
         defaultAcceleration = shipVariant.MaxAcceleration;
 
-        changedTopSpeed = (defaultTopSpeed * 0.55f); // The speed that ships will be capped at while colliding with walls.
+        changedTopSpeed = (defaultTopSpeed * 0.49f); // The speed that ships will be capped at while colliding with walls.
         changedAcceleration = (defaultAcceleration * 0.4f); // The acceleration that ships will be capped at while colliding with walls.
     }
 
@@ -74,7 +74,7 @@ public class ShipToWallCollision : MonoBehaviour
         {
             if (sControlScript.GetMaxSpeed() < defaultTopSpeed)
             {
-                sControlScript.SetMaxSpeed((sControlScript.GetMaxSpeed() + (defaultTopSpeed / 0.35f) * Time.deltaTime));
+                sControlScript.SetMaxSpeed((sControlScript.GetMaxSpeed() + (defaultTopSpeed / 0.33f) * Time.deltaTime));
             }
             else if (shipVariant.DefaultMaxAcceleration > defaultTopSpeed)
             {

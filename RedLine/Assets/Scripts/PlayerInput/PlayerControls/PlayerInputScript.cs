@@ -15,6 +15,8 @@ public class PlayerInputScript : MonoBehaviour
 
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
+    public void SetPlayerNumber(int number) { m_playerNumber = number; }
+    public int GetPlayerNumber() { return m_playerNumber; }
     private GameManager gMan;
     public bool playerReadyInMenu;
     private ShipSelection m_selection;
@@ -39,6 +41,8 @@ public class PlayerInputScript : MonoBehaviour
             m_playerNumber = gMan.numberOfPlayers;
         if (gMan != null)
             eventSystem.firstSelectedGameObject = gMan.FindStartButton();
+        if (gMan != null && m_playerNumber != 1)
+            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1);
 
 
         if (player != null)
@@ -47,6 +51,30 @@ public class PlayerInputScript : MonoBehaviour
         }
         
         //GameManager.gManager.hapticsController.ConfigureRumble(thisGamepad);
+    }
+
+    public void PlayerDisconnect()
+    {
+        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject);
+        Destroy(m_selection.gameObject);
+        for(int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
+        {
+            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() != m_playerNumber)
+            {
+                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
+            }
+        }
+        if (GameManager.gManager.players.Contains(this.gameObject))
+        {
+            GameManager.gManager.players.Remove(this.gameObject);
+        }
+        if (GameManager.gManager.playerObjects.Contains(this.gameObject))
+        {
+            GameManager.gManager.playerObjects.Remove(this.gameObject);
+        }
+        gMan.numberOfPlayers -= 1;
+        gMan.uiCInput.SetNumberOfPlayers(gMan.uiCInput.GetNumberOfPlayers() - 1);
+        Destroy(this.gameObject);
     }
 
     public Gamepad GetPlayerGamepad()
@@ -74,15 +102,6 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (GameManager.gManager.raceStarted == false && m_shipControls.enabled == true)
-        //{
-        //    m_shipControls.enabled = false;
-        //}
-        //
-        //if (GameManager.gManager.raceStarted == true && m_shipControls.enabled == false)
-        //{
-        //    m_shipControls.enabled = true;
-        //}
         if(gMan.raceStarted)
             CalculatePOV();
     }
@@ -124,9 +143,16 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if(GameManager.gManager != null)
+        {
+            GameManager.gManager.StopTime();
+        }
+    }
+
     public void Brake(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<float>());
         if (m_shipControls != null)
         {
             m_shipControls.SetBrakeMultiplier(context.ReadValue<float>());
@@ -135,7 +161,6 @@ public class PlayerInputScript : MonoBehaviour
 
     public void Accelerate(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<float>());
         if(m_shipControls != null)
         {
             m_shipControls.SetSpeedMultiplier(context.ReadValue<float>());

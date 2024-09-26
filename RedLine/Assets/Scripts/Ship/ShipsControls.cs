@@ -53,6 +53,9 @@ public class ShipsControls : MonoBehaviour
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
     public float boostTime;
+    private bool m_isBoostingOnBoostPad;
+    public bool ReturnIsBoosting() { return m_isBoosting; }
+    public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
@@ -210,15 +213,20 @@ public class ShipsControls : MonoBehaviour
             if (hit.transform.tag == "Road")
             {
                 m_targetPos = hit.normal;
+
+                if (hit.distance < 1f)
+                    m_rb.AddForce(transform.up * 4000, ForceMode.Force);
             }
         }
 
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.1f);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.1f);
-        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.1f);
+        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, 0.05f);
+        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, 0.05f);
+        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, 0.05f);
 
-        if(hit.distance > 1)
+        if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * variant.DownForce, ForceMode.Force);
+
+
     }
 
     /// <summary>
@@ -245,12 +253,19 @@ public class ShipsControls : MonoBehaviour
     /// This is only for the boost pad. its called from when you hit the boost pad
     /// </summary>
     /// <param name="force"> How strong the boost is </param>
-    /// <param name="resetBoostLevel"> </param>
-    public void BoostPadBoost(float force, bool resetBoostLevel)
+    public void BoostPadBoost(float force)
     {
-        m_isBoosting = true;
+        m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
         SwitchFire();
+        StartCoroutine(StopBoosting());
+    }
+
+    IEnumerator StopBoosting()
+    {
+        yield return new WaitForSeconds(2f);
+
+        m_isBoostingOnBoostPad = false;
     }
 
     /// <summary>
@@ -258,9 +273,35 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void ShipBoost()
     {
-        m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
-
-        StartCoroutine(ShipBoostAcceleration());
+        if (m_boostLevel > 0)
+        {
+            m_isBoosting = true;
+            ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
+            PlayerInputScript pInput = this.gameObject.GetComponent<PlayerInputScript>();
+            if (cRumble != null && pInput != null)
+            {
+                switch (m_boostLevel)
+                {
+                    case 1:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 1, 0.3f);
+                            break;
+                        }
+                    case 2:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 2, 0.5f);
+                            break;
+                        }
+                    case 3:
+                        {
+                            cRumble.RumbleTiming(pInput.GetPlayerGamepad(), 3, 0.8f);
+                            break;
+                        }
+                }
+            }
+            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
+            StartCoroutine(ShipBoostAcceleration());
+        }
     }
      /// <summary>
      /// after the first jolt the ship will maintain the the speed for a bit depending on the level of boost
@@ -287,7 +328,8 @@ public class ShipsControls : MonoBehaviour
         m_currentBoost = 0f;
         m_boostLevel = 0;
 
-        return null;
+        yield return new WaitForSeconds(1f);
+        m_isBoosting = false;
     }
 
     /// <summary>
@@ -325,7 +367,7 @@ public class ShipsControls : MonoBehaviour
 
         // this multiplier changes the turn angle based on how fast you are going. The faster you go the less you turn
         float multiplier = 0.5f;
-        if (!m_isBoosting)
+        if (!m_isBoosting && !m_isBoostingOnBoostPad)
             multiplier = variant.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
