@@ -8,11 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CloudLowerMat
-  m_Shader: {fileID: -6465566751694194690, guid: f341d83b9c15d3c4fae122bfe8651286,
+  m_Shader: {fileID: -6465566751694194690, guid: f92a3e66cde68bf4bac8c34a8126d770,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Cloud_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3d3c03587dbe95b42b7675622295825d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Color_Texture:
@@ -48,10 +48,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha_Clip: 0.29
-    - _Cloud_Height: 7
+    - _Cloud_Height: 8.92
     - _Cloud_Size: 60
     - _Cloud_Size_2: 25
-    - _Cloud_intensity: 1.1
+    - _Cloud_intensity: 1
+    - _Fluff_Scale_1: 600
+    - _Fluff_Scale_2: 200
     - _Fluff_Texture_Strength: 0.19
     - _Norma_Influence: 0.48
     - _Normal_Influence: 0
@@ -60,16 +62,19 @@ Material:
     - _SSS_Intensity: 2.22
     - _SSS_Power: 4.7
     - _Smoothness: 1.67
+    - _Tiling: 2
     m_Colors:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Cloud_Color_1: {r: 2.419442, g: 2.9995422, b: 2.9995422, a: 0.43137255}
-    - _Cloud_Color_2: {r: 0.06706124, g: 0.103773594, b: 0.103773594, a: 0}
+    - _Cloud_Color_1: {r: 2.996518, g: 3.5890496, b: 3.5890496, a: 0.43137255}
+    - _Cloud_Color_2: {r: 0.030927373, g: 0.047169805, b: 0.047169805, a: 0}
     - _Cloud_Speed: {r: 0.005, g: 0, b: 0, a: 0}
     - _Cloud_Speed_2: {r: 0.01, g: 0.015, b: 0, a: 0}
     - _Coud_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0}
     - _FluffScrollSpeed: {r: -0.002, g: 0.005, b: 0, a: 0}
     - _FluffScrollSpeed_2: {r: 0.002, g: -0.008, b: 0, a: 0}
+    - _No_sun_color: {r: 0.09301914, g: 0.32121834, b: 2.8171494, a: 0}
     - _SSS_Color: {r: 22.363522, g: 5.0347195, b: 0, a: 0}
+    - _Sun_color: {r: 11.984314, g: 2.7607844, b: 0.8784314, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2302961397982780815
 MonoBehaviour:

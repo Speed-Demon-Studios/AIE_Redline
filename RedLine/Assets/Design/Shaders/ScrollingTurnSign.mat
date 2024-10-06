@@ -10,18 +10,16 @@ Material:
   m_Name: ScrollingTurnSign
   m_Shader: {fileID: -6465566751694194690, guid: 1e90f9187318bb940adc1187f9b8398b,
     type: 3}
-  m_ValidKeywords:
-  - _SURFACE_TYPE_TRANSPARENT
+  m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION_TYPE_COLOUR_ADJUSTABLE
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+    RenderType: Opaque
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -65,7 +63,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _Dot_Matrix_Tiling: 2
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EMISSION_TYPE: 2
     - _Metallic_Multiplier: 1
     - _Normal_Strength: 1
@@ -74,11 +72,11 @@ Material:
     - _ReceiveShadows: 1
     - _Scroll_Steps: 10
     - _Smoothness_Multiplier: 1
-    - _SrcBlend: 5
-    - _Surface: 1
+    - _SrcBlend: 1
+    - _Surface: 0
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
     - _Emission_Colour: {r: 7.999999, g: 2.7643976, b: 0.46073294, a: 0}
