@@ -20,7 +20,6 @@ public class PlayerInputScript : MonoBehaviour
     private GameManager gMan;
     public bool playerReadyInMenu;
     private ShipSelection m_selection;
-    public ShipSelection GetShipSelection() { return m_selection; }
     public void SetSelection(ShipSelection selection) { m_selection = selection; }
 
     private float m_currentPOV;

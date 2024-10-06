@@ -10,10 +10,10 @@ using System.Net;
 public class FinishRace : MonoBehaviour
 {
     public GameObject mainButton;
+    public bool m_allRacersFinished = false;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
     private TextMeshProUGUI[] tempSortingTextList;
-    private bool m_allRacersFinished = false;
     private bool m_alreadyShowingPlacements = false;
     private bool m_allRacersCrosedLine = false;
     private bool m_checkingRacersFinished = false;
@@ -22,7 +22,6 @@ public class FinishRace : MonoBehaviour
     private bool readyToDisplay = false;
     private bool timingsListsUpdated = false;
     private bool textListSorted = false;
-
 
     private void Awake()
     {
@@ -90,8 +89,8 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
-                                float totalMinutes = racerDeets.totalRaceTimeSeconds / 60f;
-                                float totalSeconds = racerDeets.totalRaceTimeSeconds % 60f;
+                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
                                 float quickestTime = 0;
 
                                 foreach(float time in racerDeets.lapTimesSECONDS)
@@ -107,8 +106,8 @@ public class FinishRace : MonoBehaviour
                                     }
                                 }
 
-                                float quickestMiuntes = quickestTime / 60f;
-                                float quickestSeconds = quickestTime % 60f;
+                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
+                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
@@ -128,8 +127,8 @@ public class FinishRace : MonoBehaviour
                             }
                             else
                             {
-                                float totalMinutes = racerDeets.totalRaceTimeSeconds / 60f;
-                                float totalSeconds = racerDeets.totalRaceTimeSeconds % 60f;
+                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
                                 float quickestTime = 0;
 
                                 foreach (float time in racerDeets.lapTimesSECONDS)
@@ -145,8 +144,8 @@ public class FinishRace : MonoBehaviour
                                     }
                                 }
 
-                                float quickestMiuntes = quickestTime / 60f;
-                                float quickestSeconds = quickestTime % 60f;
+                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
+                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {

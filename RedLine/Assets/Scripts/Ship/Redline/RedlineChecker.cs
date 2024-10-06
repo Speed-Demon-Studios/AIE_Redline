@@ -7,7 +7,7 @@ public class RedlineChecker : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>();
-        if (other.CompareTag("Redline") && !transform.parent.GetComponent<RacerDetails>().rCS.ReturnList().Contains(other.gameObject))
+        if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
         {
             tryTest.SwitchRedlineBool(true);
         }
@@ -16,7 +16,7 @@ public class RedlineChecker : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>(); ;
-        if (other.CompareTag("Redline") && !transform.parent.GetComponent<RacerDetails>().rCS.ReturnList().Contains(other.gameObject))
+        if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
         {
             tryTest.SwitchRedlineBool(false);
         }
