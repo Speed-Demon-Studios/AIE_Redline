@@ -10,10 +10,10 @@ using System.Net;
 public class FinishRace : MonoBehaviour
 {
     public GameObject mainButton;
+    public bool m_allRacersFinished = false;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
     private TextMeshProUGUI[] tempSortingTextList;
-    private bool m_allRacersFinished = false;
     private bool m_alreadyShowingPlacements = false;
     private bool m_allRacersCrosedLine = false;
     private bool m_checkingRacersFinished = false;
