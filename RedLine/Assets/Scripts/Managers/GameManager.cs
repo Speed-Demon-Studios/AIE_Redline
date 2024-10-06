@@ -61,28 +61,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void EmptyStartButtonList()
-    {
-        m_startButtons.Clear();
-    }
-
-    public void ResetForEachPlayer()
-    {
-        uiCInput = FindObjectOfType<UIControllerInput>();
-        int index = 0;
-        foreach(GameObject player in players)
-        {
-            if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() == 1)
-            {
-                index++;
-            }
-            else
-            {
-                uiCInput.ResetFirstButtonSelect(player.GetComponent<PlayerInputScript>().GetPlayerNumber() - 1);
-            }
-        }
-    }
-
     private void Update()
     {
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)

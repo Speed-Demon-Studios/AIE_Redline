@@ -19,9 +19,7 @@ public class ManageSceneLoading : MonoBehaviour
             //IBR.playerCamera.gameObject.SetActive(false);
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
-            playerOBJ.GetComponent<RacerDetails>().rCS.ClearList();
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
-            controls.ClearList();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
             GameObject a = shipCollider.gameObject;
             GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
@@ -41,7 +39,6 @@ public class ManageSceneLoading : MonoBehaviour
             racerDeets.currentLapTimeMINUTES = 0;
             racerDeets.lapTimesSECONDS = new List<float>();
             racerDeets.lapTimesMINUTES = new List<float>();
-            racerDeets.rCS.enabled = false;
 
             ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         }
@@ -75,16 +72,16 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-        //int index = 0;
-        //foreach(GameObject player in GameManager.gManager.players)
-        //{
-        //    if(index != 0)
-        //    {
-        //        GameManager.gManager.uiCInput.ResetFirstButtonSelect(index);
-        //    }
-        //
-        //    index++;
-        //}
+        int index = 0;
+        foreach(GameObject player in GameManager.gManager.players)
+        {
+            if(index != 0)
+            {
+                GameManager.gManager.uiCInput.ResetFirstButtonSelect(index);
+            }
+
+            index++;
+        }
 
         SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);

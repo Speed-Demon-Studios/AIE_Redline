@@ -40,7 +40,9 @@ MonoBehaviour:
       type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  m_RendererFeatureMap: adc0de57c6d2eee5
+  - {fileID: 4974246646012252958}
+  - {fileID: 3749186338988107582}
+  m_RendererFeatureMap: adc0de57c6d2eee51e13bd48f81208453e27227c1cc90734
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -81,3 +83,40 @@ MonoBehaviour:
   m_ClusteredRendering: 0
   m_TileSize: 32
   m_IntermediateTextureMode: 0
+--- !u!114 &3749186338988107582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a2f6e0de7f614fa2630e6db16cb24, type: 3}
+  m_Name: Blit
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    Event: 1000
+    blitMaterial: {fileID: 2100000, guid: 2af8065090d313c47a466725c9cf42fa, type: 2}
+    blitMaterialPassIndex: 0
+    destination: 0
+    textureId: _BlitPassTexture
+--- !u!114 &4974246646012252958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f01da5a4c9b7e4f9927b2417a18e68, type: 3}
+  m_Name: GrabScreenFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    TextureName: _GrabPassTransparent
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 0

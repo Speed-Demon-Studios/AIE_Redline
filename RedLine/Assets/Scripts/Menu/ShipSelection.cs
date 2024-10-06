@@ -26,10 +26,6 @@ public class ShipSelection : MonoBehaviour
     private void Start()
     {
         m_currentShips = ships[0];
-        StartCoroutine(NameChange(variants[m_shipIndex].VariantName));
-        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
         cam.GetComponentInChildren<Camera>().targetTexture = texture;
         image.texture = texture;
     }

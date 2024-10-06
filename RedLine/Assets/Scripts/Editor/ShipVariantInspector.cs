@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(ShipVariant))]
 public class ShipVariantInspector : Editor
 {
+    GameObject Collision;
     public override void OnInspectorGUI()
     {
         EditorGUI.BeginChangeCheck();
@@ -40,7 +41,7 @@ public class ShipVariantInspector : Editor
         GameObject model = (GameObject)EditorGUILayout.ObjectField(variant.model, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
 
         GUILayout.Space(45f);
-        GameObject collision = (GameObject)EditorGUILayout.ObjectField(variant.collision, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
+        Collision = (GameObject)EditorGUILayout.ObjectField(variant.collision, typeof(GameObject), true, GUILayout.Width(150), GUILayout.Height(25));
 
         GUILayout.EndHorizontal();
 
@@ -123,6 +124,7 @@ public class ShipVariantInspector : Editor
             variant.NeededSpeedCurve = neededSpeedCurve;
             variant.DefaultMaxSpeed = DefaultMaxSpeed;
             variant.MaxAcceleration = MaxAcceleration;
+            variant.collision = Collision;
         }
     }
 }

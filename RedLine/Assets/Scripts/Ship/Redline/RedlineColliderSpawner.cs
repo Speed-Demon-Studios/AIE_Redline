@@ -7,9 +7,10 @@ using UnityEngine;
 public class RedlineColliderSpawner : MonoBehaviour
 {
     List<GameObject> m_lineColliders = new();
+    private List<GameObject> m_shipsInColliders = new();
+    public List<GameObject> GetColliders() { return m_shipsInColliders; }
+    public List<GameObject> m_allShipsInColliders;
     private int childIndex;
-
-    public List<GameObject> ReturnList() { return m_lineColliders; }
 
     public GameObject colliderPrefab;
     public Transform spawnPoint;
@@ -17,16 +18,10 @@ public class RedlineColliderSpawner : MonoBehaviour
 
     void OnEnable()
     {
-        ClearList();
         for (int i = 0; i < 35; i++)
         {
             SpawnCollider();
         }
-    }
-
-    public void ClearList()
-    {
-        m_lineColliders.Clear();
     }
 
     // Update is called once per frame
@@ -80,13 +75,10 @@ public class RedlineColliderSpawner : MonoBehaviour
     {
         if (childIndex < m_lineColliders.Count)
         {
-            if (m_lineColliders[childIndex] != null)
-            {
-                m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
-                childIndex += 1;
-                if (childIndex > m_lineColliders.Count - 1)
-                    childIndex = 0;
-            }
+            m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
+            childIndex += 1;
+            if (childIndex > m_lineColliders.Count - 1)
+                childIndex = 0;
         }
     }
 
