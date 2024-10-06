@@ -23,6 +23,7 @@ public class FinishRace : MonoBehaviour
     private bool timingsListsUpdated = false;
     private bool textListSorted = false;
 
+
     private void Awake()
     {
         GameManager.gManager.raceFinisher = this;
