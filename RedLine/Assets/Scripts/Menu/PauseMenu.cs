@@ -28,4 +28,9 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.gManager.StartTime(switchs);
     }
+
+    public void QuitToMenu()
+    {
+        GameManager.gManager.mSL.InitializeForMainMenu();
+    }
 }

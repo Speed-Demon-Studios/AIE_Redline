@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -171,5 +172,13 @@ public class UIControllerInput : MonoBehaviour
         GameManager.gManager.players[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
         m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[index]);
 
+    }
+
+    public void SetUpSelectionScreen()
+    {
+        foreach (GameObject playerOBJ in GameManager.gManager.players)
+        {
+            playerOBJ.GetComponent<PlayerInputScript>().ReturnShipSelection().SetUp();
+        }
     }
 }

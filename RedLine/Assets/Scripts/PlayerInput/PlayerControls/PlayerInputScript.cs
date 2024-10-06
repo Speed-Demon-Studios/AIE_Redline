@@ -22,6 +22,8 @@ public class PlayerInputScript : MonoBehaviour
     private ShipSelection m_selection;
     public void SetSelection(ShipSelection selection) { m_selection = selection; }
 
+    public ShipSelection ReturnShipSelection() { return m_selection; }
+
     private float m_currentPOV;
     private float m_desiredPOV;
     public float lerpTime;

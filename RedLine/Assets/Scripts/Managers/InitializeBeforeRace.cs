@@ -69,6 +69,8 @@ public class InitializeBeforeRace : MonoBehaviour
 
     public void InitializeForRace()
     {
+        GameManager.gManager.raceFinished = false;
+
         if (playerCamOBJECT != null)
         {
             playerCamOBJECT.SetActive(true);
@@ -79,10 +81,10 @@ public class InitializeBeforeRace : MonoBehaviour
         foreach (GameObject racerOBJ in GameManager.gManager.players)
         {
             RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
-            if (GetComponentInChildren<IsShipCollider>().gameObject != null && GetComponentInChildren<IsShipCollider>() != null)
-            {
-                GetComponentInChildren<IsShipCollider>().shipControls = sControls;
-            }
+            //if (GetComponentInChildren<IsShipCollider>().gameObject != null && GetComponentInChildren<IsShipCollider>() != null)
+            //{
+            //    GetComponentInChildren<IsShipCollider>().shipControls = sControls;
+            //}
 
             rDeets.finishedRacing = false;
             rDeets.crossedFinishLine = false;

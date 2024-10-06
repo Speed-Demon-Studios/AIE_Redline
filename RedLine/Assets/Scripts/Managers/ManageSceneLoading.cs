@@ -19,8 +19,10 @@ public class ManageSceneLoading : MonoBehaviour
             //IBR.playerCamera.gameObject.SetActive(false);
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+            playerOBJ.GetComponent<RacerDetails>().rCS.ClearList();
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
+            controls.FireList().Clear();
             GameObject a = shipCollider.gameObject;
             GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
             a.transform.parent = null;

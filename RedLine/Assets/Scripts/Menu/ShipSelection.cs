@@ -36,6 +36,15 @@ public class ShipSelection : MonoBehaviour
         cam.transform.rotation = Quaternion.Euler(0, m_y, 0);
     }
 
+    public void SetUp()
+    {
+        StopAllCoroutines();
+        StartCoroutine(NameChange(variants[0].VariantName));
+        sliders[0].value = variants[0].DefaultMaxSpeed;
+        sliders[1].value = variants[0].TurnSpeed;
+        sliders[2].value = variants[0].DefaultMaxAcceleration;
+    }
+
     public void OnNext()
     {
         m_currentShips.SetActive(false);
