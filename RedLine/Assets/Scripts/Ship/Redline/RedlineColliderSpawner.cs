@@ -71,14 +71,22 @@ public class RedlineColliderSpawner : MonoBehaviour
     //    }
     //}
 
+    public void ClearList()
+    {
+        m_lineColliders.Clear();
+    }
+
     private void ChangePositions()
     {
-        if (childIndex < m_lineColliders.Count)
+        if (spawnPoint != null && m_lineColliders[1] != null)
         {
-            m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
-            childIndex += 1;
-            if (childIndex > m_lineColliders.Count - 1)
-                childIndex = 0;
+            if (childIndex < m_lineColliders.Count)
+            {
+                m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
+                childIndex += 1;
+                if (childIndex > m_lineColliders.Count - 1)
+                    childIndex = 0;
+            }
         }
     }
 

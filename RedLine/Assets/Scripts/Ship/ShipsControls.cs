@@ -18,6 +18,8 @@ public class ShipsControls : MonoBehaviour
     private List<GameObject> m_fire = new();
     private int m_fireIndex;
 
+    public List<GameObject> FireList() { return m_fire; }
+
     [Space]
     [Header("Speed Variables")]
     private float m_accelerateMultiplier;
@@ -140,29 +142,32 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
-        m_fireIndex = m_boostLevel;
-        switch (m_fireIndex)
+        if (m_fire.Count > 0)
         {
-            case 0:
-                m_fire[0].SetActive(false);
-                m_fire[1].SetActive(false);
-                m_fire[2].SetActive(false);
-                break;
-            case 1:
-                m_fire[0].SetActive(true);
-                m_fire[1].SetActive(false);
-                m_fire[2].SetActive(false);
-                break;
-            case 2:
-                m_fire[1].SetActive(true);
-                m_fire[2].SetActive(false);
-                m_fire[0].SetActive(false);
-                break;
-            case 3:
-                m_fire[2].SetActive(true);
-                m_fire[0].SetActive(false);
-                m_fire[1].SetActive(false);
-                break;
+            m_fireIndex = m_boostLevel;
+            switch (m_fireIndex)
+            {
+                case 0:
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 1:
+                    m_fire[0].SetActive(true);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 2:
+                    m_fire[1].SetActive(true);
+                    m_fire[2].SetActive(false);
+                    m_fire[0].SetActive(false);
+                    break;
+                case 3:
+                    m_fire[2].SetActive(true);
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    break;
+            }
         }
 
     }

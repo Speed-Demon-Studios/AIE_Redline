@@ -21,6 +21,7 @@ public class ManageSceneLoading : MonoBehaviour
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
+            controls.FireList().Clear();
             GameObject a = shipCollider.gameObject;
             GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
             a.transform.parent = null;
