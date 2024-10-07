@@ -31,6 +31,7 @@ public class FinishRace : MonoBehaviour
 
     public void DebugForFunction()
     {
+        placementWindow.SetActive(false);
         GameManager.gManager.mSL.InitializeForMainMenu();
     }
 

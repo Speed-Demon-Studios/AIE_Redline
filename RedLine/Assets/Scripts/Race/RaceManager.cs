@@ -108,9 +108,10 @@ public class RaceManager : MonoBehaviour
 
         if (GameManager.gManager.raceFinisher.AllRacersFinishedCheck() == true)
         {
-            DisableFinishedRacerMovement();
             FinishRace();
         }
+        
+        DisableFinishedRacerMovement();
 
 
         //GameManager.gManager.raceFinisher.CheckAllRacersFinished();
