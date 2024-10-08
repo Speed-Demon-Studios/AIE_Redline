@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     public RaceManager rManager;
     public FinishRace raceFinisher;
     public ControllerHaptics hapticsController;
+    public PauseMenu pMenu;
 
-    public GameObject[] m_startButtons;
+    public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     public bool indexListSorted = true;
 
     public bool timingsListUpdated = false;
+
+    public bool timeStopped = false;
 
     public int countdownIndex = 2;
     public int neededLaps = 0;
@@ -111,6 +114,21 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StopTime()
+    {
+        pMenu.transform.GetChild(0).gameObject.SetActive(true);
+        players[0].GetComponent<ActionMappingControl>().UpdateActionMapForUI();
+        pMenu.SwitchPlayerOneButton();
+        Time.timeScale = 0;
+    }
+
+    public void StartTime(bool switchs)
+    {
+        if(switchs)
+            players[0].GetComponent<ActionMappingControl>().UpdateActionMapForRace();
+        Time.timeScale = 1;
     }
 
     public void EnableRMovement()

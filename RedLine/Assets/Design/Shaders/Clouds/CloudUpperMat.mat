@@ -8,11 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CloudUpperMat
-  m_Shader: {fileID: -6465566751694194690, guid: f341d83b9c15d3c4fae122bfe8651286,
+  m_Shader: {fileID: -6465566751694194690, guid: f92a3e66cde68bf4bac8c34a8126d770,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Cloud_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3d3c03587dbe95b42b7675622295825d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Color_Texture:
@@ -51,7 +51,9 @@ Material:
     - _Cloud_Height: 7
     - _Cloud_Size: 60.67
     - _Cloud_Size_2: 27.7
-    - _Cloud_intensity: 1.48
+    - _Cloud_intensity: 1.21
+    - _Fluff_Scale_1: 600
+    - _Fluff_Scale_2: 200
     - _Fluff_Texture_Strength: 0.19
     - _Norma_Influence: 0.48
     - _Normal_Influence: 0
@@ -60,16 +62,19 @@ Material:
     - _SSS_Intensity: 0.72
     - _SSS_Power: 1.94
     - _Smoothness: 1.67
+    - _Tiling: 3
     m_Colors:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Cloud_Color_1: {r: 1.5225886, g: 1.6757483, b: 1.7207954, a: 0.43137255}
-    - _Cloud_Color_2: {r: 0.020469902, g: 0.033131577, b: 0.03773582, a: 0}
+    - _Cloud_Color_1: {r: 1.9337513, g: 2.0640204, b: 2.1023347, a: 0.43137255}
+    - _Cloud_Color_2: {r: 0.045834813, g: 0.08221341, b: 0.09433961, a: 0}
     - _Cloud_Speed: {r: -0.0025, g: 0, b: 0, a: 0}
     - _Cloud_Speed_2: {r: -0.005, g: 0.007, b: 0, a: 0}
     - _Coud_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0}
     - _FluffScrollSpeed: {r: 0.001, g: 0.0025, b: 0, a: 0}
     - _FluffScrollSpeed_2: {r: -0.001, g: -0.004, b: 0, a: 0}
+    - _No_sun_color: {r: 0, g: 0.44228095, b: 1.5016968, a: 0}
     - _SSS_Color: {r: 22.363522, g: 5.0677495, b: 0, a: 0}
+    - _Sun_color: {r: 11.984314, g: 3.3254902, b: 0.627451, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2302961397982780815
 MonoBehaviour:

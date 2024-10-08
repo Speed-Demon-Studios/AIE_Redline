@@ -12,7 +12,7 @@ public class BoostPadTrigger : MonoBehaviour
             Debug.Log("Boost pad triggered");
             ShipsControls test;
             if (other.gameObject.TryGetComponent<ShipsControls>(out test))
-                test.BoostPadBoost(force, false);
+                test.BoostPadBoost(force);
         }
     }
 }
