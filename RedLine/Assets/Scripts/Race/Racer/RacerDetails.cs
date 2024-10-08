@@ -5,8 +5,12 @@ using UnityEngine;
 public class RacerDetails : MonoBehaviour
 {
     [Header("References & Variables")]
+    public GameObject startOfTunnelOBJ;
+    public GameObject endOfTunnelOBJ;
+
     [Header("Script References")]
     public RedlineColliderSpawner rCS;
+
 
     [Space]
     [Header("LapTime Lists")]
@@ -65,6 +69,16 @@ public class RacerDetails : MonoBehaviour
 
     private void Update()
     {
+        if (endOfTunnelOBJ != null)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) <= 24f && Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) > 10f)
+            {
+                ShipsControls sControls = this.gameObject.GetComponent<ShipsControls>();
+                sControls.SetRotationToTrack(endOfTunnelOBJ.GetComponent<EndOfTunnel>().point);
+            }
+
+        }
+
         if (currentLap > 0 && finishedRacing == false)
         {
             currentLapTimeSECONDS += Time.deltaTime;
