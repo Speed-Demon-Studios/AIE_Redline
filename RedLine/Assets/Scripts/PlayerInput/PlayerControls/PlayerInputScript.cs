@@ -104,7 +104,7 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(gMan.raceStarted)
+        if(gMan.raceStarted == true && gMan.raceFinished == false)
             CalculatePOV();
     }
 

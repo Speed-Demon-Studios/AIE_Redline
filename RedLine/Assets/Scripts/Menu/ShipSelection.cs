@@ -30,6 +30,11 @@ public class ShipSelection : MonoBehaviour
         image.texture = texture;
     }
 
+    private void OnEnable()
+    {
+        SetUp();
+    }
+
     private void Update()
     {
         m_y += 5f * Time.deltaTime;

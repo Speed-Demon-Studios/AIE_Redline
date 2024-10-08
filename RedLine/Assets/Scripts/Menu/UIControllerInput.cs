@@ -155,6 +155,20 @@ public class UIControllerInput : MonoBehaviour
         }
     }
 
+    public void CallResetButtons()
+    {
+        int index = 0;
+        foreach (GameObject player in GameManager.gManager.players)
+        {
+            if (index != 0)
+            {
+                ResetFirstButtonSelect(index);
+            }
+
+            index++;
+        }
+    }
+
     public void ResetFirstButtonSelect(int playerNumber)
     {
         OnShipSelection = true;

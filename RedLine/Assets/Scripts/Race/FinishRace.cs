@@ -112,11 +112,11 @@ public class FinishRace : MonoBehaviour
 
                                 if (racerDeets.totalRaceTimeMinutes >= 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=50%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=55%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                                 else if (racerDeets.totalRaceTimeMinutes < 10.0f)
                                 {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=50%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=45%>||" + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
+                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=50%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=70%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
                                 }
                             }
                         }
@@ -124,7 +124,7 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.crossedFinishLine == false)
                             {
-                                placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=50%>DNF" + "<pos=45%>||" + "<pos=70%>" + "DNF";
+                                placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=45%>||" + "<pos=50%>DNF" + "<pos=70%>" + "DNF";
                             }
                             else
                             {
