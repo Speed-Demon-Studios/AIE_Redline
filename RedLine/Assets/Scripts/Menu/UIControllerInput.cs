@@ -31,25 +31,40 @@ public class UIControllerInput : MonoBehaviour
     // Testing
     private bool HasInitialized = true;
 
+    /// <summary>
+    /// Adds another selectionMenu in for when a player joins
+    /// </summary>
     public void AddToPlayers()
     {
         m_numberOfPalyers += 1;
         if(playerCountText != null)
             playerCountText.text = "Player Count: " + m_numberOfPalyers;
-        GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);
-        m_selectionMenuButtons.Add(a);
-        GameManager.gManager.m_startButtons.Add(a.GetComponentInChildren<Button>().gameObject);
-        a.GetComponent<ShipSelection>().texture = textures[m_numberOfPalyers - 1];
-        a.GetComponent<ShipSelection>().playerNum = m_numberOfPalyers - 1;
+
+        //
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);// Instantiate the selectionMenu                                      |
+                                                                     //                                                                    | 
+        m_selectionMenuButtons.Add(a); // Adds that new selectionMenu to personal list                                                     |
+                                                                                                                                         //|
+        GameManager.gManager.m_startButtons.Add(a.GetComponentInChildren<Button>().gameObject); // Adds the button to the GameManager list |
+                                                                                                                                         //|
+        a.GetComponent<ShipSelection>().texture = textures[m_numberOfPalyers - 1]; // Assigns the texture which displays the ship          |
+                                                                                                                                         //|
+        a.GetComponent<ShipSelection>().playerNum = m_numberOfPalyers - 1;  // Assigns the players number to the selectionMenu             |
+                                                                                                                                         //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        //
+
     }
     private void Awake()
     {
-        GameManager.gManager.CurrentScene = "MainMenu";
-        GameManager.gManager.disablePlayerCams = true;
-        GameManager.gManager.resetRacerVariables = true;
-        GameManager.gManager.m_startButtons[0] = firstButton;
-        GameManager.gManager.mSL.SetPlayerUIInputMM();
-
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        GameManager.gManager.CurrentScene = "MainMenu";// Sets a string to MainMenu to know when we are in main menu                       |
+        GameManager.gManager.disablePlayerCams = true; // turns a bool on that will disaple all cameras when in the main menu              |                                                                                  
+        GameManager.gManager.resetRacerVariables = true; // turns a bool on that will let the game know the players variables are ready    |                                                                                
+        GameManager.gManager.m_startButtons[0] = firstButton; // Sets the firstButton to the start buttons 1 list item                     |                                                                            
+        GameManager.gManager.mSL.SetPlayerUIInputMM(); // Reseting player 1 main menu button                                               |                                                                                   
+        //---------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                         //|
     }
 
     private void Update()
@@ -58,31 +73,40 @@ public class UIControllerInput : MonoBehaviour
             playerCountText.text = "Player Count: " + m_numberOfPalyers;
     }
 
+    /// <summary>
+    /// When a player disconnects we need to delete the player selection screen which this does
+    /// </summary>
+    /// <param name="selection"> what selection to delete </param>
     public void DeleteSelection(GameObject selection)
     {
-        if (m_selectionMenuButtons.Contains(selection))
-        {
-            m_selectionMenuButtons.Remove(selection);
-        }
-        else
-        {
-            Debug.Log("Does not contain " + selection + " in the list");
-        }
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (m_selectionMenuButtons.Contains(selection)) // if the list contains the deleting menu then remove it from the list             |
+        {                                                                                                                                //|
+            m_selectionMenuButtons.Remove(selection); // Remove it from the list                                                           |
+        }                                                                                                                                //|
+        else                                                                                                                             //|
+        {                                                                                                                                //|
+            Debug.Log("Does not contain " + selection + " in the list"); // If not then post an error                                      |
+        }                                                                                                                                //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
-    public void InitializePlayerConnections()
-    {
-        HasInitialized = false;
-        GameObject inputControllerParent = Instantiate(InputControllerParentPrefab);
-        PIM = inputControllerParent.GetComponent<PlayerInputManager>();
-        PIM.EnableJoining();
-        HasInitialized = true;
-        Debug.Log("Players can now join.");
-    }
+    //public void InitializePlayerConnections()
+    //{
+    //    //---------------------------------------------------------------------------------------------------------------------------------|
+    //    HasInitialized = false;                                                                                                            |
+    //    GameObject inputControllerParent = Instantiate(InputControllerParentPrefab);                                                       |
+    //    PIM = inputControllerParent.GetComponent<PlayerInputManager>();                                                                    |
+    //    PIM.EnableJoining();                                                                                                               |
+    //    HasInitialized = true;                                                                                                             |
+    //    Debug.Log("Players can now join.");                                                                                                |
+    //    //---------------------------------------------------------------------------------------------------------------------------------|
+    //}
 
 
     public void GoToRace()
     {
+        //---------------------------------------------------------------------------------------------------------------------------------|
         if (HasInitialized == true)
         {
             foreach(GameObject player in GameManager.gManager.players)
@@ -111,9 +135,8 @@ public class UIControllerInput : MonoBehaviour
             Debug.Log("Ready To Start Race");
             GameManager.gManager.racerObjects = new List<GameObject>();
             SceneManager.LoadSceneAsync(1);
-
-
         }
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
     public void AttachModels(ShipsControls ship)
@@ -160,6 +183,10 @@ public class UIControllerInput : MonoBehaviour
         int index = 0;
         foreach (GameObject player in GameManager.gManager.players)
         {
+            ActionMappingControl aMC = player.GetComponent<ActionMappingControl>();
+
+            aMC.UpdateActionMapForUI();
+
             if (index != 0)
             {
                 ResetFirstButtonSelect(index);
