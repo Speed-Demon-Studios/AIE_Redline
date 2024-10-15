@@ -129,11 +129,12 @@ public class UIControllerInput : MonoBehaviour
                 ActionMappingControl aMC = player.GetComponent<ActionMappingControl>();
                 aMC.mES.firstSelectedGameObject = null;
                 aMC.mES.SetSelectedGameObject(null);
-
             }
+
             Debug.Log("Loading Race Scene");
             Debug.Log("Ready To Start Race");
             GameManager.gManager.racerObjects = new List<GameObject>();
+
             SceneManager.LoadSceneAsync(1);
         }
         //---------------------------------------------------------------------------------------------------------------------------------|

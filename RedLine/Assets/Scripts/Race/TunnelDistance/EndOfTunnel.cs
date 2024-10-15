@@ -13,6 +13,7 @@ public class EndOfTunnel : MonoBehaviour
             RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
 
             rDeets.endOfTunnelOBJ = this.gameObject;
+            //rDeets.resetNormalOBJs.Add(this.gameObject);
         }
     }
 }

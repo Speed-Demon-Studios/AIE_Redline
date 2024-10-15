@@ -16,12 +16,18 @@ public class RedlineColliderSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameObject colliderParent;
 
-    void OnEnable()
+    //void OnEnable()
+    //{
+    //    CallSpawnCollider();
+    //}
+
+    public void CallSpawnCollider()
     {
         for (int i = 0; i < 35; i++)
         {
             SpawnCollider();
         }
+
     }
 
     // Update is called once per frame
@@ -73,7 +79,7 @@ public class RedlineColliderSpawner : MonoBehaviour
 
     public void ClearList()
     {
-        m_lineColliders.Clear();
+        m_lineColliders = new List<GameObject> ();
     }
 
     private void ChangePositions()

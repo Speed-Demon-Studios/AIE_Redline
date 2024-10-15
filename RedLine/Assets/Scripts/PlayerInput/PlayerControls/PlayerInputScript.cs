@@ -149,7 +149,10 @@ public class PlayerInputScript : MonoBehaviour
     {
         if(GameManager.gManager != null)
         {
-            GameManager.gManager.StopTime();
+            if (GameManager.gManager.raceStarted)
+            {
+                GameManager.gManager.StopTime();
+            }
         }
     }
 
@@ -173,7 +176,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.6f);
+            m_shipControls.SetTurnMultipliers(context.ReadValue<float>() * 0.75f);
         }
     }
 

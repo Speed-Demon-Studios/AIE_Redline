@@ -12,6 +12,8 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_speed;
     [SerializeField] private RacerDetails rDetails;
     [SerializeField] private ShipsControls m_shipsControls;
+    [SerializeField] private TextMeshProUGUI currentLapTime;
+    [SerializeField] private TextMeshProUGUI bestLapTime;
     public List<Slider> sliders = new();
     private int m_sliderNumber;
     public TextMeshProUGUI test;
@@ -25,6 +27,8 @@ public class PlayerUiControl : MonoBehaviour
             {
                 placementText.text = " ";
                 lapText.text = " ";
+                currentLapTime.text = " ";
+                bestLapTime.text = " ";
             }
             else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
             {
@@ -42,6 +46,17 @@ public class PlayerUiControl : MonoBehaviour
                             placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();
                         }
                     }
+                }
+
+                currentLapTime.text = string.Format("{0:00}", rDetails.currentLapTimeMINUTES) + ":" + string.Format("{0:00.00}", rDetails.currentLapTimeSECONDS);
+
+                if(rDetails.quickestLapTimeMINUTES > 50)
+                {
+                    bestLapTime.text = "--:--:--";
+                }
+                else
+                {
+                    bestLapTime.text = string.Format("{0:00}", rDetails.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", rDetails.quickestLapTimeSECONDS);
                 }
 
                 switch (m_shipsControls.ReturnBoost())
