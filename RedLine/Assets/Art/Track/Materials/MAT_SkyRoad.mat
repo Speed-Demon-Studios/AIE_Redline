@@ -11,6 +11,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 9e4ab33e220ca2640a5e9291a694faed,
     type: 3}
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _EMISSION_TYPE_COLOUR_ADJUSTABLE
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
@@ -100,7 +101,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO_Multiplier: 0.208
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _Blend: 2
     - _BumpScale: 1
     - _CastShadows: 1
@@ -119,7 +120,7 @@ Material:
     - _Metallic: 0
     - _Metallic_Multiplier: 0.935
     - _Mode: 0
-    - _Normal_Strength: 0
+    - _Normal_Strength: 0.011
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResetNormal : MonoBehaviour
 {
     public Transform point;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag.ToLower() == "racercolliders")
