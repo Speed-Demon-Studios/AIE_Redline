@@ -14,6 +14,10 @@ public class ShipBlendAnimations : MonoBehaviour
         FindEveryChild(m_controls.shipModel.transform);
     }
 
+    /// <summary>
+    /// Finds every child in the parent and if the parent has children then go through all of them
+    /// </summary>
+    /// <param name="parent"></param>
     public void FindEveryChild(Transform parent)
     {
         foreach (Transform child in parent)
@@ -32,11 +36,13 @@ public class ShipBlendAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.enabled && m_controller != null)
-        {
-            m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed());
-
-            m_controller.SetFloat("WingBlend", m_controls.GetTurnMultiplier());
-        }
+        //---------------------------------------------------------------------------------------------------------------------------------------|
+        if (this.enabled && m_controller != null) // check for null refreneces so there are no errors                                            |
+        {                                                                                                                                      //|
+            m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed()); // blend engine to speed  |
+                                                                                                                                               //|
+            m_controller.SetFloat("WingBlend", m_controls.GetTurnMultiplier()); // blend wing to the direction of turning                        |
+        }                                                                                                                                      //|
+        //---------------------------------------------------------------------------------------------------------------------------------------|
     }
 }

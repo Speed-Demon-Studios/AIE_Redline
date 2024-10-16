@@ -21,69 +21,78 @@ public class PlayerInputScript : MonoBehaviour
     public bool playerReadyInMenu;
     private ShipSelection m_selection;
     public void SetSelection(ShipSelection selection) { m_selection = selection; }
-
+    public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
     public ShipSelection ReturnShipSelection() { return m_selection; }
 
-    private float m_currentPOV;
-    private float m_desiredPOV;
+    private float m_currentFOV;
+    private float m_desiredFOV;
     public float lerpTime;
-    public float minPOV;
-    public float maxPOV;
+    public float minFOV;
+    public float maxFOV;
 
     // Start is called before the first frame update
     void Awake()
     {
-        m_shipControls = GetComponentInParent<ShipsControls>();
-        //m_cam = GetComponentInChildren<Camera>();
-        gMan = GameManager.gManager;
-
-        if(gMan != null)
-            gMan.players.Add(gameObject);
-        if (gMan != null)
-            m_playerNumber = gMan.numberOfPlayers;
-        if (gMan != null)
-            eventSystem.firstSelectedGameObject = gMan.FindStartButton();
-        if (gMan != null && m_playerNumber != 1)
-            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1);
-
-
-        if (player != null)
-        {
-            AssignController();
-        }
-        
-        //GameManager.gManager.hapticsController.ConfigureRumble(thisGamepad);
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent    |
+        gMan = GameManager.gManager; // seting a reference to the GameManager                                                              |
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (gMan != null) // if there is a GameManager                                                                                     |
+            gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
+                                                                                                                                         //|
+        if (gMan != null) // if there is a GameManager                                                                                     |
+            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
+                                                                                                                                         //|
+        if (gMan != null) // if there is a GameManager                                                                                     |
+            eventSystem.firstSelectedGameObject = gMan.FindStartButton(); // set ths first selected button the the start button            |
+                                                                                                                                         //|
+        if (gMan != null && m_playerNumber != 1) // if there is a GameManager and this object is not player 1                              |
+            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1); // set up first selected button for the selection screen             |
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (player != null) // chech for player so that we dont get error later                                                            |
+        {                                                                                                                                //|
+            AssignController(); // calls a function that help setup controllers for feedback                                               |
+        }                                                                                                                                //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
+    /// <summary>
+    /// Gets called when a controller looses connection
+    /// </summary>
     public void PlayerDisconnect()
     {
-        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject);
-        Destroy(m_selection.gameObject);
-        for(int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
-        {
-            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() != m_playerNumber)
-            {
-                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
-            }
-        }
-        if (GameManager.gManager.players.Contains(this.gameObject))
-        {
-            GameManager.gManager.players.Remove(this.gameObject);
-        }
-        if (GameManager.gManager.playerObjects.Contains(this.gameObject))
-        {
-            GameManager.gManager.playerObjects.Remove(this.gameObject);
-        }
-        gMan.numberOfPlayers -= 1;
-        gMan.uiCInput.SetNumberOfPlayers(gMan.uiCInput.GetNumberOfPlayers() - 1);
-        Destroy(this.gameObject);
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list      |
+        Destroy(m_selection.gameObject); // destroy the selection screen object                                                            |
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3      |
+        // will now become player 2                                                                                                        |
+        for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)                                                    //|
+        {                                                                                                                                //|
+            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)                    //|
+            {                                                                                                                            //|
+                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);                                    //|
+            }                                                                                                                            //|
+        }                                                                                                                                //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (GameManager.gManager.players.Contains(this.gameObject)) // if the players list contains this object                            |
+        {                                                                                                                                //|
+            GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
+        }                                                                                                                                //|
+        if (GameManager.gManager.playerObjects.Contains(this.gameObject)) // if the playerObjects list contains this object                |
+        {                                                                                                                                //|
+            GameManager.gManager.playerObjects.Remove(this.gameObject); // then remove the object from the list                            |
+        }                                                                                                                                //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        gMan.numberOfPlayers -= 1;                                                                                                       //|
+        gMan.uiCInput.SetNumberOfPlayers(gMan.uiCInput.GetNumberOfPlayers() - 1); // -1 from number of player in the uicontroller script   |
+        Destroy(this.gameObject);                                                                                                        //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
-
-    public Gamepad GetPlayerGamepad()
-    {
-        return m_playerGamepad;
-    }
-
+    
+    /// <summary>
+    /// assigning controllers so that they can have vibration feedback
+    /// </summary>
     private void AssignController()
     {
         for (int i = 0; i < Gamepad.all.Count; i++)
@@ -104,29 +113,37 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(gMan.raceStarted == true && gMan.raceFinished == false)
-            CalculatePOV();
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished                            |
+            CalculateFOV(); // calculate the FOV for the camera                                                                            |
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
-    private void CalculatePOV()
+    private void CalculateFOV()
     {
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;
-        //if(speedPercentage > 0.001)
-        //{
-        //    
-        //    //m_desiredPOV = ((maxPOV - minPOV) * speedPercentage) + minPOV;
-        //}
-        //else
-        //{
-        //    m_desiredPOV = minPOV;
-        //}
-        m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);
-
-        m_currentPOV = Mathf.Lerp(m_currentPOV, m_desiredPOV, lerpTime);
-        m_cam.fieldOfView = m_currentPOV;
-
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;                   //|
+        // if the ship is moving slightly                                                                                                  |
+        if(speedPercentage > 0.001)                                                                                                      //|
+        {                                                                                                                                //|
+            m_desiredFOV = ((maxFOV - minFOV) * speedPercentage) + minFOV; // calculate the desiredFOV                                     |
+        }                                                                                                                                //|
+        else // if its not moving                                                                                                          |
+        {                                                                                                                                //|
+            m_desiredFOV = minFOV; // then the FOV is now the min it can go                                                                |
+        }                                                                                                                                //|
+        //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
+                                                                                                                                         //|
+        m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
+        m_cam.fieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
+    /// <summary>
+    /// OnRight is for the selection screen to use the joystick or d-pad to go to the next ship in the list
+    /// </summary>
+    /// <param name="context"></param>
     public void OnRight(InputAction.CallbackContext context)
     {
         if(m_selection != null)
@@ -136,6 +153,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// OnLeft is for the selection screen to use the joystick or d-pad to go to the prev ship in the list
+    /// </summary>
+    /// <param name="context"></param>
     public void OnLeft(InputAction.CallbackContext context)
     {
         if (m_selection != null)
@@ -145,6 +166,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pause is to pause the game when the pause button is pressed
+    /// </summary>
+    /// <param name="context"></param>
     public void Pause(InputAction.CallbackContext context)
     {
         if(GameManager.gManager != null)
@@ -156,6 +181,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Brake will send through a value to the shipControlls of how mush the brake is being pressed
+    /// </summary>
+    /// <param name="context"></param>
     public void Brake(InputAction.CallbackContext context)
     {
         if (m_shipControls != null)
@@ -164,6 +193,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Accelerate will send through a value to the shipControlls for how mush the accelerate button is being pressed
+    /// </summary>
+    /// <param name="context"></param>
     public void Accelerate(InputAction.CallbackContext context)
     {
         if(m_shipControls != null)
@@ -172,6 +205,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turn will send through a value to the shipControlls for how much and which direction the player wants to turn
+    /// </summary>
+    /// <param name="context"></param>
     public void Turn(InputAction.CallbackContext context)
     {
         if (m_shipControls != null)
@@ -180,6 +217,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Strafe will send through a value to the shipControlls for how much and which direction the player wants to strafe
+    /// </summary>
+    /// <param name="context"></param>
     public void Strafe(InputAction.CallbackContext context)
     {
         if (m_shipControls != null)
@@ -188,6 +229,10 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Boost will activate the boost in shipControlls when the player presses the boost button
+    /// </summary>
+    /// <param name="context"></param>
     public void Boost(InputAction.CallbackContext context)
     {
         if (m_shipControls != null)
@@ -196,27 +241,12 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// this will change the action map to what ever is sent through
+    /// </summary>
+    /// <param name="map"> which map to change to </param>
     public void ChangeActionMap(string map)
     {
         player.SwitchCurrentActionMap(map);
     }
-    //private void OnEnable()
-    //{
-    //    if (player != null)
-    //    {
-    //        player.FindAction("Move").started += Move;
-    //        player.FindAction("Turn").started += Turn;
-    //        player.Enable();
-    //    }
-    //}
-    //
-    //private void OnDisable()
-    //{
-    //    if (player != null)
-    //    {
-    //        player.FindAction("Move").started -= Move;
-    //        player.FindAction("Turn").started -= Turn;
-    //        player.Disable();
-    //    }
-    //}
 }
