@@ -16,7 +16,6 @@ public class ManageSceneLoading : MonoBehaviour
         foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
             InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
-            //IBR.playerCamera.gameObject.SetActive(false);
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
@@ -38,10 +37,12 @@ public class ManageSceneLoading : MonoBehaviour
             racerDeets.totalRaceTimeMinutes = 0;
             racerDeets.currentLapTimeSECONDS = 0;
             racerDeets.currentLapTimeMINUTES = 0;
-            racerDeets.lapTimesSECONDS = new List<float>();
-            racerDeets.lapTimesMINUTES = new List<float>();
+            racerDeets.quickestLapTimeSECONDS = 99;
+            racerDeets.quickestLapTimeMINUTES = 99;
+
 
             ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+            racerDeets.rCS.ClearList();
         }
 
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
