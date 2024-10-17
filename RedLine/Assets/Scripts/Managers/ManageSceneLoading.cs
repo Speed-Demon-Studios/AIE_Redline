@@ -16,7 +16,6 @@ public class ManageSceneLoading : MonoBehaviour
         foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
             InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
-            //IBR.playerCamera.gameObject.SetActive(false);
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();

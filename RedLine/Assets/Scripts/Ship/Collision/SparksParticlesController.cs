@@ -23,7 +23,6 @@ public class SparksParticlesController : MonoBehaviour
     {
         ParticleSystem.MainModule mainModule = particleToActivate.main;
         mainModule.loop = false;
-        //particleToActivate.Stop();
     }
     
     private IEnumerator DeactivateSPRKS(int particleToDeactivate)

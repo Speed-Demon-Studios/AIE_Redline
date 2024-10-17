@@ -7,8 +7,6 @@ public class SparksTrigger : MonoBehaviour
 {
     private SparksParticlesController m_spc;
 
-
-    //public int[] colliderIndexes;
     public ParticleSystem[] sparks;
     public bool isColliding = false;
 
@@ -26,38 +24,24 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            //if (colliderIndexes.Length < 2)
-            //{
-            //    m_spc.ActivateSparks(colliderIndexes[0]);
-            //}
-            //else if (colliderIndexes.Length >= 2)
-            //{
             foreach (ParticleSystem sparkParticle in sparks)
             {
                 m_spc.ActivateSparks(sparkParticle);
             }
-            //}
             isColliding = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //if (colliderIndexes.Length < 2)
-        //{
-            if (other.tag.ToLower() == "walls")
+        if (other.tag.ToLower() == "walls")
+        {
+            foreach (ParticleSystem sparkParticle in sparks)
             {
-            //    m_spc.DeactivateSparks(colliderIndexes[0]);
-            //}
-            //else if (colliderIndexes.Length >= 2)
-            //{
-                foreach (ParticleSystem sparkParticle in sparks)
-                {
-                    m_spc.DeactivateSparks(sparkParticle);
-                    isColliding = false;
-                }
+                m_spc.DeactivateSparks(sparkParticle);
+                isColliding = false;
             }
-        //}    
+        }
     }
 
 

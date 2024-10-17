@@ -33,7 +33,6 @@ public class RaceCountdown : MonoBehaviour
         m_countdownFinished = false;
         m_countdownStarted = false;
         m_countdownCoroutineStarted = false;
-        //GameManager.gManager.readyForCountdown = true;
     }
 
     public IEnumerator RaceCountdownTimer()
