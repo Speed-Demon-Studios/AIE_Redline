@@ -167,20 +167,20 @@ public class VisionCone : MonoBehaviour
     }
 
     private void OnDrawGizmos()
-    {
+    {       
         if (_coneMesh)
         {
             Gizmos.color = meshColor;
             Gizmos.DrawMesh(_coneMesh, transform.position, transform.rotation);
         }
-
-        //Gizmos.DrawWireSphere(transform.position, distance);
-
-        Gizmos.color = Color.red;
-        for (int i = 0; i < count; i++)
-        {
-            Gizmos.DrawSphere(colliders[i].transform.position, 2f);
-        }
+        //
+        ////Gizmos.DrawWireSphere(transform.position, distance);
+        //
+        //Gizmos.color = Color.red;
+        //for (int i = 0; i < count; i++)
+        //{
+        //    Gizmos.DrawSphere(colliders[i].transform.position, 2f);
+        //}
 
         Gizmos.color = Color.green;
         foreach(var obj in objects)
