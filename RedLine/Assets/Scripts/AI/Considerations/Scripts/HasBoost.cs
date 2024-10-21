@@ -11,7 +11,7 @@ public class HasBoost : Consideration
     {
         if (!Invert)
         {
-            if (controls.ReturnBoostLevel() > 2)
+            if (controls.ReturnBoostLevel() > 1)
             {
                 score = 1;
             }
