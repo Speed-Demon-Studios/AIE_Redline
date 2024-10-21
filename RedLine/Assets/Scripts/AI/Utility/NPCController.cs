@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,9 @@ namespace Decisions
         private AgentBrain brain;
         private AIMoveInputs moveInputs;
         private ShipsControls controls;
+        private WhatsInVisionCone visionCones;
+
+        public WhatsInVisionCone GetVisionCones() { return visionCones; }
 
 
         private void Start()
