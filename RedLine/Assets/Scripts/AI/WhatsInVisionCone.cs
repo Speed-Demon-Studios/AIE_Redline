@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class WhatsInVisionCone : MonoBehaviour
 {
-    public List<GameObject> objects;
     private List<VisionCone> m_visionCons;
     public VisionCone frontLeft;
     public VisionCone frontRight;
@@ -24,22 +23,22 @@ public class WhatsInVisionCone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        objects.Clear();
-       foreach(VisionCone cone in m_visionCons)
-        {
-            foreach(GameObject obj in cone.objects)
-            {
-                objects.Add(obj);
-            }
-        } 
+       //objects.Clear();
+       //foreach(VisionCone cone in m_visionCons)
+       //{
+       //     foreach(GameObject obj in cone.objects)
+       //     {
+       //         objects.Add(obj);
+       //     }
+       //} 
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        foreach (var obj in objects)
-        {
-            Gizmos.DrawSphere(obj.transform.position, 2f);
-        }
+        //Gizmos.color = Color.green;
+        //foreach (var obj in objects)
+        //{
+        //    Gizmos.DrawSphere(obj.transform.position, 2f);
+        //}
     }
 }

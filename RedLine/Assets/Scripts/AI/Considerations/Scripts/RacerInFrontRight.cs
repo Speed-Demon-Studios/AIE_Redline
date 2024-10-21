@@ -4,14 +4,14 @@ using UnityEngine;
 using Decisions;
 using Unity.VisualScripting;
 
-[CreateAssetMenu(fileName = "RacersInFrontLeft", menuName = "Considerations/RacersInFrontLeft")]
-public class RacerInFrontLeft : Consideration
+[CreateAssetMenu(fileName = "RacersInFrontRight", menuName = "Considerations/RacersInFrontRight")]
+public class RacerInFrontRight : Consideration
 {
     public override float Score(NPCController npc, ShipsControls controls)
     {
-        if(npc.GetVisionCones().frontLeft.objects.Count > 0) // if there are ships in the front left sensor
+        if(npc.GetVisionCones().frontRight.objects.Count > 0) // if there are ships in the front left sensor
         {
-            foreach(GameObject racer in npc.GetVisionCones().frontLeft.objects) // go through all the ships in the sensor
+            foreach(GameObject racer in npc.GetVisionCones().frontRight.objects) // go through all the ships in the sensor
             {
                 Vector3 directionToRacer = (npc.transform.position - racer.transform.position).normalized; // direction to the ship in sensor
                 Vector3 fowardFacingDirection = (npc.transform.position - controls.facingPoint.position).normalized; // front foward facing direction

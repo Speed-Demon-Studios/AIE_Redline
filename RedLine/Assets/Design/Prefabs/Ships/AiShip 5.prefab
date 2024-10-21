@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 536088371}
   - component: {fileID: 536088370}
   - component: {fileID: 536088369}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PositionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,6 +404,8 @@ MonoBehaviour:
   listOfActions:
   - {fileID: 11400000, guid: 404a7830dba608c47876b111dd57d3cf, type: 2}
   - {fileID: 11400000, guid: 4db6ad1ae77703847a2dc7ea9451f8d7, type: 2}
+  - {fileID: 11400000, guid: 2359fb904ae13524fad8983d7bf0448c, type: 2}
+  - {fileID: 11400000, guid: 478821fed14ab86448c90f609dfbad1c, type: 2}
 --- !u!114 &6071556165509990598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
@@ -696,7 +698,7 @@ GameObject:
   - component: {fileID: 2653864896131115019}
   - component: {fileID: 4686521508879550323}
   - component: {fileID: 4737312616149547753}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Redline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5922,11 +5924,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc8cb7671632ba4d8048768e85ea3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
-  frontLeft: {fileID: 0}
-  frontRight: {fileID: 0}
-  backLeft: {fileID: 0}
-  backRight: {fileID: 0}
+  frontLeft: {fileID: 4299661351677864792}
+  frontRight: {fileID: 5058519312083354855}
+  backLeft: {fileID: 1922943507658343500}
+  backRight: {fileID: 8423723162117515738}
 --- !u!1 &7555956859275437318
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,17 +5982,7 @@ MonoBehaviour:
   obsicles:
     serializedVersion: 2
     m_Bits: 0
-  objects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  objects: []
   parent: {fileID: 2819560891871692966}
 --- !u!1 &7747097574683408835
 GameObject:
@@ -26340,7 +26331,7 @@ PrefabInstance:
     - target: {fileID: 236488307417939151, guid: cefd193856f6dc940bb55b098db30688,
         type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6746312845375566541, guid: cefd193856f6dc940bb55b098db30688,
         type: 3}
