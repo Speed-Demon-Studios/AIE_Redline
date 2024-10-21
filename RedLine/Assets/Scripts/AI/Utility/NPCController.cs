@@ -25,6 +25,7 @@ namespace Decisions
         {
             brain = GetComponent<AgentBrain>();
             controls = GetComponent<ShipsControls>();
+            visionCones = GetComponentInChildren<WhatsInVisionCone>();
         }
 
         private void Update()

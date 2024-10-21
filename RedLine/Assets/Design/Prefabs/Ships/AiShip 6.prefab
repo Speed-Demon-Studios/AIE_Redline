@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc8cb7671632ba4d8048768e85ea3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
   frontLeft: {fileID: 4425638510892664387}
   frontRight: {fileID: 6729969486409648125}
   backLeft: {fileID: 4881225612211907571}
@@ -366,8 +365,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfActions:
   - {fileID: 11400000, guid: 404a7830dba608c47876b111dd57d3cf, type: 2}
-  - {fileID: 11400000, guid: 478821fed14ab86448c90f609dfbad1c, type: 2}
   - {fileID: 11400000, guid: 4db6ad1ae77703847a2dc7ea9451f8d7, type: 2}
+  - {fileID: 11400000, guid: 478821fed14ab86448c90f609dfbad1c, type: 2}
+  - {fileID: 11400000, guid: 2359fb904ae13524fad8983d7bf0448c, type: 2}
 --- !u!114 &5398680113367365554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
@@ -818,7 +818,8 @@ MonoBehaviour:
   obsicles:
     serializedVersion: 2
     m_Bits: 0
-  objects: []
+  objects:
+  - {fileID: 0}
   parent: {fileID: 2819560891871692966}
 --- !u!1001 &8414114418086908365
 PrefabInstance:

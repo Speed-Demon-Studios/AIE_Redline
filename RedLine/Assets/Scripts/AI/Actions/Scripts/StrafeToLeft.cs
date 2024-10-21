@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Decisions;
 
-[CreateAssetMenu(fileName = "Strafe Right", menuName = "Actions/Strafe Right")]
-public class StrafeToTheRight : Action
+[CreateAssetMenu(fileName = "Strafe Left", menuName = "Actions/Strafe Left")]
+public class StrafeToLeft : Action
 {
     public override void ExecuteAction(NPCController npc, ShipsControls controls)
     {
-        controls.SetStrafeMultiplier(50f);
+        controls.SetStrafeMultiplier(-50f);
         isFinished = true;
     }
 }
