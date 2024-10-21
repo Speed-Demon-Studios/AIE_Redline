@@ -59,6 +59,7 @@ public class UIControllerInput : MonoBehaviour
     private void Awake()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
+        GameManager.gManager.uiCInput = this; // Sets the gameManagers reference to this script                                            |
         GameManager.gManager.CurrentScene = "MainMenu";// Sets a string to MainMenu to know when we are in main menu                       |
         GameManager.gManager.disablePlayerCams = true; // turns a bool on that will disaple all cameras when in the main menu              |                                                                                  
         GameManager.gManager.resetRacerVariables = true; // turns a bool on that will let the game know the players variables are ready    |                                                                                

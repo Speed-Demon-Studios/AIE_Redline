@@ -62,7 +62,8 @@ public class PlayerInputScript : MonoBehaviour
     public void PlayerDisconnect()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list      |
+        if(m_selection != null) // check if the selection is null                                                                          |
+            GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list  |
         Destroy(m_selection.gameObject); // destroy the selection screen object                                                            |
         //---------------------------------------------------------------------------------------------------------------------------------|
         // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3      |
