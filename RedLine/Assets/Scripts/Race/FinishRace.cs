@@ -39,7 +39,12 @@ public class FinishRace : MonoBehaviour
     private void Update()
     {
         //CheckAllRacersFinished();
-
+        //if (Input.GetKeyUp(KeyCode.R))
+        //{
+        //    Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+        //    Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+        //    Steamworks.SteamUserStats.StoreStats();
+        //}
     }
 
     /// <summary>
@@ -209,6 +214,27 @@ public class FinishRace : MonoBehaviour
                     }
                 }
             }
+
+            //int currentWins;
+            //Steamworks.SteamUserStats.GetStat("FirstPlaceWins", out currentWins);
+            //RacerDetails racerDeetsScript = GameManager.gManager.players[0].GetComponent<RacerDetails>();
+            //if (racerDeetsScript.placement == 1)
+            //{
+            //    currentWins++;
+            //    bool gotAchievement;
+            //    Steamworks.SteamUserStats.GetAchievement("RedlineCadet", out gotAchievement);
+            //    Steamworks.SteamUserStats.SetStat("FirstPlaceWins", currentWins);
+            //    if (currentWins == 5)
+            //    {
+            //        gotAchievement = true;
+            //        Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+            //    }
+            //    if (currentWins >= 1)
+            //    {
+            //        Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+            //    }
+            //    Steamworks.SteamUserStats.StoreStats();
+            //}
         }
     }
 
