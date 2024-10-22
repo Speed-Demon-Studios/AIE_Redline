@@ -214,6 +214,7 @@ public class FinishRace : MonoBehaviour
                     }
                 }
             }
+
             int currentWins;
             Steamworks.SteamUserStats.GetStat("FirstPlaceWins", out currentWins);
             RacerDetails racerDeetsScript = GameManager.gManager.players[0].GetComponent<RacerDetails>();
@@ -234,7 +235,6 @@ public class FinishRace : MonoBehaviour
                 }
                 Steamworks.SteamUserStats.StoreStats();
             }
-
         }
     }
 
