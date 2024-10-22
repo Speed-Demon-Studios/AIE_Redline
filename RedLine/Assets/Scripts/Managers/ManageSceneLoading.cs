@@ -16,13 +16,13 @@ public class ManageSceneLoading : MonoBehaviour
         foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
             InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
-            //IBR.playerCamera.gameObject.SetActive(false);
             playerOBJ.GetComponent<ShipsControls>().enabled = false;
             playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
             ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
             IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
+            controls.FireList().Clear();
             GameObject a = shipCollider.gameObject;
-            GameObject b = controls.shipModel.transform.GetChild(3).gameObject;
+            GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
             a.transform.parent = null;
             b.transform.parent = null;
             Destroy(a);
@@ -37,10 +37,12 @@ public class ManageSceneLoading : MonoBehaviour
             racerDeets.totalRaceTimeMinutes = 0;
             racerDeets.currentLapTimeSECONDS = 0;
             racerDeets.currentLapTimeMINUTES = 0;
-            racerDeets.lapTimesSECONDS = new List<float>();
-            racerDeets.lapTimesMINUTES = new List<float>();
+            racerDeets.quickestLapTimeSECONDS = 99;
+            racerDeets.quickestLapTimeMINUTES = 99;
+
 
             ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+            racerDeets.rCS.ClearList();
         }
 
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
@@ -72,19 +74,11 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-        int index = 0;
-        foreach(GameObject player in GameManager.gManager.players)
-        {
-            if(index != 0)
-            {
-                GameManager.gManager.uiCInput.ResetFirstButtonSelect(index);
-            }
-
-            index++;
-        }
 
         SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);
+
+
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());

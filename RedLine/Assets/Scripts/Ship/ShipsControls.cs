@@ -15,8 +15,10 @@ public class ShipsControls : MonoBehaviour
     public GameObject shipModel;
     public Transform rayCastPoint;
     private Rigidbody m_rb;
-    public List<GameObject> fire = new();
+    private List<GameObject> m_fire = new();
     private int m_fireIndex;
+
+    public List<GameObject> FireList() { return m_fire; }
 
     [Space]
     [Header("Speed Variables")]
@@ -60,6 +62,19 @@ public class ShipsControls : MonoBehaviour
 
     public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
 
+    public void ResetAngles(float angle1, float angle2, float angle3)
+    {
+        m_currentAngle = angle1;
+        m_targetAngle = angle2;
+        m_shipAngle = angle3;
+    }
+
+    public void ResetPositions(Vector3 position)
+    {
+        m_currentPos = position;
+        m_targetPos = position;
+    }
+
     public void ResetAcceleration()
     {
         wantingToBoost = false;
@@ -80,13 +95,38 @@ public class ShipsControls : MonoBehaviour
             m_currentMaxSpeed = variant.DefaultMaxSpeed;
     }
 
+    private void OnEnable()
+    {
+        if (variant != null && shipModel != null)
+        {
+            FindChildWithTag(shipModel.transform);
+        }
+    }
+
+    private void FindChildWithTag(Transform childParent)
+    {
+        foreach (Transform child in childParent)
+        {
+            if (child.CompareTag("Fire"))
+            {
+                m_fire.Add(child.gameObject);
+            }
+
+            if (child.childCount > 0)
+            {
+                FindChildWithTag(child);
+            }
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         if (this.enabled && GameManager.gManager.raceStarted)
         {
             AddToBoost();
-            SwitchFire();
+            if(m_fire.Count > 0)
+                SwitchFire();
             CheckBoost();
             Strafe();
             Turn();
@@ -102,29 +142,32 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
-        m_fireIndex = m_boostLevel;
-        switch (m_fireIndex)
+        if (m_fire.Count > 0)
         {
-            case 0:
-                fire[0].SetActive(false);
-                fire[1].SetActive(false);
-                fire[2].SetActive(false);
-                break;
-            case 1:
-                fire[0].SetActive(true);
-                fire[1].SetActive(false);
-                fire[2].SetActive(false);
-                break;
-            case 2:
-                fire[1].SetActive(true);
-                fire[2].SetActive(false);
-                fire[0].SetActive(false);
-                break;
-            case 3:
-                fire[2].SetActive(true);
-                fire[0].SetActive(false);
-                fire[1].SetActive(false);
-                break;
+            m_fireIndex = m_boostLevel;
+            switch (m_fireIndex)
+            {
+                case 0:
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 1:
+                    m_fire[0].SetActive(true);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 2:
+                    m_fire[1].SetActive(true);
+                    m_fire[2].SetActive(false);
+                    m_fire[0].SetActive(false);
+                    break;
+                case 3:
+                    m_fire[2].SetActive(true);
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    break;
+            }
         }
 
     }
@@ -146,7 +189,8 @@ public class ShipsControls : MonoBehaviour
             }
 
         }
-        SwitchFire();
+        if (m_fire.Count > 0)
+            SwitchFire();
     }
 
     /// <summary>
@@ -257,7 +301,8 @@ public class ShipsControls : MonoBehaviour
     {
         m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
-        SwitchFire();
+        if (m_fire.Count > 0)
+            SwitchFire();
         StartCoroutine(StopBoosting());
     }
 
@@ -321,9 +366,9 @@ public class ShipsControls : MonoBehaviour
             m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
         }
 
-        fire[0].SetActive(false);
-        fire[1].SetActive(false);
-        fire[2].SetActive(false);
+        m_fire[0].SetActive(false);
+        m_fire[1].SetActive(false);
+        m_fire[2].SetActive(false);
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;

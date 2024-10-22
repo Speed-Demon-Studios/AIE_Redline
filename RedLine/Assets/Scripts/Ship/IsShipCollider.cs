@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class IsShipCollider : MonoBehaviour
 {
+    public ShipsControls shipControls;
 }

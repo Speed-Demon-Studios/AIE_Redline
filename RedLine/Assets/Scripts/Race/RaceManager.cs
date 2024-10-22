@@ -5,6 +5,7 @@ public class RaceManager : MonoBehaviour
 {
     [SerializeField] private int TotalLaps;
     bool coroutineStarted = false;
+    public bool isTimeTrial = false;
 
     public float GetTotalLaps() { return TotalLaps; }
 
@@ -70,6 +71,12 @@ public class RaceManager : MonoBehaviour
                     playerInit.InitializeForRace();
                 }
                 yield return new WaitForEndOfFrame();
+
+
+                if (gObj.GetComponent<RacerDetails>() != null)
+                    gObj.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
+                {
+                }
             }
         }
         coroutineStarted = false;
@@ -91,27 +98,38 @@ public class RaceManager : MonoBehaviour
 
     public void LapComplete(RacerDetails racer)
     {
-        if (racer.currentLap >= TotalLaps)
+        if (isTimeTrial == false)
         {
-            racer.crossedFinishLine = true;
-            racer.finishedRacing = true;
+            if (racer.currentLap >= TotalLaps)
+            {
+                racer.crossedFinishLine = true;
+                racer.finishedRacing = true;
+            }
+            if (racer.currentLap < TotalLaps)
+            {
+                racer.currentLap += 1;
+            }
+            
+            if (racer.currentLap > 0)
+            {
+                Debug.Log("Lap " + (racer.currentLap - 1) + " Completed!");
+            }
+
+            if (GameManager.gManager.raceFinisher.AllRacersFinishedCheck() == true)
+            {
+                FinishRace();
+            }
+            
+            DisableFinishedRacerMovement();
         }
-        if (racer.currentLap < TotalLaps)
+        else
         {
-            racer.currentLap += 1;
-        }
-        
-        if (racer.currentLap > 0)
-        {
-            Debug.Log("Lap " + (racer.currentLap - 1) + " Completed!");
+            if (racer.currentLap == 0)
+            {
+                racer.currentLap = 1;
+            }
         }
 
-        if (GameManager.gManager.raceFinisher.AllRacersFinishedCheck() == true)
-        {
-            FinishRace();
-        }
-
-        DisableFinishedRacerMovement();
 
         //GameManager.gManager.raceFinisher.CheckAllRacersFinished();
 

@@ -13,6 +13,11 @@ public class ActionMappingControl : MonoBehaviour
     private bool controlMapChanged = false;
     private int playerRacingActionMapIndex;
 
+    public PlayerInput getPlayerInput()
+    {
+        return _playerInputActions;
+    }
+
     public void SwitchActionMapToPlayer()
     {
         for (int i = 0; i < _playerInputActions.actions.actionMaps.Count; i++)

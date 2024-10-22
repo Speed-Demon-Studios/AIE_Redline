@@ -25,9 +25,17 @@ public class ShipSelection : MonoBehaviour
 
     private void Start()
     {
+        // makest sure that the first ship is the one that shows up at the start
         m_currentShips = ships[0];
+
+        // sets up the camera texture to display the ship
         cam.GetComponentInChildren<Camera>().targetTexture = texture;
         image.texture = texture;
+    }
+
+    private void OnEnable()
+    {
+        SetUp();
     }
 
     private void Update()
@@ -36,89 +44,144 @@ public class ShipSelection : MonoBehaviour
         cam.transform.rotation = Quaternion.Euler(0, m_y, 0);
     }
 
+    /// <summary>
+    /// Set up makes sure that all the text animation and the stats show up when the screen loads up
+    /// </summary>
+    public void SetUp()
+    {
+        // stops all the current coroutines
+        StopAllCoroutines();
+        // starts the text coroutine
+        StartCoroutine(NameChange(variants[0].VariantName));
+        //---------------------------------------------------------|
+        // all the sliders are set to the right ships stats        |
+        sliders[0].value = variants[0].DefaultMaxSpeed;          //|
+        sliders[1].value = variants[0].TurnSpeed;                //|
+        sliders[2].value = variants[0].DefaultMaxAcceleration;   //|
+        //---------------------------------------------------------|
+    }
+
+    /// <summary>
+    /// OnNext will go to the next ship in the list when the input is pressed
+    /// </summary>
     public void OnNext()
     {
-        m_currentShips.SetActive(false);
-        m_shipIndex += 1;
-        if(m_shipIndex > ships.Count - 1)
-        {
-            m_shipIndex = 0;
-        }
-        m_currentShips = ships[m_shipIndex];
-        m_currentShips.SetActive(true);
-        StopAllCoroutines();
-        StartCoroutine(NameChange(variants[m_shipIndex].VariantName));
-        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        //------------------------------------------------------------------------------------------|
+        m_currentShips.SetActive(false); // sets the ship to false that was currently selected      |
+        m_shipIndex += 1; // adds one to the ship index so that it goes to the next ship            |
+        //------------------------------------------------------------------------------------------|
+        if (m_shipIndex > ships.Count - 1) // if the index goes over the count then go back to 0    |
+        {                                                                                         //|
+            m_shipIndex = 0;                                                                      //|
+        }                                                                                         //|
+        //------------------------------------------------------------------------------------------|
+        m_currentShips = ships[m_shipIndex]; // set the current ship to the index                   |
+        m_currentShips.SetActive(true); // then set that current ship to true so it shows up        |
+        //------------------------------------------------------------------------------------------|
+        StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing       |
+        StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine|
+        //------------------------------------------------------------------------------------------|
+        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;                                 //|
+        sliders[1].value = variants[m_shipIndex].TurnSpeed;                                       //|
+        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;                          //|
+        //------------------------------------------------------------------------------------------|
     }
 
+    /// <summary>
+    /// OnPrev will go to the prev ship in the list when the input is pressed
+    /// </summary>
     public void OnPrev()
     {
-        m_currentShips.SetActive(false);
-        m_shipIndex -= 1;
-        if (m_shipIndex < 0)
-        {
-            m_shipIndex = ships.Count - 1;
-        }
-        m_currentShips = ships[m_shipIndex];
-        m_currentShips.SetActive(true);
-        StopAllCoroutines();
-        StartCoroutine(NameChange(variants[m_shipIndex].VariantName));
-        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        //------------------------------------------------------------------------------------------|
+        m_currentShips.SetActive(false); // sets the ship to false that was currently selected      |
+        m_shipIndex -= 1; // adds one to the ship index so that it goes to the next ship            |
+        //------------------------------------------------------------------------------------------|
+        if (m_shipIndex < 0) // if the index goes over the count then go back to 0                  |
+        {                                                                                         //|
+            m_shipIndex = ships.Count - 1;                                                        //|
+        }                                                                                         //|
+        //------------------------------------------------------------------------------------------|
+        m_currentShips = ships[m_shipIndex]; // set the current ship to the index                   |
+        m_currentShips.SetActive(true); // then set that current ship to true so it shows up        |
+        //------------------------------------------------------------------------------------------|
+        StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing       |
+        StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine|
+        //------------------------------------------------------------------------------------------|
+        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;                                 //|
+        sliders[1].value = variants[m_shipIndex].TurnSpeed;                                       //|
+        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;                          //|
+        //------------------------------------------------------------------------------------------|
     }
 
+    /// <summary>
+    /// Once the player presses ready it sets all the variants to the shipControls and gets ready to spawn the models
+    /// </summary>
     public void Ready()
     {
-        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
-        m_ship.GetComponent<ShipsControls>().variant = variants[m_shipIndex];
-        m_ship.GetComponent<ShipsControls>().enabled = true;
-        FindObjectOfType<UIControllerInput>().ReadyPlayer(playerNum);
-        if(m_ship.GetComponent<ShipBlendAnimations>())
-            m_ship.GetComponent<ShipBlendAnimations>().enabled = true;
-        border.GetComponent<RawImage>().color = readyColor;
+        //-------------------------------------------------------------------------------------------------|
+        // Sets ship variants                                                                              |
+        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];                      //|
+        m_ship.GetComponent<ShipsControls>().variant = variants[m_shipIndex];                            //|
+        //-------------------------------------------------------------------------------------------------|
+        m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |
+        //-------------------------------------------------------------------------------------------------|
+        GameManager.gManager.uiCInput.ReadyPlayer(playerNum); // Readys this player                        |
+        //-------------------------------------------------------------------------------------------------|
+        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations             |
+            m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations |
+        //-------------------------------------------------------------------------------------------------|
+        border.GetComponent<RawImage>().color = readyColor; // switch to the red ready color               |
+        //-------------------------------------------------------------------------------------------------|
 
     }
 
+    /// <summary>
+    /// This is a effect for the text every time the ship is switch in the selection screen
+    /// </summary>
+    /// <param name="shipName"> What is the ships name you are trying to print out </param>
+    /// <returns></returns>
     IEnumerator NameChange(string shipName)
     {
-        string aToZ = "abcdefghijklmnopqrstuvwxyz";
-
-        int stringLength = shipName.Length;
-
-        string tempName = shipName;
-
-        for (int j = 0; j < stringLength; j++)
-        {
-            yield return new WaitForSeconds(0.005f);
-
-            char randomLetter = aToZ[Random.Range(0, 24)];
-
-            tempName = tempName.Remove(j, 1);
-            tempName = tempName.Insert(j, randomLetter.ToString());
-
-            this.shipName.text = tempName;
-        }
-
-        for (int i = 0; i < stringLength; i++)
-        {
-            tempName = tempName.Remove(i, 1);
-            tempName = tempName.Insert(i, shipName.ToCharArray()[i].ToString());
-
-            for (int j = i + 1; j < stringLength; j++)
-            {
-                yield return new WaitForSeconds(0.001f);
-
-                char randomLetter = aToZ[Random.Range(0, 24)];
-
-                tempName = tempName.Remove(j, 1);
-                tempName = tempName.Insert(j, randomLetter.ToString());
-            }
-            this.shipName.text = tempName;
-            yield return new WaitForSeconds(0.008f);
-
-        }
+        //-------------------------------------------------------------------------------------------------|
+        string aToZ = "abcdefghijklmnopqrstuvwxyz"; // a string with every letter in the alphabet          |
+                                                                                                         //|
+        int stringLength = shipName.Length; // an int for the ship string length                           |
+                                                                                                         //|
+        string tempName = shipName; // temp reference to the orginal name of the ship                      |
+        //-------------------------------------------------------------------------------------------------|
+        for (int j = 0; j < stringLength; j++) // for each letter in the ship name                         |
+        {                                                                                                //|
+            yield return new WaitForSeconds(0.005f); // wait                                               |
+                                                                                                         //|
+            char randomLetter = aToZ[Random.Range(0, 24)]; // choose a random letter from aToZ             |
+                                                                                                         //|
+            tempName = tempName.Remove(j, 1); // j being the index remove the letter at point j            |
+            tempName = tempName.Insert(j, randomLetter.ToString()); // replace it with the random letter   |
+                                                                                                         //|
+            this.shipName.text = tempName; // set the text to the new text                                 |
+        }                                                                                                //|
+        //-------------------------------------------------------------------------------------------------|-------------------|
+        // this is doing the same as before but now it will slow choose the correct letter                                     |
+        for (int i = 0; i < stringLength; i++)                                                                               //|
+        {                                                                                                                    //|
+            tempName = tempName.Remove(i, 1); // remove the letter at index i                                                  |
+            tempName = tempName.Insert(i, shipName.ToCharArray()[i].ToString()); // replace it with the correct letter         |
+                                                                                                                             //|
+            //----------------------------------------------------------------------------------------|                        |
+            for (int j = i + 1; j < stringLength; j++) // for the remaining letters                   |                        |
+            {                                                                                       //|                        |
+                yield return new WaitForSeconds(0.001f); // wait                                      |                        |
+                                                                                                    //|                        |
+                char randomLetter = aToZ[Random.Range(0, 24)]; // choose random letter                |                        |
+                                                                                                    //|                        |
+                tempName = tempName.Remove(j, 1); // remove at index j                                |                        |
+                tempName = tempName.Insert(j, randomLetter.ToString()); // replace with random letter |                        |
+            }                                                                                       //|                        |
+            //----------------------------------------------------------------------------------------|                        |
+            this.shipName.text = tempName; // set text to new word                                                             |
+            yield return new WaitForSeconds(0.008f); // wait before doing it again                                             |
+                                                                                                                             //|
+        }                                                                                                                    //|
+        //---------------------------------------------------------------------------------------------------------------------|
     }
 }

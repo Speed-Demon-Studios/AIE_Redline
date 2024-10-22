@@ -6,14 +6,15 @@ using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Net;
+using UnityEngine.Assertions.Must;
 
 public class FinishRace : MonoBehaviour
 {
     public GameObject mainButton;
+    public bool m_allRacersFinished = false;
     [SerializeField] private GameObject[] placementTexts;
     [SerializeField] private GameObject placementWindow;
     private TextMeshProUGUI[] tempSortingTextList;
-    private bool m_allRacersFinished = false;
     private bool m_alreadyShowingPlacements = false;
     private bool m_allRacersCrosedLine = false;
     private bool m_checkingRacersFinished = false;
@@ -31,6 +32,7 @@ public class FinishRace : MonoBehaviour
 
     public void DebugForFunction()
     {
+        placementWindow.SetActive(false);
         GameManager.gManager.mSL.InitializeForMainMenu();
     }
 
@@ -73,7 +75,11 @@ public class FinishRace : MonoBehaviour
             for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
             {
                 placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
-                TextMeshProUGUI placementText = placementTexts[i].GetComponent<TextMeshProUGUI>(); // Get a reference to the text object.
+                RacerEntry rEntry = placementTexts[i].GetComponent<RacerEntry>();
+                TextMeshProUGUI placementText = rEntry.placementObject; // Get a reference to the PLACEMENT text object.
+                TextMeshProUGUI nameText = rEntry.racerNameObject; // Get a reference to the NAME text object.
+                TextMeshProUGUI totalTimeText = rEntry.Time1Object; // Get a reference to the TOTAL RACE TIME text object.
+                TextMeshProUGUI quickestTimeText = rEntry.Time2Object; // Get a reference to the FASTEST RACE TIME text object.
 
                 // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
                 foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
@@ -89,72 +95,115 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+
+
+                                float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
                                 float quickestTime = 0;
 
-                                foreach(float time in racerDeets.lapTimesSECONDS)
+                                float secondsAdded = 0;
+                                int minutesAdded = 0;
+
+                                //for (int a = 0; a < totalSeconds; a++)
+                                //{
+                                //    secondsAdded += 1f;
+                                //
+                                //    if (secondsAdded >= 60)
+                                //    {
+                                //        minutesAdded += 1;
+                                //        secondsAdded = 0;
+                                //    }
+                                //}
+                                //
+                                //foreach(float time in racerDeets.lapTimesSECONDS)
+                                //{
+                                //    if(quickestTime == 0)
+                                //    {
+                                //        quickestTime = time;
+                                //    }
+                                //
+                                //    if(time < quickestTime)
+                                //    {
+                                //        quickestTime = time;
+                                //    }
+                                //}
+
+                                //float quickestMiuntes = Mathf.CeilToInt(quickestTime / 60);
+                                //float quickestSeconds = Mathf.CeilToInt(quickestTime - quickestMiuntes / 60);
+
+                                float quickestSeconds = 0;
+                                int quickestMinutes = 0;
+
+                                for (int a = 0; a < quickestTime; a++)
                                 {
-                                    if(quickestTime == 0)
+                                    quickestSeconds += 1f;
+
+                                    if (quickestSeconds >= 60)
                                     {
-                                        quickestTime = time;
-                                    }
+                                        quickestMinutes += 1;
 
-                                    if(time < quickestTime)
-                                    {
-                                        quickestTime = time;
+                                        quickestSeconds = 0;
                                     }
                                 }
 
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
 
-                                if (racerDeets.totalRaceTimeMinutes >= 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
-                                }
-                                else if (racerDeets.totalRaceTimeMinutes < 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
-                                }
+                                placementText.text = "(" + (racerDeets.placement.ToString()) + ")";
+                                nameText.text = racerDeets.RacerName;
+                                totalTimeText.text = string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                         }
                         else
                         {
                             if (racerDeets.crossedFinishLine == false)
                             {
-                                placementText.text = racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + "DNF";
+                                placementText.text = "(" + (racerDeets.placement.ToString()) + ")";
+                                nameText.text = racerDeets.RacerName;
+                                totalTimeText.text = "DNF";
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                             else
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
-                                float quickestTime = 0;
+                                float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
+                                //float quickestTime = 0;
 
-                                foreach (float time in racerDeets.lapTimesSECONDS)
-                                {
-                                    if (quickestTime == 0)
-                                    {
-                                        quickestTime = time;
-                                    }
+                                //int secondsAdded = 0;
+                                //int minutesAdded = 0;
+                                //
+                                //for (int a = 0; a < totalSeconds; a++)
+                                //{
+                                //    secondsAdded += 1;
+                                //
+                                //    if (secondsAdded >= 60)
+                                //    {
+                                //        minutesAdded += 1;
+                                //        secondsAdded = 0;
+                                //    }
+                                //}
+                                //
+                                //int quickestSeconds = 0;
+                                //int quickestMinutes = 0;
+                                //
+                                //for (int a = 0; a < quickestTime; a++)
+                                //{
+                                //    quickestSeconds += 1;
+                                //
+                                //    if (quickestSeconds >= 60)
+                                //    {
+                                //        quickestMinutes += 1;
+                                //
+                                //        quickestSeconds = 0;
+                                //    }
+                                //}
 
-                                    if (time < quickestTime)
-                                    {
-                                        quickestTime = time;
-                                    }
-                                }
+                                //float quickestMiuntes = Mathf.CeilToInt(quickestTime / 60);
+                                //float quickestSeconds = Mathf.CeilToInt(quickestTime - quickestMiuntes % 60);
 
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
-
-                                if (racerDeets.totalRaceTimeMinutes >= 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
-                                }
-                                else if (racerDeets.totalRaceTimeMinutes < 10.0f)
-                                {
-                                    placementText.text = "(" + (racerDeets.placement) + ") " + racerDeets.RacerName + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds + "<pos=50%>||" + "<pos=85%>" + string.Format("{0:0}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds));
-                                }
+                                placementText.text = "(" + (racerDeets.placement) + ")";
+                                nameText.text = racerDeets.RacerName;
+                                totalTimeText.text = string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                         }
                     }

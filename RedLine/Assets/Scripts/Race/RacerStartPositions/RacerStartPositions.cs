@@ -26,22 +26,63 @@ public class RacerStartPositions : MonoBehaviour
                 // Iterate through the list of racer objects, and the list of start positions, and assign racers to their respective starting positions.
                 for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
                 {
+                    bool isPlayer = false;
+                    foreach (GameObject playerOBJ in GameManager.gManager.players)
+                    {
+                        if (GameManager.gManager.playerObjects[i] == playerOBJ)
+                        {
+                            isPlayer = true;
+                        }
+                    }   
+
+                    if (isPlayer == false)
+                    {
+                        for (int a = 0; a < startPositions.Count(); a++)
+                        {
+                            StartingPositionDetails thisPosition = startPositions[a].GetComponent<StartingPositionDetails>();
+                            if (thisPosition.SpotFilled == false)
+                            {
+                                thisPosition.HeldRacer = GameManager.gManager.racerObjects[i];
+                                GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = true;
+                                GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.racerObjects[i].transform);
+                                GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
+                                GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
+                                GameManager.gManager.racerObjects[i].transform.position = startPositions[a].transform.position;
+                                GameManager.gManager.racerObjects[i].transform.rotation = startPositions[a].transform.rotation;
+                                GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = false;
+                                thisPosition.SpotFilled = true;
+                                a = startPositions.Count();
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < GameManager.gManager.players.Count; i++)
+                {
                     for (int a = 0; a < startPositions.Count(); a++)
                     {
                         StartingPositionDetails thisPosition = startPositions[a].GetComponent<StartingPositionDetails>();
                         if (thisPosition.SpotFilled == false)
                         {
                             thisPosition.HeldRacer = GameManager.gManager.racerObjects[i];
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = true;
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.racerObjects[i].transform);
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
                             GameManager.gManager.racerObjects[i].transform.position = startPositions[a].transform.position;
+                            GameManager.gManager.racerObjects[i].transform.rotation = startPositions[a].transform.rotation;
+                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = false;
                             thisPosition.SpotFilled = true;
                             a = startPositions.Count();
                             break;
                         }
-                    }
-                    GameManager.gManager.racersPlaced = true;
-                    GameManager.gManager.readyForCountdown = true;
 
+                    }
                 }
+
+                GameManager.gManager.racersPlaced = true;
+                GameManager.gManager.readyForCountdown = true;
             }
         }
         placingRacers = false;
@@ -55,6 +96,5 @@ public class RacerStartPositions : MonoBehaviour
             placingRacers = true;
             PlaceRacersInSpots();
         }
-        
     }
 }
