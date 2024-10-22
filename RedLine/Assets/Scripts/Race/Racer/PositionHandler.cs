@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PositionHandler : MonoBehaviour
@@ -8,6 +9,9 @@ public class PositionHandler : MonoBehaviour
     public List<RacerDetails> racers = new List<RacerDetails>();
     public IList<RacerDetails> racerFinder = new List<RacerDetails>();
     private bool racersSorted = false;
+
+    public List<GameObject> aiRacePrefabs = new();
+    public Nodes startNode;
 
     private void Awake()
     {
@@ -20,25 +24,31 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        // Find all the racers in the scene
-        racerFinder = FindObjectsOfType<RacerDetails>();
+        //for (int i = 0; i < 9; i++)
+        //{
+        //    int index = Random.Range(0, aiRacePrefabs.Count - 1);
+        //
+        //    GameObject a = Instantiate(aiRacePrefabs[index]);
+        //
+        //    a.GetComponent<AIMoveInputs>().desiredNode = startNode;
+        //
+        //    GameManager.gManager.racerObjects.Add(a);
+        //}
 
-        foreach (RacerDetails rD in racerFinder)
-        {
-            Debug.Log("FOUND RACER IN FINDER");
-            racers.Add(rD);
-        }
+        //foreach (RacerDetails rD in racers)
+        //{
+        //    GameManager.gManager.racerObjects.Add(rD.gameObject);
+        //}
 
-        foreach (RacerDetails rD in racers)
-        {
-            GameManager.gManager.racerObjects.Add(rD.gameObject);
-        }
+        //if (GameManager.gManager.racerObjects.Count == GameManager.gManager.playerObjects.Count + 9)
+        //{
+        //    Debug.Log("Racers Added");
+        //    racersAdded = true;
+        //    GameManager.gManager.racersAdded = true;
+        //}
 
-        if (GameManager.gManager.racerObjects.Count == racers.Count && racers.Count == racerFinder.Count)
-        {
-            racersAdded = true;
-            GameManager.gManager.racersAdded = true;
-        }
+        racersAdded = true;
+        GameManager.gManager.racersAdded = true;
     }
 
     public IEnumerator SortRacers()

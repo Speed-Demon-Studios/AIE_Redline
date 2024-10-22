@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     public int countdownIndex = 2;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
+    public float difficultyChange = 1;
+
+    public void ChangeDifficulty(float change) { difficultyChange = change; }
 
     public static GameManager gManager { get; private set; }
 

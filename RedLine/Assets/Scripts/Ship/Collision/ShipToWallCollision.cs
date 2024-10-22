@@ -26,12 +26,12 @@ public class ShipToWallCollision : MonoBehaviour
     public void UpdateDetails()
     {
         detailsSet = true;
-        shipVariant = sControlScript.variant;
+        shipVariant = sControlScript.VariantObject;
         defaultTopSpeed = shipVariant.DefaultMaxSpeed;
-        defaultAcceleration = shipVariant.MaxAcceleration;
+        //defaultAcceleration = shipVariant.MaxAcceleration;
 
         changedTopSpeed = (defaultTopSpeed * 0.53f); // The speed that ships will be capped at while colliding with walls.
-        changedAcceleration = (defaultAcceleration * 0.55f); // The acceleration that ships will be capped at while colliding with walls.
+        //changedAcceleration = (defaultAcceleration * 0.55f); // The acceleration that ships will be capped at while colliding with walls.
     }
 
     private void OnCollisionEnter(Collision other)
@@ -47,7 +47,7 @@ public class ShipToWallCollision : MonoBehaviour
         if (other.transform.tag.ToLower() == "walls" && intoWall == true)
         {
             sControlScript.SetMaxSpeed(changedTopSpeed);
-            shipVariant.MaxAcceleration = changedAcceleration;
+            //shipVariant.MaxAcceleration = changedAcceleration;
         }
     }
 
@@ -61,7 +61,7 @@ public class ShipToWallCollision : MonoBehaviour
 
     private void Update()
     {
-        if (detailsSet == false && sControlScript.variant != null)
+        if (detailsSet == false && GameManager.gManager.raceStarted)
         {
             UpdateDetails();
         }
@@ -70,7 +70,7 @@ public class ShipToWallCollision : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (intoWall == false && detailsSet == true)
+        if (intoWall == false && detailsSet == true && GameManager.gManager.raceStarted)
         {
             if (sControlScript.GetMaxSpeed() < defaultTopSpeed)
             {
@@ -80,14 +80,14 @@ public class ShipToWallCollision : MonoBehaviour
             {
                 sControlScript.SetMaxSpeed(defaultTopSpeed);
             }
-            if (shipVariant.MaxAcceleration < defaultAcceleration)
-            {
-                shipVariant.MaxAcceleration += 1.5f * Time.deltaTime;
-            }
-            else if (shipVariant.MaxAcceleration > defaultAcceleration)
-            {
-                shipVariant.MaxAcceleration = defaultAcceleration;
-            }
+            //if (shipVariant.MaxAcceleration < defaultAcceleration)
+            //{
+            //    shipVariant.MaxAcceleration += 1.5f * Time.deltaTime;
+            //}
+            //else if (shipVariant.MaxAcceleration > defaultAcceleration)
+            //{
+            //    shipVariant.MaxAcceleration = defaultAcceleration;
+            //}
         }
     }
 }

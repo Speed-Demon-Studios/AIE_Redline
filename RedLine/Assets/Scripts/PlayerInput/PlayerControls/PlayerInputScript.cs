@@ -124,7 +124,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
         // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;                   //|
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;             //|
         // if the ship is moving slightly                                                                                                  |
         if(speedPercentage > 0.001)                                                                                                      //|
         {                                                                                                                                //|

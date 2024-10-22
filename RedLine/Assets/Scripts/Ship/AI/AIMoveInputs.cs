@@ -43,7 +43,9 @@ public class AIMoveInputs : MonoBehaviour
                                                                                                                                                           //|
         m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos); // the distance from the ship to the randomPos                      |
                                                                                                                                                           //|
-        m_speed = Random.Range(0.6f, 1f); // set the speed to a random value between 0.6 and 1 so there are some random acceleration                        |
+        m_speed = Random.Range(0.6f, 1f);                                                                                                                 //|
+        m_controls.SetAccelerationChange(GameManager.gManager.difficultyChange); // Changes the difficulty percentage in the ship controlls                 |
+        m_controls.PercentageChange();                                                                                                                    //|
         //--------------------------------------------------------------------------------------------------------------------------------------------------|
     }
 

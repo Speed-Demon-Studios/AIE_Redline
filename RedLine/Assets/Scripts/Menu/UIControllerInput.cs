@@ -254,6 +254,17 @@ public class UIControllerInput : MonoBehaviour
     }
 
     /// <summary>
+    /// Reseting the first selected button for player 1 for the difficultyMenu
+    /// </summary>
+    public void ResetFirstButtonForPlayerOne(GameObject button)
+    {
+        OnShipSelection = true;
+        int index = 0;
+        GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button);
+
+    }
+
+    /// <summary>
     /// Sets up the selection screen for each player
     /// </summary>
     public void SetUpSelectionScreen()
