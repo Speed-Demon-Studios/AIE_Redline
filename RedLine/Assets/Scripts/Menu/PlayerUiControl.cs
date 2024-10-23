@@ -14,6 +14,12 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private ShipsControls m_shipsControls;
     [SerializeField] private TextMeshProUGUI currentLapTime;
     [SerializeField] private TextMeshProUGUI bestLapTime;
+    [SerializeField] private HUD hudScript;
+    [SerializeField] private Image energyBar;
+    [SerializeField] private Image speedBar;
+    [SerializeField] private Color defaultEnergybarColour;
+    [SerializeField] private Color defaultSpeedColour;
+    [SerializeField] private Color overdriveSpeedColour;
     public List<Slider> sliders = new();
     private int m_sliderNumber;
     public List<Animator> anim;
@@ -38,7 +44,7 @@ public class PlayerUiControl : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------|
                 if (rDetails.currentLap > 0) // if the player has past the start line and started the race then display the laps           |
                 {                                                                                                                        //|------|
-                    lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString(); //|
+                    lapText.text = rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString(); //|
                 }                                                                                                                               //|
         //----------------------------------------------------------------------------------------------------------------------------------------|
                 if (GameManager.gManager.indexListSorted == true) // if the list of racers is sorted                                              |
@@ -47,7 +53,7 @@ public class PlayerUiControl : MonoBehaviour
                     {                                                                                                                           //|
                         if (GameManager.gManager.pHandler.racers[i] == rDetails) // if i is equal to this current object then display the position|
                         {                                                                                                                       //|
-                            placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();     //|
+                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();     //|
                         }                                                                                                                       //|
                     }                                                                                                                           //|
                 }                                                                                                                               //|
@@ -81,10 +87,11 @@ public class PlayerUiControl : MonoBehaviour
                 // if the player is boosting than set all the bars to zero                  |
                 if (m_shipsControls.ReturnIsBoosting())                                   //|
                 {                                                                         //|
-                    for (int i = 0; i < sliders.Count; i++)                               //|
-                    {                                                                     //|
-                        sliders[i].value = 0;                                             //|
-                    }                                                                     //|
+                    //for (int i = 0; i < sliders.Count; i++)                               //|
+                    //{                                                                     //|
+                    //    //sliders[i].value = 0;                                             //|
+                    //}                                                                     //|
+                    energyBar.fillAmount = 0;
                 }                                                                         //|
         //----------------------------------------------------------------------------------|
                 // flicker animation if the ship is in the redline                          |
@@ -93,11 +100,27 @@ public class PlayerUiControl : MonoBehaviour
                 anim[2].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());             //|
         //----------------------------------------------------------------------------------|---------------------------------------------------|
                 // if the boost level is less than the slider count then set the sliders values to the boost                                    |
-                if(m_shipsControls.ReturnBoostLevel() < sliders.Count)                                                                        //|
-                    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();   //|
-                                                                                                                                              //|
+                //if(m_shipsControls.ReturnBoostLevel() < sliders.Count)                                                                        //|
+                //    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();   //|
+                float speedFillValue = hudScript.map(((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f), 0, 1, 0.547f, 0.66f);
+                speedBar.fillAmount = speedFillValue;
+
+                if (speedBar.fillAmount > 0.628f)
+                {
+                    //speedBar.fillAmount -= (((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f) * 0.1f) * (Time.deltaTime * 1.22f);
+                    speedBar.color = overdriveSpeedColour;
+                }
+                else if (speedBar.fillAmount <= 0.628)
+                {
+                    speedBar.color = defaultSpeedColour;
+                }
+
+                float energyfillValue = hudScript.map(m_shipsControls.ReturnBoost() * 0.32f, 0, 1, 0.025f, 0.194f);
+                energyBar.fillAmount = energyfillValue;
+
                 // Set the speed text to the current speed times 7                                                                              |
-                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();                                        //|
+                m_speed.richText = true;                                        //|
+                m_speed.text = "<b>" + (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString() + "</b>" + " KPH";
             }                                                                                                                                 //|
         }                                                                                                                                     //|
         //--------------------------------------------------------------------------------------------------------------------------------------|

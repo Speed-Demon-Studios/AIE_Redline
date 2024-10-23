@@ -20,7 +20,7 @@ public class HUD : MonoBehaviour
     public float[] lapTimes;
     
     // Re-maps one value range to another
-    float map(float s, float a1, float a2, float b1, float b2)
+    public float map(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
@@ -53,7 +53,7 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        UpdateHUD();
+        //UpdateHUD();
     }
 
 }
