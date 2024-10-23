@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     public int countdownIndex = 2;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
+    public float difficultyChange = 1;
+
+    public void ChangeDifficulty(float change) { difficultyChange = change; }
 
     public static GameManager gManager { get; private set; }
 
@@ -63,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(racerObjects.Count + " Racers");
+        Debug.Log(playerObjects.Count + " playersObjects");
+        Debug.Log(players.Count + " players");
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;
@@ -134,6 +140,14 @@ public class GameManager : MonoBehaviour
     public void EnableRMovement()
     {
         foreach (GameObject racerOBJ in racerObjects)
+        {
+            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+            rDeets.EnableRacerMovement();
+            rB.isKinematic = false;
+        }
+
+        foreach (GameObject racerOBJ in playerObjects)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
             Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();

@@ -17,6 +17,7 @@ public class AIMoveInputs : MonoBehaviour
     private float m_targetTurnAngle;
     private float m_currentTurnAngle;
 
+    private Nodes m_prevNode;
     public Nodes desiredNode;
     private Nodes m_nextNode;
     public GameObject nodeParent;
@@ -28,6 +29,7 @@ public class AIMoveInputs : MonoBehaviour
     {
         //--------------------------------------------------------------------------------------------------------------------------------------------------|
         m_controls = GetComponent<ShipsControls>(); // reference to the shipsControls script                                                                |
+        m_prevNode = desiredNode;
                                                                                                                                                           //|
         if(desiredNode.nextNode.Count > 1) // if the nextNode list count is greater than 1                                                                  |
         {                                                                                                                                                 //|
@@ -43,7 +45,8 @@ public class AIMoveInputs : MonoBehaviour
                                                                                                                                                           //|
         m_firstDistanceToNode = Vector3.Distance(this.transform.position, m_randomPos); // the distance from the ship to the randomPos                      |
                                                                                                                                                           //|
-        m_speed = Random.Range(0.6f, 1f); // set the speed to a random value between 0.6 and 1 so there are some random acceleration                        |
+        m_speed = Random.Range(0.6f, 1f);                                                                                                                 //|
+        m_controls.SetAccelerationChange(GameManager.gManager.difficultyChange); // Changes the difficulty percentage in the ship controlls                 |
         //--------------------------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -61,8 +64,10 @@ public class AIMoveInputs : MonoBehaviour
         // checks if it is at the current node by check the distance                                                                                                                                                                |
         // if it is at the current node then it will change the current node to the next node                                                                                                                                       |
         // if not then it will continue to go to the current node                                                                                                                                                                   |
-        if (Vector3.Distance(this.gameObject.transform.position, desiredNode.transform.position) < Variant.distance || Vector3.Distance(this.gameObject.transform.position, m_nextNode.transform.position) < Variant.distance)    //|
+        if (Vector3.Distance(this.gameObject.transform.position, desiredNode.transform.position) < Variant.distance || Vector3.Distance(this.gameObject.transform.position, m_nextNode.transform.position) < Variant.distance ||  //|
+            Vector3.Distance(this.gameObject.transform.position, m_nextNode.transform.position) < Vector3.Distance(this.gameObject.transform.position, m_prevNode.transform.position))                                            //|
         {                                                                                                                                                                                                                         //|
+            m_prevNode = desiredNode;                                                                                                                                                                                             //|
             desiredNode = m_nextNode;                                                                                                                                                                                             //|
                                                                                                                                                                                                                                   //|
             if(desiredNode.nextNode.Count > 1)                                                                                                                                                                                    //|

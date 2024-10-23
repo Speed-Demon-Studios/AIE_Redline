@@ -121,7 +121,6 @@ public class ShipSelection : MonoBehaviour
         //-------------------------------------------------------------------------------------------------|
         // Sets ship variants                                                                              |
         m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];                      //|
-        m_ship.GetComponent<ShipsControls>().variant = variants[m_shipIndex];                            //|
         //-------------------------------------------------------------------------------------------------|
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |
         //-------------------------------------------------------------------------------------------------|

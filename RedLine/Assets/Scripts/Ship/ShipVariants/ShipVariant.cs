@@ -18,6 +18,8 @@ public class ShipVariant : ScriptableObject
     public float DefaultMaxSpeed;
     public float AccelerationMultiplier;
     public float BreakMultiplier;
+    public AnimationCurve breakCurve;
+    public AnimationCurve accelerationCurve;
     public AnimationCurve SpeedCurve;
     [Space]
     [Header("Turning Variables")]
