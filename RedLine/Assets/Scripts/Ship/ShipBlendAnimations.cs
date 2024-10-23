@@ -39,7 +39,7 @@ public class ShipBlendAnimations : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------------|
         if (this.enabled && m_controller != null) // check for null refreneces so there are no errors                                            |
         {                                                                                                                                      //|
-            m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetMaxSpeed()); // blend engine to speed  |
+            m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetCurrentMaxSpeed()); // blend engine to speed  |
                                                                                                                                                //|
             m_controller.SetFloat("WingBlend", m_controls.GetTurnMultiplier()); // blend wing to the direction of turning                        |
         }                                                                                                                                      //|
