@@ -115,8 +115,12 @@ public class PlayerUiControl : MonoBehaviour
                     speedBar.color = defaultSpeedColour;
                 }
 
+                energyBar.color = defaultEnergybarColour;
+
+
                 float energyfillValue = hudScript.map(m_shipsControls.ReturnBoost() * 0.32f, 0, 1, 0.025f, 0.194f);
                 energyBar.fillAmount = energyfillValue;
+
 
                 // Set the speed text to the current speed times 7                                                                              |
                 m_speed.richText = true;                                        //|
