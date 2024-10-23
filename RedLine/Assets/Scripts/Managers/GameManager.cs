@@ -143,6 +143,14 @@ public class GameManager : MonoBehaviour
             rDeets.EnableRacerMovement();
             rB.isKinematic = false;
         }
+
+        foreach (GameObject racerOBJ in playerObjects)
+        {
+            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+            rDeets.EnableRacerMovement();
+            rB.isKinematic = false;
+        }
     }
 
     public void DisableRMovement(GameObject racer = null)

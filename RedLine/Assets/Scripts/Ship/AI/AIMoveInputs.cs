@@ -45,7 +45,6 @@ public class AIMoveInputs : MonoBehaviour
                                                                                                                                                           //|
         m_speed = Random.Range(0.6f, 1f);                                                                                                                 //|
         m_controls.SetAccelerationChange(GameManager.gManager.difficultyChange); // Changes the difficulty percentage in the ship controlls                 |
-        m_controls.PercentageChange();                                                                                                                    //|
         //--------------------------------------------------------------------------------------------------------------------------------------------------|
     }
 

@@ -24,16 +24,16 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        //for (int i = 0; i < 9; i++)
-        //{
-        //    int index = Random.Range(0, aiRacePrefabs.Count - 1);
-        //
-        //    GameObject a = Instantiate(aiRacePrefabs[index]);
-        //
-        //    a.GetComponent<AIMoveInputs>().desiredNode = startNode;
-        //
-        //    GameManager.gManager.racerObjects.Add(a);
-        //}
+        for (int i = 0; i < 9; i++)
+        {
+            int index = Random.Range(0, aiRacePrefabs.Count - 1);
+        
+            GameObject a = Instantiate(aiRacePrefabs[index]);
+        
+            a.GetComponent<AIMoveInputs>().desiredNode = startNode;
+        
+            GameManager.gManager.racerObjects.Add(a);
+        }
 
         //foreach (RacerDetails rD in racers)
         //{

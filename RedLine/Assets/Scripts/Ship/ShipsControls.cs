@@ -26,11 +26,12 @@ public class ShipsControls : MonoBehaviour
     private float m_acceleration;
     private float m_currentMaxSpeed;
     private float m_defaultMaxSpeed;
-    private float m_defaultMaxAcceleration;
     private float m_accelerationChangePercentage = 1;
+
+    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
     public void SetAccelerationChange(float change) { m_accelerationChangePercentage = change; }
-    public void SetMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
-    public float GetMaxSpeed() { return m_currentMaxSpeed; }
+    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
+    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
 
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -89,17 +90,6 @@ public class ShipsControls : MonoBehaviour
     void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
-        if (VariantObject != null)
-        {
-            m_defaultMaxSpeed = VariantObject.DefaultMaxAcceleration;
-            
-        }
-        m_currentMaxSpeed = m_defaultMaxSpeed;
-    }
-
-    public void PercentageChange()
-    {
-        m_defaultMaxSpeed *= m_accelerationChangePercentage;
     }
 
     private void OnEnable()
@@ -108,6 +98,13 @@ public class ShipsControls : MonoBehaviour
         {
             FindChildWithTag(shipModel.transform);
         }
+        if (VariantObject != null)
+        {
+            Debug.Log("Bitch");
+            m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
+        }
+        m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
+        m_currentMaxSpeed = m_defaultMaxSpeed;
     }
 
     private void FindChildWithTag(Transform childParent)
