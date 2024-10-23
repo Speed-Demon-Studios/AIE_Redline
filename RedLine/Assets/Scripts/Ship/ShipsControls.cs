@@ -166,6 +166,10 @@ public class ShipsControls : MonoBehaviour
                     m_fire[0].SetActive(false);
                     break;
                 case 3:
+                    if (this.gameObject == GameManager.gManager.players[0])
+                    {
+                        GameManager.gManager.SAM.GetAchievement("RedlineRider");
+                    }
                     m_fire[2].SetActive(true);
                     m_fire[0].SetActive(false);
                     m_fire[1].SetActive(false);

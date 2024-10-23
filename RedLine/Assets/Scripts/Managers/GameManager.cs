@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public string CurrentScene;
 
+    public SteamAchievementManager SAM;
     public RedlineActivator rActivator;
     public NameRandomiser nRandomiser;
     public RaceCountdown raceCountdown;

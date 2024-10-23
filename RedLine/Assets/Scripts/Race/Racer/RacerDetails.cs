@@ -39,6 +39,7 @@ public class RacerDetails : MonoBehaviour
     [Header("Bool Variables")]
     public bool finishedRacing = false;
     public bool crossedFinishLine = false;
+    public bool gotLVL3 = false;
 
     [Space]
     [Header("String Variables")]
