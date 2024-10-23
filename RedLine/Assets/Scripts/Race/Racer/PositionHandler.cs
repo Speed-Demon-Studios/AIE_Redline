@@ -31,21 +31,16 @@ public class PositionHandler : MonoBehaviour
             GameObject a = Instantiate(aiRacePrefabs[index]);
         
             a.GetComponent<AIMoveInputs>().desiredNode = startNode;
-        
+
+            racers.Add(a.GetComponent<RacerDetails>());
+
             GameManager.gManager.racerObjects.Add(a);
         }
 
-        //foreach (RacerDetails rD in racers)
-        //{
-        //    GameManager.gManager.racerObjects.Add(rD.gameObject);
-        //}
-
-        //if (GameManager.gManager.racerObjects.Count == GameManager.gManager.playerObjects.Count + 9)
-        //{
-        //    Debug.Log("Racers Added");
-        //    racersAdded = true;
-        //    GameManager.gManager.racersAdded = true;
-        //}
+        foreach(GameObject players in GameManager.gManager.players)
+        {
+            racers.Add(players.GetComponent<RacerDetails>());
+        }
 
         racersAdded = true;
         GameManager.gManager.racersAdded = true;

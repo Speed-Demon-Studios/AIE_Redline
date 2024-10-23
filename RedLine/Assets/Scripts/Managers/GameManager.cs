@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(racerObjects.Count + " Racers");
+        Debug.Log(playerObjects.Count + " playersObjects");
+        Debug.Log(players.Count + " players");
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;
