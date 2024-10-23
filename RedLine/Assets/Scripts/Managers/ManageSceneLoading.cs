@@ -18,7 +18,7 @@ public class ManageSceneLoading : MonoBehaviour
             ResetShip(playerOBJ);
         }
 
-        foreach(GameObject playerOBJ in GameManager.gManager.racerObjects)
+        foreach(GameObject playerOBJ in GameManager.gManager.players)
         {
             PlayerInputScript testInput;
 

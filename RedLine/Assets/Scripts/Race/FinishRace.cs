@@ -152,7 +152,10 @@ public class FinishRace : MonoBehaviour
     private void SelectMainButton()
     {
         ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>(); // Get a reference to player ones ActionMappingControl script.
+        aMC.UpdateActionMapForUI();
+        aMC.SwitchActionMapToUI();
         aMC.mES.SetSelectedGameObject(mainButton); // Set player ones MultiplayerEventSystem's selectedGameObject to the mainButton object.
+        aMC.mES.firstSelectedGameObject = mainButton;
     }
 
     public bool AllRacersFinishedCheck()
@@ -256,6 +259,7 @@ public class FinishRace : MonoBehaviour
         if (m_allRacersFinished == true && m_alreadyShowingPlacements == false && m_allRacersCrosedLine == true)
         {
             ShowFinalPlacements();
+            SelectMainButton();
         }
         return;
     }
