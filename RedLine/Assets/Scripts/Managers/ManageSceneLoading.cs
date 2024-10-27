@@ -15,36 +15,64 @@ public class ManageSceneLoading : MonoBehaviour
         reloadingmenu = true;
         foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
-            InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
-            playerOBJ.GetComponent<ShipsControls>().enabled = false;
-            playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
-            ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
-            IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
-            controls.FireList().Clear();
-            GameObject a = shipCollider.gameObject;
-            GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
-            a.transform.parent = null;
-            b.transform.parent = null;
-            Destroy(a);
-            Destroy(b);
-            controls.VariantObject = null;
-            controls.variant = null;
-            playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
-            RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
-            racerDeets.finishedRacing = false;
-            racerDeets.currentLap = 0;
-            racerDeets.totalRaceTimeSeconds = 0;
-            racerDeets.totalRaceTimeMinutes = 0;
-            racerDeets.currentLapTimeSECONDS = 0;
-            racerDeets.currentLapTimeMINUTES = 0;
-            racerDeets.quickestLapTimeSECONDS = 99;
-            racerDeets.quickestLapTimeMINUTES = 99;
-
-
-            ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
-            racerDeets.rCS.ClearList();
+            ResetShip(playerOBJ);
         }
 
+        foreach(GameObject playerOBJ in GameManager.gManager.racerObjects)
+        {
+            PlayerInputScript testInput;
+
+            if(!playerOBJ.TryGetComponent<PlayerInputScript>(out testInput))
+            {
+                GameManager.gManager.racerObjects.Remove(playerOBJ);
+
+                Destroy(playerOBJ);
+            }
+        }
+
+        ResetGameManager();
+
+        reloadingmenu = true;
+        if (coroutineStarted == false)
+        {
+            coroutineStarted = true;
+            StartCoroutine(LoadMenuScene());
+        }
+    }
+
+    public void ResetShip(GameObject playerOBJ)
+    {
+        InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
+        playerOBJ.GetComponent<ShipsControls>().enabled = false;
+        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+        ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
+        IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
+        controls.FireList().Clear();
+        GameObject a = shipCollider.gameObject;
+        GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
+        a.transform.parent = null;
+        b.transform.parent = null;
+        Destroy(a);
+        Destroy(b);
+        controls.VariantObject = null;
+        playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
+        RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
+        racerDeets.finishedRacing = false;
+        racerDeets.currentLap = 0;
+        racerDeets.totalRaceTimeSeconds = 0;
+        racerDeets.totalRaceTimeMinutes = 0;
+        racerDeets.currentLapTimeSECONDS = 0;
+        racerDeets.currentLapTimeMINUTES = 0;
+        racerDeets.quickestLapTimeSECONDS = 99;
+        racerDeets.quickestLapTimeMINUTES = 99;
+
+
+        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+        racerDeets.rCS.ClearList();
+    }
+
+    public void ResetGameManager()
+    {
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();
@@ -57,12 +85,6 @@ public class ManageSceneLoading : MonoBehaviour
         GameManager.gManager.namesAssigned = false;
         GameManager.gManager.nRandomiser.usedNames = new List<string>();
         GameManager.gManager.redlineActivated = false;
-        reloadingmenu = true;
-        if (coroutineStarted == false)
-        {
-            coroutineStarted = true;
-            StartCoroutine(LoadMenuScene());
-        }
     }
 
     IEnumerator LoadMenuScene()

@@ -5,34 +5,40 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class WhatsInVisionCone : MonoBehaviour
 {
-    public List<GameObject> objects;
-    public List<VisionCone> visionCons;
+    private List<VisionCone> m_visionCons;
+    public VisionCone frontLeft;
+    public VisionCone frontRight;
+    public VisionCone backLeft;
+    public VisionCone backRight;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_visionCons.Add(frontLeft);
+        m_visionCons.Add(frontRight);
+        m_visionCons.Add(backLeft);
+        m_visionCons.Add(backRight);
     }
 
     // Update is called once per frame
     void Update()
     {
-        objects.Clear();
-       foreach(VisionCone cone in visionCons)
-        {
-            foreach(GameObject obj in cone.objects)
-            {
-                objects.Add(obj);
-            }
-        } 
+       //objects.Clear();
+       //foreach(VisionCone cone in m_visionCons)
+       //{
+       //     foreach(GameObject obj in cone.objects)
+       //     {
+       //         objects.Add(obj);
+       //     }
+       //} 
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        foreach (var obj in objects)
-        {
-            Gizmos.DrawSphere(obj.transform.position, 2f);
-        }
+        //Gizmos.color = Color.green;
+        //foreach (var obj in objects)
+        //{
+        //    Gizmos.DrawSphere(obj.transform.position, 2f);
+        //}
     }
 }

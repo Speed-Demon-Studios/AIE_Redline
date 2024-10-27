@@ -59,6 +59,7 @@ public class UIControllerInput : MonoBehaviour
     private void Awake()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
+        GameManager.gManager.uiCInput = this; // Sets the gameManagers reference to this script                                            |
         GameManager.gManager.CurrentScene = "MainMenu";// Sets a string to MainMenu to know when we are in main menu                       |
         GameManager.gManager.disablePlayerCams = true; // turns a bool on that will disaple all cameras when in the main menu              |                                                                                  
         GameManager.gManager.resetRacerVariables = true; // turns a bool on that will let the game know the players variables are ready    |                                                                                
@@ -249,6 +250,17 @@ public class UIControllerInput : MonoBehaviour
         GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
         GameManager.gManager.players[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
         m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[index]);
+
+    }
+
+    /// <summary>
+    /// Reseting the first selected button for player 1 for the difficultyMenu
+    /// </summary>
+    public void ResetFirstButtonForPlayerOne(GameObject button)
+    {
+        OnShipSelection = true;
+        int index = 0;
+        GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button);
 
     }
 
