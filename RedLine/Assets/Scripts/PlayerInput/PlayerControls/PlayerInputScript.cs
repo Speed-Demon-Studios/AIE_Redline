@@ -10,10 +10,11 @@ public class PlayerInputScript : MonoBehaviour
 {
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
+    public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
 
-    [SerializeField] private Camera m_cam;
+    public Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }

@@ -46,6 +46,8 @@ public class ManageSceneLoading : MonoBehaviour
     public void ResetShip(GameObject playerOBJ)
     {
         InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
+        AIMoveInputs aiMove = playerOBJ.GetComponent<AIMoveInputs>();
+        Destroy(aiMove, 0.5f);
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
         ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();

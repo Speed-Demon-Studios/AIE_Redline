@@ -43,7 +43,6 @@ public class RaceManager : MonoBehaviour
     {
         GameManager gMAN = GameManager.gManager;
         gMAN.DisableRMovement();
-        gMAN.raceFinished = true;
 
         for (int i = 0; i < gMAN.players.Count; i++)
         {
@@ -52,7 +51,13 @@ public class RaceManager : MonoBehaviour
             AMC.UpdateActionMapForUI();
         }
 
-        gMAN.raceFinisher.ShowFinalPlacements();
+        Invoke(nameof(CallFinalPlacements), 2f);
+    }
+
+    public void CallFinalPlacements()
+    {
+        GameManager.gManager.raceFinished = true;
+        GameManager.gManager.raceFinisher.ShowFinalPlacements();
     }
 
     IEnumerator InitPlayers()
