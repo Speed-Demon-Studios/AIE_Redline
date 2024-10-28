@@ -17,6 +17,8 @@ public class AIMoveInputs : MonoBehaviour
     private float m_targetTurnAngle;
     private float m_currentTurnAngle;
 
+    public void SetVariant(ShipVariant variant) { Variant = variant; }
+
     private Nodes m_prevNode;
     public Nodes desiredNode;
     private Nodes m_nextNode;

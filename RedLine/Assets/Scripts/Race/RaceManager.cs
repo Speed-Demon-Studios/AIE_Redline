@@ -43,7 +43,6 @@ public class RaceManager : MonoBehaviour
     {
         GameManager gMAN = GameManager.gManager;
         gMAN.DisableRMovement();
-        gMAN.raceFinished = true;
 
         for (int i = 0; i < gMAN.players.Count; i++)
         {
@@ -52,7 +51,13 @@ public class RaceManager : MonoBehaviour
             AMC.UpdateActionMapForUI();
         }
 
-        gMAN.raceFinisher.ShowFinalPlacements();
+        Invoke(nameof(CallFinalPlacements), 2f);
+    }
+
+    public void CallFinalPlacements()
+    {
+        GameManager.gManager.raceFinished = true;
+        GameManager.gManager.raceFinisher.ShowFinalPlacements();
     }
 
     IEnumerator InitPlayers()
@@ -83,15 +88,25 @@ public class RaceManager : MonoBehaviour
         StopCoroutine(InitPlayers());
     }
 
-    public void DisableFinishedRacerMovement()
+    public void DisableFinishedRacerMovement(RacerDetails racer = null)
     {
-        for (int i = 0; i < GameManager.gManager.players.Count; i++)
+        if (racer == null)
         {
-            RacerDetails racerDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
-
-            if (racerDeets.finishedRacing == true && racerDeets.crossedFinishLine == true)
+            for (int i = 0; i < GameManager.gManager.players.Count; i++)
             {
-                GameManager.gManager.DisableRMovement(GameManager.gManager.players[i]);
+                RacerDetails racerDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
+
+                if (racerDeets.finishedRacing == true && racerDeets.crossedFinishLine == true)
+                {
+                    GameManager.gManager.DisableRMovement(GameManager.gManager.players[i]);
+                }
+            }
+        }
+        else
+        {
+            if(racer.finishedRacing == true && racer.crossedFinishLine == true)
+            {
+                GameManager.gManager.DisableRMovement(racer.gameObject);
             }
         }
     }
@@ -120,7 +135,7 @@ public class RaceManager : MonoBehaviour
                 FinishRace();
             }
             
-            DisableFinishedRacerMovement();
+            DisableFinishedRacerMovement(racer);
         }
         else
         {
