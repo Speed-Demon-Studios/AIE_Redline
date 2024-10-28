@@ -7,8 +7,8 @@ public class SteamAchievementManager : MonoBehaviour
 
     public void GetAchievement(string AchievementID)
     {
-        bool gotAchievement;
-
+        //bool gotAchievement;
+        //
         //Steamworks.SteamUserStats.GetAchievement(AchievementID, out gotAchievement);
         //
         //if (gotAchievement == false)
@@ -22,24 +22,24 @@ public class SteamAchievementManager : MonoBehaviour
 
     public void CheckAllAchievementProgress(int p1Placement)
     {
-        RacerDetails rDeets = GameManager.gManager.players[0].GetComponent<RacerDetails>();
-        bool gotAchievement;
-
+        //RacerDetails rDeets = GameManager.gManager.players[0].GetComponent<RacerDetails>();
+        //bool gotAchievement;
+        //
         //if (p1Placement > 0)
         //{
         //    // Checking for WIN related achievements
         //    if (p1Placement == 1)
         //    {
         //        int currentWins;
-        //        Steamworks.SteamUserStats.GetStat("FirstPlaceWins", out currentWins);
+        //        Steamworks.SteamUserStats.GetStat("RaceWins", out currentWins);
         //        currentWins++;
-        //        Steamworks.SteamUserStats.SetStat("FirstPlaceWins", currentWins);
+        //        Steamworks.SteamUserStats.SetStat("RaceWins", currentWins);
         //
-        //        // "First Flight" - Win 1 race.
-        //        Steamworks.SteamUserStats.GetAchievement("FirstTimer", out gotAchievement);
+        //        // "New Rider" - Win 1 race.
+        //        Steamworks.SteamUserStats.GetAchievement("NewRider", out gotAchievement);
         //        if (currentWins == 1)
         //        {
-        //            Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+        //            Steamworks.SteamUserStats.SetAchievement("NewRider");
         //        }
         //        Steamworks.SteamUserStats.StoreStats();
         //

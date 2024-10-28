@@ -153,7 +153,7 @@ public class FinishRace : MonoBehaviour
             }
 
             RacerDetails racerDeetsScript = GameManager.gManager.players[0].GetComponent<RacerDetails>();
-            GameManager.gManager.SAM.GetAchievement("NewRider");
+            GameManager.gManager.SAM.GetAchievement("FirstFlight");
             GameManager.gManager.SAM.CheckAllAchievementProgress(racerDeetsScript.placement);
         }
     }
