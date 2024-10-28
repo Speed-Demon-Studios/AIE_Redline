@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public FinishRace raceFinisher;
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
+    public Nodes startNode;
 
     public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
@@ -166,29 +167,36 @@ public class GameManager : MonoBehaviour
             Rigidbody rB = racer.GetComponent<Rigidbody>();
             ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
-            rB.velocity = new Vector3(0, 0, 0);
-            rB.angularVelocity = new Vector3(0, 0, 0);
+            //rB.velocity = new Vector3(0, 0, 0);
+            //rB.angularVelocity = new Vector3(0, 0, 0);
 
+            //rDeets.DisableShipControls();
             sControls.ResetAcceleration();
-            rB.isKinematic = true;
+            AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
+            aiMove.SetVariant(sControls.VariantObject);
+            aiMove.desiredNode = startNode;
 
-            rDeets.DisableShipControls();
         }
         else if (racer == null)
         {
-            foreach (GameObject racerOBJ in allRacers)
+            foreach (GameObject racerOBJ in racerObjects)
             {
                 InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
                 ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
 
-                rB.velocity = new Vector3(0, 0, 0);
-                rB.angularVelocity = new Vector3(0, 0, 0);
+                //rB.velocity = new Vector3(0, 0, 0);
+                //rB.angularVelocity = new Vector3(0, 0, 0);
 
+                //rDeets.DisableShipControls();
                 sControls.ResetAcceleration();
-                rB.isKinematic = true;
+                AIMoveInputs test;
+                if (!racerOBJ.TryGetComponent<AIMoveInputs>(out test))
+                {
+                    AIMoveInputs aiMove = racerOBJ.AddComponent<AIMoveInputs>();
 
-                rDeets.DisableShipControls();
+                    aiMove.desiredNode = startNode;
+                }
             }
         }
     }
