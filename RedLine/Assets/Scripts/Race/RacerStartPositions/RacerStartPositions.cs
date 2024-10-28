@@ -80,6 +80,10 @@ public class RacerStartPositions : MonoBehaviour
                         }
 
                     }
+
+                    PlayerAudioController pAC = GameManager.gManager.players[i].GetComponent<PlayerAudioController>();
+
+                    pAC.StartEngineHum();
                 }
 
                 GameManager.gManager.racersPlaced = true;
