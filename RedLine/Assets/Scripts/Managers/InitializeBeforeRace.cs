@@ -51,7 +51,7 @@ public class InitializeBeforeRace : MonoBehaviour
 
         sControls = this.GetComponent<ShipsControls>();
 
-        GameManager.gManager.playerObjects.Add(this.gameObject);
+        GameManager.gManager.allRacers.Add(this.gameObject);
 
         if (playerCamOBJECT != null)
         {

@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour
     public FinishRace raceFinisher;
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
+    public Nodes startNode;
 
     public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
-    public IList<GameObject> playerObjects = new List<GameObject>();
+    public IList<GameObject> allRacers = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
 
     public bool resetRacerVariables = false;
@@ -67,9 +68,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(racerObjects.Count + " Racers");
-        Debug.Log(playerObjects.Count + " playersObjects");
+
+        Debug.Log(allRacers.Count + " Racers");
+        Debug.Log(racerObjects.Count + " Ai Racers");
         Debug.Log(players.Count + " players");
+
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;
@@ -140,15 +143,15 @@ public class GameManager : MonoBehaviour
 
     public void EnableRMovement()
     {
-        foreach (GameObject racerOBJ in racerObjects)
-        {
-            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-            rDeets.EnableRacerMovement();
-            rB.isKinematic = false;
-        }
+        //foreach (GameObject racerOBJ in racerObjects)
+        //{
+        //    InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+        //    Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+        //    rDeets.EnableRacerMovement();
+        //    rB.isKinematic = false;
+        //}
 
-        foreach (GameObject racerOBJ in playerObjects)
+        foreach (GameObject racerOBJ in allRacers)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
             Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
@@ -161,17 +164,14 @@ public class GameManager : MonoBehaviour
     {
         if (racer != null)
         {
-            InitializeBeforeRace rDeets = racer.GetComponent<InitializeBeforeRace>();
-            Rigidbody rB = racer.GetComponent<Rigidbody>();
             ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
-            rB.velocity = new Vector3(0, 0, 0);
-            rB.angularVelocity = new Vector3(0, 0, 0);
-
+            racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
             sControls.ResetAcceleration();
-            rB.isKinematic = true;
+            AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
+            aiMove.SetVariant(sControls.VariantObject);
+            aiMove.desiredNode = startNode;
 
-            rDeets.DisableShipControls();
         }
         else if (racer == null)
         {
@@ -181,13 +181,18 @@ public class GameManager : MonoBehaviour
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
                 ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
 
-                rB.velocity = new Vector3(0, 0, 0);
-                rB.angularVelocity = new Vector3(0, 0, 0);
+                //rB.velocity = new Vector3(0, 0, 0);
+                //rB.angularVelocity = new Vector3(0, 0, 0);
 
+                //rDeets.DisableShipControls();
                 sControls.ResetAcceleration();
-                rB.isKinematic = true;
+                AIMoveInputs test;
+                if (!racerOBJ.TryGetComponent<AIMoveInputs>(out test))
+                {
+                    AIMoveInputs aiMove = racerOBJ.AddComponent<AIMoveInputs>();
 
-                rDeets.DisableShipControls();
+                    aiMove.desiredNode = startNode;
+                }
             }
         }
     }

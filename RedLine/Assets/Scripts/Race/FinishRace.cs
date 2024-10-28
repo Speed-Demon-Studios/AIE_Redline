@@ -58,7 +58,7 @@ public class FinishRace : MonoBehaviour
             m_alreadyShowingPlacements = true;
             GameManager.gManager.raceFinished = true;
 
-            foreach (GameObject racer in GameManager.gManager.playerObjects)
+            foreach (GameObject racer in GameManager.gManager.allRacers)
             {
                 if (GameManager.gManager.players.Contains(racer) == false)
                 {
@@ -74,10 +74,9 @@ public class FinishRace : MonoBehaviour
             }
 
             SelectMainButton();
-            //Invoke(nameof(SelectMainButton), .1f);
 
             // Iterate through all of the racer objects.
-            for (int i = 0; i < GameManager.gManager.playerObjects.Count; i++)
+            for (int i = 0; i < GameManager.gManager.allRacers.Count; i++)
             {
                 placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
                 RacerEntry rEntry = placementTexts[i].GetComponent<RacerEntry>();
@@ -87,7 +86,7 @@ public class FinishRace : MonoBehaviour
                 TextMeshProUGUI quickestTimeText = rEntry.Time2Object; // Get a reference to the FASTEST RACE TIME text object.
 
                 // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
-                foreach (GameObject racerOBJ in GameManager.gManager.playerObjects)
+                foreach (GameObject racerOBJ in GameManager.gManager.allRacers)
                 {
 
                     RacerDetails racerDeets = racerOBJ.GetComponent<RacerDetails>();

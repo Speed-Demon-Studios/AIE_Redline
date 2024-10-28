@@ -10,10 +10,11 @@ public class PlayerInputScript : MonoBehaviour
 {
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
+    public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
 
-    [SerializeField] private Camera m_cam;
+    public Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }
@@ -80,9 +81,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
         }                                                                                                                                //|
-        if (GameManager.gManager.playerObjects.Contains(this.gameObject)) // if the playerObjects list contains this object                |
+        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
         {                                                                                                                                //|
-            GameManager.gManager.playerObjects.Remove(this.gameObject); // then remove the object from the list                            |
+            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
         }                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
         gMan.numberOfPlayers -= 1;                                                                                                       //|

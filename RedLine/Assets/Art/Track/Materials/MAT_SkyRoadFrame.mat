@@ -12,14 +12,16 @@ Material:
     type: 3}
   m_ValidKeywords:
   - _EMISSION_TYPE_COLOUR_ADJUSTABLE
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -32,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Colour_Texture:
-        m_Texture: {fileID: 2800000, guid: 6849363b189cfad40adf393be526f77d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 20a91ee4f9b92364d92e6dd8c2d3312c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -64,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Map:
-        m_Texture: {fileID: 2800000, guid: de7286c04fb5c26438fe15a274a1e45a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 09830e752e2eaf047be215ad84d17285, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -76,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RMA_map:
-        m_Texture: {fileID: 2800000, guid: 12750fabbf867094bab4a7b17de086a2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1fb02f01d71507e4bacde1064ebd38a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -108,7 +110,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 1
     - _EMISSION_TYPE: 2
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
@@ -127,18 +129,18 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _Smoothness_Multiplier: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 0.7353569, g: 0.68544436, b: 0.6204994, a: 1}
     - _Color: {r: 0.7353569, g: 0.6854443, b: 0.6204993, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission_Colour: {r: 0.005943987, g: 0.15454365, b: 0.112935744, a: 0.45490196}
+    - _Emission_Colour: {r: 0, g: 1, b: 0.8937981, a: 0.45490196}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5530055812935225128

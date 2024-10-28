@@ -13,21 +13,24 @@ public class ManageSceneLoading : MonoBehaviour
     public void InitializeForMainMenu()
     {
         reloadingmenu = true;
+        GameManager.gManager.rActivator.DeactivateRedline();
         foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
             ResetShip(playerOBJ);
         }
 
-        foreach(GameObject playerOBJ in GameManager.gManager.players)
+        for (int i = GameManager.gManager.racerObjects.Count - 1; i >= 0; i--)
         {
-            PlayerInputScript testInput;
+            GameObject temp = GameManager.gManager.racerObjects[i];
 
-            if(!playerOBJ.TryGetComponent<PlayerInputScript>(out testInput))
+            if (GameManager.gManager.allRacers.Contains(temp))
             {
-                GameManager.gManager.racerObjects.Remove(playerOBJ);
-
-                Destroy(playerOBJ);
+                GameManager.gManager.allRacers.Remove(temp);
             }
+
+            GameManager.gManager.racerObjects.Remove(temp);
+
+            Destroy(temp);
         }
 
         ResetGameManager();
@@ -43,6 +46,8 @@ public class ManageSceneLoading : MonoBehaviour
     public void ResetShip(GameObject playerOBJ)
     {
         InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
+        AIMoveInputs aiMove = playerOBJ.GetComponent<AIMoveInputs>();
+        Destroy(aiMove, 0.5f);
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
         ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();

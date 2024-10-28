@@ -23,6 +23,10 @@ public class PlayerUiControl : MonoBehaviour
     public List<Slider> sliders = new();
     private int m_sliderNumber;
     public List<Animator> anim;
+    public Animator finishAnim;
+    public Image indicator;
+    public float distance;
+    private List<Image> indicators = new();
 
     private void Update()
     {
@@ -53,7 +57,7 @@ public class PlayerUiControl : MonoBehaviour
                     {                                                                                                                           //|
                         if (GameManager.gManager.pHandler.racers[i] == rDetails) // if i is equal to this current object then display the position|
                         {                                                                                                                       //|
-                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();     //|
+                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.allRacers.Count.ToString();              //|
                         }                                                                                                                       //|
                     }                                                                                                                           //|
                 }                                                                                                                               //|
@@ -125,8 +129,45 @@ public class PlayerUiControl : MonoBehaviour
                 // Set the speed text to the current speed times 7                                                                              |
                 m_speed.richText = true;                                        //|
                 m_speed.text = "<b>" + (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString() + "</b>" + " KPH";
+                //--------------------------------------------------------------------------------------------------------------------------------------|
+                Vector3 worldPos = GameManager.gManager.startNode.transform.position;
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                if (indicator != null)
+                    indicator.transform.position = Camera.main.WorldToScreenPoint(worldPos);
+                //for(int i = indicators.Count; i > 0; i--)
+                //{
+                //    Image img = indicators[i];
+                //    GameObject a = indicators[i].gameObject;
+                //    indicators.Remove(img);
+                //    Destroy(a);
+                //}
+                //foreach(GameObject player in GameManager.gManager.players)
+                //{
+                //    if(player != m_shipsControls.gameObject)
+                //    {
+                //        if (Vector3.Distance(m_shipsControls.gameObject.transform.position, player.transform.position) <= distance)
+                //        {
+                //            Image a = Instantiate(indicator, this.gameObject.transform);
+                //            indicators.Add(a);
+                //            a.transform.position = m_shipsControls.gameObject.GetComponent<PlayerInputScript>().m_cam.WorldToScreenPoint(player.transform.position);
+                //
+                //        }
+                //    }
+                //}
             }                                                                                                                                 //|
         }                                                                                                                                     //|
         //--------------------------------------------------------------------------------------------------------------------------------------|
+    }
+
+    public void FinishPopUp()
+    {
+        finishAnim.gameObject.SetActive(true);
+        StartCoroutine(WaitToHideFinish());
+    }
+
+    IEnumerator WaitToHideFinish()
+    {
+        yield return new WaitForSeconds(2f);
+        finishAnim.gameObject.SetActive(false);
     }
 }
