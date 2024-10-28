@@ -30,7 +30,7 @@ public class RacerStartPositions : MonoBehaviour
                     bool isPlayer = false;
                     foreach (GameObject playerOBJ in GameManager.gManager.players)
                     {
-                        if (GameManager.gManager.playerObjects[i] == playerOBJ)
+                        if (GameManager.gManager.allRacers[i] == playerOBJ)
                         {
                             isPlayer = true;
                         }
@@ -66,14 +66,14 @@ public class RacerStartPositions : MonoBehaviour
                         StartingPositionDetails thisPosition = startPositions[a].GetComponent<StartingPositionDetails>();
                         if (thisPosition.SpotFilled == false)
                         {
-                            thisPosition.HeldRacer = GameManager.gManager.playerObjects[i];
-                            GameManager.gManager.playerObjects[i].GetComponent<ShipsControls>().enabled = true;
-                            GameManager.gManager.playerObjects[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.playerObjects[i].transform);
-                            GameManager.gManager.playerObjects[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
-                            GameManager.gManager.playerObjects[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
-                            GameManager.gManager.playerObjects[i].transform.position = startPositions[a].transform.position;
-                            GameManager.gManager.playerObjects[i].transform.rotation = startPositions[a].transform.rotation;
-                            GameManager.gManager.playerObjects[i].GetComponent<ShipsControls>().enabled = false;
+                            thisPosition.HeldRacer = GameManager.gManager.allRacers[i];
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().enabled = true;
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.allRacers[i].transform);
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
+                            GameManager.gManager.allRacers[i].transform.position = startPositions[a].transform.position;
+                            GameManager.gManager.allRacers[i].transform.rotation = startPositions[a].transform.rotation;
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().enabled = false;
                             thisPosition.SpotFilled = true;
                             a = startPositions.Count();
                             break;

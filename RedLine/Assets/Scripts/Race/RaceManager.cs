@@ -28,9 +28,9 @@ public class RaceManager : MonoBehaviour
         gMAN.nRandomiser.AssignRacerNames();
         gMAN.raceStarted = true;
         
-        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        for (int i = 0; i < gMAN.players.Count; i++)
         {
-            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+            ActionMappingControl AMC = gMAN.players[i].GetComponent<ActionMappingControl>();
 
             AMC.UpdateActionMapForRace();
         }
@@ -45,9 +45,9 @@ public class RaceManager : MonoBehaviour
         gMAN.DisableRMovement();
         gMAN.raceFinished = true;
 
-        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        for (int i = 0; i < gMAN.players.Count; i++)
         {
-            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+            ActionMappingControl AMC = gMAN.players[i].GetComponent<ActionMappingControl>();
             
             AMC.UpdateActionMapForUI();
         }
@@ -59,7 +59,7 @@ public class RaceManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        foreach (GameObject gObj in GameManager.gManager.playerObjects)
+        foreach (GameObject gObj in GameManager.gManager.allRacers)
         {
             if (gObj != null)
             {

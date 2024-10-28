@@ -398,7 +398,7 @@ public class ShipsControls : MonoBehaviour
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
-        if (m_accelerateMultiplier == 0 && m_brakeMultiplier != 0)
+        if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0)
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
         else
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;

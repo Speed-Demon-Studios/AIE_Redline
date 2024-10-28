@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
-    public IList<GameObject> playerObjects = new List<GameObject>();
+    public IList<GameObject> allRacers = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
 
     public bool resetRacerVariables = false;
@@ -66,9 +66,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(racerObjects.Count + " Racers");
-        Debug.Log(playerObjects.Count + " playersObjects");
+
+        Debug.Log(allRacers.Count + " Racers");
+        Debug.Log(racerObjects.Count + " Ai Racers");
         Debug.Log(players.Count + " players");
+
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;
@@ -139,15 +141,15 @@ public class GameManager : MonoBehaviour
 
     public void EnableRMovement()
     {
-        foreach (GameObject racerOBJ in racerObjects)
-        {
-            InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-            Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-            rDeets.EnableRacerMovement();
-            rB.isKinematic = false;
-        }
+        //foreach (GameObject racerOBJ in racerObjects)
+        //{
+        //    InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
+        //    Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
+        //    rDeets.EnableRacerMovement();
+        //    rB.isKinematic = false;
+        //}
 
-        foreach (GameObject racerOBJ in playerObjects)
+        foreach (GameObject racerOBJ in allRacers)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
             Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
@@ -174,7 +176,7 @@ public class GameManager : MonoBehaviour
         }
         else if (racer == null)
         {
-            foreach (GameObject racerOBJ in racerObjects)
+            foreach (GameObject racerOBJ in allRacers)
             {
                 InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();

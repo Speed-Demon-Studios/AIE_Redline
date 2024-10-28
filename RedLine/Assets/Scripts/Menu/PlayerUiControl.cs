@@ -53,7 +53,7 @@ public class PlayerUiControl : MonoBehaviour
                     {                                                                                                                           //|
                         if (GameManager.gManager.pHandler.racers[i] == rDetails) // if i is equal to this current object then display the position|
                         {                                                                                                                       //|
-                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();     //|
+                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.allRacers.Count.ToString();              //|
                         }                                                                                                                       //|
                     }                                                                                                                           //|
                 }                                                                                                                               //|

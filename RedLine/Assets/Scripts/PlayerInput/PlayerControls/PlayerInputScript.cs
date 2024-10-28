@@ -80,9 +80,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
         }                                                                                                                                //|
-        if (GameManager.gManager.playerObjects.Contains(this.gameObject)) // if the playerObjects list contains this object                |
+        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
         {                                                                                                                                //|
-            GameManager.gManager.playerObjects.Remove(this.gameObject); // then remove the object from the list                            |
+            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
         }                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
         gMan.numberOfPlayers -= 1;                                                                                                       //|
