@@ -12,7 +12,7 @@ public class WhatsInVisionCone : MonoBehaviour
     public VisionCone backRight;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_visionCons.Add(frontLeft);
         m_visionCons.Add(frontRight);

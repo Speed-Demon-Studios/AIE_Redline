@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VariantName: Cutlass
   DownForce: 15000
-  model: {fileID: 7024027080776050394, guid: 2cda5571071459642a92b9dce428c7ba, type: 3}
+  model: {fileID: 3254323414157998264, guid: fe991ebae7809e3439f3995780e73ea8, type: 3}
   collision: {fileID: 2012846358539112329, guid: 09a9d35ac030adb4e8e75f0099733f98,
     type: 3}
   DefaultMaxAcceleration: 6.2
@@ -22,6 +22,54 @@ MonoBehaviour:
   DefaultMaxSpeed: 148
   AccelerationMultiplier: 2.4
   BreakMultiplier: 4
+  breakCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 4
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.2
+      inSlope: -0.07964377
+      outSlope: -0.07964377
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1177963
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: -0.07964377
+      outSlope: -0.07964377
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1177963
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   SpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -95,14 +143,41 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: -0.0142375
+      outSlope: -0.0142375
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.14
+      value: 1
+      inSlope: 0.010498358
+      outSlope: 0.010498358
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8402033
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.27
+      value: 0.38
+      inSlope: -0.78889453
+      outSlope: -0.78889453
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.34887162
+      outWeight: 0.079461806
+    - serializedVersion: 3
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
+      inWeight: 0.1177963
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  distance: 0
-  turnMultiplier: 0
+  distance: 20
+  turnMultiplier: 10
