@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ public class PlayerInputScript : MonoBehaviour
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
 
-    public Camera m_cam;
+    public CinemachineVirtualCamera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }
@@ -138,7 +139,7 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_cam.fieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        m_cam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 

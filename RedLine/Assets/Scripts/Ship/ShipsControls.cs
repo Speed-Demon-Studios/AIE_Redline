@@ -15,6 +15,7 @@ public class ShipsControls : MonoBehaviour
     public Transform rayCastPoint;
     private Rigidbody m_rb;
     private List<GameObject> m_fire = new();
+    public GameObject cameraRotationPoint;
     private int m_fireIndex;
 
     public List<GameObject> FireList() { return m_fire; }
@@ -40,6 +41,7 @@ public class ShipsControls : MonoBehaviour
     private float m_strafeMultiplier;
     public float strafeStrength;
     private float m_turningAngle;
+    public float cameraTurnAngle;
 
     public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
 
@@ -424,6 +426,7 @@ public class ShipsControls : MonoBehaviour
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (VariantObject.TurnSpeed * multiplier), 0));
 
+        cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / cameraTurnAngle));
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
