@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PositionHandler : MonoBehaviour
@@ -24,17 +23,20 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        for (int i = 0; i < 9; i++)
+        if (!GameManager.gManager.rManager.isTimeTrial)
         {
-            int index = Random.Range(0, aiRacePrefabs.Count - 1);
-        
-            GameObject a = Instantiate(aiRacePrefabs[index]);
-        
-            a.GetComponent<AIMoveInputs>().desiredNode = startNode;
+            for (int i = 0; i < 9; i++)
+            {
+                int index = Random.Range(0, aiRacePrefabs.Count - 1);
 
-            racers.Add(a.GetComponent<RacerDetails>());
+                GameObject a = Instantiate(aiRacePrefabs[index]);
 
-            GameManager.gManager.racerObjects.Add(a);
+                a.GetComponent<AIMoveInputs>().desiredNode = startNode;
+
+                racers.Add(a.GetComponent<RacerDetails>());
+
+                GameManager.gManager.racerObjects.Add(a);
+            }
         }
 
         foreach(GameObject players in GameManager.gManager.players)
