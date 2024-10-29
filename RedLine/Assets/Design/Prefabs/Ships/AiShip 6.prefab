@@ -321,7 +321,6 @@ GameObject:
   - component: {fileID: 5609334039806038210}
   - component: {fileID: 5573208418150351537}
   - component: {fileID: -3375732324914225338}
-  - component: {fileID: 8236615204231983788}
   m_Layer: 0
   m_Name: AiShip 6
   m_TagString: Racer
@@ -404,7 +403,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
@@ -415,7 +414,42 @@ MonoBehaviour:
   collisionParent: {fileID: 0}
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
-  strafeStrength: 0
+  cameraRotationPoint: {fileID: 0}
+  strafeStrength: 1.4
+  cameraTurnAngle: 11
+  modleRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.08745247
+    - serializedVersion: 3
+      time: 0.82639647
+      value: 0.10509832
+      inSlope: -0.2835781
+      outSlope: -0.2835781
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.005
+      inSlope: -0.9183868
+      outSlope: -0.9183868
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11730333
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wantingToBoost: 0
   forceMultiplier: 80
   accelerationForce: 10
@@ -518,20 +552,6 @@ MonoBehaviour:
   pInput: {fileID: 0}
   aiInput: {fileID: 2819560891871692965}
   rb: {fileID: 2819560891871692963}
---- !u!114 &8236615204231983788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4815bec3247aea4683ae96efdeb9333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInputActions: {fileID: 0}
-  mES: {fileID: 0}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0

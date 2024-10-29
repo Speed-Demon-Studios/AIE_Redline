@@ -14,8 +14,11 @@ public class PlayerInputScript : MonoBehaviour
     public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    public List<int> playerLayers = new();
+    public List<LayerMask> ignoreLayers = new();
 
-    public CinemachineVirtualCamera m_cam;
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
+    [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }
@@ -55,6 +58,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
+                                                                                                                                         //|
+        m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                                //|
+        m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                            //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -139,7 +145,7 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_cam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 

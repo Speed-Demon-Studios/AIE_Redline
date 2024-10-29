@@ -33,6 +33,8 @@ public class ShipsControls : MonoBehaviour
     public void SetAccelerationChange(float change) { m_accelerationChangePercentage = change; }
     public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
     public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
+    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
+    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
 
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -42,6 +44,7 @@ public class ShipsControls : MonoBehaviour
     public float strafeStrength;
     private float m_turningAngle;
     public float cameraTurnAngle;
+    public AnimationCurve modleRotationCurve;
 
     public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
 
@@ -239,8 +242,28 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void RotateShip()
     {
+        float tempTarget;
+        if (m_targetAngle < 0)
+            tempTarget = -m_targetAngle;
+        else
+            tempTarget = m_targetAngle;
+
+        float tempCurrent;
+        if (m_currentAngle < 0)
+            tempCurrent = -m_currentAngle;
+        else
+            tempCurrent = m_currentAngle;
+
+        float difference;
+        if (tempCurrent > tempTarget)
+            difference = tempCurrent - tempTarget;
+        else
+            difference = tempTarget - tempCurrent;
+        // this curve will let the modle rotate fast at the start and slow down once it gets to it max turn
+        float lerpSpeed = modleRotationCurve.Evaluate(difference);
+
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
-        m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, 0.03f);
+        m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, lerpSpeed);
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint, transform.up);
@@ -426,7 +449,11 @@ public class ShipsControls : MonoBehaviour
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (VariantObject.TurnSpeed * multiplier), 0));
 
-        cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / cameraTurnAngle));
+        if (cameraRotationPoint != null)
+        {
+            // rotates a point that lets the camera rotate but a lot less then the ship
+            cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / cameraTurnAngle));
+        }
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }

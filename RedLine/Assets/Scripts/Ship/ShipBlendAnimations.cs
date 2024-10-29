@@ -39,9 +39,26 @@ public class ShipBlendAnimations : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------------|
         if (this.enabled && m_controller != null) // check for null refreneces so there are no errors                                            |
         {                                                                                                                                      //|
-            m_controller.SetFloat("EngineBlend", m_controls.ReturnRB().velocity.magnitude / m_controls.GetCurrentMaxSpeed()); // blend engine to speed  |
+            m_controller.SetFloat("Engine", m_controls.ReturnRB().velocity.magnitude / m_controls.GetCurrentMaxSpeed()); // blend engine to speed|
                                                                                                                                                //|
-            m_controller.SetFloat("WingBlend", m_controls.GetTurnMultiplier()); // blend wing to the direction of turning                        |
+            m_controller.SetFloat("Flaps", m_controls.GetTurnMultiplier()); // blend wing to the direction of turning                            |
+                                                                                                                                               //|
+                                                                                                                                               //|
+            if (m_controls.ReturnRB().velocity.magnitude > 0.5f && m_controls.GetBrakeMultiplier() == 0) // if the ships is moving forward and not braking
+            {                                                                                                                                  //|
+                m_controller.SetFloat("WingRight", m_controls.GetAccelerationMultiplier());                                                    //|
+                m_controller.SetFloat("WingLeft", m_controls.GetAccelerationMultiplier());                                                     //|
+            }                                                                                                                                  //|
+            else if(m_controls.GetBrakeMultiplier() != 0) // if the ship is braking                                                              |
+            {                                                                                                                                  //|
+                m_controller.SetFloat("WingRight", -m_controls.GetBrakeMultiplier());                                                          //|
+                m_controller.SetFloat("WingLeft", -m_controls.GetBrakeMultiplier());                                                           //|
+            }                                                                                                                                  //|
+            else // if the ship is at a stop and not doing anything                                                                              |
+            {                                                                                                                                  //|
+                m_controller.SetFloat("WingRight", 0);                                                                                         //|
+                m_controller.SetFloat("WingLeft", 0);                                                                                          //|
+            }                                                                                                                                  //|
         }                                                                                                                                      //|
         //---------------------------------------------------------------------------------------------------------------------------------------|
     }
