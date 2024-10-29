@@ -62,6 +62,69 @@ MonoBehaviour:
   lapTimes:
   - 22.538
   - 96.356
+--- !u!1 &1118446545466465883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7175591537509441888}
+  - component: {fileID: 7314734928845687300}
+  m_Layer: 0
+  m_Name: EngineHum 2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7175591537509441888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118446545466465883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2834802456668022025}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7314734928845687300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118446545466465883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1707219996
+      Data2: 1209115749
+      Data3: 1446559134
+      Data4: -1228485050
+    Path: event:/ShipEngineHum/EngineHum
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1734343116818270318
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +154,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8944135831046906096}
+  - {fileID: 8033637018253631480}
+  - {fileID: 7175591537509441888}
+  - {fileID: 5648857313650204715}
+  - {fileID: 6653594019699927691}
   m_Father: {fileID: 2868536069181459850}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -499,8 +566,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventEmitterRefs:
+  m_engineAudioInfo:
+  - Guid:
+      Data1: 660891482
+      Data2: 1174222986
+      Data3: -252911741
+      Data4: -351592047
+    Path: event:/NewShipEngineLoop/MainShipEngineLoopCompressor
+  - Guid:
+      Data1: -1707219996
+      Data2: 1209115749
+      Data3: 1446559134
+      Data4: -1228485050
+    Path: event:/ShipEngineHum/EngineHum
+  - Guid:
+      Data1: 1137344070
+      Data2: 1096902449
+      Data3: 149315970
+      Data4: 2060307264
+    Path: event:/ShipEngineHumBACKING/ShipEngineHumAUX
+  - Guid:
+      Data1: -1537893168
+      Data2: 1260994752
+      Data3: 1997540799
+      Data4: 2070873256
+    Path: event:/EnginePulse/MainEnginePulseLoop
+  m_engineEmitters:
   - {fileID: 2213884190655598488}
+  - {fileID: 5285167953445669882}
+  - {fileID: 7314734928845687300}
+  - {fileID: 5589612803952223228}
+  m_engineEmitterPitches:
+  - 1
+  - 1
+  - 1
+  - 1
+  m_engineEmitterVolumes:
+  - 0.045
+  - 0.045
+  - 0.045
+  - 0.045
+  combinedPitch: 1
+  useCombinedPitch: 0
+  m_redlineAudioInfo:
+  - Guid:
+      Data1: -732727649
+      Data2: 1314593622
+      Data3: 208126650
+      Data4: 963345092
+    Path: event:/RedlineEnergyCharger/248757-Sci-Fi_Energy_Shield_Up_14
+  m_redlineEmitters:
+  - {fileID: 495749546619460934}
+  m_redlineEmitterPitches:
+  - 1
+  m_redlineEmitterVolumes:
+  - 0.05
 --- !u!1 &2868536069371765811
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,17 +835,17 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1073155609
-      Data2: 1139023539
-      Data3: -367592814
-      Data4: -650374194
-    Path: event:/ShipEngine/NormalizedEngineSoundVolumeUp
+      Data1: 660891482
+      Data2: 1174222986
+      Data3: -252911741
+      Data4: -351592047
+    Path: event:/NewShipEngineLoop/MainShipEngineLoopCompressor
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
@@ -1061,6 +1181,69 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &4939134089007823073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8033637018253631480}
+  - component: {fileID: 5285167953445669882}
+  m_Layer: 0
+  m_Name: EngineHum 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8033637018253631480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939134089007823073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2834802456668022025}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5285167953445669882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939134089007823073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1707219996
+      Data2: 1209115749
+      Data3: 1446559134
+      Data4: -1228485050
+    Path: event:/ShipEngineHum/EngineHum
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6241893629016962924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1275,69 @@ Transform:
   m_Father: {fileID: 2868536069181459850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7337148842865959229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5648857313650204715}
+  - component: {fileID: 5589612803952223228}
+  m_Layer: 0
+  m_Name: EngineHum 2 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5648857313650204715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337148842865959229}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2834802456668022025}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5589612803952223228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337148842865959229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1707219996
+      Data2: 1209115749
+      Data3: 1446559134
+      Data4: -1228485050
+    Path: event:/ShipEngineHum/EngineHum
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7669515900440626705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1369,69 @@ Transform:
   m_Father: {fileID: 2868536069181459850}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8708058684691917856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6653594019699927691}
+  - component: {fileID: 495749546619460934}
+  m_Layer: 0
+  m_Name: RedlineAudio1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6653594019699927691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708058684691917856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2834802456668022025}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495749546619460934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708058684691917856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1707219996
+      Data2: 1209115749
+      Data3: 1446559134
+      Data4: -1228485050
+    Path: event:/ShipEngineHum/EngineHum
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2765409232838878355
 PrefabInstance:
   m_ObjectHideFlags: 0

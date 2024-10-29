@@ -38,6 +38,33 @@ MonoBehaviour:
   lastModified: 638657269981515256
   FileSizes: []
   Exists: 1
+--- !u!114 &-4721146399573708427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/RedlineEnergyCharger/248757-Sci-Fi_Energy_Shield_Up_14
+  m_EditorClassIdentifier: 
+  Path: event:/RedlineEnergyCharger/248757-Sci-Fi_Energy_Shield_Up_14
+  Guid:
+    Data1: -732727649
+    Data2: 1314593622
+    Data3: 208126650
+    Data4: 963345092
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2900
 --- !u!114 &-2907545706788944971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +92,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4200
+--- !u!114 &-2205534202152425613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/NewShipEngineLoop/MainShipEngineLoopCompressor
+  m_EditorClassIdentifier: 
+  Path: event:/NewShipEngineLoop/MainShipEngineLoopCompressor
+  Guid:
+    Data1: 660891482
+    Data2: 1174222986
+    Data3: -252911741
+    Data4: -351592047
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 53028
+--- !u!114 &-902353640327382038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShipEngine/NormalizedEngineSoundVolumeUp
+  m_EditorClassIdentifier: 
+  Path: event:/ShipEngine/NormalizedEngineSoundVolumeUp
+  Guid:
+    Data1: 1073155609
+    Data2: 1139023539
+    Data3: -367592814
+    Data4: -650374194
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 19983
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,18 +159,69 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -6885077242360977996}
-  - {fileID: -6674820574515672155}
+  - {fileID: 2572994617365935129}
+  - {fileID: 7530275692248856671}
   EditorEvents:
-  - {fileID: 5637463809876672210}
-  - {fileID: -2907545706788944971}
+  - {fileID: -902353640327382038}
+  - {fileID: 6485689676080109701}
+  - {fileID: -2205534202152425613}
+  - {fileID: 4122204961937916631}
+  - {fileID: 6928355200123278492}
+  - {fileID: -4721146399573708427}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6674820574515672155}
+  - {fileID: 7530275692248856671}
   StringsBanks:
-  - {fileID: -6885077242360977996}
-  cacheTime: 638657269981535419
+  - {fileID: 2572994617365935129}
+  cacheTime: 638658091942232196
   cacheVersion: 131620
+--- !u!114 &2572994617365935129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638658091942232196
+  FileSizes:
+  - Name: Desktop
+    Value: 1148
+  Exists: 1
+--- !u!114 &4122204961937916631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShipEngineHumBACKING/ShipEngineHumAUX
+  m_EditorClassIdentifier: 
+  Path: event:/ShipEngineHumBACKING/ShipEngineHumAUX
+  Guid:
+    Data1: 1137344070
+    Data2: 1096902449
+    Data3: 149315970
+    Data4: 2060307264
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10221
 --- !u!114 &5637463809876672210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,3 +249,77 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19983
+--- !u!114 &6485689676080109701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShipEngineHum/EngineHum
+  m_EditorClassIdentifier: 
+  Path: event:/ShipEngineHum/EngineHum
+  Guid:
+    Data1: -1707219996
+    Data2: 1209115749
+    Data3: 1446559134
+    Data4: -1228485050
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4200
+--- !u!114 &6928355200123278492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/EnginePulse/MainEnginePulseLoop
+  m_EditorClassIdentifier: 
+  Path: event:/EnginePulse/MainEnginePulseLoop
+  Guid:
+    Data1: -1537893168
+    Data2: 1260994752
+    Data3: 1997540799
+    Data4: 2070873256
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6687
+--- !u!114 &7530275692248856671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638658091942194714
+  FileSizes:
+  - Name: Desktop
+    Value: 1331648
+  Exists: 1
