@@ -27,10 +27,8 @@ public class ShipsControls : MonoBehaviour
     private float m_acceleration;
     private float m_currentMaxSpeed;
     private float m_defaultMaxSpeed;
-    private float m_accelerationChangePercentage = 1;
 
     public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
-    public void SetAccelerationChange(float change) { m_accelerationChangePercentage = change; }
     public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
     public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
     public float GetBrakeMultiplier() { return m_brakeMultiplier; }
@@ -107,6 +105,10 @@ public class ShipsControls : MonoBehaviour
         {
             m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
         }
+    }
+
+    public void DifficultySpeedChange()
+    {
         m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
     }
