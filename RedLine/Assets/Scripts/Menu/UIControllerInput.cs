@@ -136,7 +136,16 @@ public class UIControllerInput : MonoBehaviour
             Debug.Log("Loading Race Scene"); //                                                                                            |
             Debug.Log("Ready To Start Race"); //                                                                                           |
             GameManager.gManager.racerObjects = new List<GameObject>(); // Empty the racerObject List                                      |
-//                                                                                                                                         |
+            for (int i = GameManager.gManager.allRacers.Count - 1; i >= 0; i--)                                                          //|
+            {                                                                                                                            //|
+                GameObject temp = GameManager.gManager.allRacers[i];                                                                     //|
+                                                                                                                                         //|
+                if (temp == null)                                                                                                        //|
+                {                                                                                                                        //|
+                    GameManager.gManager.allRacers.Remove(temp);                                                                         //|
+                }                                                                                                                        //|
+            }                                                                                                                            //|
+            //                                                                                                                             |
             SceneManager.LoadSceneAsync(1); // Load the new race scene                                                                     |
         } //                                                                                                                               |
         //---------------------------------------------------------------------------------------------------------------------------------|
@@ -236,7 +245,7 @@ public class UIControllerInput : MonoBehaviour
         OnShipSelection = true;
         GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[playerNumber].GetComponentInChildren<Button>().gameObject);
         GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>());
-        m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[playerNumber]);
+        m_selectionMenuButtons[playerNumber].GetComponent<ShipSelection>().SetShip(GameManager.gManager.allRacers[playerNumber]);
 
     }
 
@@ -249,7 +258,18 @@ public class UIControllerInput : MonoBehaviour
         int index = 0;
         GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(m_selectionMenuButtons[index].GetComponentInChildren<Button>().gameObject);
         GameManager.gManager.players[index].GetComponent<PlayerInputScript>().SetSelection(m_selectionMenuButtons[index].GetComponent<ShipSelection>());
-        m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.playerObjects[index]);
+        m_selectionMenuButtons[index].GetComponent<ShipSelection>().SetShip(GameManager.gManager.allRacers[index]);
+
+    }
+
+    /// <summary>
+    /// Reseting the first selected button for player 1 for the difficultyMenu
+    /// </summary>
+    public void ResetFirstButtonForPlayerOne(GameObject button)
+    {
+        OnShipSelection = true;
+        int index = 0;
+        GameManager.gManager.players[index].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button);
 
     }
 

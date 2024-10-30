@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ public class PlayerInputScript : MonoBehaviour
 {
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
+    public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    public List<int> playerLayers = new();
+    public List<LayerMask> ignoreLayers = new();
 
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
@@ -53,6 +58,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
+                                                                                                                                         //|
+        m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                                //|
+        m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                            //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -80,9 +88,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
         }                                                                                                                                //|
-        if (GameManager.gManager.playerObjects.Contains(this.gameObject)) // if the playerObjects list contains this object                |
+        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
         {                                                                                                                                //|
-            GameManager.gManager.playerObjects.Remove(this.gameObject); // then remove the object from the list                            |
+            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
         }                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
         gMan.numberOfPlayers -= 1;                                                                                                       //|
@@ -124,7 +132,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
         // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;                   //|
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;             //|
         // if the ship is moving slightly                                                                                                  |
         if(speedPercentage > 0.001)                                                                                                      //|
         {                                                                                                                                //|
@@ -137,7 +145,7 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_cam.fieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
