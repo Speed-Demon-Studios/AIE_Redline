@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3963482409163247865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4586422934614820811}
@@ -68,11 +68,23 @@ VisualEffect:
       - m_Value: 11.2
         m_Name: Dissolve_Speed
         m_Overridden: 1
-      - m_Value: 10
+      - m_Value: 17
         m_Name: Dissolve_Scale_Outer
         m_Overridden: 1
-      - m_Value: 20
+      - m_Value: 22
         m_Name: Dissolve_Speed_Outer
+        m_Overridden: 1
+      - m_Value: 4
+        m_Name: FlameScale_Outer
+        m_Overridden: 1
+      - m_Value: 25
+        m_Name: Dissolve_Speed_Core
+        m_Overridden: 1
+      - m_Value: 7.6
+        m_Name: Dissolve_Scale_Core
+        m_Overridden: 1
+      - m_Value: 21.6
+        m_Name: FlameRate_Outer
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -84,6 +96,12 @@ VisualEffect:
       - m_Value: {x: 0, y: 5, z: 0}
         m_Name: FlameVelocity_B
         m_Overridden: 1
+      - m_Value: {x: 0.3, y: 22, z: 0}
+        m_Name: FlameVelocity_Core
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 3, z: 0}
+        m_Name: FlameVelocity_Outer
+        m_Overridden: 1
     m_Vector4f:
       m_Array:
       - m_Value: {x: 0, y: 11.984314, z: 11.356863, w: 1}
@@ -91,6 +109,12 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: {x: 1.8196079, y: 3.764706, z: 5.992157, w: 0}
         m_Name: Colour_B
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 6.122713, z: 16.94838, w: 1}
+        m_Name: Colour_Core
+        m_Overridden: 1
+      - m_Value: {x: 1.9502074, y: 4.0349116, z: 6.4222345, w: 1}
+        m_Name: Colour_Outer
         m_Overridden: 1
     m_Uint:
       m_Array: []
@@ -177,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 4586422934614820810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1671700035376051347}
