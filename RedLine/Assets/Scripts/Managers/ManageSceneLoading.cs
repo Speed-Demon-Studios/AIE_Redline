@@ -47,7 +47,7 @@ public class ManageSceneLoading : MonoBehaviour
     {
         InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
         AIMoveInputs aiMove = playerOBJ.GetComponent<AIMoveInputs>();
-        Destroy(aiMove, 0.5f);
+        Destroy(aiMove);
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
         ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
@@ -70,6 +70,10 @@ public class ManageSceneLoading : MonoBehaviour
         racerDeets.currentLapTimeMINUTES = 0;
         racerDeets.quickestLapTimeSECONDS = 99;
         racerDeets.quickestLapTimeMINUTES = 99;
+
+        controls.SetBrakeMultiplier(0);
+        controls.SetTurnMultipliers(0);
+        controls.SetStrafeMultiplier(0);
 
 
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();

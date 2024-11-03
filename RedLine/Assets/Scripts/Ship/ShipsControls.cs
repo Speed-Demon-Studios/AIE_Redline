@@ -15,8 +15,10 @@ public class ShipsControls : MonoBehaviour
     public Transform rayCastPoint;
     private Rigidbody m_rb;
     private List<GameObject> m_fire = new();
+    public GameObject cameraRotationPoint;
     private int m_fireIndex;
 
+    public bool isTestShip;
     public List<GameObject> FireList() { return m_fire; }
 
     [Space]
@@ -26,12 +28,12 @@ public class ShipsControls : MonoBehaviour
     private float m_acceleration;
     private float m_currentMaxSpeed;
     private float m_defaultMaxSpeed;
-    private float m_accelerationChangePercentage = 1;
 
     public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
-    public void SetAccelerationChange(float change) { m_accelerationChangePercentage = change; }
     public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
     public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
+    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
+    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
 
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -40,6 +42,8 @@ public class ShipsControls : MonoBehaviour
     private float m_strafeMultiplier;
     public float strafeStrength;
     private float m_turningAngle;
+    public float cameraTurnAngle;
+    public AnimationCurve modelRotationCurve;
 
     public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
 
@@ -102,6 +106,10 @@ public class ShipsControls : MonoBehaviour
         {
             m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
         }
+    }
+
+    public void DifficultySpeedChange()
+    {
         m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
     }
@@ -125,7 +133,7 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (this.enabled && GameManager.gManager.raceStarted)
+        if (isTestShip || this.enabled && GameManager.gManager.raceStarted)
         {
             AddToBoost();
             if(m_fire.Count > 0)
@@ -237,8 +245,28 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void RotateShip()
     {
+        float tempTarget;
+        if (m_targetAngle < 0)
+            tempTarget = -m_targetAngle;
+        else
+            tempTarget = m_targetAngle;
+
+        float tempCurrent;
+        if (m_currentAngle < 0)
+            tempCurrent = -m_currentAngle;
+        else
+            tempCurrent = m_currentAngle;
+
+        float difference;
+        if (tempCurrent > tempTarget)
+            difference = tempCurrent - tempTarget;
+        else
+            difference = tempTarget - tempCurrent;
+        // this curve will let the modle rotate fast at the start and slow down once it gets to it max turn
+        float lerpSpeed = modelRotationCurve.Evaluate(difference);
+
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
-        m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, 0.03f);
+        m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, lerpSpeed);
 
         // first it will look at facing position which in the empty object infront of the ship
         transform.LookAt(facingPoint, transform.up);
@@ -405,6 +433,11 @@ public class ShipsControls : MonoBehaviour
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
 
+        if (float.IsNaN(m_acceleration))
+            m_acceleration = 0;
+        if (float.IsNaN(speedMultiplier))
+            speedMultiplier = 0;
+
         m_rb.velocity += m_acceleration * speedMultiplier * transform.forward;
     }
 
@@ -421,9 +454,17 @@ public class ShipsControls : MonoBehaviour
         if (!m_isBoosting && !m_isBoostingOnBoostPad)
             multiplier = VariantObject.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
+        if (float.IsNaN(multiplier))
+            multiplier = 0;
+
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (VariantObject.TurnSpeed * multiplier), 0));
 
+        if (cameraRotationPoint != null)
+        {
+            // rotates a point that lets the camera rotate but a lot less then the ship
+            cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / cameraTurnAngle));
+        }
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
     }
