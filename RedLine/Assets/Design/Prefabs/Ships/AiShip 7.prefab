@@ -244,8 +244,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891588230137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.9}
-  m_LocalScale: {x: 0.82958, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2819560892090638106}
@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 5609334039806038210}
   - component: {fileID: 5573208418150351537}
   - component: {fileID: 7244173973842047067}
-  - component: {fileID: 6123751117057579120}
   m_Layer: 0
   m_Name: AiShip 7
   m_TagString: Racer
@@ -352,7 +351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
@@ -363,7 +362,16 @@ MonoBehaviour:
   collisionParent: {fileID: 0}
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
-  strafeStrength: 0
+  cameraRotationPoint: {fileID: 0}
+  isTestShip: 0
+  strafeStrength: 1.4
+  cameraTurnAngle: 11
+  modelRotationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wantingToBoost: 0
   forceMultiplier: 80
   accelerationForce: 10
@@ -394,7 +402,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f135f0eef7da2964cb3b105fab71eb68, type: 3}
   m_Name: 
@@ -466,20 +474,6 @@ MonoBehaviour:
   pInput: {fileID: 0}
   aiInput: {fileID: 2819560891871692965}
   rb: {fileID: 2819560891871692963}
---- !u!114 &6123751117057579120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819560891871692966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4815bec3247aea4683ae96efdeb9333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInputActions: {fileID: 0}
-  mES: {fileID: 0}
 --- !u!1 &2819560892090638107
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560892090638107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

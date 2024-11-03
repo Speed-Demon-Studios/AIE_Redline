@@ -11,6 +11,7 @@ public class ShipVariant : ScriptableObject
     [Header("Ship Model")]
     public GameObject model;
     public GameObject collision;
+    public ShipType shipType;
     [Space]
     [Header("Speed Variables")]
     public float DefaultMaxAcceleration;

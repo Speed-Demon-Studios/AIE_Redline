@@ -32,7 +32,7 @@ public class PositionHandler : MonoBehaviour
                 GameObject a = Instantiate(aiRacePrefabs[index]);
 
                 a.GetComponent<AIMoveInputs>().desiredNode = startNode;
-
+                a.GetComponent<ShipsControls>().DifficultySpeedChange();
                 racers.Add(a.GetComponent<RacerDetails>());
 
                 GameManager.gManager.racerObjects.Add(a);
@@ -41,6 +41,7 @@ public class PositionHandler : MonoBehaviour
 
         foreach(GameObject players in GameManager.gManager.players)
         {
+            players.GetComponent<ShipsControls>().DifficultySpeedChange();
             racers.Add(players.GetComponent<RacerDetails>());
         }
 

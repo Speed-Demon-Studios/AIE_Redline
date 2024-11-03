@@ -328,7 +328,18 @@ MonoBehaviour:
   player: {fileID: 3948600599449153757}
   eventSystem: {fileID: 3458273097799416325}
   uiController: {fileID: 3154480810170725980}
-  m_cam: {fileID: 8177504199516520170}
+  playerLayers: 08000000090000000a0000000b000000
+  ignoreLayers:
+  - serializedVersion: 2
+    m_Bits: 503
+  - serializedVersion: 2
+    m_Bits: 759
+  - serializedVersion: 2
+    m_Bits: 1271
+  - serializedVersion: 2
+    m_Bits: 2295
+  m_virtualCam: {fileID: 8177504199516520170}
+  m_cam: {fileID: 2868536069371765821}
   playerReadyInMenu: 0
   lerpTime: 0.05
   minFOV: 75
@@ -354,6 +365,39 @@ MonoBehaviour:
   cameraRotationPoint: {fileID: 7341607018904620202}
   strafeStrength: 1.4
   cameraTurnAngle: 11
+  modelRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69493634
+      value: 0.7542918
+      inSlope: -0.9684653
+      outSlope: -0.9684653
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21341988
+      outWeight: 0.22222584
+    - serializedVersion: 3
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -2.2439308
+      outSlope: -2.2439308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.114574745
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wantingToBoost: 0
   forceMultiplier: 80
   accelerationForce: 10
@@ -484,7 +528,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044234, y: -0.07395424, z: 0.003269409, w: 0.99628323}
+  m_LocalRotation: {x: 0.044044256, y: -0.073954195, z: 0.0032694088, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1045,7 +1089,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7341607018904620202}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

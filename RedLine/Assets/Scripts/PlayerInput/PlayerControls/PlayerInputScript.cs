@@ -14,8 +14,11 @@ public class PlayerInputScript : MonoBehaviour
     public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    public List<int> playerLayers = new();
+    public List<LayerMask> ignoreLayers = new();
 
-    public CinemachineVirtualCamera m_cam;
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
+    [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }
@@ -55,6 +58,10 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
+        if(m_virtualCam != null && playerLayers.Count > 0)                                                                               //|
+            m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                            //|
+        if(m_cam != null && playerLayers.Count > 0)                                                                                      //|
+            m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                        //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -117,7 +124,7 @@ public class PlayerInputScript : MonoBehaviour
     void FixedUpdate()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        if (gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished                            |
+        if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
             CalculateFOV(); // calculate the FOV for the camera                                                                            |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
@@ -139,7 +146,8 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_cam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        if(m_virtualCam != null)                                                                                                         //|
+            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                               |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
