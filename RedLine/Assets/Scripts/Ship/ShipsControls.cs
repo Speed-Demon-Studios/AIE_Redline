@@ -18,6 +18,7 @@ public class ShipsControls : MonoBehaviour
     public GameObject cameraRotationPoint;
     private int m_fireIndex;
 
+    public bool isTestShip;
     public List<GameObject> FireList() { return m_fire; }
 
     [Space]
@@ -42,7 +43,7 @@ public class ShipsControls : MonoBehaviour
     public float strafeStrength;
     private float m_turningAngle;
     public float cameraTurnAngle;
-    public AnimationCurve modleRotationCurve;
+    public AnimationCurve modelRotationCurve;
 
     public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
 
@@ -132,7 +133,7 @@ public class ShipsControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (this.enabled && GameManager.gManager.raceStarted)
+        if (isTestShip || this.enabled && GameManager.gManager.raceStarted)
         {
             AddToBoost();
             if(m_fire.Count > 0)
@@ -262,7 +263,7 @@ public class ShipsControls : MonoBehaviour
         else
             difference = tempTarget - tempCurrent;
         // this curve will let the modle rotate fast at the start and slow down once it gets to it max turn
-        float lerpSpeed = modleRotationCurve.Evaluate(difference);
+        float lerpSpeed = modelRotationCurve.Evaluate(difference);
 
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
         m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, lerpSpeed);
@@ -432,6 +433,11 @@ public class ShipsControls : MonoBehaviour
 
         m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
 
+        if (float.IsNaN(m_acceleration))
+            m_acceleration = 0;
+        if (float.IsNaN(speedMultiplier))
+            speedMultiplier = 0;
+
         m_rb.velocity += m_acceleration * speedMultiplier * transform.forward;
     }
 
@@ -447,6 +453,9 @@ public class ShipsControls : MonoBehaviour
         float multiplier = 0.5f;
         if (!m_isBoosting && !m_isBoostingOnBoostPad)
             multiplier = VariantObject.TurnSpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
+
+        if (float.IsNaN(multiplier))
+            multiplier = 0;
 
         // this rotation is for the turning of the ship which only happens on the ships local y axis
         rotation.localRotation = Quaternion.Euler(new Vector3(0, m_currentAngle * (VariantObject.TurnSpeed * multiplier), 0));

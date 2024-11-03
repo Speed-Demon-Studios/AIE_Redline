@@ -31,7 +31,7 @@ public class PlayerUiControl : MonoBehaviour
     private void Update()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        if (GameManager.gManager)                                                                                                        //|
+        if (GameManager.gManager && !m_shipsControls.isTestShip)                                                                         //|
         {                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
             if (GameManager.gManager.raceStarted == false) // if the race has not started than all the text is null                        |
