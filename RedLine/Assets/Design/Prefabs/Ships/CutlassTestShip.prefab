@@ -121,8 +121,50 @@ MonoBehaviour:
   m_speed: {fileID: 8370063527241296903}
   rDetails: {fileID: 0}
   m_shipsControls: {fileID: 2868536069181459848}
+  currentLapTime: {fileID: 0}
+  bestLapTime: {fileID: 0}
+  hudScript: {fileID: 0}
+  energyBar: {fileID: 0}
+  speedBar: {fileID: 0}
+  defaultEnergybarColour: {r: 0, g: 0, b: 0, a: 0}
+  defaultSpeedColour: {r: 0, g: 0, b: 0, a: 0}
+  overdriveSpeedColour: {r: 0, g: 0, b: 0, a: 0}
   sliders: []
-  test: {fileID: 0}
+  anim: []
+  finishAnim: {fileID: 0}
+  indicator: {fileID: 0}
+  distance: 0
+--- !u!1 &1511094335043425430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414725234958146298}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1414725234958146298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511094335043425430}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2868536069181459850}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2868536068024986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +286,7 @@ Transform:
   - {fileID: 4224050798392490133}
   - {fileID: 6721885452477223704}
   - {fileID: 535916827334618085}
+  - {fileID: 1414725234958146298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -289,11 +332,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3948600599449153757}
   eventSystem: {fileID: 0}
+  uiController: {fileID: 0}
+  playerLayers: 
+  ignoreLayers: []
+  m_virtualCam: {fileID: 0}
   m_cam: {fileID: 2868536069371765821}
   playerReadyInMenu: 0
   lerpTime: 0.05
-  minPOV: 90
-  maxPOV: 135
+  minFOV: 0
+  maxFOV: 0
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,18 +353,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variant: {fileID: 0}
   VariantObject: {fileID: 11400000, guid: a6a13676ee7995546b297e0210ebb33c, type: 2}
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
-  collisionParent: {fileID: 0}
+  collisionParent: {fileID: 2574798238462877232}
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
-  fire:
-  - {fileID: 6890939362872732136}
-  - {fileID: 7230363856535853717}
-  - {fileID: 2918860219381749840}
+  cameraRotationPoint: {fileID: 1511094335043425430}
+  isTestShip: 1
   strafeStrength: 1.4
+  cameraTurnAngle: 11
+  modelRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85990703
+      value: 0.284543
+      inSlope: -0.07856341
+      outSlope: -0.07856341
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09942892
+      outWeight: 0.22222584
+    - serializedVersion: 3
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -2.2439308
+      outSlope: -2.2439308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.114574745
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wantingToBoost: 0
   forceMultiplier: 80
   accelerationForce: 10
