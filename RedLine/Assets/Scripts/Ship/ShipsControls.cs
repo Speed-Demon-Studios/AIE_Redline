@@ -62,15 +62,15 @@ public class ShipsControls : MonoBehaviour
     public float accelerationForce;
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
-    public float boostTime;
     private bool m_isBoostingOnBoostPad;
     private float m_maxSpeedDuringBoost;
     public float maxBoostSpeedChange;
+    public List<float> boostingTimes = new();
     public bool ReturnIsBoosting() { return m_isBoosting; }
     public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
-    public void SwitchRedlineBool() { m_isInRedline = true; }
+    public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
     private IEnumerator RedlineFalse()
     {
@@ -395,7 +395,7 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
-        float time = m_boostLevel * boostTime;
+        float time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {
