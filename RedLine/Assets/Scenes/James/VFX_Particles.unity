@@ -363,6 +363,16 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Overridden
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5036753170802401458, guid: 16f7772963016674db91c4a6f500fae3,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 26.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5036753170802401458, guid: 16f7772963016674db91c4a6f500fae3,
+        type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Value
+      value: 
+      objectReference: {fileID: 2800000, guid: 33ad5f29fd222c6479c78e9cf6b66bb5, type: 3}
     - target: {fileID: 9206251365926993029, guid: 16f7772963016674db91c4a6f500fae3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -380,12 +390,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f7772963016674db91c4a6f500fae3, type: 3}
---- !u!4 &222958479 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2929841150137566244, guid: 16f7772963016674db91c4a6f500fae3,
-    type: 3}
-  m_PrefabInstance: {fileID: 222958478}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &382814023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1185,137 +1189,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 371.716, y: -209.074, z: -2.932}
---- !u!1 &1496590407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1496590408}
-  - component: {fileID: 1496590410}
-  - component: {fileID: 1496590409}
-  m_Layer: 0
-  m_Name: VFX_Sparks_Flare (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1496590408
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496590407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0066147, y: 0.01, z: 0.01}
-  m_LocalScale: {x: 1.96368, y: 1.96368, z: 1.96368}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 222958479}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!73398921 &1496590409
-VFXRenderer:
-  serializedVersion: 1
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496590407}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!2083052967 &1496590410
-VisualEffect:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496590407}
-  m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 9208b54ccd77ff7419994035ba269252, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
-  m_StartSeed: 0
-  m_ResetSeedOnPlay: 1
-  m_ResourceVersion: 1
-  m_PropertySheet:
-    m_Float:
-      m_Array:
-      - m_Value: 1
-        m_Name: Scale
-        m_Overridden: 1
-      - m_Value: 100
-        m_Name: Count
-        m_Overridden: 1
-      - m_Value: 50
-        m_Name: D_Speed
-        m_Overridden: 1
-      - m_Value: 4.5
-        m_Name: D_Scale
-        m_Overridden: 1
-    m_Vector2f:
-      m_Array: []
-    m_Vector3f:
-      m_Array:
-      - m_Value: {x: 0, y: 0.1, z: 0}
-        m_Name: Velocity
-        m_Overridden: 1
-    m_Vector4f:
-      m_Array:
-      - m_Value: {x: 7.999999, y: 4.535109, z: 0, w: 1}
-        m_Name: Colour
-        m_Overridden: 1
-    m_Uint:
-      m_Array: []
-    m_Int:
-      m_Array: []
-    m_Matrix4x4f:
-      m_Array: []
-    m_AnimationCurve:
-      m_Array: []
-    m_Gradient:
-      m_Array: []
-    m_NamedObject:
-      m_Array:
-      - m_Value: {fileID: 2800000, guid: fd17bd04ed31abe44b30672c26cc4da2, type: 3}
-        m_Name: Spark2D
-        m_Overridden: 1
-    m_Bool:
-      m_Array: []
 --- !u!1001 &1553793007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,131 +1377,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e84cd194a7ad2f48a7ad17c3228b159, type: 3}
---- !u!1 &1933638768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1933638769}
-  - component: {fileID: 1933638771}
-  - component: {fileID: 1933638770}
-  m_Layer: 0
-  m_Name: VFX_Sparks (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1933638769
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933638768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 222958479}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!73398921 &1933638770
-VFXRenderer:
-  serializedVersion: 1
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933638768}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!2083052967 &1933638771
-VisualEffect:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933638768}
-  m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 3107ed43219f5784087b3ffbe22b52c5, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
-  m_StartSeed: 0
-  m_ResetSeedOnPlay: 1
-  m_ResourceVersion: 1
-  m_PropertySheet:
-    m_Float:
-      m_Array:
-      - m_Value: 72
-        m_Name: Count
-        m_Overridden: 1
-      - m_Value: 0
-        m_Name: Scale
-        m_Overridden: 1
-    m_Vector2f:
-      m_Array: []
-    m_Vector3f:
-      m_Array:
-      - m_Value: {x: 5, y: 5, z: 5}
-        m_Name: Velocity
-        m_Overridden: 1
-    m_Vector4f:
-      m_Array:
-      - m_Value: {x: 191.74902, y: 61.239216, z: 0, w: 1}
-        m_Name: Colour
-        m_Overridden: 1
-    m_Uint:
-      m_Array: []
-    m_Int:
-      m_Array: []
-    m_Matrix4x4f:
-      m_Array: []
-    m_AnimationCurve:
-      m_Array: []
-    m_Gradient:
-      m_Array: []
-    m_NamedObject:
-      m_Array:
-      - m_Value: {fileID: 2800000, guid: fd17bd04ed31abe44b30672c26cc4da2, type: 3}
-        m_Name: Spark2D
-        m_Overridden: 1
-    m_Bool:
-      m_Array: []
 --- !u!1001 &4533632984757046787
 PrefabInstance:
   m_ObjectHideFlags: 0
