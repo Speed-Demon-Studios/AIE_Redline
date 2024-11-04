@@ -59,7 +59,6 @@ public class ShipsControls : MonoBehaviour
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
-    public float forceMultiplier;
     public float accelerationForce;
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
@@ -305,9 +304,9 @@ public class ShipsControls : MonoBehaviour
             }
         }
 
-        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
-        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
-        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
+        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
+        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
+        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
