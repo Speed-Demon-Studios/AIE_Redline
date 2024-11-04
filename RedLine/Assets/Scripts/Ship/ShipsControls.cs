@@ -34,7 +34,7 @@ public class ShipsControls : MonoBehaviour
     public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
     public float GetBrakeMultiplier() { return m_brakeMultiplier; }
     public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
-
+    [Space]
     [Header("Turning Varibles")]
     private float m_targetAngle;
     private float m_currentAngle;
@@ -46,11 +46,12 @@ public class ShipsControls : MonoBehaviour
     public AnimationCurve modelRotationCurve;
 
     public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
-
+    [Space]
     [Header("TrackStick")]
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
-
+    public float shipAdjustSpeed;
+    [Space]
     [Header("Boost Variables")]
     private float m_currentBoost;
     public float ReturnBoost() { return m_currentBoost; }
@@ -64,11 +65,20 @@ public class ShipsControls : MonoBehaviour
     public float howFastYouLooseBoost;
     public float boostTime;
     private bool m_isBoostingOnBoostPad;
+    private float m_maxSpeedDuringBoost;
+    public float maxBoostSpeedChange;
     public bool ReturnIsBoosting() { return m_isBoosting; }
     public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
-    public void SwitchRedlineBool(bool isTrue) { m_isInRedline = isTrue; }
+    public void SwitchRedlineBool() { m_isInRedline = true; }
+    public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
+    private IEnumerator RedlineFalse()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        m_isInRedline = false;
+    }
 
     public void ResetAngles(float angle1, float angle2, float angle3)
     {
@@ -112,6 +122,7 @@ public class ShipsControls : MonoBehaviour
     {
         m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
+        m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
     }
 
     private void FindChildWithTag(Transform childParent)
@@ -294,9 +305,9 @@ public class ShipsControls : MonoBehaviour
             }
         }
 
-        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, 0.05f);
-        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, 0.05f);
-        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, 0.05f);
+        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
+        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
+        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
@@ -375,7 +386,7 @@ public class ShipsControls : MonoBehaviour
                         }
                 }
             }
-            m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
+            //m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }
     }
@@ -389,12 +400,12 @@ public class ShipsControls : MonoBehaviour
 
         while (time > 0)
         {
-            if (time > 0)
-            {
-                time -= 1f * Time.deltaTime;
-            }
+            yield return new WaitForEndOfFrame();
+            time -= Time.deltaTime;
 
+            Debug.Log("Boosting player");
             m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
+            Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
 
         m_fire[0].SetActive(false);
@@ -426,12 +437,13 @@ public class ShipsControls : MonoBehaviour
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
-        if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0)
+        if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
         else
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
 
-        m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
+        if(!m_isBoosting)
+            m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
 
         if (float.IsNaN(m_acceleration))
             m_acceleration = 0;
