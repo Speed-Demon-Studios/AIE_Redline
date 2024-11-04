@@ -342,7 +342,7 @@ MonoBehaviour:
   m_cam: {fileID: 2868536069371765821}
   playerReadyInMenu: 0
   lerpTime: 0.05
-  minFOV: 75
+  minFOV: 85
   maxFOV: 120
 --- !u!114 &2868536069181459848
 MonoBehaviour:
@@ -363,6 +363,7 @@ MonoBehaviour:
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
   cameraRotationPoint: {fileID: 7341607018904620202}
+  isTestShip: 0
   strafeStrength: 1.4
   cameraTurnAngle: 11
   modelRotationCurve:
@@ -398,12 +399,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shipAdjustSpeed: 0.075
   wantingToBoost: 0
   forceMultiplier: 80
-  accelerationForce: 10
+  accelerationForce: 100
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
-  boostTime: 2
+  boostTime: 1.25
+  maxBoostSpeedChange: 300
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
@@ -528,7 +531,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044256, y: -0.073954195, z: 0.0032694088, w: 0.99628323}
+  m_LocalRotation: {x: 0.044044234, y: -0.07395424, z: 0.003269409, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1041,7 +1044,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241893629016962924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.37, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
