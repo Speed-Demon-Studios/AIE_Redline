@@ -15,7 +15,6 @@ public class RacerDetails : MonoBehaviour
     [Header("Script References")]
     public RedlineColliderSpawner rCS;
 
-
     [Space]
     [Header("LapTime Lists")]
     public float quickestLapTimeSECONDS = 99;
@@ -51,6 +50,15 @@ public class RacerDetails : MonoBehaviour
     private CheckpointHandler m_cHandler; // Reference to the CheckpointHandler.cs script.
 
     private bool nameSet = false;         // Whether or not the racers name has been set.
+
+    private void Awake()
+    {
+        if (GameManager.gManager.players.Contains(this.gameObject))
+        {
+            GameManager.gManager.rAC.PlayerJoinSound();
+        }
+    }
+
 
     /// <summary>
     /// Calculates the distance to the next checkpoint

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
     public Nodes startNode;
+    public UIAudioController rAC;
 
     public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;

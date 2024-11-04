@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7647445765421691336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/PlayerJoinGame
+  m_EditorClassIdentifier: 
+  Path: event:/UI/PlayerJoinGame
+  Guid:
+    Data1: -1830663462
+    Data2: 1080759601
+    Data3: -54556793
+    Data4: -1559949472
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 288
 --- !u!114 &-6885077242360977996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,6 +65,33 @@ MonoBehaviour:
   lastModified: 638657269981515256
   FileSizes: []
   Exists: 1
+--- !u!114 &-5838853755903085769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CutlassEngineSound/CutlassEngineLoop1.1
+  m_EditorClassIdentifier: 
+  Path: event:/CutlassEngineSound/CutlassEngineLoop1.1
+  Guid:
+    Data1: -2037933404
+    Data2: 1221429914
+    Data3: -82143102
+    Data4: -211552929
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10448
 --- !u!114 &-4721146399573708427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,13 +222,74 @@ MonoBehaviour:
   - {fileID: 4122204961937916631}
   - {fileID: 6928355200123278492}
   - {fileID: -4721146399573708427}
+  - {fileID: 2658546784528882239}
+  - {fileID: 2368922772598688561}
+  - {fileID: 4760523441949180700}
+  - {fileID: 258234696783266387}
+  - {fileID: -7647445765421691336}
+  - {fileID: 9140701790237856491}
+  - {fileID: -5838853755903085769}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638663098512678633
+  cacheTime: 638663282669414398
   cacheVersion: 131620
+--- !u!114 &258234696783266387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UICancel
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UICancel
+  Guid:
+    Data1: 1100750972
+    Data2: 1306875294
+    Data3: -1316814456
+    Data4: -1933908993
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 148
+--- !u!114 &2368922772598688561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SplitwingEngineLoop/SplitwingEngineLoop1.2
+  m_EditorClassIdentifier: 
+  Path: event:/SplitwingEngineLoop/SplitwingEngineLoop1.2
+  Guid:
+    Data1: -855726295
+    Data2: 1196474829
+    Data3: -643299150
+    Data4: -2098144273
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12512
 --- !u!114 &2572994617365935129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,11 +305,38 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638663098512678633
+  lastModified: 638663282669414398
   FileSizes:
   - Name: Desktop
-    Value: 1148
+    Value: 1554
   Exists: 1
+--- !u!114 &2658546784528882239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CutlassEngineSound/CutlassMainEngineCompressor
+  m_EditorClassIdentifier: 
+  Path: event:/CutlassEngineSound/CutlassMainEngineCompressor
+  Guid:
+    Data1: 1911799846
+    Data2: 1197969837
+    Data3: 381080228
+    Data4: -676002068
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 37485
 --- !u!114 &4122204961937916631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +364,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10221
+--- !u!114 &4760523441949180700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/GamePaused
+  m_EditorClassIdentifier: 
+  Path: event:/UI/GamePaused
+  Guid:
+    Data1: -1693224700
+    Data2: 1208141708
+    Data3: 1990534328
+    Data4: 906663105
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 255
 --- !u!114 &5637463809876672210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,8 +487,35 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638663098512597693
+  lastModified: 638663282669374510
   FileSizes:
   - Name: Desktop
-    Value: 1331648
+    Value: 2055520
   Exists: 1
+--- !u!114 &9140701790237856491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UIConfirm
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UIConfirm
+  Guid:
+    Data1: 181863396
+    Data2: 1258173719
+    Data3: -47274580
+    Data4: 2104675208
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 230

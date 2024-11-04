@@ -131,6 +131,7 @@ public class ShipSelection : MonoBehaviour
         //-------------------------------------------------------------------------------------------------|
         border.GetComponent<RawImage>().color = readyColor; // switch to the red ready color               |
         //-------------------------------------------------------------------------------------------------|
+        GameManager.gManager.rAC.MenuConfirmSound();
 
     }
 
