@@ -15,6 +15,7 @@ namespace EAudioSystem
 
         // Error Checking
         private List<string> errorMessages = new List<string>();
+
         private bool[] errorBools = new bool[6];
         private bool checkingArrays = false;
         private bool detectedERROR = false;
