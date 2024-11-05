@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EAudioSystem;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
     public Nodes startNode;
-    public EAudioSystem.UIAudioController uAC;
+    public UIAudioController uAC;
 
     public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
