@@ -169,8 +169,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560891588230137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00051117, y: 0, z: 0.55}
-  m_LocalScale: {x: 0.82958, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2819560892090638106}
@@ -287,47 +287,23 @@ MonoBehaviour:
   shipModel: {fileID: 2819560891356404108}
   rayCastPoint: {fileID: 4022018049878914855}
   cameraRotationPoint: {fileID: 0}
+  isTestShip: 0
   strafeStrength: 1.4
   cameraTurnAngle: 11
-  modleRotationCurve:
+  modelRotationCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.08745247
-    - serializedVersion: 3
-      time: 0.82639647
-      value: 0.10509832
-      inSlope: -0.2835781
-      outSlope: -0.2835781
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.005
-      inSlope: -0.9183868
-      outSlope: -0.9183868
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11730333
-      outWeight: 0.33333334
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shipAdjustSpeed: 0.75
   wantingToBoost: 0
   forceMultiplier: 80
   accelerationForce: 10
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
   boostTime: 2
+  maxBoostSpeedChange: 0
   m_boostLevel: 0
 --- !u!54 &2819560891871692963
 Rigidbody:
@@ -448,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2819560892090638107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

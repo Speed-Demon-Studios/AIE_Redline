@@ -12,6 +12,15 @@ public class RedlineChecker : MonoBehaviour
             tryTest.SwitchRedlineBool(true);
         }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        ShipsControls tryTest = this.GetComponentInParent<ShipsControls>();
+        if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
+        {
+            tryTest.SwitchRedlineBool(true);
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {

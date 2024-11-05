@@ -74,11 +74,6 @@ public class ShipBlendAnimations : MonoBehaviour
             {
                 m_controller.SetFloat("WingRight", m_controls.GetTurnMultiplier());
             }
-            else if(shipType == ShipType.Fulcrum)
-            {
-
-            }
-                                                                                                                                               //|
         }                                                                                                                                      //|
         //---------------------------------------------------------------------------------------------------------------------------------------|
     }
