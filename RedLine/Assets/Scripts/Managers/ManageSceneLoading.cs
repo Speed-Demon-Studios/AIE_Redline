@@ -106,8 +106,8 @@ public class ManageSceneLoading : MonoBehaviour
         }
 
 
-        SceneManager.LoadSceneAsync(0);
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.LoadSceneAsync(1);
+        SceneManager.UnloadSceneAsync(2);
 
 
 
@@ -121,9 +121,6 @@ public class ManageSceneLoading : MonoBehaviour
         {
             reloadingmenu = false;
             ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>();
-
-            aMC.mES.firstSelectedGameObject = GameManager.gManager.m_startButtons[0];
-            aMC.mES.SetSelectedGameObject(GameManager.gManager.m_startButtons[0]);
         }
     }
 }

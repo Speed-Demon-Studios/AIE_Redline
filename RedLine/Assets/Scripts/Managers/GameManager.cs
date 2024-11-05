@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using EAudioSystem;
-using FMODUnity;
+using MenuManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,9 +18,7 @@ public class GameManager : MonoBehaviour
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
     public Nodes startNode;
-    public UIAudioController uAC;
 
-    public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
@@ -200,11 +197,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddToNumberOfPlayers() { numberOfPlayers += 1; }
-
-    public GameObject FindStartButton()
-    {
-        return m_startButtons[numberOfPlayers - 1];
-    }
 
     private void Awake()
     {
