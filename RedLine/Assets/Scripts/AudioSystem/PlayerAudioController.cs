@@ -159,6 +159,11 @@ namespace EAudioSystem
                 }
             }
 
+            if (m_engineEmitters[index] == null || m_engineEmitters[index].EventReference.IsNull == true)
+            {
+                return;
+            }
+
             if (addDT == true)
             {
                 if (add == true)
