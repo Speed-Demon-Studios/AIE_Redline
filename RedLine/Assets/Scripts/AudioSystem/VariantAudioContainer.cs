@@ -32,6 +32,8 @@ public class VariantAudioContainer : MonoBehaviour
                     break;
                 }
         }
+
+        PAC.variantSet = true;
     }
     // Start is called before the first frame update
     void Start()

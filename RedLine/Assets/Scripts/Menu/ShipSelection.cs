@@ -119,6 +119,7 @@ public class ShipSelection : MonoBehaviour
     /// </summary>
     public void Ready()
     {
+        GameManager.gManager.uAC.MenuConfirmSound();
         //-------------------------------------------------------------------------------------------------|
         // Sets ship variants                                                                              |
         m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];                      //|
@@ -133,7 +134,6 @@ public class ShipSelection : MonoBehaviour
         //-------------------------------------------------------------------------------------------------|
         border.GetComponent<RawImage>().color = readyColor; // switch to the red ready color               |
         //-------------------------------------------------------------------------------------------------|
-        GameManager.gManager.uAC.MenuConfirmSound();
 
     }
 
