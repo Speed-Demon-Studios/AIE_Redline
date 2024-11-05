@@ -342,7 +342,7 @@ MonoBehaviour:
   m_cam: {fileID: 2868536069371765821}
   playerReadyInMenu: 0
   lerpTime: 0.05
-  minFOV: 75
+  minFOV: 85
   maxFOV: 120
 --- !u!114 &2868536069181459848
 MonoBehaviour:
@@ -363,47 +363,49 @@ MonoBehaviour:
   shipModel: {fileID: 2868536068024986450}
   rayCastPoint: {fileID: 8319451938726217151}
   cameraRotationPoint: {fileID: 7341607018904620202}
+  isTestShip: 0
   strafeStrength: 1.4
   cameraTurnAngle: 11
-  modleRotationCurve:
+  modelRotationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.2
+      value: 0.3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 1
-      outWeight: 0.08745247
-    - serializedVersion: 3
-      time: 0.82639647
-      value: 0.10509832
-      inSlope: -0.2835781
-      outSlope: -0.2835781
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0.005
-      inSlope: -0.9183868
-      outSlope: -0.9183868
+      time: 0.7520871
+      value: 0.28697905
+      inSlope: -0.07099292
+      outSlope: -0.07099292
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.11730333
-      outWeight: 0.33333334
+      inWeight: 0.09073286
+      outWeight: 0.22222584
+    - serializedVersion: 3
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -2.2439308
+      outSlope: -2.2439308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.114574745
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shipAdjustSpeed: 0.075
   wantingToBoost: 0
-  forceMultiplier: 80
-  accelerationForce: 10
+  accelerationForce: 100
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
-  boostTime: 2
+  maxBoostSpeedChange: 300
+  boostingTimes: []
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
@@ -476,6 +478,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa7073e324d13e498cd5bea195a3bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wingSpeed: 0.06
+  engineSpeed: 0.03
+  flapSpeed: 0.05
 --- !u!114 &2447601818090787841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +533,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044234, y: -0.07395424, z: 0.003269409, w: 0.99628323}
+  m_LocalRotation: {x: 0.04404427, y: -0.073954225, z: 0.0032694112, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -805,7 +810,19 @@ MonoBehaviour:
     m_ActionId: dd1c567c-4e30-462b-8833-4973d947015b
     m_ActionName: UI/Submit[/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2868536069181459849}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
+        m_MethodName: Back
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7ad06e98-8ad5-4601-a739-22970ae6a751
     m_ActionName: UI/Cancel[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/escape]
   - m_PersistentCalls:
@@ -1041,7 +1058,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241893629016962924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.37, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

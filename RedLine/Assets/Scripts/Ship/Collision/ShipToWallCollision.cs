@@ -61,7 +61,7 @@ public class ShipToWallCollision : MonoBehaviour
 
     private void Update()
     {
-        if (detailsSet == false && GameManager.gManager.raceStarted)
+        if (GameManager.gManager != null && detailsSet == false && GameManager.gManager.raceStarted)
         {
             UpdateDetails();
         }

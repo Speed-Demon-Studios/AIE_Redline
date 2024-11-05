@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using MenuManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour
     public PauseMenu pMenu;
     public Nodes startNode;
 
-    public List<GameObject> m_startButtons = new();
     public GameObject[] StartingPoints;
 
     public List<GameObject> players;
@@ -197,11 +197,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddToNumberOfPlayers() { numberOfPlayers += 1; }
-
-    public GameObject FindStartButton()
-    {
-        return m_startButtons[numberOfPlayers - 1];
-    }
 
     private void Awake()
     {

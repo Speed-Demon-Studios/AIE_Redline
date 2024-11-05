@@ -44,23 +44,22 @@ public class PlayerInputScript : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (gMan != null) // if there is a GameManager                                                                                     |
             gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
-                                                                                                                                         //|
+
         if (gMan != null) // if there is a GameManager                                                                                     |
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
+
+        if (m_playerNumber == 1)                                                                                                         //|
+            gMan.uiCInput.GetMenuManager().PressStart();                                                                                 //|
                                                                                                                                          //|
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            eventSystem.firstSelectedGameObject = gMan.FindStartButton(); // set ths first selected button the the start button            |
-                                                                                                                                         //|
-        if (gMan != null && m_playerNumber != 1) // if there is a GameManager and this object is not player 1                              |
-            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1); // set up first selected button for the selection screen             |
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (player != null) // chech for player so that we dont get error later                                                            |
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
-                                                                                                                                         //|
-        m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                                //|
-        m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                            //|
+        if(m_virtualCam != null && playerLayers.Count > 0)                                                                               //|
+            m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                            //|
+        if(m_cam != null && playerLayers.Count > 0)                                                                                      //|
+            m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                        //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -123,7 +122,7 @@ public class PlayerInputScript : MonoBehaviour
     void FixedUpdate()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        if (gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished                            |
+        if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
             CalculateFOV(); // calculate the FOV for the camera                                                                            |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
@@ -145,7 +144,8 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        if(m_virtualCam != null)                                                                                                         //|
+            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                               |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -187,6 +187,15 @@ public class PlayerInputScript : MonoBehaviour
             {
                 GameManager.gManager.StopTime();
             }
+        }
+    }
+
+    public void Back(InputAction.CallbackContext context)
+    {
+        if (GameManager.gManager != null)
+        {
+            if(context.performed)
+                GameManager.gManager.uiCInput.GetMenuManager().BackOutMenu();
         }
     }
 
