@@ -6,11 +6,11 @@ public class PauseSound : MonoBehaviour
 {
     private void OnEnable()
     {
-        GameManager.gManager.rAC.GamePauseSound();
+        GameManager.gManager.uAC.GamePauseSound();
     }
 
     public void PlayConfirmSound()
     {
-        GameManager.gManager.rAC.MenuConfirmSound();
+        GameManager.gManager.uAC.MenuConfirmSound();
     }
 }

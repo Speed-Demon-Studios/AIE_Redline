@@ -504,6 +504,11 @@ PrefabInstance:
       objectReference: {fileID: 1016200761}
     - target: {fileID: 7813179349627151420, guid: 492c65929d98ff84e86c7bd4c23fd9e8,
         type: 3}
+      propertyPath: uAC
+      value: 
+      objectReference: {fileID: 1016200761}
+    - target: {fileID: 7813179349627151420, guid: 492c65929d98ff84e86c7bd4c23fd9e8,
+        type: 3}
       propertyPath: uiCInput
       value: 
       objectReference: {fileID: 1750733891}
@@ -4065,10 +4070,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef6e0d158327994e84b99cc716d2eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinEmitter: {fileID: 1016200764}
-  confirmEmitter: {fileID: 1016200767}
-  pauseEmitter: {fileID: 1016200766}
-  cancelEmitter: {fileID: 1016200768}
+  fmodEmitters:
+  - {fileID: 1016200764}
+  - {fileID: 1016200766}
+  - {fileID: 1016200767}
+  - {fileID: 1016200768}
   menuAudio:
   - Guid:
       Data1: -1693224700
@@ -4088,15 +4094,18 @@ MonoBehaviour:
       Data3: -47274580
       Data4: 2104675208
     Path: event:/UI/UIConfirm
+  - Guid:
+      Data1: 1100750972
+      Data2: 1306875294
+      Data3: -1316814456
+      Data4: -1933908993
+    Path: event:/UI/UICancel
   pitchVariations:
   - 1
   - 1.1
   - 1.35
   - 1.55
   - 1.8
-  selectedVariation: 0
-  selectedVariationIndex: 0
-  pitchOUT: 0
 --- !u!114 &1016200764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5300,7 +5309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601005541}
-  m_LocalRotation: {x: 0.0032694112, y: 0.99628323, z: -0.04404427, w: 0.073954225}
+  m_LocalRotation: {x: 0.003269409, y: 0.99628323, z: -0.044044234, w: 0.07395424}
   m_LocalPosition: {x: -39.40865, y: 1.3191981, z: 4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5468,7 +5477,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664551570}
-  m_LocalRotation: {x: 0.0032694112, y: 0.99628323, z: -0.04404427, w: 0.073954225}
+  m_LocalRotation: {x: 0.003269409, y: 0.99628323, z: -0.044044234, w: 0.07395424}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

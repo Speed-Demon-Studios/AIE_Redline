@@ -55,7 +55,7 @@ public class RacerDetails : MonoBehaviour
     {
         if (GameManager.gManager.players.Contains(this.gameObject))
         {
-            GameManager.gManager.rAC.PlayerJoinSound();
+            GameManager.gManager.uAC.PlayerJoinSound();
         }
     }
 

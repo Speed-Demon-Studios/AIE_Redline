@@ -1,70 +1,158 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using FMODUnity;
+using System;
 
-public class UIAudioController : MonoBehaviour
+namespace EAudioSystem
 {
-    public FMODUnity.StudioEventEmitter joinEmitter;
-    public FMODUnity.StudioEventEmitter confirmEmitter;
-    public FMODUnity.StudioEventEmitter pauseEmitter;
-    public FMODUnity.StudioEventEmitter cancelEmitter;
-    public List<FMODUnity.EventReference> menuAudio = new List<FMODUnity.EventReference>();
-    public float[] pitchVariations;
-    public float selectedVariation;
-    public int selectedVariationIndex;
-    public float pitchOUT;
-
-    private void Start()
+    public class UIAudioController : MonoBehaviour
     {
-        pauseEmitter.EventReference = menuAudio[0];
-        joinEmitter.EventReference = menuAudio[1];
-        confirmEmitter.EventReference = menuAudio[2];
-    }
+        [SerializeField] private StudioEventEmitter[] fmodEmitters;
+        [SerializeField] private EventReference[] menuAudio;
+        [SerializeField] private float[] pitchVariations;
+        private float selectedVariation = 0.0f;
+        private float pitchSelected = 0.0f;
 
-    public void GamePauseSound()
-    {
-        pauseEmitter.Play();
-    }
+        // Error Checking
+        private List<string> errorMessages = new List<string>();
+        private bool[] errorBools = new bool[6];
+        private bool checkingArrays = false;
+        private bool detectedERROR = false;
 
-    public void PlayerJoinSound()
-    {
-        joinEmitter.Play();
-    }
+        public void GamePauseSound()
+        {
+            fmodEmitters[0].Play();
+            StudioEventEmitter testEmitter = new StudioEventEmitter();
+        }
+    
+        public void PlayerJoinSound()
+        {
+            fmodEmitters[1].Play();
+        }
+    
+        public void MenuConfirmSound()
+        {
+            pitchSelected = UnityEngine.Random.Range(0.0f, 25.0f);
+    
+            switch (pitchSelected)
+            {
+                case <= 5:
+                    {
+                        selectedVariation = pitchVariations[0];
+                        break;
+                    }
+                case float v when (v > 5 && v <= 10):
+                    {
+                        selectedVariation = pitchVariations[1];
+                        break;
+                    }
+                case float v when (v > 10 && v <= 15):
+                    {
+                        selectedVariation = pitchVariations[2];
+                        break;
+                    }
+                case float v when (v > 15 && v <= 20):
+                    {
+                        selectedVariation = pitchVariations[3];
+                        break;
+                    }
+                case float v when (v > 20 && v <= 25):
+                    {
+                        selectedVariation = pitchVariations[4];
+                        break;
+                    }
+            }
+            fmodEmitters[2].EventInstance.setPitch(selectedVariation);
+            fmodEmitters[2].Play();
+        }
 
-    public void MenuConfirmSound()
-    {
-        confirmEmitter.EventInstance.getPitch(out pitchOUT);
-        float pitchSelected = 0.0f;
-        pitchSelected = Random.Range(0.0f, 25.0f);
+        // ERROR CHECKING
+        private void CheckArrays()
+        {
+            bool checkingArrays = false;
+            bool fmeERROR = false;
+            bool maERROR = false;
+            bool pvsERROR = false;
+            bool FmeMaSizeMismatchERROR = false;
+            errorBools[0] = checkingArrays;
+            errorBools[1] = fmeERROR;
+            errorBools[2] = maERROR;
+            errorBools[3] = pvsERROR;
+            errorBools[4] = FmeMaSizeMismatchERROR;
 
-        if (pitchSelected <= 5)
-        {
-            selectedVariation = pitchVariations[0];
-        }
-        else if (pitchSelected > 5 && pitchSelected <= 10)
-        {
-            selectedVariation = pitchVariations[1];
-        }
-        else if (pitchSelected > 10 && pitchSelected <= 15)
-        {
-            selectedVariation = pitchVariations[2];
-        }
-        else if (pitchSelected > 15 && pitchSelected <= 20)
-        {
-            selectedVariation = pitchVariations[3];
-        }
-        else if (pitchSelected > 20 && pitchSelected <= 25)
-        {
-            selectedVariation = pitchVariations[4];
-        }
-        confirmEmitter.EventInstance.getPitch(out pitchOUT);
-        confirmEmitter.EventInstance.setPitch(selectedVariation);
-        confirmEmitter.Play();
-    }
+            // fmodEmitters array
+            for (int i = 0; i < fmodEmitters.Length; i++)
+            {
+                if (fmodEmitters[i] == null)
+                {
+                    Debug.LogException(new Exception("|UIAudioController.cs|: Item at index [" + i + "] in array 'fmodEmitters' is NULL!"));
+                    fmeERROR = true;
+                }
+                else
+                    Debug.Log("|UIAudioController.cs|: Item at index [" + i + "] in array 'fmodEmitters' ::: OK!");
+            }
 
-    private void Update()
-    {
-        confirmEmitter.EventInstance.setPitch(selectedVariation);
+            // menuAudio array
+            for (int i = 0; i < menuAudio.Length; i++)
+            {
+                if (menuAudio[i].IsNull == true)
+                {
+                    Debug.LogException(new Exception("|UIAudioController.cs|: Item at index [" + i + "] in array 'menuAudio' is NULL!"));
+                    maERROR = true;
+                }
+                else
+                    Debug.Log("|UIAudioController.cs|: Item at index [" + i + "] in array 'menuAudio' ::: OK!");
+            }
+
+            for (int i = 0; i < pitchVariations.Length; i++)
+            {
+                if (pitchVariations[i] == 0)
+                {
+                    Debug.LogException(new Exception("|UIAudioController.cs|: Item at index [" + i + "] in array 'pitchVariations' is ZERO!"));
+                    pvsERROR = true;
+                }
+                else
+                    Debug.Log("|UIAudioController.cs|: Item at index [" + i + "] in array 'pitchVariations' ::: OK!");
+            }
+
+            if (menuAudio.Length != fmodEmitters.Length)
+            {
+                Debug.LogException(new Exception("|UIAudioController.cs|: Size Mismatch(Array 'menuAudio' & Array 'fmodEmitters')"));
+                FmeMaSizeMismatchERROR = true;
+            }
+            else
+                Debug.Log("|UIAudioController.cs|: Array 'menuAudio' & Array 'fmodEmitters' Size Check Status ::: OK!");
+
+            foreach (bool errorCheck in errorBools)
+            {
+                if (errorCheck == true)
+                {
+                    detectedERROR = true;
+                }
+            }
+        }
+
+        // ------------------
+
+
+        private void Start()
+        {
+            CheckArrays();
+            if (detectedERROR == false)
+            {
+                for (int i = 0; i < fmodEmitters.Length; i++)
+                {
+                    fmodEmitters[i].EventReference = menuAudio[i];
+                }
+            }
+        }
+    
+        private void Update()
+        {
+            if (detectedERROR == false)
+            {
+                fmodEmitters[2].EventInstance.setPitch(selectedVariation);
+            }
+        }
     }
 }
