@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using EAudioSystem;
 
 public class ShipSelection : MonoBehaviour
 {
@@ -118,9 +119,11 @@ public class ShipSelection : MonoBehaviour
     /// </summary>
     public void Ready()
     {
+        GameManager.gManager.uAC.MenuConfirmSound();
         //-------------------------------------------------------------------------------------------------|
         // Sets ship variants                                                                              |
         m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];                      //|
+        m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
         //-------------------------------------------------------------------------------------------------|
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |
         //-------------------------------------------------------------------------------------------------|

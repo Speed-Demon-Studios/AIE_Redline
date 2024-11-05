@@ -44,15 +44,13 @@ public class PlayerInputScript : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (gMan != null) // if there is a GameManager                                                                                     |
             gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
-                                                                                                                                         //|
+
         if (gMan != null) // if there is a GameManager                                                                                     |
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
+
+        if (m_playerNumber == 1)                                                                                                         //|
+            gMan.uiCInput.GetMenuManager().PressStart();                                                                                 //|
                                                                                                                                          //|
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            eventSystem.firstSelectedGameObject = gMan.FindStartButton(); // set ths first selected button the the start button            |
-                                                                                                                                         //|
-        if (gMan != null && m_playerNumber != 1) // if there is a GameManager and this object is not player 1                              |
-            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1); // set up first selected button for the selection screen             |
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (player != null) // chech for player so that we dont get error later                                                            |
         {                                                                                                                                //|
@@ -189,6 +187,15 @@ public class PlayerInputScript : MonoBehaviour
             {
                 GameManager.gManager.StopTime();
             }
+        }
+    }
+
+    public void Back(InputAction.CallbackContext context)
+    {
+        if (GameManager.gManager != null)
+        {
+            if(context.performed)
+                GameManager.gManager.uiCInput.GetMenuManager().BackOutMenu();
         }
     }
 

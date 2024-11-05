@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using EAudioSystem;
 
 public class RacerStartPositions : MonoBehaviour
 {
@@ -79,6 +80,13 @@ public class RacerStartPositions : MonoBehaviour
                             break;
                         }
 
+                    }
+
+
+                    if (GameManager.gManager.players[i].GetComponent<PlayerAudioController>() != null)
+                    {
+                        PlayerAudioController pAC = GameManager.gManager.players[i].GetComponent<PlayerAudioController>();
+                        pAC.StartEngineHum();
                     }
                 }
 

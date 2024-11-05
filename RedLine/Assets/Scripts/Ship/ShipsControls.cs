@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -423,9 +424,30 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Brake()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
+        
+        
+        // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
+        // || [R = Result] [A = m_breakMultiplier] [B = VariantObject.BreakMultiplier] [C = multiplier] ||
+        // ||-------------------------------------------------------------------------------------------||
+        // ||                                                                                           ||
+        // ||                                 R = ((A x B x C) x 0.64)                                  ||
+        // ||                                                                                           ||
+        // ||-------------------------------------------------------------------------------------------||
+                                                                                                                                                
+        PAC.UpdatePitch(0, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 9.5f, true, false, true, 0.33f);           // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+        PAC.UpdateVolume(0, 0.03f, 0.36f, true, false, true, 0.25f);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+
+        PAC.UpdatePitch(1, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 19.2f, true, false, true, 0.33f);          // Engine sound that is second in the list  (Index [1]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+        PAC.UpdateVolume(1, 0.03f, 0.15f, true, false, true, 0.25f);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+
+        PAC.UpdatePitch(2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 3.6f, true, false, true, 0.33f);           // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+        PAC.UpdateVolume(2, 0.03f, 0.41f, true, false, true, 0.25f);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+                                                                                                                                                
+        
     }
 
     /// <summary>
@@ -433,13 +455,39 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Accelerate()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
         if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
+        {
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
+
+            // Audio Pitch & Volume Modulation
+            PAC.UpdatePitch(0, 0.6f, 9.5f, true, false, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+            PAC.UpdateVolume(0, 0.01f, 0.36f, true, false, true, 0.25f);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+
+            PAC.UpdatePitch(1, 0.6f, 19.2f, true, false, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+            PAC.UpdateVolume(1, 0.01f, 0.15f, true, false, true, 0.25f);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+
+            PAC.UpdatePitch(2, 0.6f, 3.6f, true, false, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+            PAC.UpdateVolume(2, 0.01f, 0.41f, true, false, true, 0.25f);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+        }
         else
+        {
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
+
+            // Audio Pitch & Volume Modulation
+            PAC.UpdatePitch(0, 0.7f, 9.5f, true, true, false);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+            PAC.UpdateVolume(0, 0.015f, 0.36f, true, true, false, 0.25f);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+
+            PAC.UpdatePitch(1, 1.0f, 19.2f, true, true, false);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+            PAC.UpdateVolume(1, 0.015f, 0.15f, true, true, false, 0.25f);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+
+            PAC.UpdatePitch(2, 0.7f, 3.6f, true, true, false);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+            PAC.UpdateVolume(2, 0.015f, 0.41f, true, true, false, 0.25f);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, adding 0.015f to the volume value over time.
+        }
 
         if(!m_isBoosting)
             m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
