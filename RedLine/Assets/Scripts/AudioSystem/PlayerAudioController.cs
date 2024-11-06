@@ -12,24 +12,40 @@ namespace EAudioSystem
     public class PlayerAudioController : MonoBehaviour
     {
         [Header("Engine Audio")]                                                                                                    // Engine Audio -----------------------------------------------------------|
-        [SerializeField] private List<EventReference> m_engineAudioInfo = new List<EventReference>();                               // References to the FMOD audio "Events".                                  |
         [SerializeField] private StudioEventEmitter[] m_engineEmitters;                                                             // References to the FMOD "StudioEventEmitter" components for the engines. |
-        [SerializeField] private List<float> m_engineEmitterPitches = new List<float>();                                            // Pitch/Frequency float variables.                                        |
-        [SerializeField] private List<float> m_engineEmitterVolumes = new List<float>();                                            // Volume float variables.                                                 |
-        [SerializeField] private List<float> m_engineEmitterValueCaps = new List<float>();
-        [SerializeField] private List<float> m_engineEmitterValueMultipliers = new List<float>();
+        private List<EventReference> m_engineAudioInfo = new List<EventReference>();                               // References to the FMOD audio "Events".                                  |
+        private List<float> m_engineEmitterPitches = new List<float>();                                                             // Pitch/Frequency float variables.                                        |
+        private List<float> m_engineEmitterVolumes = new List<float>();                                                             // Volume float variables.                                                 |
+        private float[] m_maxEnginePitches;
+        private float[] m_maxEngineVolumes;
                                                                                                                                     // ------------------------------------------------------------------------|
         [Space]
         [Space]
 
 
         [Header("Redline Audio")]                                                                                                   // Redline Audio ----------------------------------------------------------|
-        [SerializeField] private List<EventReference> m_redlineAudioInfo = new List<EventReference>();                              // References to the FMOD audio "Events".                                  |
-        [SerializeField] private StudioEventEmitter[] m_redlineEmitters;                                                            // References to the FMOD "StudioEventEmitter" components for the redline. |
-        [SerializeField] private float[] m_redlineEmitterPitches;                                                                   // Pitch/Frequency float variables.                                        |
-        [SerializeField] private float[] m_redlineEmitterVolumes;                                                                   // Volume float variables.                                                 |
+        //[SerializeField] private List<EventReference> m_redlineAudioInfo = new List<EventReference>();                              // References to the FMOD audio "Events".                                  |
+        //[SerializeField] private StudioEventEmitter[] m_redlineEmitters;                                                            // References to the FMOD "StudioEventEmitter" components for the redline. |
+        //[SerializeField] private float[] m_redlineEmitterPitches;                                                                   // Pitch/Frequency float variables.                                        |
+        //[SerializeField] private float[] m_redlineEmitterVolumes;                                                                   // Volume float variables.                                                 |
                                                                                                                                     // ------------------------------------------------------------------------|
         public bool variantSet = false;
+
+        public void SetDefaultModulations(float[] newPitchArray, float[] newVolumeArray)
+        {
+            m_maxEngineVolumes = new float[newPitchArray.Length];
+            m_maxEngineVolumes = new float[newVolumeArray.Length];
+
+            for(int i = 0; i < newPitchArray.Length; i++)
+            {
+                m_maxEnginePitches[i] = newPitchArray[i];
+            }
+
+            for(int i = 0; i < newVolumeArray.Length; i++)
+            {
+                m_maxEngineVolumes[i] = newVolumeArray[i];
+            }
+        }
 
         public void SetEngineAudios(List<EventReference> newAudioEvents)
         {
@@ -45,7 +61,7 @@ namespace EAudioSystem
             }
         }
 
-        public void UpdatePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f)
+        public void UpdatePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
             {
@@ -58,6 +74,7 @@ namespace EAudioSystem
                         break;
                     }
                 }
+
                 if (add == true && subtract == true)
                 {
                     Debug.LogError("Player [" + (playerListIndex + 1) + "] |PlayerAudioController.cs| UpdatePitch() Function Invoke Error :: Conflicting Parameters. BOOL 'add' & BOOL 'subtract' are both TRUE.");
@@ -79,6 +96,13 @@ namespace EAudioSystem
                     subtract = false;
                 }
             }
+
+            Debug.Log("[" + index + "] Max Pitch: " + maxValue);
+            if (useDefaultMax == true)
+            {
+                maxValue = m_maxEnginePitches[index];
+            }    
+            Debug.Log("[" + index + "] Max Pitch: " + maxValue);
 
             if (addDT == true)
             {
@@ -124,7 +148,7 @@ namespace EAudioSystem
             }
         }
 
-        public void UpdateVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f)
+        public void UpdateVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
             {
@@ -163,6 +187,13 @@ namespace EAudioSystem
             {
                 return;
             }
+
+            Debug.Log("[" + index + "] Max Volume: " + maxValue);
+            if (useDefaultMax == true)
+            {
+                maxValue = m_maxEngineVolumes[index];
+            }
+            Debug.Log("[" + index + "] Max Volume: " + maxValue);
 
             if (addDT == true)
             {
@@ -254,12 +285,12 @@ namespace EAudioSystem
             }
         }
     
-        public void StartRedlineSounds()
-        {
-            foreach (StudioEventEmitter emitters in m_redlineEmitters)
-            {
-                emitters.Play();
-            }
-        }
+        //public void StartRedlineSounds()
+        //{
+        //    foreach (StudioEventEmitter emitters in m_redlineEmitters)
+        //    {
+        //        emitters.Play();
+        //    }
+        //}
     }
 };
