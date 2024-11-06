@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,10 +29,8 @@ public class ShipToWallCollision : MonoBehaviour
         detailsSet = true;
         shipVariant = sControlScript.VariantObject;
         defaultTopSpeed = sControlScript.GetDefaultMaxSpeed();
-        //defaultAcceleration = shipVariant.MaxAcceleration;
 
         changedTopSpeed = (defaultTopSpeed * 0.53f); // The speed that ships will be capped at while colliding with walls.
-        //changedAcceleration = (defaultAcceleration * 0.55f); // The acceleration that ships will be capped at while colliding with walls.
     }
 
     private void OnCollisionEnter(Collision other)
@@ -39,6 +38,8 @@ public class ShipToWallCollision : MonoBehaviour
         if (other.transform.tag.ToLower() == "walls")
         {
             intoWall = true;
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+            PAC.PlayGPSFX(0);
         }
     }
 
@@ -47,7 +48,6 @@ public class ShipToWallCollision : MonoBehaviour
         if (other.transform.tag.ToLower() == "walls" && intoWall == true)
         {
             sControlScript.SetCurrentMaxSpeed(changedTopSpeed);
-            //shipVariant.MaxAcceleration = changedAcceleration;
         }
     }
 

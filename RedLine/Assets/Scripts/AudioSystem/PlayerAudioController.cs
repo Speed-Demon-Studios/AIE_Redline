@@ -6,35 +6,56 @@ namespace EAudioSystem
 {
     using FMODUnity;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    using UnityEditor.ShaderGraph.Internal;
 
     public class PlayerAudioController : MonoBehaviour
     {
-        [Header("Engine Audio")]                                                                                                    // Engine Audio -----------------------------------------------------------|
-        [SerializeField] private StudioEventEmitter[] m_engineEmitters;                                                             // References to the FMOD "StudioEventEmitter" components for the engines. |
-        private List<EventReference> m_engineAudioInfo = new List<EventReference>();                               // References to the FMOD audio "Events".                                  |
-        [SerializeField] private List<float> m_engineEmitterPitches = new List<float>();                                                             // Pitch/Frequency float variables.                                        |
-        [SerializeField] private List<float> m_engineEmitterVolumes = new List<float>();                                                             // Volume float variables.                                                 |
-        private List<float> m_maxEnginePitches = new List<float>();
-        private List<float> m_maxEngineVolumes = new List<float>();
-                                                                                                                                    // ------------------------------------------------------------------------|
+        public bool variantSet = false; // BOOLEAN value to tell the game whether or not the ship variant has been selected and set-up.
+
+        // Engine Audio -------------------------------------------------------------------------------------------------------------------------------------
+        [Header("Engine Audio")]
+        [SerializeField] private StudioEventEmitter[] m_engineEmitters; // References to the FMOD "StudioEventEmitter" components for the engines.
+        [SerializeField] private List<float> m_engineEmitterPitches = new(); // Pitch/Frequency float variables.
+        [SerializeField] private List<float> m_engineEmitterVolumes = new(); // Audio Volume float variables.
+        private List<EventReference> m_engineAudioInfo = new(); // References to the FMOD audio Events for the ship ENGINE.
+        private List<float> m_maxEnginePitches = new(); // Default MAX pitch values for the individual engine sounds.
+        private List<float> m_maxEngineVolumes = new(); // Default MAX volume values for the individual engine sounds.
+        //---------------------------------------------------------------------------------------------------------------------------------------------------
+
         [Space]
         [Space]
 
+        // Gameplay Audio -----------------------------------------------------------------------------------------------------------------------------------
+        [Header("Gameplay Audio")]
+        [SerializeField] private List<StudioEventEmitter> m_gameplaySoundEmitters = new(); // All references to the audio event emitters for gameplay sounds.
+        [SerializeField] private List<EventReference> m_gameplayAudioInfo = new(); // All references to the FMOD audio events that are for gameplay (e.g. wall crashing sound, sparks sound, etc..)
+        [SerializeField] private List<float> m_gameplayAudioPitches = new(); // List of frequency/pitch values for each individual gameplay sound.
+        [SerializeField] private List<float> m_gameplayAudioVolumes = new(); // List of audio volume values for each individual gameplay sound.
+        //---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        [Header("Redline Audio")]                                                                                                   // Redline Audio ----------------------------------------------------------|
-        //[SerializeField] private List<EventReference> m_redlineAudioInfo = new List<EventReference>();                              // References to the FMOD audio "Events".                                  |
-        //[SerializeField] private StudioEventEmitter[] m_redlineEmitters;                                                            // References to the FMOD "StudioEventEmitter" components for the redline. |
-        //[SerializeField] private float[] m_redlineEmitterPitches;                                                                   // Pitch/Frequency float variables.                                        |
-        //[SerializeField] private float[] m_redlineEmitterVolumes;                                                                   // Volume float variables.                                                 |
-                                                                                                                                    // ------------------------------------------------------------------------|
-        public bool variantSet = false;
+        public void PlayGPSFX(int soundIndex)
+        {
+            switch (soundIndex)
+            {
+                // Wall Crash SFX.
+                case 0:
+                {
+                    if (m_gameplayAudioInfo[soundIndex].IsNull == false && m_gameplaySoundEmitters[0] != null)
+                    {
+                            if (m_gameplaySoundEmitters[0].EventReference.IsNull == true)
+                            {
+                                m_gameplaySoundEmitters[0].EventReference = m_gameplayAudioInfo[0];
+                            }
 
-        public void SetDefaultModulations(float PitchValue, float VolumeValue)
+                            m_gameplaySoundEmitters[0].Play();
+                    }
+                    break;
+                }
+            }
+        }
+
+        public void SetDefaultEngineModulations(float PitchValue, float VolumeValue)
         {
             m_maxEnginePitches.Add(PitchValue);
-
             m_maxEngineVolumes.Add(VolumeValue);
         }
 
@@ -52,7 +73,7 @@ namespace EAudioSystem
             }
         }
 
-        public void UpdatePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f, bool useDefaultMax = false)
+        public void UpdateEnginePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
             {
@@ -157,7 +178,7 @@ namespace EAudioSystem
             //}
         }
 
-        public void UpdateVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
+        public void UpdateEngineVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
             {
@@ -285,13 +306,6 @@ namespace EAudioSystem
                         currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]);
                     }
                 }
-    
-                //for (int i = 0; i < m_redlineEmitters.Length; i++)
-                //{
-                //    StudioEventEmitter currentRedlineEmitter = m_redlineEmitters[i];
-                //    currentRedlineEmitter.EventInstance.setPitch(m_redlineEmitterPitches[i]);
-                //    currentRedlineEmitter.EventInstance.setVolume(m_redlineEmitterVolumes[i]);
-                //}
             }
         }
     
@@ -302,13 +316,5 @@ namespace EAudioSystem
                 emitters.Play();
             }
         }
-    
-        //public void StartRedlineSounds()
-        //{
-        //    foreach (StudioEventEmitter emitters in m_redlineEmitters)
-        //    {
-        //        emitters.Play();
-        //    }
-        //}
     }
 };

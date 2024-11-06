@@ -439,14 +439,14 @@ public class ShipsControls : MonoBehaviour
             // ||                                                                                           ||
             // ||-------------------------------------------------------------------------------------------||
                                                                                                                                                     
-            PAC.UpdatePitch(0, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 9.5f, true, false, true, 0.33f, true);           // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(0, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 9.5f, true, false, true, 0.33f, true);           // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
 
-            PAC.UpdatePitch(1, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f), 19.2f, true, false, true, 0.33f, true);          // Engine sound that is second in the list  (Index [1]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(1, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f), 19.2f, true, false, true, 0.33f, true);          // Engine sound that is second in the list  (Index [1]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
 
-            PAC.UpdatePitch(2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 3.6f, true, false, true, 0.33f, true);           // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 3.6f, true, false, true, 0.33f, true);           // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
         }
     }
 
@@ -467,14 +467,14 @@ public class ShipsControls : MonoBehaviour
             if (PAC != null)
             {
                 // Audio Pitch & Volume Modulation
-                PAC.UpdatePitch(0, 1.0f, 9.5f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(0, 1.0f, 9.5f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
-                PAC.UpdatePitch(1, 2.5f, 19.2f, true, false, true, 0.33f, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(1, 2.5f, 19.2f, true, false, true, 0.33f, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
-                PAC.UpdatePitch(2, 0.25f, 3.6f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(2, 0.25f, 3.6f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
             }
         }
         else
@@ -484,14 +484,14 @@ public class ShipsControls : MonoBehaviour
             if (PAC != null)
             {
                 // Audio Pitch & Volume Modulation
-                PAC.UpdatePitch(0, 1.1f, 9.5f, true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateVolume(0, 0.015f, 0.36f, true, true, false, default, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(0, 1.1f, 9.5f, true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(0, 0.015f, 0.36f, true, true, false, default, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
 
-                PAC.UpdatePitch(1, 4.5f, 19.2f, true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateVolume(1, 0.015f, 0.3f, true, true, false, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(1, 4.5f, 19.2f, true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(1, 0.015f, 0.3f, true, true, false, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
 
-                PAC.UpdatePitch(2, 1.1f, 3.6f, true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateVolume(2, 0.015f, 0.41f, true, true, false, default, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(2, 1.1f, 3.6f, true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(2, 0.015f, 0.41f, true, true, false, default, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, adding 0.015f to the volume value over time.
             }
         }
 
