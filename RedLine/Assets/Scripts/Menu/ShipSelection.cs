@@ -185,7 +185,6 @@ public class ShipSelection : MonoBehaviour
             //----------------------------------------------------------------------------------------|                        |
             this.shipName.text = tempName; // set text to new word                                                             |
             yield return new WaitForSeconds(0.008f); // wait before doing it again                                             |
-                                                                                                                             //|
         }                                                                                                                    //|
         //---------------------------------------------------------------------------------------------------------------------|
     }

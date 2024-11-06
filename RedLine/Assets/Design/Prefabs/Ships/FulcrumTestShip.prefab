@@ -226,6 +226,9 @@ GameObject:
   - component: {fileID: 2868536069181459848}
   - component: {fileID: 2868536069181459851}
   - component: {fileID: 6267707172146090529}
+  - component: {fileID: 5868207803166506762}
+  - component: {fileID: 494131289026453656}
+  - component: {fileID: 8009728641288937855}
   m_Layer: 0
   m_Name: FulcrumTestShip
   m_TagString: Racer
@@ -365,12 +368,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shipAdjustSpeed: 0
   wantingToBoost: 0
-  forceMultiplier: 80
   accelerationForce: 10
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
-  boostTime: 1
+  maxBoostSpeedChange: 0
+  boostingTimes: []
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
@@ -401,6 +405,64 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5868207803166506762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fecc0125d2245a488ebf36e9e33b1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FulcrumEngineAudio: []
+  SplitwingEngineAudio: []
+  CutlassEngineAudio: []
+  isTestFulcrum: 1
+  isTestCutlass: 0
+  isTestSplitwing: 0
+  m_FulcrumMaxEnginePitchValues:
+  - 7.44
+  - 19.4
+  - 2.76
+  m_FulcrumMaxEngineVolumeValues:
+  - 0.25
+  - 0.1
+  - 0.35
+  m_SplitwingMaxEnginePitchValues: []
+  m_SplitwingMaxEngineVolumeValues: []
+  m_CutlassMaxEnginePitchValues: []
+  m_CutlassMaxEngineVolumeValues: []
+--- !u!114 &494131289026453656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_engineEmitters: []
+  variantSet: 0
+--- !u!114 &8009728641288937855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868536069181459855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 3697162360618014083}
 --- !u!1 &2868536069371765811
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,8 +656,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2266649719894886687}
+  - component: {fileID: 6589188627840961513}
+  - component: {fileID: 8632434937303743878}
+  - component: {fileID: 6230141379049179789}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EmitterParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,6 +681,99 @@ Transform:
   m_Father: {fileID: 2868536069181459850}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6589188627840961513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3697162360618014083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &8632434937303743878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3697162360618014083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &6230141379049179789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3697162360618014083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &3809895347315521471
 GameObject:
   m_ObjectHideFlags: 0

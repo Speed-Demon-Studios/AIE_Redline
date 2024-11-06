@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using EAudioSystem;
+using UnityEditor.ShaderGraph.Internal;
 
 public class VariantAudioContainer : MonoBehaviour
 {
     public List<EventReference> FulcrumEngineAudio = new List<EventReference>();
     public List<EventReference> SplitwingEngineAudio = new List<EventReference>();
     public List<EventReference> CutlassEngineAudio = new List<EventReference>();
+    public bool isTestFulcrum = false;
+    public bool isTestCutlass = false;
+    public bool isTestSplitwing = false;
+
+    [SerializeField] private float[] m_FulcrumMaxEnginePitchValues;
+    [SerializeField] private float[] m_FulcrumMaxEngineVolumeValues;
+
+    [SerializeField] private float[] m_SplitwingMaxEnginePitchValues;
+    [SerializeField] private float[] m_SplitwingMaxEngineVolumeValues;
+
+    [SerializeField] private float[] m_CutlassMaxEnginePitchValues;
+    [SerializeField] private float[] m_CutlassMaxEngineVolumeValues;
 
     public void CheckVariant(int variantINDEX)
     {
@@ -24,6 +37,7 @@ public class VariantAudioContainer : MonoBehaviour
             case 1:
                 {
                     PAC.SetEngineAudios(FulcrumEngineAudio);
+                    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
                     break;
                 }
             case 2:
@@ -35,15 +49,21 @@ public class VariantAudioContainer : MonoBehaviour
 
         PAC.variantSet = true;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    public void SetTestFulcrum()
     {
-        
+        PlayerAudioController PAC = this.gameObject.GetComponent<PlayerAudioController>();
+
+        PAC.SetEngineAudios(FulcrumEngineAudio);
+        PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
+        PAC.variantSet = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (isTestFulcrum == true)
+        {
+            SetTestFulcrum();
+        }
     }
 }
