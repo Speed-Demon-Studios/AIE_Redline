@@ -53,20 +53,22 @@ public class VariantAudioContainer : MonoBehaviour
         PAC.variantSet = true;
     }
 
-    //public void SetTestFulcrum()
-    //{
-    //    PlayerAudioController PAC = this.gameObject.GetComponent<PlayerAudioController>();
-    //
-    //    PAC.SetEngineAudios(FulcrumEngineAudio);
-    //    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
-    //    PAC.variantSet = true;
-    //}
-    //
-    //private void Start()
-    //{
-    //    if (isTestFulcrum == true)
-    //    {
-    //        SetTestFulcrum();
-    //    }
-    //}
+    public void SetTestFulcrum()
+    {
+        PlayerAudioController PAC = this.gameObject.GetComponent<PlayerAudioController>();
+    
+        PAC.SetEngineAudios(FulcrumEngineAudio);
+        PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[0], m_FulcrumMaxEngineVolumeValues[0]);
+        PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[1], m_FulcrumMaxEngineVolumeValues[1]);
+        PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[2], m_FulcrumMaxEngineVolumeValues[2]);
+        PAC.variantSet = true;
+    }
+    
+    private void Start()
+    {
+        if (isTestFulcrum == true)
+        {
+            SetTestFulcrum();
+        }
+    }
 }
