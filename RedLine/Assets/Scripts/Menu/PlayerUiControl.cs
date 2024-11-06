@@ -12,77 +12,162 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_speed;
     [SerializeField] private RacerDetails rDetails;
     [SerializeField] private ShipsControls m_shipsControls;
+    [SerializeField] private TextMeshProUGUI currentLapTime;
+    [SerializeField] private TextMeshProUGUI bestLapTime;
+    [SerializeField] private HUD hudScript;
+    [SerializeField] private Image energyBar;
+    [SerializeField] private Image speedBar;
+    [SerializeField] private Color defaultEnergybarColour;
+    [SerializeField] private Color defaultSpeedColour;
+    [SerializeField] private Color overdriveSpeedColour;
     public List<Slider> sliders = new();
     private int m_sliderNumber;
-    public TextMeshProUGUI test;
     public List<Animator> anim;
+    public Animator finishAnim;
+    public Image indicator;
+    public float distance;
+    private List<Image> indicators = new();
 
     private void Update()
     {
-        if (GameManager.gManager)
-        {
-            if (GameManager.gManager.raceStarted == false)
-            {
-                placementText.text = " ";
-                lapText.text = " ";
-            }
-            else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
-            {
-                if (rDetails.currentLap > 0)
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (GameManager.gManager && !m_shipsControls.isTestShip)                                                                         //|
+        {                                                                                                                                //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+            if (GameManager.gManager.raceStarted == false) // if the race has not started than all the text is null                        |
+            {                                                                                                                            //|
+                placementText.text = " ";                                                                                                //|
+                lapText.text = " ";                                                                                                      //|
+                currentLapTime.text = " ";                                                                                               //|
+                bestLapTime.text = " ";                                                                                                  //|
+            }                                                                                                                            //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+        // if the race has started but not finished then start to display all the info                                                     |
+            else if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)                             //|
+            {                                                                                                                            //|
+        //---------------------------------------------------------------------------------------------------------------------------------|
+                if (rDetails.currentLap > 0) // if the player has past the start line and started the race then display the laps           |
+                {                                                                                                                        //|------|
+                    lapText.text = rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString(); //|
+                }                                                                                                                               //|
+        //----------------------------------------------------------------------------------------------------------------------------------------|
+                if (GameManager.gManager.indexListSorted == true) // if the list of racers is sorted                                              |
+                {                                                                                                                               //|
+                    for (int i = 0; i < GameManager.gManager.pHandler.racers.Count; i++) // go through all racers and display the position        |
+                    {                                                                                                                           //|
+                        if (GameManager.gManager.pHandler.racers[i] == rDetails) // if i is equal to this current object then display the position|
+                        {                                                                                                                       //|
+                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.allRacers.Count.ToString();              //|
+                        }                                                                                                                       //|
+                    }                                                                                                                           //|
+                }                                                                                                                               //|
+        //----------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+                // display the current lap time                                                                                                                       |
+                currentLapTime.text = string.Format("{0:00}", rDetails.currentLapTimeMINUTES) + ":" + string.Format("{0:00.00}", rDetails.currentLapTimeSECONDS);   //|
+                // if the quickest lap time is over a certain time than dont display it                                                                               |
+                if(rDetails.quickestLapTimeMINUTES > 50)                                                                                                            //|
+                {                                                                                                                                                   //|
+                    bestLapTime.text = "--:--:--";                                                                                                                  //|
+                }                                                                                                                                                   //|
+                else // if the quickest lap time is good than display it on the screen                                                                                |
+                {                                                                                                                                                   //|
+                    bestLapTime.text = string.Format("{0:00}", rDetails.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", rDetails.quickestLapTimeSECONDS);//|
+                }                                                                                                                                                   //|
+        //---------------------------------------------------------------------------------------------------------------------------------|--------------------------|
+                // this is for the bars and sets which bar is currently inscreasing depending on the level of boost                        |
+                switch (m_shipsControls.ReturnBoost())                                                                                   //|
+                {                                                                                                                        //|
+                    case > 3:                                                                                                            //|
+                        m_sliderNumber = 2;                                                                                              //|
+                        break;                                                                                                           //|
+                    case > 2:                                                                                                            //|
+                        m_sliderNumber = 1;                                                                                              //|
+                        break;                                                                                                           //|
+                    case > 1:                                                                                                            //|
+                        m_sliderNumber = 0;                                                                                              //|
+                        break;                                                                                                           //|
+                }                                                                                                                        //|
+        //----------------------------------------------------------------------------------|----------------------------------------------|
+                // if the player is boosting than set all the bars to zero                  |
+                if (m_shipsControls.ReturnIsBoosting())                                   //|
+                {                                                                         //|
+                    //for (int i = 0; i < sliders.Count; i++)                               //|
+                    //{                                                                     //|
+                    //    //sliders[i].value = 0;                                             //|
+                    //}                                                                     //|
+                    energyBar.fillAmount = 0;
+                }                                                                         //|
+        //----------------------------------------------------------------------------------|
+                // flicker animation if the ship is in the redline                          |
+                anim[0].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());             //|
+                anim[1].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());             //|
+                anim[2].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());             //|
+        //----------------------------------------------------------------------------------|---------------------------------------------------|
+                // if the boost level is less than the slider count then set the sliders values to the boost                                    |
+                //if(m_shipsControls.ReturnBoostLevel() < sliders.Count)                                                                        //|
+                //    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();   //|
+                float speedFillValue = hudScript.map(((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f), 0, 1, 0.547f, 0.66f);
+                speedBar.fillAmount = speedFillValue;
+
+                if (speedBar.fillAmount > 0.628f)
                 {
-                    lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString();
+                    //speedBar.fillAmount -= (((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f) * 0.1f) * (Time.deltaTime * 1.22f);
+                    speedBar.color = overdriveSpeedColour;
+                }
+                else if (speedBar.fillAmount <= 0.628)
+                {
+                    speedBar.color = defaultSpeedColour;
                 }
 
-                if (GameManager.gManager.indexListSorted == true)
-                {
-                    for (int i = 0; i < GameManager.gManager.pHandler.racers.Count; i++)
-                    {
-                        if (GameManager.gManager.pHandler.racers[i] == rDetails)
-                        {
-                            placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();
-                        }
-                    }
-                }
+                energyBar.color = defaultEnergybarColour;
 
-                switch (m_shipsControls.ReturnBoost())
-                {
-                    case > 3:
-                        m_sliderNumber = 2;
-                        break;
-                    case > 2:
-                        m_sliderNumber = 1;
-                        break;
-                    case > 1:
-                        m_sliderNumber = 0;
-                        break;
-                }
 
-                if (m_shipsControls.ReturnIsBoosting())
-                {
+                float energyfillValue = hudScript.map(m_shipsControls.ReturnBoost() * 0.32f, 0, 1, 0.025f, 0.194f);
+                energyBar.fillAmount = energyfillValue;
 
-                    for (int i = 0; i < sliders.Count; i++)
-                    {
-                        sliders[i].value = 0;
-                    }
-                }
 
-                anim[0].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
-                anim[1].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
-                anim[2].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());
-
-                if (test != null)
-                    test.text = m_shipsControls.ReturnRB().velocity.y.ToString();
-
-                if(m_shipsControls.ReturnBoostLevel() < sliders.Count)
-                    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();
-
-                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();
-            }
-        }
+                // Set the speed text to the current speed times 7                                                                              |
+                m_speed.richText = true;                                        //|
+                m_speed.text = "<b>" + (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString() + "</b>" + " KPH";
+                //--------------------------------------------------------------------------------------------------------------------------------------|
+                Vector3 worldPos = GameManager.gManager.startNode.transform.position;
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                if (indicator != null)
+                    indicator.transform.position = Camera.main.WorldToScreenPoint(worldPos);
+                //for(int i = indicators.Count; i > 0; i--)
+                //{
+                //    Image img = indicators[i];
+                //    GameObject a = indicators[i].gameObject;
+                //    indicators.Remove(img);
+                //    Destroy(a);
+                //}
+                //foreach(GameObject player in GameManager.gManager.players)
+                //{
+                //    if(player != m_shipsControls.gameObject)
+                //    {
+                //        if (Vector3.Distance(m_shipsControls.gameObject.transform.position, player.transform.position) <= distance)
+                //        {
+                //            Image a = Instantiate(indicator, this.gameObject.transform);
+                //            indicators.Add(a);
+                //            a.transform.position = m_shipsControls.gameObject.GetComponent<PlayerInputScript>().m_cam.WorldToScreenPoint(player.transform.position);
+                //
+                //        }
+                //    }
+                //}
+            }                                                                                                                                 //|
+        }                                                                                                                                     //|
+        //--------------------------------------------------------------------------------------------------------------------------------------|
     }
 
-    public void ResetSliders()
+    public void FinishPopUp()
     {
+        finishAnim.gameObject.SetActive(true);
+        StartCoroutine(WaitToHideFinish());
+    }
 
+    IEnumerator WaitToHideFinish()
+    {
+        yield return new WaitForSeconds(2f);
+        finishAnim.gameObject.SetActive(false);
     }
 }

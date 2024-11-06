@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Net;
+using UnityEngine.Assertions.Must;
 
 public class FinishRace : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class FinishRace : MonoBehaviour
 
     public void DebugForFunction()
     {
+        Debug.Log("Pressed");
         placementWindow.SetActive(false);
         GameManager.gManager.mSL.InitializeForMainMenu();
     }
@@ -38,7 +40,12 @@ public class FinishRace : MonoBehaviour
     private void Update()
     {
         //CheckAllRacersFinished();
-
+        //if (Input.GetKeyUp(KeyCode.R))
+        //{
+        //    Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+        //    Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+        //    Steamworks.SteamUserStats.StoreStats();
+        //}
     }
 
     /// <summary>
@@ -51,7 +58,7 @@ public class FinishRace : MonoBehaviour
             m_alreadyShowingPlacements = true;
             GameManager.gManager.raceFinished = true;
 
-            foreach (GameObject racer in GameManager.gManager.racerObjects)
+            foreach (GameObject racer in GameManager.gManager.allRacers)
             {
                 if (GameManager.gManager.players.Contains(racer) == false)
                 {
@@ -66,12 +73,10 @@ public class FinishRace : MonoBehaviour
                 placementWindow.SetActive(true);
             }
 
-            ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>(); // Get a reference to player ones ActionMappingControl script.
-            aMC.mES.firstSelectedGameObject = mainButton; // Set player ones MultiplayerEventSystem's firstSelectedGameObject to the mainButton object.
-            aMC.mES.SetSelectedGameObject(mainButton); // Set player ones MultiplayerEventSystem's selectedGameObject to the mainButton object.
+            SelectMainButton();
 
             // Iterate through all of the racer objects.
-            for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
+            for (int i = 0; i < GameManager.gManager.allRacers.Count; i++)
             {
                 placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
                 RacerEntry rEntry = placementTexts[i].GetComponent<RacerEntry>();
@@ -81,7 +86,7 @@ public class FinishRace : MonoBehaviour
                 TextMeshProUGUI quickestTimeText = rEntry.Time2Object; // Get a reference to the FASTEST RACE TIME text object.
 
                 // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
-                foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
+                foreach (GameObject racerOBJ in GameManager.gManager.allRacers)
                 {
 
                     RacerDetails racerDeets = racerOBJ.GetComponent<RacerDetails>();
@@ -94,30 +99,32 @@ public class FinishRace : MonoBehaviour
                         {
                             if (racerDeets.finishedRacing == true)
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
+
+
+                                float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
                                 float quickestTime = 0;
 
-                                foreach(float time in racerDeets.lapTimesSECONDS)
-                                {
-                                    if(quickestTime == 0)
-                                    {
-                                        quickestTime = time;
-                                    }
+                                float quickestSeconds = 0;
+                                int quickestMinutes = 0;
 
-                                    if(time < quickestTime)
+                                for (int a = 0; a < quickestTime; a++)
+                                {
+                                    quickestSeconds += 1f;
+
+                                    if (quickestSeconds >= 60)
                                     {
-                                        quickestTime = time;
+                                        quickestMinutes += 1;
+
+                                        quickestSeconds = 0;
                                     }
                                 }
 
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
 
                                 placementText.text = "(" + (racerDeets.placement.ToString()) + ")";
                                 nameText.text = racerDeets.RacerName;
-                                totalTimeText.text = string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds);
-                                quickestTimeText.text = string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds);
+                                totalTimeText.text = string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                         }
                         else
@@ -127,40 +134,53 @@ public class FinishRace : MonoBehaviour
                                 placementText.text = "(" + (racerDeets.placement.ToString()) + ")";
                                 nameText.text = racerDeets.RacerName;
                                 totalTimeText.text = "DNF";
-                                quickestTimeText.text = "DNF";
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                             else
                             {
-                                float totalMinutes = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds / 60);
-                                float totalSeconds = Mathf.FloorToInt(racerDeets.totalRaceTimeSeconds - totalMinutes / 60);
-                                float quickestTime = 0;
-
-                                foreach (float time in racerDeets.lapTimesSECONDS)
-                                {
-                                    if (quickestTime == 0)
-                                    {
-                                        quickestTime = time;
-                                    }
-
-                                    if (time < quickestTime)
-                                    {
-                                        quickestTime = time;
-                                    }
-                                }
-
-                                float quickestMiuntes = Mathf.FloorToInt(quickestTime / 60);
-                                float quickestSeconds = Mathf.FloorToInt(quickestTime - quickestMiuntes / 60);
+                                float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
+                                float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
 
                                 placementText.text = "(" + (racerDeets.placement) + ")";
                                 nameText.text = racerDeets.RacerName;
-                                totalTimeText.text = string.Format("{0:00}", totalMinutes) + ":" + string.Format("{0:00.00}", totalSeconds);
-                                quickestTimeText.text = string.Format("{0:00}", quickestMiuntes) + ":" + string.Format("{0:00.00}", quickestSeconds);
+                                totalTimeText.text = string.Format("{0:00}", racerDeets.totalRaceTimeMinutes) + ":" + string.Format("{0:00.00}", racerDeets.totalRaceTimeSeconds);
+                                quickestTimeText.text = string.Format("{0:00}", racerDeets.quickestLapTimeMINUTES) + ":" + string.Format("{0:00.00}", racerDeets.quickestLapTimeSECONDS);
                             }
                         }
                     }
                 }
             }
+
+            //int currentWins;
+            //Steamworks.SteamUserStats.GetStat("FirstPlaceWins", out currentWins);
+            //RacerDetails racerDeetsScript = GameManager.gManager.players[0].GetComponent<RacerDetails>();
+            //if (racerDeetsScript.placement == 1)
+            //{
+            //    currentWins++;
+            //    bool gotAchievement;
+            //    Steamworks.SteamUserStats.GetAchievement("RedlineCadet", out gotAchievement);
+            //    Steamworks.SteamUserStats.SetStat("FirstPlaceWins", currentWins);
+            //    if (currentWins == 5)
+            //    {
+            //        gotAchievement = true;
+            //        Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+            //    }
+            //    if (currentWins >= 1)
+            //    {
+            //        Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+            //    }
+            //    Steamworks.SteamUserStats.StoreStats();
+            //}
         }
+    }
+
+    private void SelectMainButton()
+    {
+        ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>(); // Get a reference to player ones ActionMappingControl script.
+        aMC.UpdateActionMapForUI();
+        aMC.SwitchActionMapToUI();
+        aMC.mES.SetSelectedGameObject(mainButton); // Set player ones MultiplayerEventSystem's selectedGameObject to the mainButton object.
+        aMC.mES.firstSelectedGameObject = mainButton;
     }
 
     public bool AllRacersFinishedCheck()
@@ -264,6 +284,7 @@ public class FinishRace : MonoBehaviour
         if (m_allRacersFinished == true && m_alreadyShowingPlacements == false && m_allRacersCrosedLine == true)
         {
             ShowFinalPlacements();
+            SelectMainButton();
         }
         return;
     }

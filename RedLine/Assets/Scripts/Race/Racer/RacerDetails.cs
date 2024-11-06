@@ -7,6 +7,10 @@ public class RacerDetails : MonoBehaviour
     [Header("References & Variables")]
     public GameObject startOfTunnelOBJ;
     public GameObject endOfTunnelOBJ;
+    public GameObject corkscrewReset1;
+    public GameObject corkscrewReset2;
+    public IList<GameObject> resetNormalOBJs = new List<GameObject>();
+
 
     [Header("Script References")]
     public RedlineColliderSpawner rCS;
@@ -14,8 +18,8 @@ public class RacerDetails : MonoBehaviour
 
     [Space]
     [Header("LapTime Lists")]
-    public List<float> lapTimesSECONDS = new List<float>();
-    public List<float> lapTimesMINUTES = new List<float>();
+    public float quickestLapTimeSECONDS = 99;
+    public float quickestLapTimeMINUTES = 99;
 
     [Space]
     [Header("Integer Variables")]
@@ -71,30 +75,49 @@ public class RacerDetails : MonoBehaviour
     {
         if (endOfTunnelOBJ != null)
         {
-            if (Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) <= 24f && Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) > 10f)
+            if (Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) <= 35f && Vector3.Distance(this.gameObject.transform.position, endOfTunnelOBJ.transform.position) > 1f)
             {
                 ShipsControls sControls = this.gameObject.GetComponent<ShipsControls>();
                 sControls.SetRotationToTrack(endOfTunnelOBJ.GetComponent<EndOfTunnel>().point);
             }
-
         }
+
+        if (corkscrewReset1 != null)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, corkscrewReset1.transform.position) <= 40f && Vector3.Distance(this.gameObject.transform.position, corkscrewReset1.transform.position) > 1f)
+            {
+                ShipsControls sControls = this.gameObject.GetComponent<ShipsControls>();
+                sControls.SetRotationToTrack(corkscrewReset1.GetComponent<CorkscrewReset>().point);
+            }
+        }
+
+        if (corkscrewReset2 != null)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, corkscrewReset2.transform.position) <= 40f && Vector3.Distance(this.gameObject.transform.position, corkscrewReset2.transform.position) > 1f)
+            {
+                ShipsControls sControls = this.gameObject.GetComponent<ShipsControls>();
+                sControls.SetRotationToTrack(corkscrewReset2.GetComponent<CorkscrewReset>().point);
+            }
+        }
+
+
 
         if (currentLap > 0 && finishedRacing == false)
         {
-            currentLapTimeSECONDS += Time.deltaTime;
+            currentLapTimeSECONDS += 1 * Time.deltaTime;
             totalRaceTimeSeconds += 1 * Time.deltaTime;
 
-            //if (totalRaceTimeSeconds >= 60.0f)
-            //{
-            //    totalRaceTimeSeconds = 0.0f;
-            //    totalRaceTimeMinutes += 1.0f;
-            //}
-            //
-            //if (currentLapTimeSECONDS >= 60.0f)
-            //{
-            //    currentLapTimeSECONDS = 0.0f;
-            //    currentLapTimeMINUTES += 1;
-            //}
+            if (totalRaceTimeSeconds >= 60.0f)
+            {
+                totalRaceTimeSeconds = 0.0f;
+                totalRaceTimeMinutes += 1.0f;
+            }
+            
+            if (currentLapTimeSECONDS >= 60.0f)
+            {
+                currentLapTimeSECONDS = 0.0f;
+                currentLapTimeMINUTES += 1;
+            }
         }
 
         if (GameManager.gManager.raceStarted == false && nameSet == false)
@@ -128,9 +151,17 @@ public class RacerDetails : MonoBehaviour
                         if (currentLap > 0)
                         {
                             GameManager.gManager.timingsListUpdated = false;
-                            lapTimesSECONDS.Add(currentLapTimeSECONDS);
-                            //lapTimesMINUTES.Add(currentLapTimeMINUTES);
-                            //currentLapTimeMINUTES = 0;
+                            if(currentLapTimeMINUTES < quickestLapTimeMINUTES)
+                            {
+                                quickestLapTimeMINUTES = currentLapTimeMINUTES;
+                                quickestLapTimeSECONDS = currentLapTimeSECONDS;
+                            }
+                            else if(currentLapTimeSECONDS < quickestLapTimeSECONDS)
+                            {
+                                quickestLapTimeSECONDS = currentLapTimeSECONDS;
+                            }
+
+                            currentLapTimeMINUTES = 0;
                             currentLapTimeSECONDS = 0;
                             GameManager.gManager.timingsListUpdated = true;
                         } 
