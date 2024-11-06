@@ -195,7 +195,7 @@ public class PlayerInputScript : MonoBehaviour
         if (GameManager.gManager != null)
         {
             if(context.performed)
-                GameManager.gManager.uiCInput.GetMenuManager().BackOutMenu();
+                GameManager.gManager.uiCInput.GetMenuManager().BackOutMenu(m_playerNumber - 1);
         }
     }
 

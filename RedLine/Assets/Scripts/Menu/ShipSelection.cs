@@ -139,6 +139,20 @@ public class ShipSelection : MonoBehaviour
         //-------------------------------------------------------------------------------------------------|
 
     }
+    public void UnReady()
+    {
+        //-------------------------------------------------------------------------------------------------|
+        // Sets ship variants                                                                              |
+        m_ship.GetComponent<ShipsControls>().VariantObject = null;                                       //|
+        //-------------------------------------------------------------------------------------------------|
+        m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement         |
+        //-------------------------------------------------------------------------------------------------|
+        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations    |
+        //-------------------------------------------------------------------------------------------------|
+        border.GetComponent<RawImage>().color = notReady; // switch to the red ready color                 |
+        //-------------------------------------------------------------------------------------------------|
+
+    }
 
     /// <summary>
     /// This is a effect for the text every time the ship is switch in the selection screen

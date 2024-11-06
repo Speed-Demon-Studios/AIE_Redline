@@ -78,6 +78,8 @@ public class ManageSceneLoading : MonoBehaviour
 
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         racerDeets.rCS.ClearList();
+
+        playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
@@ -105,8 +107,8 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-
-        SceneManager.LoadSceneAsync(1);
+        PlayerPrefs.SetInt("SceneID", 1);
+        SceneManager.LoadSceneAsync(3);
         SceneManager.UnloadSceneAsync(2);
 
 

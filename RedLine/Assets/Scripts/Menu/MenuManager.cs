@@ -53,18 +53,21 @@ namespace MenuManagement
             }
         }
 
-        public void BackOutMenu()
+        public void BackOutMenu(int playerNumber)
         {
             switch (m_currentMenuType)
             {
                 case MenuType.Difficulty:
-                    BackToMenu();
+                    Back();
                     break;
                 case MenuType.Option:
-                    BackToMenu();
+                    Back();
                     break;
                 case MenuType.Credits:
-                    BackToMenu();
+                    Back();
+                    break;
+                case MenuType.ShipSelectionReady:
+                    GameManager.gManager.uiCInput.UnReadyPlayer(playerNumber);
                     break;
 
             }
@@ -94,7 +97,7 @@ namespace MenuManagement
             }
         }
 
-        private void BackToMenu()
+        public void Back()
         {
             GameObject prevObject = m_currentMenu.prevMenu.gameObject;
             GameObject currentObject = m_currentMenu.gameObject;
