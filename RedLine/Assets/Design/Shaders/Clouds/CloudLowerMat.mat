@@ -47,11 +47,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Clip: 0.29
-    - _Cloud_Height: 0.8
+    - _Alpha_Clip: 0
+    - _Alpha_Clip_Threshold: 0
+    - _Cloud_Height: 4.49
     - _Cloud_Size: 60
     - _Cloud_Size_2: 25
-    - _Cloud_intensity: 1
+    - _Cloud_intensity: 0.91
     - _Fluff_Scale_1: 600
     - _Fluff_Scale_2: 200
     - _Fluff_Texture_Strength: 0.19
@@ -60,21 +61,26 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SSS_Intensity: 2.22
-    - _SSS_Power: 4.7
+    - _SSS_Power: 6.84
     - _Smoothness: 1.67
-    - _Tiling: 2
+    - _Tiling: 4
+    - _Whisp_Density: 334.91
+    - _Whisp_Intensity: 0
+    - _Whisp_Power: 3.4
     m_Colors:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Cloud_Color_1: {r: 2.996518, g: 3.5890496, b: 3.5890496, a: 0.43137255}
-    - _Cloud_Color_2: {r: 0.030927373, g: 0.047169805, b: 0.047169805, a: 0}
-    - _Cloud_Speed: {r: 0.005, g: 0, b: 0, a: 0}
-    - _Cloud_Speed_2: {r: 0.01, g: 0.015, b: 0, a: 0}
+    - _Cloud_Color_1: {r: 4.474769, g: 5.3956666, b: 6.282457, a: 0.57254905}
+    - _Cloud_Color_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Cloud_Colour: {r: 5.4327226, g: 6.380891, b: 6.6574407, a: 0}
+    - _Cloud_Speed: {r: 0.0025, g: 0, b: 0, a: 0}
+    - _Cloud_Speed_2: {r: 0.005, g: 0.0075, b: 0, a: 0}
     - _Coud_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0}
-    - _FluffScrollSpeed: {r: -0.001, g: 0.0025, b: 0, a: 0}
-    - _FluffScrollSpeed_2: {r: 0.001, g: -0.004, b: 0, a: 0}
-    - _No_sun_color: {r: 0.09301914, g: 0.32121834, b: 2.8171494, a: 0}
+    - _FluffScrollSpeed: {r: -0.0005, g: 0.00125, b: 0, a: 0}
+    - _FluffScrollSpeed_2: {r: 0.0005, g: -0.002, b: 0, a: 0}
+    - _No_sun_color: {r: 2.0837357, g: 2.8870785, b: 10.77444, a: 0}
     - _SSS_Color: {r: 22.363522, g: 5.0347195, b: 0, a: 0}
-    - _Sun_color: {r: 11.984314, g: 2.7607844, b: 0.8784314, a: 0}
+    - _Sky_Colour: {r: 3.5650387, g: 8.128069, b: 11.996638, a: 0}
+    - _Sun_color: {r: 22.627417, g: 5.839333, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2302961397982780815
 MonoBehaviour:

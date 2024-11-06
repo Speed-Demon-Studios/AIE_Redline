@@ -32,6 +32,7 @@ public class FinishRace : MonoBehaviour
 
     public void DebugForFunction()
     {
+        Debug.Log("Pressed");
         placementWindow.SetActive(false);
         GameManager.gManager.mSL.InitializeForMainMenu();
     }
@@ -39,7 +40,12 @@ public class FinishRace : MonoBehaviour
     private void Update()
     {
         //CheckAllRacersFinished();
-
+        //if (Input.GetKeyUp(KeyCode.R))
+        //{
+        //    Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+        //    Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+        //    Steamworks.SteamUserStats.StoreStats();
+        //}
     }
 
     /// <summary>
@@ -52,7 +58,7 @@ public class FinishRace : MonoBehaviour
             m_alreadyShowingPlacements = true;
             GameManager.gManager.raceFinished = true;
 
-            foreach (GameObject racer in GameManager.gManager.racerObjects)
+            foreach (GameObject racer in GameManager.gManager.allRacers)
             {
                 if (GameManager.gManager.players.Contains(racer) == false)
                 {
@@ -67,12 +73,10 @@ public class FinishRace : MonoBehaviour
                 placementWindow.SetActive(true);
             }
 
-            ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>(); // Get a reference to player ones ActionMappingControl script.
-            aMC.mES.firstSelectedGameObject = mainButton; // Set player ones MultiplayerEventSystem's firstSelectedGameObject to the mainButton object.
-            aMC.mES.SetSelectedGameObject(mainButton); // Set player ones MultiplayerEventSystem's selectedGameObject to the mainButton object.
+            SelectMainButton();
 
             // Iterate through all of the racer objects.
-            for (int i = 0; i < GameManager.gManager.racerObjects.Count; i++)
+            for (int i = 0; i < GameManager.gManager.allRacers.Count; i++)
             {
                 placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
                 RacerEntry rEntry = placementTexts[i].GetComponent<RacerEntry>();
@@ -82,7 +86,7 @@ public class FinishRace : MonoBehaviour
                 TextMeshProUGUI quickestTimeText = rEntry.Time2Object; // Get a reference to the FASTEST RACE TIME text object.
 
                 // Iterate through all of the racer objects again, this time to update the text objects with each racer's respective name and placement.
-                foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
+                foreach (GameObject racerOBJ in GameManager.gManager.allRacers)
                 {
 
                     RacerDetails racerDeets = racerOBJ.GetComponent<RacerDetails>();
@@ -100,36 +104,6 @@ public class FinishRace : MonoBehaviour
                                 float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
                                 float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
                                 float quickestTime = 0;
-
-                                float secondsAdded = 0;
-                                int minutesAdded = 0;
-
-                                //for (int a = 0; a < totalSeconds; a++)
-                                //{
-                                //    secondsAdded += 1f;
-                                //
-                                //    if (secondsAdded >= 60)
-                                //    {
-                                //        minutesAdded += 1;
-                                //        secondsAdded = 0;
-                                //    }
-                                //}
-                                //
-                                //foreach(float time in racerDeets.lapTimesSECONDS)
-                                //{
-                                //    if(quickestTime == 0)
-                                //    {
-                                //        quickestTime = time;
-                                //    }
-                                //
-                                //    if(time < quickestTime)
-                                //    {
-                                //        quickestTime = time;
-                                //    }
-                                //}
-
-                                //float quickestMiuntes = Mathf.CeilToInt(quickestTime / 60);
-                                //float quickestSeconds = Mathf.CeilToInt(quickestTime - quickestMiuntes / 60);
 
                                 float quickestSeconds = 0;
                                 int quickestMinutes = 0;
@@ -166,39 +140,6 @@ public class FinishRace : MonoBehaviour
                             {
                                 float totalMinutes = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds / 60);
                                 float totalSeconds = Mathf.CeilToInt(racerDeets.totalRaceTimeSeconds - totalMinutes % 60);
-                                //float quickestTime = 0;
-
-                                //int secondsAdded = 0;
-                                //int minutesAdded = 0;
-                                //
-                                //for (int a = 0; a < totalSeconds; a++)
-                                //{
-                                //    secondsAdded += 1;
-                                //
-                                //    if (secondsAdded >= 60)
-                                //    {
-                                //        minutesAdded += 1;
-                                //        secondsAdded = 0;
-                                //    }
-                                //}
-                                //
-                                //int quickestSeconds = 0;
-                                //int quickestMinutes = 0;
-                                //
-                                //for (int a = 0; a < quickestTime; a++)
-                                //{
-                                //    quickestSeconds += 1;
-                                //
-                                //    if (quickestSeconds >= 60)
-                                //    {
-                                //        quickestMinutes += 1;
-                                //
-                                //        quickestSeconds = 0;
-                                //    }
-                                //}
-
-                                //float quickestMiuntes = Mathf.CeilToInt(quickestTime / 60);
-                                //float quickestSeconds = Mathf.CeilToInt(quickestTime - quickestMiuntes % 60);
 
                                 placementText.text = "(" + (racerDeets.placement) + ")";
                                 nameText.text = racerDeets.RacerName;
@@ -209,7 +150,37 @@ public class FinishRace : MonoBehaviour
                     }
                 }
             }
+
+            //int currentWins;
+            //Steamworks.SteamUserStats.GetStat("FirstPlaceWins", out currentWins);
+            //RacerDetails racerDeetsScript = GameManager.gManager.players[0].GetComponent<RacerDetails>();
+            //if (racerDeetsScript.placement == 1)
+            //{
+            //    currentWins++;
+            //    bool gotAchievement;
+            //    Steamworks.SteamUserStats.GetAchievement("RedlineCadet", out gotAchievement);
+            //    Steamworks.SteamUserStats.SetStat("FirstPlaceWins", currentWins);
+            //    if (currentWins == 5)
+            //    {
+            //        gotAchievement = true;
+            //        Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
+            //    }
+            //    if (currentWins >= 1)
+            //    {
+            //        Steamworks.SteamUserStats.SetAchievement("FirstTimer");
+            //    }
+            //    Steamworks.SteamUserStats.StoreStats();
+            //}
         }
+    }
+
+    private void SelectMainButton()
+    {
+        ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>(); // Get a reference to player ones ActionMappingControl script.
+        aMC.UpdateActionMapForUI();
+        aMC.SwitchActionMapToUI();
+        aMC.mES.SetSelectedGameObject(mainButton); // Set player ones MultiplayerEventSystem's selectedGameObject to the mainButton object.
+        aMC.mES.firstSelectedGameObject = mainButton;
     }
 
     public bool AllRacersFinishedCheck()
@@ -313,6 +284,7 @@ public class FinishRace : MonoBehaviour
         if (m_allRacersFinished == true && m_alreadyShowingPlacements == false && m_allRacersCrosedLine == true)
         {
             ShowFinalPlacements();
+            SelectMainButton();
         }
         return;
     }
