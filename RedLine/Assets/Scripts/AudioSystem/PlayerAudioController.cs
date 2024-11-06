@@ -14,10 +14,10 @@ namespace EAudioSystem
         [Header("Engine Audio")]                                                                                                    // Engine Audio -----------------------------------------------------------|
         [SerializeField] private StudioEventEmitter[] m_engineEmitters;                                                             // References to the FMOD "StudioEventEmitter" components for the engines. |
         private List<EventReference> m_engineAudioInfo = new List<EventReference>();                               // References to the FMOD audio "Events".                                  |
-        private List<float> m_engineEmitterPitches = new List<float>();                                                             // Pitch/Frequency float variables.                                        |
-        private List<float> m_engineEmitterVolumes = new List<float>();                                                             // Volume float variables.                                                 |
-        private float[] m_maxEnginePitches;
-        private float[] m_maxEngineVolumes;
+        [SerializeField] private List<float> m_engineEmitterPitches = new List<float>();                                                             // Pitch/Frequency float variables.                                        |
+        [SerializeField] private List<float> m_engineEmitterVolumes = new List<float>();                                                             // Volume float variables.                                                 |
+        private List<float> m_maxEnginePitches = new List<float>();
+        private List<float> m_maxEngineVolumes = new List<float>();
                                                                                                                                     // ------------------------------------------------------------------------|
         [Space]
         [Space]
@@ -31,20 +31,11 @@ namespace EAudioSystem
                                                                                                                                     // ------------------------------------------------------------------------|
         public bool variantSet = false;
 
-        public void SetDefaultModulations(float[] newPitchArray, float[] newVolumeArray)
+        public void SetDefaultModulations(float PitchValue, float VolumeValue)
         {
-            m_maxEngineVolumes = new float[newPitchArray.Length];
-            m_maxEngineVolumes = new float[newVolumeArray.Length];
+            m_maxEnginePitches.Add(PitchValue);
 
-            for(int i = 0; i < newPitchArray.Length; i++)
-            {
-                m_maxEnginePitches[i] = newPitchArray[i];
-            }
-
-            for(int i = 0; i < newVolumeArray.Length; i++)
-            {
-                m_maxEngineVolumes[i] = newVolumeArray[i];
-            }
+            m_maxEngineVolumes.Add(VolumeValue);
         }
 
         public void SetEngineAudios(List<EventReference> newAudioEvents)
@@ -97,20 +88,38 @@ namespace EAudioSystem
                 }
             }
 
-            Debug.Log("[" + index + "] Max Pitch: " + maxValue);
-            if (useDefaultMax == true)
+            if (float.IsNaN(m_engineEmitterPitches[index]) == true)
             {
-                maxValue = m_maxEnginePitches[index];
-            }    
-            Debug.Log("[" + index + "] Max Pitch: " + maxValue);
+                m_engineEmitterPitches[index] = 0.05f;
+                m_engineEmitterPitches[index] = minimumValue;
+            }
 
             if (addDT == true)
             {
                 if (add == true)
                 {
-                    if (m_engineEmitterPitches[index] < maxValue)
+                    if (useDefaultMax == false)
                     {
-                        m_engineEmitterPitches[index] += amount * Time.deltaTime;
+                        if (m_engineEmitterPitches[index] < maxValue)
+                        {
+                            m_engineEmitterPitches[index] += amount * Time.deltaTime;
+                        }
+                        if (m_engineEmitterPitches[index] > maxValue)
+                        {
+                            m_engineEmitterPitches[index] = maxValue;
+                        }
+                    }
+                    else
+                    {
+                        if (m_engineEmitterPitches[index] < m_maxEnginePitches[index])
+                        {
+                            m_engineEmitterPitches[index] += amount * Time.deltaTime;
+                        }
+
+                        if (m_engineEmitterPitches[index] > m_maxEnginePitches[index])
+                        {
+                            m_engineEmitterPitches[index] = m_maxEnginePitches[index];
+                        }
                     }
                 }
                 
@@ -134,18 +143,18 @@ namespace EAudioSystem
                     }
                 }
             }
-            else if (addDT == false)
-            {
-                if (add == true)
-                {
-                    m_engineEmitterPitches[index] += amount;
-                }
-
-                if (subtract == true)
-                {
-                    m_engineEmitterPitches[index] -= amount;
-                }
-            }
+            //else if (addDT == false)
+            //{
+            //    if (add == true)
+            //    {
+            //        m_engineEmitterPitches[index] += amount;
+            //    }
+            //
+            //    if (subtract == true)
+            //    {
+            //        m_engineEmitterPitches[index] -= amount;
+            //    }
+            //}
         }
 
         public void UpdateVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
@@ -188,6 +197,12 @@ namespace EAudioSystem
                 return;
             }
 
+            //if (float.IsNaN(m_engineEmitterVolumes[index]) == true)
+            //{
+            //    m_engineEmitterVolumes[index] = 0.05f;
+            //    m_engineEmitterVolumes[index] = minValue;
+            //}
+
             Debug.Log("[" + index + "] Max Volume: " + maxValue);
             if (useDefaultMax == true)
             {
@@ -211,7 +226,7 @@ namespace EAudioSystem
 
                 if (subtract == true)
                 {
-                    if (minValue == 999.0f)
+                    if (minValue > 500.0f)
                     {
                         if (m_engineEmitterVolumes[index] > 0.0f)
                         {
@@ -263,9 +278,12 @@ namespace EAudioSystem
             {
                 for (int i = 0; i < m_engineEmitters.Length; i++)
                 {
-                    StudioEventEmitter currentEngineEmitter = m_engineEmitters[i];
-                    currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]);
-                    currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]);
+                    if (m_engineEmitters[i] != null)
+                    {
+                        StudioEventEmitter currentEngineEmitter = m_engineEmitters[i];
+                        currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]);
+                        currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]);
+                    }
                 }
     
                 //for (int i = 0; i < m_redlineEmitters.Length; i++)

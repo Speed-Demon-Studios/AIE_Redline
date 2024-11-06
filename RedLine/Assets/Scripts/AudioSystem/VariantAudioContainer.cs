@@ -10,12 +10,13 @@ public class VariantAudioContainer : MonoBehaviour
     public List<EventReference> FulcrumEngineAudio = new List<EventReference>();
     public List<EventReference> SplitwingEngineAudio = new List<EventReference>();
     public List<EventReference> CutlassEngineAudio = new List<EventReference>();
+
     public bool isTestFulcrum = false;
     public bool isTestCutlass = false;
     public bool isTestSplitwing = false;
 
-    [SerializeField] private float[] m_FulcrumMaxEnginePitchValues;
-    [SerializeField] private float[] m_FulcrumMaxEngineVolumeValues;
+    [SerializeField] private List<float> m_FulcrumMaxEnginePitchValues = new List<float>();
+    [SerializeField] private List<float> m_FulcrumMaxEngineVolumeValues = new List<float>();
 
     [SerializeField] private float[] m_SplitwingMaxEnginePitchValues;
     [SerializeField] private float[] m_SplitwingMaxEngineVolumeValues;
@@ -37,7 +38,9 @@ public class VariantAudioContainer : MonoBehaviour
             case 1:
                 {
                     PAC.SetEngineAudios(FulcrumEngineAudio);
-                    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
+                    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[0], m_FulcrumMaxEngineVolumeValues[0]);
+                    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[1], m_FulcrumMaxEngineVolumeValues[1]);
+                    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues[2], m_FulcrumMaxEngineVolumeValues[2]);
                     break;
                 }
             case 2:
@@ -50,20 +53,20 @@ public class VariantAudioContainer : MonoBehaviour
         PAC.variantSet = true;
     }
 
-    public void SetTestFulcrum()
-    {
-        PlayerAudioController PAC = this.gameObject.GetComponent<PlayerAudioController>();
-
-        PAC.SetEngineAudios(FulcrumEngineAudio);
-        PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
-        PAC.variantSet = true;
-    }
-
-    private void Start()
-    {
-        if (isTestFulcrum == true)
-        {
-            SetTestFulcrum();
-        }
-    }
+    //public void SetTestFulcrum()
+    //{
+    //    PlayerAudioController PAC = this.gameObject.GetComponent<PlayerAudioController>();
+    //
+    //    PAC.SetEngineAudios(FulcrumEngineAudio);
+    //    PAC.SetDefaultModulations(m_FulcrumMaxEnginePitchValues, m_FulcrumMaxEngineVolumeValues);
+    //    PAC.variantSet = true;
+    //}
+    //
+    //private void Start()
+    //{
+    //    if (isTestFulcrum == true)
+    //    {
+    //        SetTestFulcrum();
+    //    }
+    //}
 }
