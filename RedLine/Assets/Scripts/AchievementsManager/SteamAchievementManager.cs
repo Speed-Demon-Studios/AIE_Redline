@@ -1,9 +1,24 @@
+using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SteamAchievementManager : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        //Steamworks.SteamAPI.Init();
+        //
+        //if (SteamAPI.RestartAppIfNecessary((AppId_t)3204410))
+        //{
+        //    Debug.Log("[Steamworks.NET] Shutting down because RestartAppIfNecessary returned true. Steam will restart the application.");
+        //
+        //    Application.Quit();
+        //    return;
+        //}
+    }
+
 
     public void GetAchievement(string AchievementID)
     {
@@ -16,8 +31,8 @@ public class SteamAchievementManager : MonoBehaviour
         //    Steamworks.SteamUserStats.SetAchievement(AchievementID);
         //    Steamworks.SteamUserStats.StoreStats();
         //}
-
-        return;
+        //
+        //return;
     }
 
     public void CheckAllAchievementProgress(int p1Placement)
@@ -25,7 +40,7 @@ public class SteamAchievementManager : MonoBehaviour
         //RacerDetails rDeets = GameManager.gManager.players[0].GetComponent<RacerDetails>();
         //bool gotAchievement;
         //
-        //if (p1Placement > 0)
+        //if (p1Placement >= 0)
         //{
         //    // Checking for WIN related achievements
         //    if (p1Placement == 1)
@@ -33,7 +48,9 @@ public class SteamAchievementManager : MonoBehaviour
         //        int currentWins;
         //        Steamworks.SteamUserStats.GetStat("RaceWins", out currentWins);
         //        currentWins++;
+        //        Debug.Log("current wins: " + currentWins);
         //        Steamworks.SteamUserStats.SetStat("RaceWins", currentWins);
+        //        Steamworks.SteamUserStats.StoreStats();
         //
         //        // "New Rider" - Win 1 race.
         //        Steamworks.SteamUserStats.GetAchievement("NewRider", out gotAchievement);
@@ -52,21 +69,6 @@ public class SteamAchievementManager : MonoBehaviour
         //        Steamworks.SteamUserStats.StoreStats();
         //    }
         //}
-
-        return;
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //return;
     }
 }
