@@ -136,7 +136,7 @@ namespace MenuManagement
                             redline = child.GetComponent<RedlineColliderSpawner>(); // then assign it to the redline reference                 |
                     } //                                                                                                                       |
             //---------------------------------------------------------------------------------------------------------------------------------|
-                    AttachModels(player.GetComponent<ShipsControls>()); // Attach the models of the ship the player selected                   |
+                    player.GetComponent<ShipsControls>().AttachModels(); // Attach the models of the ship the player selected                  |
             //---------------------------------------------------------------------------------------------------------------------------------|
                     foreach (Transform child in player.transform) // do another check on the redline collider spawner reference                |
                     { //                                                                                                                       |
@@ -164,16 +164,6 @@ namespace MenuManagement
                 SceneManager.LoadSceneAsync(3); // Load the new race scene                                                                     |
             } //                                                                                                                               |
             //---------------------------------------------------------------------------------------------------------------------------------|
-        }
-
-        /// <summary>
-        /// Spawn the models onto the ship for the ship that the player chose
-        /// </summary>
-        /// <param name="ship"> Which player ship controls is it </param>
-        public void AttachModels(ShipsControls ship)
-        {
-            Instantiate(ship.VariantObject.model, ship.shipModel.transform);
-            Instantiate(ship.VariantObject.collision, ship.collisionParent);
         }
 
         /// <summary>
