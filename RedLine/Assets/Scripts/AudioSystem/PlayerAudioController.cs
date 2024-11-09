@@ -9,6 +9,15 @@ namespace EAudioSystem
 
     public class PlayerAudioController : MonoBehaviour
     {
+        // TODO:
+        // * Finish gameplay audio functionality
+        // * Update the funcionality for the engine sounds, allowing variation between the different difficulty modes, and so the engine sounds get quieter after a race has been completed.
+        // * Update generalised functionality for the entire audio system so values get reset and deleted properly at the end of a race so the player can return to the main menu without getting errors.
+        // * Add scaling to all engine sounds so they scale when boosting then go back to the normal range SMOOTHLY when a boost has finished.
+        // * Remove the debugging custom error stuff from this script and the UIAudioController.cs script, and possibly add them into their own script to clean up the code in those scripts.
+        // * Redline audio (e.g. gaining redline, reaching the different levels of redline, etc...).
+        // * Update the funcitionality for the engine audio so that when a players speed lowers while they are turning or crashing into a wall, the sound modulation will reflect those changes.
+    
         public bool variantSet = false; // BOOLEAN value to tell the game whether or not the ship variant has been selected and set-up.
 
         // Engine Audio -------------------------------------------------------------------------------------------------------------------------------------
