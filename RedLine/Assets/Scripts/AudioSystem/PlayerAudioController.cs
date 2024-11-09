@@ -292,20 +292,21 @@ namespace EAudioSystem
 
         void Update()
         {
-            if (variantSet == true)
+            if (variantSet == true) // If the variant has been selected
             {
-                for (int i = 0; i < m_engineEmitters.Length; i++)
+                for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
                 {
-                    if (m_engineEmitters[i] != null)
+                    if (m_engineEmitters[i] != null) // If the emitter at the current index is not NULL
                     {
-                        StudioEventEmitter currentEngineEmitter = m_engineEmitters[i];
-                        currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]);
-                        currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]);
+                        StudioEventEmitter currentEngineEmitter = m_engineEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
+                        currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]); // Update the PITCH of the audio assigned to the current emitter.
+                        currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                     }
                 }
             }
         }
-    
+
+        // Start playing the engine audio from all of the engine audio emitters.
         public void StartEngineHum()
         {
             foreach (StudioEventEmitter emitters in m_engineEmitters)
