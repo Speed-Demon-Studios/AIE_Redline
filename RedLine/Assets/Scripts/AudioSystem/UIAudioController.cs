@@ -7,9 +7,9 @@ namespace EAudioSystem
 {
     public class UIAudioController : MonoBehaviour
     {
-        [SerializeField] private StudioEventEmitter[] fmodEmitters;
-        [SerializeField] private EventReference[] menuAudio;
-        [SerializeField] private float[] pitchVariations;
+        [SerializeField] private StudioEventEmitter[] fmodEmitters; // List of FMOD audio emitter components for any UI or menu sounds (e.g. Player Joining, Game Pausing, Confirmation, ETC)
+        [SerializeField] private EventReference[] menuAudio; // Array of FMOD audio 'Events' for all UI or menu sounds.
+        [SerializeField] private float[] pitchVariations; // FLOAT array of any pitch variations for the menu confirmation audio.
         private float selectedVariation = 0.0f;
         private float pitchSelected = 0.0f;
 
@@ -23,7 +23,6 @@ namespace EAudioSystem
         public void GamePauseSound()
         {
             fmodEmitters[0].Play();
-            StudioEventEmitter testEmitter = new StudioEventEmitter();
         }
     
         public void PlayerJoinSound()
