@@ -53,12 +53,14 @@ namespace EAudioSystem
             }
         }
 
+        // Set up the default modulation values for the engine sounds (Pitch, Volume).
         public void SetDefaultEngineModulations(float PitchValue, float VolumeValue)
         {
             m_maxEnginePitches.Add(PitchValue);
             m_maxEngineVolumes.Add(VolumeValue);
         }
 
+        // Set up the variables, emitters and 'events' for engine audio, based off of the selected ship variation.
         public void SetEngineAudios(List<EventReference> newAudioEvents)
         {
             m_engineAudioInfo = new List<EventReference>();
@@ -73,6 +75,8 @@ namespace EAudioSystem
             }
         }
 
+        // Update engine sound pitch. passing in values for the index of the sound you want to update, the amount you want to update it by, the maximum value, whether to add DeltaTime,
+        // whether you are adding or subtracting, the minimum value - which has a default of '999.0' which will bypass the minimum, and wheather or not you want to use the default MAX value set in the editor.
         public void UpdateEnginePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
@@ -146,7 +150,7 @@ namespace EAudioSystem
                 
                 if (subtract == true)
                 {
-                    if (minimumValue == 999.0f)
+                    if (minimumValue >= 800.0f)
                     {
                         if (m_engineEmitterPitches[index] <= 0.33f && m_engineEmitterPitches[index] > -0.7f)
                         {
@@ -164,20 +168,10 @@ namespace EAudioSystem
                     }
                 }
             }
-            //else if (addDT == false)
-            //{
-            //    if (add == true)
-            //    {
-            //        m_engineEmitterPitches[index] += amount;
-            //    }
-            //
-            //    if (subtract == true)
-            //    {
-            //        m_engineEmitterPitches[index] -= amount;
-            //    }
-            //}
         }
 
+        // Update engine sound volume. passing in values for the index of the sound you want to update, the amount you want to update it by, the maximum value, whether to add DeltaTime,
+        // whether you are adding or subtracting, the minimum value - which has a default of '999.0' which will bypass the minimum, and wheather or not you want to use the default MAX value set in the editor.
         public void UpdateEngineVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
         {
             if (add == true && subtract == true || add == false && subtract == false)
@@ -217,12 +211,6 @@ namespace EAudioSystem
             {
                 return;
             }
-
-            //if (float.IsNaN(m_engineEmitterVolumes[index]) == true)
-            //{
-            //    m_engineEmitterVolumes[index] = 0.05f;
-            //    m_engineEmitterVolumes[index] = minValue;
-            //}
 
             Debug.Log("[" + index + "] Max Volume: " + maxValue);
             if (useDefaultMax == true)
