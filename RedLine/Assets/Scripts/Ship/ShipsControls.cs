@@ -106,7 +106,7 @@ public class ShipsControls : MonoBehaviour
     public void AttachModels()
     {
         if (shipModel.transform.childCount > 0)
-            Destroy(shipModel.transform.GetChild(0).gameObject);
+            DestroyImmediate(shipModel.transform.GetChild(0).gameObject);
 
         Instantiate(VariantObject.model, shipModel.transform);
         Instantiate(VariantObject.collision, collisionParent);

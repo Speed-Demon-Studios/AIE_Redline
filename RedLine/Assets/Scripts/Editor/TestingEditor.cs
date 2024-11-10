@@ -1,38 +1,151 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TestingShips;
+using Unity.VisualScripting;
 using UnityEditor;
+using UnityEngine;
 
-[CustomEditor(typeof(Testing))]
-public class TestingEditor : Editor
+public class TestingEditor : EditorWindow
 {
-    public override void OnInspectorGUI()
+    GameObject m_prefab;
+    ShipVariant m_variant;
+    GameObject m_player;
+    Vector3 m_spawnPos;
+    string[] levels = new string[3] { "Easy", "Medium", "Hard" };
+    int indexForLevels;
+
+    string[] ships = new string[3] { "Splitwing", "Fulcrum", "Cutlass" };
+    int indexForShips;
+
+    [MenuItem("Window/Testing Panel")]
+    public static void ShowMyEditor()
+    {
+        GetWindow<TestingEditor>("Testing Panel");
+    }
+
+    private void OnGUI()
     {
         EditorGUI.BeginChangeCheck();
 
-        Testing testingScript = (Testing)target;
+        GameObject ship = EditorGUILayout.ObjectField("Player Ship", m_prefab, typeof(GameObject), false) as GameObject;
 
-        GameObject ship = EditorGUILayout.ObjectField("Player Ship", testingScript.playerPref, typeof(GameObject), false) as GameObject;
+        ShipVariant variant = EditorGUILayout.ObjectField("Player Variant", m_variant, typeof(ShipVariant), false) as ShipVariant;
 
-        ShipVariant variant = EditorGUILayout.ObjectField("Player Variant", testingScript.m_variant, typeof(ShipVariant), false) as ShipVariant;
+        GUILayout.Space(15f);
 
-        if (GUILayout.Button("Spawn Ship"))
+        Vector3 spawnPos = EditorGUILayout.Vector3Field("SpawnPos", m_spawnPos);
+
+        GUILayout.Space(25f);
+
+        if (m_player != null && Application.isPlaying)
         {
-            testingScript.SpawnShip();
+            EditorGUI.BeginChangeCheck();
+            indexForLevels = EditorGUILayout.Popup(indexForLevels, levels);
+            if (EditorGUI.EndChangeCheck())
+            {
+                switch (indexForLevels)
+                {
+                    case 0:
+                        GameManager.gManager.difficultyChange = 0.8f;
+                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
+                        break;
+                    case 1:
+                        GameManager.gManager.difficultyChange = 1f;
+                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
+                        break;
+                    case 2:
+                        GameManager.gManager.difficultyChange = 1.2f;
+                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
+                        break;
+                }
+            }
         }
 
-        if (GUILayout.Button("Switch Variant"))
+        GUILayout.Space(35f);
+
+        if (GUILayout.Button("Spawn Ship", GUILayout.Width(150f)))
         {
-            testingScript.SwitchModel();
+            SpawnShip();
+        }
+
+        if (GUILayout.Button("Switch Variant", GUILayout.Width(150f)))
+        {
+            SwitchModel();
+        }
+
+        if (m_player != null)
+        {
+            GUI.color = Color.red;
+            if (GUILayout.Button("Delete Ship", GUILayout.Width(150f)))
+            {
+                DeleteTestShip();
+            }
         }
 
         if (EditorGUI.EndChangeCheck())
         {
-            Undo.RecordObject(testingScript, "Changed Script");
+            Undo.RecordObject(this, "Changed Script");
 
-            testingScript.playerPref = ship;
-            testingScript.m_variant = variant;
+            m_prefab = ship;
+            m_variant = variant;
+            m_spawnPos = spawnPos;
+        }
+    }
+
+    private void SpawnShip()
+    {
+        if (m_prefab == null)
+        {
+            Debug.LogError("You need a ship in the prefab field to spawn a test ship");
+        }
+        else if(m_variant == null)
+        {
+            Debug.LogError("You need a variant in the variant field to spawn a test ship");
+        }
+        if(m_player != null)
+        {
+            Debug.LogError("Test ship is already in the scene. cant spawn another ship");
+        }
+        else
+        {
+            m_player = Instantiate(m_prefab);
+            m_player.transform.position = m_spawnPos;
+
+            m_player.GetComponent<ShipsControls>().VariantObject = m_variant;
+
+            m_player.GetComponent<ShipsControls>().isTestShip = true;
+
+            m_player.GetComponent<ActionMappingControl>().UpdateActionMapForRace();
+
+            m_player.GetComponent<PlayerInputScript>().enabled = true;
+            m_player.GetComponent<PlayerInputScript>().m_cam.gameObject.SetActive(true);
+
+            m_player.GetComponent<ShipsControls>().AttachModels();
+
+            m_player.GetComponent<ShipsControls>().enabled = true;
+        }
+    }
+
+    private void SwitchModel()
+    {
+        if (m_player == null)
+        {
+            Debug.LogError("There is no test ship in the scene");
+        }
+        else
+        {
+            m_player.GetComponent<ShipsControls>().VariantObject = m_variant;
+            m_player.GetComponent<ShipsControls>().AttachModels();
+        }
+    }
+
+    private void DeleteTestShip()
+    {
+        if (m_player == null)
+        {
+            Debug.LogError("There is no test ship in the scene");
+        }
+        else
+        {
+            DestroyImmediate(m_player);
+            m_player = null;
         }
     }
 }

@@ -21,26 +21,8 @@ namespace TestingShips
 
         }
 
-        public void SpawnShip()
-        {
-            m_player = Instantiate(playerPref);
 
-            m_player.GetComponent<ShipsControls>().enabled = true;
-            m_player.GetComponent<ShipsControls>().isTestShip = true;
 
-            m_player.GetComponent<ActionMappingControl>().UpdateActionMapForRace();
 
-            m_player.GetComponent<PlayerInputScript>().enabled = true;
-            m_player.GetComponent<PlayerInputScript>().m_cam.gameObject.SetActive(true);
-
-            m_player.GetComponent<ShipsControls>().VariantObject = m_variant;
-            m_player.GetComponent<ShipsControls>().AttachModels();
-        }
-
-        public void SwitchModel()
-        {
-            m_player.GetComponent<ShipsControls>().VariantObject = m_variant;
-            m_player.GetComponent<ShipsControls>().AttachModels();
-        }
     }
 }
