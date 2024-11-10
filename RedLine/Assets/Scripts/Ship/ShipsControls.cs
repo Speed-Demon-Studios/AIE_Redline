@@ -100,6 +100,19 @@ public class ShipsControls : MonoBehaviour
         m_acceleration = 0;
     }
 
+    /// <summary>
+    /// Spawn the models onto the ship for the ship that the player chose
+    /// </summary>
+    /// <param name="ship"> Which player ship controls is it </param>
+    public void AttachModels()
+    {
+        if (shipModel.transform.childCount > 0)
+            DestroyImmediate(shipModel.transform.GetChild(0).gameObject);
+
+        Instantiate(VariantObject.model, shipModel.transform);
+        Instantiate(VariantObject.collision, collisionParent);
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -164,31 +177,34 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
-        if (m_fire.Count > 0)
+        if (!isTestShip)
         {
-            m_fireIndex = m_boostLevel;
-            switch (m_fireIndex)
+            if (m_fire.Count > 0)
             {
-                case 0:
-                    m_fire[0].SetActive(false);
-                    m_fire[1].SetActive(false);
-                    m_fire[2].SetActive(false);
-                    break;
-                case 1:
-                    m_fire[0].SetActive(true);
-                    m_fire[1].SetActive(false);
-                    m_fire[2].SetActive(false);
-                    break;
-                case 2:
-                    m_fire[1].SetActive(true);
-                    m_fire[2].SetActive(false);
-                    m_fire[0].SetActive(false);
-                    break;
-                case 3:
-                    m_fire[2].SetActive(true);
-                    m_fire[0].SetActive(false);
-                    m_fire[1].SetActive(false);
-                    break;
+                m_fireIndex = m_boostLevel;
+                switch (m_fireIndex)
+                {
+                    case 0:
+                        m_fire[0].SetActive(false);
+                        m_fire[1].SetActive(false);
+                        m_fire[2].SetActive(false);
+                        break;
+                    case 1:
+                        m_fire[0].SetActive(true);
+                        m_fire[1].SetActive(false);
+                        m_fire[2].SetActive(false);
+                        break;
+                    case 2:
+                        m_fire[1].SetActive(true);
+                        m_fire[2].SetActive(false);
+                        m_fire[0].SetActive(false);
+                        break;
+                    case 3:
+                        m_fire[2].SetActive(true);
+                        m_fire[0].SetActive(false);
+                        m_fire[1].SetActive(false);
+                        break;
+                }
             }
         }
 
@@ -400,7 +416,6 @@ public class ShipsControls : MonoBehaviour
 
         while (time > 0)
         {
-            yield return new WaitForEndOfFrame();
             time -= Time.deltaTime;
 
             Debug.Log("Boosting player");
@@ -408,12 +423,15 @@ public class ShipsControls : MonoBehaviour
             Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
 
+        yield return new WaitForEndOfFrame();
+
         m_fire[0].SetActive(false);
         m_fire[1].SetActive(false);
         m_fire[2].SetActive(false);
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
+        Mathf.Clamp(m_rb.velocity.magnitude, 0, m_defaultMaxSpeed);
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;
