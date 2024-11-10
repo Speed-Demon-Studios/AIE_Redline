@@ -14,14 +14,24 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private ShipsControls m_shipsControls;
     [SerializeField] private TextMeshProUGUI currentLapTime;
     [SerializeField] private TextMeshProUGUI bestLapTime;
+    [SerializeField] private HUD hudScript;
+    [SerializeField] private Image energyBar;
+    [SerializeField] private Image speedBar;
+    [SerializeField] private Color defaultEnergybarColour;
+    [SerializeField] private Color defaultSpeedColour;
+    [SerializeField] private Color overdriveSpeedColour;
     public List<Slider> sliders = new();
     private int m_sliderNumber;
     public List<Animator> anim;
+    public Animator finishAnim;
+    public Image indicator;
+    public float distance;
+    private List<Image> indicators = new();
 
     private void Update()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        if (GameManager.gManager)                                                                                                        //|
+        if (GameManager.gManager && !m_shipsControls.isTestShip)                                                                         //|
         {                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
             if (GameManager.gManager.raceStarted == false) // if the race has not started than all the text is null                        |
@@ -38,7 +48,7 @@ public class PlayerUiControl : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------|
                 if (rDetails.currentLap > 0) // if the player has past the start line and started the race then display the laps           |
                 {                                                                                                                        //|------|
-                    lapText.text = "laps: " + rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString(); //|
+                    lapText.text = rDetails.currentLap.ToString() + " / " + GameManager.gManager.rManager.GetTotalLaps().ToString(); //|
                 }                                                                                                                               //|
         //----------------------------------------------------------------------------------------------------------------------------------------|
                 if (GameManager.gManager.indexListSorted == true) // if the list of racers is sorted                                              |
@@ -47,7 +57,7 @@ public class PlayerUiControl : MonoBehaviour
                     {                                                                                                                           //|
                         if (GameManager.gManager.pHandler.racers[i] == rDetails) // if i is equal to this current object then display the position|
                         {                                                                                                                       //|
-                            placementText.text = "Pos: " + (i + 1).ToString() + " / " + GameManager.gManager.racerObjects.Count.ToString();     //|
+                            placementText.text = (i + 1).ToString() + " / " + GameManager.gManager.allRacers.Count.ToString();              //|
                         }                                                                                                                       //|
                     }                                                                                                                           //|
                 }                                                                                                                               //|
@@ -81,10 +91,11 @@ public class PlayerUiControl : MonoBehaviour
                 // if the player is boosting than set all the bars to zero                  |
                 if (m_shipsControls.ReturnIsBoosting())                                   //|
                 {                                                                         //|
-                    for (int i = 0; i < sliders.Count; i++)                               //|
-                    {                                                                     //|
-                        sliders[i].value = 0;                                             //|
-                    }                                                                     //|
+                    //for (int i = 0; i < sliders.Count; i++)                               //|
+                    //{                                                                     //|
+                    //    //sliders[i].value = 0;                                             //|
+                    //}                                                                     //|
+                    energyBar.fillAmount = 0;
                 }                                                                         //|
         //----------------------------------------------------------------------------------|
                 // flicker animation if the ship is in the redline                          |
@@ -93,13 +104,70 @@ public class PlayerUiControl : MonoBehaviour
                 anim[2].SetBool("IsIn", m_shipsControls.ReturnIsInRedline());             //|
         //----------------------------------------------------------------------------------|---------------------------------------------------|
                 // if the boost level is less than the slider count then set the sliders values to the boost                                    |
-                if(m_shipsControls.ReturnBoostLevel() < sliders.Count)                                                                        //|
-                    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();   //|
-                                                                                                                                              //|
+                //if(m_shipsControls.ReturnBoostLevel() < sliders.Count)                                                                        //|
+                //    sliders[m_shipsControls.ReturnBoostLevel()].value = m_shipsControls.ReturnBoost() - m_shipsControls.ReturnBoostLevel();   //|
+                float speedFillValue = hudScript.map(((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f), 0, 1, 0.547f, 0.66f);
+                speedBar.fillAmount = speedFillValue;
+
+                if (speedBar.fillAmount > 0.628f)
+                {
+                    //speedBar.fillAmount -= (((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f) * 0.1f) * (Time.deltaTime * 1.22f);
+                    speedBar.color = overdriveSpeedColour;
+                }
+                else if (speedBar.fillAmount <= 0.628)
+                {
+                    speedBar.color = defaultSpeedColour;
+                }
+
+                energyBar.color = defaultEnergybarColour;
+
+
+                float energyfillValue = hudScript.map(m_shipsControls.ReturnBoost() * 0.32f, 0, 1, 0.025f, 0.194f);
+                energyBar.fillAmount = energyfillValue;
+
+
                 // Set the speed text to the current speed times 7                                                                              |
-                m_speed.text = (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString();                                        //|
+                m_speed.richText = true;                                        //|
+                m_speed.text = "<b>" + (((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f).ToString() + "</b>" + " KPH";
+                //--------------------------------------------------------------------------------------------------------------------------------------|
+                Vector3 worldPos = GameManager.gManager.startNode.transform.position;
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                if (indicator != null)
+                    indicator.transform.position = Camera.main.WorldToScreenPoint(worldPos);
+                //for(int i = indicators.Count; i > 0; i--)
+                //{
+                //    Image img = indicators[i];
+                //    GameObject a = indicators[i].gameObject;
+                //    indicators.Remove(img);
+                //    Destroy(a);
+                //}
+                //foreach(GameObject player in GameManager.gManager.players)
+                //{
+                //    if(player != m_shipsControls.gameObject)
+                //    {
+                //        if (Vector3.Distance(m_shipsControls.gameObject.transform.position, player.transform.position) <= distance)
+                //        {
+                //            Image a = Instantiate(indicator, this.gameObject.transform);
+                //            indicators.Add(a);
+                //            a.transform.position = m_shipsControls.gameObject.GetComponent<PlayerInputScript>().m_cam.WorldToScreenPoint(player.transform.position);
+                //
+                //        }
+                //    }
+                //}
             }                                                                                                                                 //|
         }                                                                                                                                     //|
         //--------------------------------------------------------------------------------------------------------------------------------------|
+    }
+
+    public void FinishPopUp()
+    {
+        finishAnim.gameObject.SetActive(true);
+        StartCoroutine(WaitToHideFinish());
+    }
+
+    IEnumerator WaitToHideFinish()
+    {
+        yield return new WaitForSeconds(2f);
+        finishAnim.gameObject.SetActive(false);
     }
 }

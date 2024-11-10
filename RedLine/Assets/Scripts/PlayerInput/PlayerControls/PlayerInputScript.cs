@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ public class PlayerInputScript : MonoBehaviour
 {
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
+    public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    public List<int> playerLayers = new();
+    public List<LayerMask> ignoreLayers = new();
 
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
     [SerializeField] private Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
@@ -39,20 +44,22 @@ public class PlayerInputScript : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (gMan != null) // if there is a GameManager                                                                                     |
             gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
-                                                                                                                                         //|
+
         if (gMan != null) // if there is a GameManager                                                                                     |
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
+
+        if (m_playerNumber == 1)                                                                                                         //|
+            gMan.uiCInput.GetMenuManager().PressStart();                                                                                 //|
                                                                                                                                          //|
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            eventSystem.firstSelectedGameObject = gMan.FindStartButton(); // set ths first selected button the the start button            |
-                                                                                                                                         //|
-        if (gMan != null && m_playerNumber != 1) // if there is a GameManager and this object is not player 1                              |
-            gMan.uiCInput.ResetFirstButtonSelect(m_playerNumber - 1); // set up first selected button for the selection screen             |
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (player != null) // chech for player so that we dont get error later                                                            |
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
+        if(m_virtualCam != null && playerLayers.Count > 0)                                                                               //|
+            m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                            //|
+        if(m_cam != null && playerLayers.Count > 0)                                                                                      //|
+            m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                        //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -62,7 +69,8 @@ public class PlayerInputScript : MonoBehaviour
     public void PlayerDisconnect()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list      |
+        if(m_selection != null) // check if the selection is null                                                                          |
+            GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list  |
         Destroy(m_selection.gameObject); // destroy the selection screen object                                                            |
         //---------------------------------------------------------------------------------------------------------------------------------|
         // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3      |
@@ -79,9 +87,9 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
         }                                                                                                                                //|
-        if (GameManager.gManager.playerObjects.Contains(this.gameObject)) // if the playerObjects list contains this object                |
+        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
         {                                                                                                                                //|
-            GameManager.gManager.playerObjects.Remove(this.gameObject); // then remove the object from the list                            |
+            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
         }                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
         gMan.numberOfPlayers -= 1;                                                                                                       //|
@@ -114,7 +122,7 @@ public class PlayerInputScript : MonoBehaviour
     void FixedUpdate()
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
-        if (gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished                            |
+        if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
             CalculateFOV(); // calculate the FOV for the camera                                                                            |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
@@ -123,7 +131,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         //---------------------------------------------------------------------------------------------------------------------------------|
         // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.variant.DefaultMaxSpeed;                   //|
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;             //|
         // if the ship is moving slightly                                                                                                  |
         if(speedPercentage > 0.001)                                                                                                      //|
         {                                                                                                                                //|
@@ -136,7 +144,8 @@ public class PlayerInputScript : MonoBehaviour
         //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
                                                                                                                                          //|
         m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        m_cam.fieldOfView = m_currentFOV; // set the FOV to the currentFOV                                                                 |
+        if(m_virtualCam != null)                                                                                                         //|
+            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                               |
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -178,6 +187,15 @@ public class PlayerInputScript : MonoBehaviour
             {
                 GameManager.gManager.StopTime();
             }
+        }
+    }
+
+    public void Back(InputAction.CallbackContext context)
+    {
+        if (GameManager.gManager != null)
+        {
+            if(context.performed)
+                GameManager.gManager.uiCInput.GetMenuManager().BackOutMenu(m_playerNumber - 1);
         }
     }
 
