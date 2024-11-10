@@ -415,9 +415,9 @@ public class ShipsControls : MonoBehaviour
 
         while (time > 0)
         {
-            time -= Time.deltaTime;
+            time -= 1f + Time.deltaTime;
 
-            Debug.Log("Boosting player");
+            Debug.Log(time + " Boosting time");
             m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
             Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
