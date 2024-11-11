@@ -426,12 +426,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   shipAdjustSpeed: 0.75
   wantingToBoost: 0
-  forceMultiplier: 80
   accelerationForce: 10
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
-  boostTime: 2
   maxBoostSpeedChange: 0
+  boostingTimes:
+  - 1
+  - 2
+  - 2.5
   m_boostLevel: 0
 --- !u!54 &2819560891871692963
 Rigidbody:

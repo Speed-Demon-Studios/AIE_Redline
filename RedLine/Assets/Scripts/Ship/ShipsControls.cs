@@ -411,7 +411,10 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
-        float time = boostingTimes[m_boostLevel - 1];
+        float time = 0;
+
+        if (m_boostLevel > 0)
+            time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {

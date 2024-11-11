@@ -26,9 +26,8 @@ public class LoadingScreen : MonoBehaviour
 
         while (!operation.isDone)
         {
-            m_targetLoading = operation.progress / 0.9f;
-            m_currentLoading = Mathf.Lerp(m_currentLoading, m_targetLoading, 0.03f);
-            loadingBar.fillAmount += m_currentLoading;
+            m_currentLoading = operation.progress / 0.9f;
+            loadingBar.fillAmount = m_currentLoading;
             yield return null;
         }
 
