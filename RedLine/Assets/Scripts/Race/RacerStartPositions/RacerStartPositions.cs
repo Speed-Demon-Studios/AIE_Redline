@@ -83,7 +83,7 @@ public class RacerStartPositions : MonoBehaviour
                 }
 
                 GameManager.gManager.racersPlaced = true;
-                GameManager.gManager.readyForCountdown = true;
+                //GameManager.gManager.readyForCountdown = true;
             }
         }
         placingRacers = false;
