@@ -9,10 +9,10 @@ public class TestingEditor : EditorWindow
     GameObject m_player;
     Vector3 m_spawnPos;
     string[] levels = new string[3] { "Easy", "Medium", "Hard" };
-    int indexForLevels;
+    int indexForLevel;
 
     string[] ships = new string[3] { "Splitwing", "Fulcrum", "Cutlass" };
-    int indexForShips;
+    int indexForShip;
 
     [MenuItem("Window/Testing Panel")]
     public static void ShowMyEditor()
@@ -37,10 +37,10 @@ public class TestingEditor : EditorWindow
         if (m_player != null && Application.isPlaying)
         {
             EditorGUI.BeginChangeCheck();
-            indexForLevels = EditorGUILayout.Popup(indexForLevels, levels);
+            indexForLevel = EditorGUILayout.Popup(indexForLevel, levels);
             if (EditorGUI.EndChangeCheck())
             {
-                switch (indexForLevels)
+                switch (indexForLevel)
                 {
                     case 0:
                         GameManager.gManager.difficultyChange = 0.8f;
@@ -115,7 +115,7 @@ public class TestingEditor : EditorWindow
             m_player.GetComponent<ActionMappingControl>().UpdateActionMapForRace();
 
             m_player.GetComponent<PlayerInputScript>().enabled = true;
-            m_player.GetComponent<PlayerInputScript>().m_cam.gameObject.SetActive(true);
+            m_player.GetComponent<PlayerInputScript>().cam.gameObject.SetActive(true);
 
             m_player.GetComponent<ShipsControls>().AttachModels();
 

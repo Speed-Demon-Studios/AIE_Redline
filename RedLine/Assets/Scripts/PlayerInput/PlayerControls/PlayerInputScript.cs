@@ -18,7 +18,7 @@ public class PlayerInputScript : MonoBehaviour
     public List<LayerMask> ignoreLayers = new();
 
     [SerializeField] private CinemachineVirtualCamera m_virtualCam;
-    public Camera m_cam;
+    public Camera cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }

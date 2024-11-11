@@ -132,7 +132,7 @@ public class ShipsControls : MonoBehaviour
 
     public void DifficultySpeedChange()
     {
-        m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
+        m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
         m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
     }
@@ -411,13 +411,16 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
-        float time = boostingTimes[m_boostLevel - 1];
+        float time = 0;
+
+        if (m_boostLevel > 0)
+            time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {
-            time -= Time.deltaTime;
+            time -= 1f + Time.deltaTime;
 
-            Debug.Log("Boosting player");
+            Debug.Log(time + " Boosting time");
             m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
             Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
