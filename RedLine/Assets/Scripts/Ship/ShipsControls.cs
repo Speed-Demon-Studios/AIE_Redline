@@ -424,11 +424,11 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void Brake()
     {
-        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
         
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
         if (PAC != null)
         {
             // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
@@ -439,14 +439,15 @@ public class ShipsControls : MonoBehaviour
             // ||                                                                                           ||
             // ||-------------------------------------------------------------------------------------------||
                                                                                                                                                     
-            PAC.UpdateEnginePitch(0, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 9.5f, true, false, true, 0.33f, true);           // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateEngineVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(0, (((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f) * GameManager.gManager.difficultyChange), ((9.5f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);           // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(0, ((0.05f) * GameManager.gManager.difficultyChange), ((0.36f) * GameManager.gManager.difficultyChange), true, false, true, 0.24f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
 
-            PAC.UpdateEnginePitch(1, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f), 19.2f, true, false, true, 0.33f, true);          // Engine sound that is second in the list  (Index [1]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateEngineVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(1, (((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f) * GameManager.gManager.difficultyChange), ((19.2f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);          // Engine sound that is second in the list  (Index [1]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(1, ((0.05f) * GameManager.gManager.difficultyChange), ((0.3f) * GameManager.gManager.difficultyChange), true, false, true, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
 
-            PAC.UpdateEnginePitch(2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f), 3.6f, true, false, true, 0.33f, true);           // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
-            PAC.UpdateEngineVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateEnginePitch(2, (((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.64f) * GameManager.gManager.difficultyChange), 3.6f, true, false, true, 0.33f, true);           // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  Multiplying the multiplier values, then  getting 64% of the returned value, before finally subtracting it all from the pitch value over time.
+            PAC.UpdateEngineVolume(2, ((0.05f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, false, true, 0.37f, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, Subtracting 0.03f from the volume  value over time, capping the minimum at 0.29f.
+            PAC.UpdateWindVolume(0, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * 0.3f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
         }
     }
 
@@ -467,14 +468,15 @@ public class ShipsControls : MonoBehaviour
             if (PAC != null)
             {
                 // Audio Pitch & Volume Modulation
-                PAC.UpdateEnginePitch(0, 1.0f, 9.5f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateEngineVolume(0, 0.05f, 0.36f, true, false, true, 0.24f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(0, ((1.0f) * GameManager.gManager.difficultyChange), ((9.5f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(0, ((0.05f) * GameManager.gManager.difficultyChange), ((0.36f) * GameManager.gManager.difficultyChange), true, false, true, 0.24f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
-                PAC.UpdateEnginePitch(1, 2.5f, 19.2f, true, false, true, 0.33f, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateEngineVolume(1, 0.05f, 0.3f, true, false, true, (float)0.1, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(1, ((2.5f) * GameManager.gManager.difficultyChange), ((19.2f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(1, ((0.05f) * GameManager.gManager.difficultyChange), ((0.3f) * GameManager.gManager.difficultyChange), true, false, true, (float)0.1, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
-                PAC.UpdateEnginePitch(2, 0.25f, 3.6f, true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                PAC.UpdateEngineVolume(2, 0.05f, 0.41f, true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateEnginePitch(2, ((0.25f) * GameManager.gManager.difficultyChange), ((3.6f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                PAC.UpdateEngineVolume(2, ((0.05f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                PAC.UpdateWindVolume(0, ((0.2f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
             }
         }
         else
@@ -484,14 +486,16 @@ public class ShipsControls : MonoBehaviour
             if (PAC != null)
             {
                 // Audio Pitch & Volume Modulation
-                PAC.UpdateEnginePitch(0, 1.1f, 9.5f, true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateEngineVolume(0, 0.015f, 0.36f, true, true, false, default, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(0, ((1.1f) * GameManager.gManager.difficultyChange), ((9.5f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(0, ((0.015f) * GameManager.gManager.difficultyChange), ((0.36f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
 
-                PAC.UpdateEnginePitch(1, 4.5f, 19.2f, true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateEngineVolume(1, 0.015f, 0.3f, true, true, false, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(1, ((4.5f) * GameManager.gManager.difficultyChange), ((19.2f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(1, ((0.015f) * GameManager.gManager.difficultyChange), ((0.3f) * GameManager.gManager.difficultyChange), true, true, false, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
 
-                PAC.UpdateEnginePitch(2, 1.1f, 3.6f, true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                PAC.UpdateEngineVolume(2, 0.015f, 0.41f, true, true, false, default, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, adding 0.015f to the volume value over time.
+                PAC.UpdateEnginePitch(2, ((1.1f) * GameManager.gManager.difficultyChange), ((3.6f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                PAC.UpdateEngineVolume(2, ((0.015f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                              // Engine sound that is third  in the list  (Index [2]), Updating Volume, adding 0.015f to the volume value over time.
+
+                PAC.UpdateWindVolume(0, ((0.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
             }
         }
 

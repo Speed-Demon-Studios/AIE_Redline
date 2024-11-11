@@ -32,6 +32,8 @@ public class SparksTrigger : MonoBehaviour
         }
     }
 
+
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.ToLower() == "walls")

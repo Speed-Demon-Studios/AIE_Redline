@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  variantSet: 0
   m_engineEmitters:
   - {fileID: 4813991537892134318}
   - {fileID: 7368745089848430234}
@@ -603,7 +604,30 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  variantSet: 0
+  m_windEmitters:
+  - {fileID: 2505498650955538714}
+  m_windAudioInfo:
+  - Guid:
+      Data1: -934016012
+      Data2: 1099982075
+      Data3: 271125669
+      Data4: -1450442892
+    Path: event:/Wind/StrongWind/StrongWind
+  m_windAudioVolumes:
+  - 0.14
+  m_gameplaySoundEmitters:
+  - {fileID: 7346446070959484949}
+  m_gameplayAudioInfo:
+  - Guid:
+      Data1: 35483242
+      Data2: 1214719427
+      Data3: -1135943039
+      Data4: -2016693459
+    Path: event:/GameplaySFX/Crash#3
+  m_gameplayAudioPitches:
+  - 1
+  m_gameplayAudioVolumes:
+  - 0.5
 --- !u!114 &3604519759070996812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +669,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044256, y: -0.073954195, z: 0.0032694088, w: 0.99628323}
+  m_LocalRotation: {x: 0.044044234, y: -0.07395424, z: 0.003269409, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1194,6 +1218,8 @@ GameObject:
   - component: {fileID: 4813991537892134318}
   - component: {fileID: 7368745089848430234}
   - component: {fileID: 4470023418321511443}
+  - component: {fileID: 7346446070959484949}
+  - component: {fileID: 2505498650955538714}
   m_Layer: 0
   m_Name: EmitterParent
   m_TagString: Untagged
@@ -1279,6 +1305,68 @@ MonoBehaviour:
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
 --- !u!114 &4470023418321511443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799718593253688579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &7346446070959484949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799718593253688579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &2505498650955538714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

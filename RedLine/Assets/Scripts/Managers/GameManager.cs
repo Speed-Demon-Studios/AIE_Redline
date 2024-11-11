@@ -144,14 +144,6 @@ public class GameManager : MonoBehaviour
 
     public void EnableRMovement()
     {
-        //foreach (GameObject racerOBJ in racerObjects)
-        //{
-        //    InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-        //    Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-        //    rDeets.EnableRacerMovement();
-        //    rB.isKinematic = false;
-        //}
-
         foreach (GameObject racerOBJ in allRacers)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();

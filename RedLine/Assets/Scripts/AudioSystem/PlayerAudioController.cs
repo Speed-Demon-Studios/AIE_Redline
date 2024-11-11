@@ -5,7 +5,9 @@ using UnityEngine;
 namespace EAudioSystem
 {
     using FMODUnity;
+    using System.Collections;
     using System.Linq;
+    using Unity.VisualScripting;
 
     public class PlayerAudioController : MonoBehaviour
     {
@@ -35,13 +37,63 @@ namespace EAudioSystem
 
         // Gameplay Audio -----------------------------------------------------------------------------------------------------------------------------------
         [Header("Gameplay Audio")]
+        [SerializeField] private List<StudioEventEmitter> m_windEmitters = new(); // All references to the FMOD event emitters for wind sounds.
+        [SerializeField] private List<EventReference> m_windAudioInfo = new();
+        [SerializeField] private List<float> m_windAudioVolumes = new();
+
         [SerializeField] private List<StudioEventEmitter> m_gameplaySoundEmitters = new(); // All references to the audio event emitters for gameplay sounds.
         [SerializeField] private List<EventReference> m_gameplayAudioInfo = new(); // All references to the FMOD audio events that are for gameplay (e.g. wall crashing sound, sparks sound, etc..)
         [SerializeField] private List<float> m_gameplayAudioPitches = new(); // List of frequency/pitch values for each individual gameplay sound.
         [SerializeField] private List<float> m_gameplayAudioVolumes = new(); // List of audio volume values for each individual gameplay sound.
         //---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public void PlayGPSFX(int soundIndex)
+        public bool IsEmitterPlaying(int listNum, int index)
+        {
+            StudioEventEmitter EmitterToCheck = new();
+            switch (listNum)
+            {
+                case 0:
+                    {
+                        if (m_engineEmitters[index] != null)
+                        {
+                            EmitterToCheck = m_engineEmitters[index];
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (m_gameplaySoundEmitters[index] != null)
+                        {
+                            EmitterToCheck = m_gameplaySoundEmitters[index];
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (m_windEmitters[index] != null)
+                        {
+                            EmitterToCheck = m_windEmitters[index];
+                        }
+                        break;
+                    }
+            }
+
+            if (EmitterToCheck != null)
+            {
+                if (EmitterToCheck.IsPlaying() == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public void PlayGPSFX(int soundIndex, int windIndex = 99)
         {
             switch (soundIndex)
             {
@@ -50,17 +102,34 @@ namespace EAudioSystem
                 {
                     if (m_gameplayAudioInfo[soundIndex].IsNull == false && m_gameplaySoundEmitters[0] != null)
                     {
-                            if (m_gameplaySoundEmitters[0].EventReference.IsNull == true)
-                            {
-                                m_gameplaySoundEmitters[0].EventReference = m_gameplayAudioInfo[0];
-                            }
+                        if (m_gameplaySoundEmitters[0].EventReference.IsNull == true)
+                        {
+                            m_gameplaySoundEmitters[0].EventReference = m_gameplayAudioInfo[0];
+                        }
 
-                            m_gameplaySoundEmitters[0].Play();
+                        m_gameplaySoundEmitters[0].Play();
                     }
                     break;
                 }
+                case 1:
+                    {
+                        if (windIndex < 50)
+                        {
+                            if (windIndex >= 50)
+                            {
+                                windIndex = 0;
+                            }
+
+                            if (m_windAudioInfo[windIndex].IsNull == false && m_windEmitters[windIndex] != null)
+                            {
+
+                            }
+                        }
+                        break;
+                    }
             }
         }
+
 
         // Set up the default modulation values for the engine sounds (Pitch, Volume).
         public void SetDefaultEngineModulations(float PitchValue, float VolumeValue)
@@ -82,6 +151,8 @@ namespace EAudioSystem
             {
                 m_engineEmitters[i].EventReference = m_engineAudioInfo[i];
             }
+
+            m_windEmitters[0].EventReference = m_windAudioInfo[0];
         }
 
         // Update engine sound pitch. passing in values for the index of the sound you want to update, the amount you want to update it by, the maximum value, whether to add DeltaTime,
@@ -271,29 +342,50 @@ namespace EAudioSystem
 
         }
 
+        public void UpdateWindVolume(int index, float amount, float maxValue, bool add, bool subtract, float minValue = 0.0f)
+        {
+            if (float.IsNaN(m_windAudioVolumes[index]) == true)
+            {
+                m_windAudioVolumes[index] = 0.03f;
+            }
+            if (add == true)
+            {
+                if (m_windAudioVolumes[index] < maxValue)
+                {
+                    m_windAudioVolumes[index] += amount * Time.deltaTime;
+                }
+                if (m_windAudioVolumes[index] > maxValue)
+                {
+                    m_windAudioVolumes[index] = maxValue;
+                }
+            }
+            else if (subtract == true)
+            {
+                if (minValue < 0.0f)
+                {
+                    minValue = 0.0f;
+                }
 
-
-        void Start()                                                                                                                // ----------------------------------------------------|
-        {                                                                                                                           //                                                     |
-            StudioEventEmitter currentEmitter;                                                                                      // Reference to the StudioEventEmitter to be altered.  |
-                                                                                                                                    //                                                     |
-            //for (int i = 0; i < m_engineEmitters.Length; i++)                                                                     // Iterate through the "m_engineEmitters" list.        |
-            //{                                                                                                                     //                                                     |
-            //    currentEmitter = m_engineEmitters[i];                                                                             // Set the reference for the 'CurrentEmitter'.         |
-            //    currentEmitter.EventReference = m_engineAudioInfo[i];                                                             // Set the audio FMOD 'Event' for the current emitter. |
-            //}                                                                                                                     //                                                     |
-            //                                                                                                                      //                                                     |
-            //for (int i = 0; i < m_redlineEmitters.Length; i++)                                                                    // Iterate through the "m_redlineEmitters" list.       |
-            //{                                                                                                                     //                                                     |
-            //    currentEmitter = m_redlineEmitters[i];                                                                            // Set the reference for the 'CurrentEmitter'.         |
-            //    currentEmitter.EventReference = m_redlineAudioInfo[i];                                                            // Set the audio FMOD 'Event' for the current emitter. |
-            //}                                                                                                                     //                                                     |
-        }                                                                                                                           // ----------------------------------------------------|
+                if (m_windAudioVolumes[index] > minValue)
+                {
+                    m_windAudioVolumes[index] -= amount * Time.deltaTime;
+                }
+                if (m_windAudioVolumes[index] < minValue)
+                {
+                    m_windAudioVolumes[index] = minValue;
+                }
+            }
+        }
 
         void Update()
         {
             if (variantSet == true) // If the variant has been selected
             {
+                if (GetComponentInChildren<SparksParticlesController>() != null && GetComponentInChildren<SparksParticlesController>().PAC != this)
+                {
+                    GetComponentInChildren<SparksParticlesController>().PAC = this;
+                }
+
                 for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
                 {
                     if (m_engineEmitters[i] != null) // If the emitter at the current index is not NULL
@@ -303,6 +395,24 @@ namespace EAudioSystem
                         currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                     }
                 }
+
+                for (int i = 0; i < m_gameplaySoundEmitters.Count; i++)
+                {
+                    if (m_gameplaySoundEmitters[i] != null)
+                    {
+                        StudioEventEmitter currentGameplayEmitter = m_gameplaySoundEmitters[i];
+                        currentGameplayEmitter.EventInstance.setVolume(m_gameplayAudioVolumes[i]);
+                    }
+                }
+
+                for (int i = 0; i < m_windEmitters.Count; i++)
+                {
+                    if (m_windEmitters[i] != null)
+                    {
+                        StudioEventEmitter currentWindEmitter = m_windEmitters[i];
+                        currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]);
+                    }
+                }
             }
         }
 
@@ -310,6 +420,10 @@ namespace EAudioSystem
         public void StartEngineHum()
         {
             foreach (StudioEventEmitter emitters in m_engineEmitters)
+            {
+                emitters.Play();
+            }
+            foreach (StudioEventEmitter emitters in m_windEmitters)
             {
                 emitters.Play();
             }
