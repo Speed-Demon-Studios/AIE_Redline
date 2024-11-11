@@ -61,6 +61,7 @@ public class RacerDetails : MonoBehaviour
         return distanceToCheckpoint;
     }
 
+
     public void ResetRacerVariables()
     {
         finishedRacing = false;

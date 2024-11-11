@@ -33,6 +33,7 @@ public class InitializeBeforeRace : MonoBehaviour
 
     private void Awake()
     {
+
         if (!GetComponent<ShipsControls>().isTestShip)
         {
             foreach (GameObject playerOBJ in GameManager.gManager.players)
