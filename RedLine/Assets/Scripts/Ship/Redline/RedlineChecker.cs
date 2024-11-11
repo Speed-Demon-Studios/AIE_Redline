@@ -9,7 +9,7 @@ public class RedlineChecker : MonoBehaviour
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>();
         if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
         {
-            tryTest.SwitchRedlineBool();
+            tryTest.SwitchRedlineBool(true);
         }
     }
     
@@ -18,7 +18,7 @@ public class RedlineChecker : MonoBehaviour
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>();
         if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
         {
-            tryTest.SwitchRedlineBool();
+            tryTest.SwitchRedlineBool(true);
         }
     }
 
@@ -27,7 +27,7 @@ public class RedlineChecker : MonoBehaviour
         ShipsControls tryTest = this.GetComponentInParent<ShipsControls>(); ;
         if (other.CompareTag("Redline") && other.gameObject != this.gameObject)
         {
-            tryTest.DelayRedlineFalse();
+            tryTest.SwitchRedlineBool(false);
         }
     }
 }
