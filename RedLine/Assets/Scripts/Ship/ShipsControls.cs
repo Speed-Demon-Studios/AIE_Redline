@@ -59,18 +59,19 @@ public class ShipsControls : MonoBehaviour
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
+    public float forceMultiplier;
     public float accelerationForce;
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
+    public float boostTime;
     private bool m_isBoostingOnBoostPad;
     private float m_maxSpeedDuringBoost;
     public float maxBoostSpeedChange;
-    public List<float> boostingTimes = new();
     public bool ReturnIsBoosting() { return m_isBoosting; }
     public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
-    public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
+    public void SwitchRedlineBool() { m_isInRedline = true; }
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
     private IEnumerator RedlineFalse()
     {
@@ -97,19 +98,6 @@ public class ShipsControls : MonoBehaviour
         wantingToBoost = false;
         m_boostLevel = 0;
         m_acceleration = 0;
-    }
-
-    /// <summary>
-    /// Spawn the models onto the ship for the ship that the player chose
-    /// </summary>
-    /// <param name="ship"> Which player ship controls is it </param>
-    public void AttachModels()
-    {
-        if (shipModel.transform.childCount > 0)
-            DestroyImmediate(shipModel.transform.GetChild(0).gameObject);
-
-        Instantiate(VariantObject.model, shipModel.transform);
-        Instantiate(VariantObject.collision, collisionParent);
     }
 
     // Start is called before the first frame update
@@ -176,34 +164,31 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
-        if (!isTestShip)
+        if (m_fire.Count > 0)
         {
-            if (m_fire.Count > 0)
+            m_fireIndex = m_boostLevel;
+            switch (m_fireIndex)
             {
-                m_fireIndex = m_boostLevel;
-                switch (m_fireIndex)
-                {
-                    case 0:
-                        m_fire[0].SetActive(false);
-                        m_fire[1].SetActive(false);
-                        m_fire[2].SetActive(false);
-                        break;
-                    case 1:
-                        m_fire[0].SetActive(true);
-                        m_fire[1].SetActive(false);
-                        m_fire[2].SetActive(false);
-                        break;
-                    case 2:
-                        m_fire[1].SetActive(true);
-                        m_fire[2].SetActive(false);
-                        m_fire[0].SetActive(false);
-                        break;
-                    case 3:
-                        m_fire[2].SetActive(true);
-                        m_fire[0].SetActive(false);
-                        m_fire[1].SetActive(false);
-                        break;
-                }
+                case 0:
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 1:
+                    m_fire[0].SetActive(true);
+                    m_fire[1].SetActive(false);
+                    m_fire[2].SetActive(false);
+                    break;
+                case 2:
+                    m_fire[1].SetActive(true);
+                    m_fire[2].SetActive(false);
+                    m_fire[0].SetActive(false);
+                    break;
+                case 3:
+                    m_fire[2].SetActive(true);
+                    m_fire[0].SetActive(false);
+                    m_fire[1].SetActive(false);
+                    break;
             }
         }
 
@@ -320,9 +305,9 @@ public class ShipsControls : MonoBehaviour
             }
         }
 
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
-        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
+        m_currentPos.x = Mathf.LerpAngle(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
+        m_currentPos.y = Mathf.LerpAngle(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
+        m_currentPos.z = Mathf.LerpAngle(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
@@ -411,10 +396,11 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
-        float time = boostingTimes[m_boostLevel - 1];
+        float time = m_boostLevel * boostTime;
 
         while (time > 0)
         {
+            yield return new WaitForEndOfFrame();
             time -= Time.deltaTime;
 
             Debug.Log("Boosting player");
@@ -422,15 +408,12 @@ public class ShipsControls : MonoBehaviour
             Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
 
-        yield return new WaitForEndOfFrame();
-
         m_fire[0].SetActive(false);
         m_fire[1].SetActive(false);
         m_fire[2].SetActive(false);
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
-        Mathf.Clamp(m_rb.velocity.magnitude, 0, m_defaultMaxSpeed);
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;

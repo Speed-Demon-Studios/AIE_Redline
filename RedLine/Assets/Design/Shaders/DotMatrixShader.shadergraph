@@ -7,6 +7,9 @@
             "m_Id": "1548a3193bae4cec8b04333c3a52f323"
         },
         {
+            "m_Id": "756e6d965b124d9da17fbb422dc5c838"
+        },
+        {
             "m_Id": "65e38961dc4e43a1b07ae2f76e0728a6"
         },
         {
@@ -87,6 +90,9 @@
         },
         {
             "m_Id": "4344f4850a684cf3b149368d4e4e9454"
+        },
+        {
+            "m_Id": "b70716859a0446dbbea074fe5ddcd487"
         },
         {
             "m_Id": "73255646ba1b410b99412ab4085182d5"
@@ -337,6 +343,20 @@
                     "m_Id": "8c6a054c43fc47e2a27263b3a18e22c9"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "b70716859a0446dbbea074fe5ddcd487"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "0d3dad5f19284d58b51ac2e5095dd7cd"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -782,7 +802,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"988e192f5ea43e9459f2a53b558a5afb\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -1118,6 +1138,19 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.BaseColor"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
+    "m_ObjectId": "332d9ebf60fe460b9bdb43ee306d1d25",
+    "m_Id": 0,
+    "m_DisplayName": "Dot Matrix Texture",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
 }
 
 {
@@ -1564,6 +1597,9 @@
     "m_ChildObjectList": [
         {
             "m_Id": "1548a3193bae4cec8b04333c3a52f323"
+        },
+        {
+            "m_Id": "756e6d965b124d9da17fbb422dc5c838"
         },
         {
             "m_Id": "65e38961dc4e43a1b07ae2f76e0728a6"
@@ -2061,6 +2097,35 @@
         "y": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "756e6d965b124d9da17fbb422dc5c838",
+    "m_Guid": {
+        "m_GuidSerialized": "8e69dea7-9e3d-41ce-b16c-455e0651ff7e"
+    },
+    "m_Name": "Dot Matrix Texture",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Dot Matrix Texture",
+    "m_DefaultReferenceName": "_Dot_Matrix_Texture",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {
@@ -2940,6 +3005,41 @@
         "m_Guid": ""
     },
     "m_DefaultType": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "b70716859a0446dbbea074fe5ddcd487",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -947.9998779296875,
+            "y": 89.0,
+            "width": 182.0,
+            "height": 33.99999237060547
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "332d9ebf60fe460b9bdb43ee306d1d25"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "756e6d965b124d9da17fbb422dc5c838"
+    }
 }
 
 {

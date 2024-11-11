@@ -78,8 +78,6 @@ public class ManageSceneLoading : MonoBehaviour
 
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         racerDeets.rCS.ClearList();
-
-        playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
@@ -107,9 +105,9 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-        PlayerPrefs.SetInt("SceneID", 1);
-        SceneManager.LoadSceneAsync(3);
-        SceneManager.UnloadSceneAsync(2);
+
+        SceneManager.LoadSceneAsync(0);
+        SceneManager.UnloadSceneAsync(1);
 
 
 
@@ -123,6 +121,9 @@ public class ManageSceneLoading : MonoBehaviour
         {
             reloadingmenu = false;
             ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>();
+
+            aMC.mES.firstSelectedGameObject = GameManager.gManager.m_startButtons[0];
+            aMC.mES.SetSelectedGameObject(GameManager.gManager.m_startButtons[0]);
         }
     }
 }
