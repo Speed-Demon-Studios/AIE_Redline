@@ -533,8 +533,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.04404427, y: -0.073954225, z: 0.0032694112, w: 0.99628323}
-  m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.77, z: -3.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -566,9 +566,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 90
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 96.7701
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -973,9 +973,13 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dfd4d290-7850-49eb-a1cf-47700a0bebaf
     m_ActionName: Player/Pause[/XInputControllerWindows1/start,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e58b6130-ce0b-4a73-be5b-69a863ffbd6a
+    m_ActionName: Player/Cancel[/XInputControllerWindows/buttonEast,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 2868536069371765821}
 --- !u!114 &3458273097799416325

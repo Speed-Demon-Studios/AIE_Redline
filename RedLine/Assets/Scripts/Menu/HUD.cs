@@ -7,13 +7,16 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     [SerializeField]
-    private Image energyBarFill, speedBarFill;
+    private Image energyBarFill, energyLeadingEdgeLower, energyLeadingEdgeUpper, speedBarFill;
     [SerializeField]
     private TextMeshProUGUI speedText, posText, lapText, lapTimeText;
     [Range(0f, 1f)]
     public float energyBarFillAmount, speedBarFillAmount;
 
-    public Vector2 energyBarFillRange, speedBarFillRange;
+    [SerializeField]
+    private float leadingEdgeWidth;
+
+    public Vector2 energyBarFillRange, energyLeadingEdgeFillRange, speedBarFillRange;
 
     public int kph, position, totalPositions, lap, totalLaps;
 
@@ -30,6 +33,11 @@ public class HUD : MonoBehaviour
     {
         float energyFill = map(energyBarFillAmount, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
         energyBarFill.fillAmount = energyFill;
+
+        float energyLELowerFill = map(energyBarFillAmount, 0, 1, energyLeadingEdgeFillRange.x, energyLeadingEdgeFillRange.y);
+        float energyLEUpperFill = map(energyBarFillAmount + leadingEdgeWidth, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
+        energyLeadingEdgeLower.fillAmount = energyLELowerFill;
+        energyLeadingEdgeUpper.fillAmount = energyLEUpperFill;
 
         float speedFill = map(speedBarFillAmount, 0, 1, speedBarFillRange.x, speedBarFillRange.y);
         speedBarFill.fillAmount = speedFill;
@@ -53,7 +61,7 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        //UpdateHUD();
+        UpdateHUD();
     }
 
 }

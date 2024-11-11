@@ -18,7 +18,7 @@ public class PlayerInputScript : MonoBehaviour
     public List<LayerMask> ignoreLayers = new();
 
     [SerializeField] private CinemachineVirtualCamera m_virtualCam;
-    [SerializeField] private Camera m_cam;
+    public Camera m_cam;
     private int m_playerNumber;
     public void SetPlayerNumber(int number) { m_playerNumber = number; }
     public int GetPlayerNumber() { return m_playerNumber; }
@@ -56,10 +56,13 @@ public class PlayerInputScript : MonoBehaviour
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
-        if(m_virtualCam != null && playerLayers.Count > 0)                                                                               //|
-            m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                            //|
-        if(m_cam != null && playerLayers.Count > 0)                                                                                      //|
-            m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                        //|
+        //if (!m_shipControls.isTestShip)
+        //{
+        //    if (m_virtualCam != null && playerLayers.Count > 0)                                                                          //|
+        //        m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                        //|
+        //    if (m_cam != null && playerLayers.Count > 0)                                                                                 //|
+        //        m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                    //|
+        //}
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
