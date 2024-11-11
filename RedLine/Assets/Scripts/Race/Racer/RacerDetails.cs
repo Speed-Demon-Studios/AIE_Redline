@@ -11,7 +11,6 @@ public class RacerDetails : MonoBehaviour
     public GameObject corkscrewReset2;
     public IList<GameObject> resetNormalOBJs = new List<GameObject>();
 
-
     [Header("Script References")]
     public RedlineColliderSpawner rCS;
 

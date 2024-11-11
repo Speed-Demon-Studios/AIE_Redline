@@ -343,7 +343,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 2295
   m_virtualCam: {fileID: 8177504199516520170}
-  m_cam: {fileID: 2868536069371765821}
+  cam: {fileID: 0}
   playerReadyInMenu: 0
   lerpTime: 0.05
   minFOV: 85
@@ -409,7 +409,10 @@ MonoBehaviour:
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
   maxBoostSpeedChange: 300
-  boostingTimes: []
+  boostingTimes:
+  - 1
+  - 2
+  - 2.5
   m_boostLevel: 0
 --- !u!54 &2868536069181459851
 Rigidbody:
