@@ -132,7 +132,7 @@ public class ShipsControls : MonoBehaviour
 
     public void DifficultySpeedChange()
     {
-        m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
+        m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
         m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
     }
