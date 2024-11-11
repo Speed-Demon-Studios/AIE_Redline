@@ -47,22 +47,19 @@ public class PlayerInputScript : MonoBehaviour
 
         if (gMan != null) // if there is a GameManager                                                                                     |
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
-
-        if (m_playerNumber == 1)                                                                                                         //|
-            gMan.uiCInput.GetMenuManager().PressStart();                                                                                 //|
                                                                                                                                          //|
         //---------------------------------------------------------------------------------------------------------------------------------|
         if (player != null) // chech for player so that we dont get error later                                                            |
         {                                                                                                                                //|
             AssignController(); // calls a function that help setup controllers for feedback                                               |
         }                                                                                                                                //|
-        //if (!m_shipControls.isTestShip)
-        //{
-        //    if (m_virtualCam != null && playerLayers.Count > 0)                                                                          //|
-        //        m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                        //|
-        //    if (m_cam != null && playerLayers.Count > 0)                                                                                 //|
-        //        m_cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                    //|
-        //}
+        if (!m_shipControls.isTestShip)
+        {
+            if (m_virtualCam != null && playerLayers.Count > 0)                                                                          //|
+                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                        //|
+            if (cam != null && playerLayers.Count > 0)                                                                                   //|
+                cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                      //|
+        }
         //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
@@ -95,8 +92,8 @@ public class PlayerInputScript : MonoBehaviour
             GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
         }                                                                                                                                //|
         //---------------------------------------------------------------------------------------------------------------------------------|
-        gMan.numberOfPlayers -= 1;                                                                                                       //|
-        gMan.uiCInput.SetNumberOfPlayers(gMan.uiCInput.GetNumberOfPlayers() - 1); // -1 from number of player in the uicontroller script   |
+        GameManager.gManager.numberOfPlayers -= 1;                                                                                       //|
+        GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1); // -1 from number of player in the uicontroller script   |
         Destroy(this.gameObject);                                                                                                        //|
         //---------------------------------------------------------------------------------------------------------------------------------|
     }

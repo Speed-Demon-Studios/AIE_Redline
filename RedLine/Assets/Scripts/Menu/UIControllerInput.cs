@@ -44,6 +44,8 @@ namespace MenuManagement
             if (playerCountText != null)
                 playerCountText.text = "Player Count: " + m_numberOfPalyers;
 
+            GameManager.gManager.AddToNumberOfPlayers();                                                                                     //|
+
             //---------------------------------------------------------------------------------------------------------------------------------|
             GameObject a = Instantiate(SelectionMenu, selectionMenuGrid);// Instantiate the selectionMenu                                      |
                                                                                                                                              //| 
@@ -266,11 +268,15 @@ namespace MenuManagement
 
         public void ResetFirstButton(int playerNumber, Button button)
         {
+            StartCoroutine(DelayResetFirstButton(playerNumber, button));
+        }
+
+        IEnumerator DelayResetFirstButton(int playerNumber, Button button)
+        {
+            yield return new WaitForEndOfFrame();
             GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button.gameObject);
             GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.firstSelectedGameObject = button.gameObject;
         }
-
-
         /// <summary>
         /// Sets up the selection screen for each player
         /// </summary>
