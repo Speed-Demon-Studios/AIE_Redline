@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+/*
 [CustomEditor(typeof(NodePlacer))]
 public class NodePlacerEditor : Editor
 {
@@ -37,3 +37,4 @@ public class NodePlacerEditor : Editor
        //}
     }
 }
+*/

@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 1726985918234443405}
   - {fileID: 5486749517610831505}
   - {fileID: 8962606718355721125}
+  - {fileID: 2362410390968948646}
 --- !u!114 &1726985918234443405
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -86,6 +87,85 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0.088
+--- !u!114 &2362410390968948646
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9669dd43d41362b826cb959e024e98, type: 3}
+  m_Name: TinyMotionComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  blurMode:
+    m_OverrideState: 1
+    m_Value: 0
+  sampleCountMode:
+    m_OverrideState: 1
+    m_Value: 0
+  samples:
+    m_OverrideState: 0
+    m_Value: 6
+  minSampleCount:
+    m_OverrideState: 0
+    m_Value: 2
+  maxSampleCount:
+    m_OverrideState: 0
+    m_Value: 6
+  motionTextureQuality:
+    m_OverrideState: 0
+    m_Value: 1
+  downsample:
+    m_OverrideState: 0
+    m_Value: 1
+  noiseMode:
+    m_OverrideState: 1
+    m_Value: 2
+  animateNoise:
+    m_OverrideState: 0
+    m_Value: 0
+  skipSecondPass:
+    m_OverrideState: 0
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.289
+  intensityCamera:
+    m_OverrideState: 0
+    m_Value: 0
+  shutterSpeed:
+    m_OverrideState: 0
+    m_Value: 250
+  threshold:
+    m_OverrideState: 1
+    m_Value: 0.42
+  depthSeparationTreshold:
+    m_OverrideState: 1
+    m_Value: 0.257
+  depthSeparationBothWays:
+    m_OverrideState: 1
+    m_Value: 0
+  depthSeparationVelocity:
+    m_OverrideState: 1
+    m_Value: 1
+  depthSeparationVelocityTreshold:
+    m_OverrideState: 1
+    m_Value: 0.55
+  clampVelocity:
+    m_OverrideState: 0
+    m_Value: 1
+  viewInEditor:
+    m_OverrideState: 0
+    m_Value: 1
+  includeTransparentObjects:
+    m_OverrideState: 1
+    m_Value: 1
+  debugMode:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &5360816156565096687
 MonoBehaviour:
   m_ObjectHideFlags: 3
