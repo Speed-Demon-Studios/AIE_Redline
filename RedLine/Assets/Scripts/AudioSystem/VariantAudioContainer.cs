@@ -4,6 +4,7 @@ using UnityEngine;
 using FMODUnity;
 using EAudioSystem;
 using UnityEditor.ShaderGraph.Internal;
+using System.Linq;
 
 public class VariantAudioContainer : MonoBehaviour
 {
@@ -33,23 +34,28 @@ public class VariantAudioContainer : MonoBehaviour
             case 0:
                 {
                     PAC.SetEngineAudios(SplitwingEngineAudio);
-                    PAC.SetDefaultEngineModulations(m_SplitwingMaxEnginePitchValues[0], m_SplitwingMaxEngineVolumeValues[0]);
-                    PAC.SetDefaultEngineModulations(m_SplitwingMaxEnginePitchValues[1], m_SplitwingMaxEngineVolumeValues[1]);
+                    for (int i = 0; i < m_SplitwingMaxEnginePitchValues.Count(); i++)
+                    {
+                        PAC.SetDefaultEngineModulations(m_SplitwingMaxEnginePitchValues[i], m_SplitwingMaxEngineVolumeValues[i]);
+                    }
                     break;
                 }
             case 1:
                 {
                     PAC.SetEngineAudios(FulcrumEngineAudio);
-                    PAC.SetDefaultEngineModulations(m_FulcrumMaxEnginePitchValues[0], m_FulcrumMaxEngineVolumeValues[0]);
-                    PAC.SetDefaultEngineModulations(m_FulcrumMaxEnginePitchValues[1], m_FulcrumMaxEngineVolumeValues[1]);
-                    PAC.SetDefaultEngineModulations(m_FulcrumMaxEnginePitchValues[2], m_FulcrumMaxEngineVolumeValues[2]);
+                    for (int i = 0; i < m_FulcrumMaxEnginePitchValues.Count(); i++)
+                    {
+                        PAC.SetDefaultEngineModulations(m_FulcrumMaxEnginePitchValues[i], m_FulcrumMaxEngineVolumeValues[i]);
+                    }
                     break;
                 }
             case 2:
                 {
                     PAC.SetEngineAudios(CutlassEngineAudio);
-                    PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[0], m_CutlassMaxEngineVolumeValues[0]);
-                    PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[1], m_CutlassMaxEngineVolumeValues[1]);
+                    for (int i = 0; i < m_CutlassMaxEnginePitchValues.Count(); i++)
+                    {
+                        PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[i], m_CutlassMaxEngineVolumeValues[i]);
+                    }
                     break;
                 }
         }

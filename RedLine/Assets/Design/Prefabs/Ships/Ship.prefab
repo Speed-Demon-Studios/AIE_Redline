@@ -57,7 +57,10 @@ MonoBehaviour:
   m_lapText: {fileID: 0}
   m_lapTimeText: {fileID: 0}
   m_bestLapTime: {fileID: 0}
+  m_energyBarFillAmount: 0
+  m_speedBarFillAmount: 0
   m_leadingEdgeWidth: 0
+  m_gainingRedline: 0
   energySegmentPulse:
     serializedVersion: 2
     m_Curve: []
@@ -411,9 +414,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   shipAdjustSpeed: 0.075
   wantingToBoost: 0
+  m_isBoosting: 0
+  m_isInRedline: 0
   accelerationForce: 80
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
+  m_isBoostingOnBoostPad: 0
   maxBoostSpeedChange: 300
   boostingTimes:
   - 2
@@ -576,6 +582,18 @@ MonoBehaviour:
       Data3: 381080228
       Data4: -676002068
     Path: event:/CutlassEngineSound/CutlassMainEngineCompressor
+  - Guid:
+      Data1: -1537893168
+      Data2: 1260994752
+      Data3: 1997540799
+      Data4: 2070873256
+    Path: event:/EnginePulse/MainEnginePulseLoop
+  - Guid:
+      Data1: -1537893168
+      Data2: 1260994752
+      Data3: 1997540799
+      Data4: 2070873256
+    Path: event:/EnginePulse/MainEnginePulseLoop
   isTestFulcrum: 0
   isTestCutlass: 0
   isTestSplitwing: 0
@@ -594,11 +612,15 @@ MonoBehaviour:
   - 1
   - 1
   m_CutlassMaxEnginePitchValues:
-  - 1
-  - 1
+  - 5.8
+  - 8.5
+  - 22.2
+  - 0.67
   m_CutlassMaxEngineVolumeValues:
-  - 1
-  - 1
+  - 0.27
+  - 0.49
+  - 0.03
+  - 0.77
 --- !u!114 &3862740244906453385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,15 +634,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variantSet: 1
+  resettingAudio: 0
   m_engineEmitters:
   - {fileID: 4813991537892134318}
   - {fileID: 7368745089848430234}
   - {fileID: 4470023418321511443}
+  - {fileID: 8690732429911848126}
   m_engineEmitterPitches:
   - 0
   - 0
   - 0
+  - 0
   m_engineEmitterVolumes:
+  - 0
   - 0
   - 0
   - 0
@@ -690,7 +716,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044256, y: -0.073954195, z: 0.0032694088, w: 0.99628323}
+  m_LocalRotation: {x: 0.04404427, y: -0.073954225, z: 0.0032694112, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -834,8 +860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rDetails: {fileID: -6679554185345550660}
   m_shipsControls: {fileID: 2868536069181459848}
-  currentLapTime: {fileID: 3266401269022760725}
-  bestLapTime: {fileID: 1928052667734600460}
   finishAnim: {fileID: 6175974610275792240}
   hud: {fileID: 7136114194503167074}
 --- !u!1 &2868536069761448568
@@ -1261,6 +1285,7 @@ GameObject:
   - component: {fileID: 4470023418321511443}
   - component: {fileID: 7346446070959484949}
   - component: {fileID: 2505498650955538714}
+  - component: {fileID: 8690732429911848126}
   m_Layer: 0
   m_Name: EmitterParent
   m_TagString: Untagged
@@ -1281,7 +1306,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2868536069181459850}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4813991537892134318
 MonoBehaviour:
@@ -1408,6 +1433,37 @@ MonoBehaviour:
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
 --- !u!114 &2505498650955538714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799718593253688579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &8690732429911848126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1912,6 +1968,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD2.0
       objectReference: {fileID: 0}
+    - target: {fileID: 5961451083190328798, guid: 43abdb9ab90fbdf4d943369271365a07,
+        type: 3}
+      propertyPath: m_bestLapTime
+      value: 
+      objectReference: {fileID: 1750075804246262653}
     - target: {fileID: 5961451083190328799, guid: 43abdb9ab90fbdf4d943369271365a07,
         type: 3}
       propertyPath: m_RootOrder
@@ -1974,6 +2035,18 @@ PrefabInstance:
       objectReference: {fileID: 2868536069371765821}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43abdb9ab90fbdf4d943369271365a07, type: 3}
+--- !u!114 &1750075804246262653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3024803260919476929, guid: 43abdb9ab90fbdf4d943369271365a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3581423977359651260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7136114194503167074 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5961451083190328798, guid: 43abdb9ab90fbdf4d943369271365a07,
@@ -2758,18 +2831,6 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06557bb0382672488984c786b3e1b31, type: 3}
---- !u!114 &1928052667734600460 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8985761244897740418, guid: a06557bb0382672488984c786b3e1b31,
-    type: 3}
-  m_PrefabInstance: {fileID: 7381971062827429262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3154480810170725980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5599364139165785042, guid: a06557bb0382672488984c786b3e1b31,
@@ -2780,18 +2841,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5eb74170c694e747bdb3165638ae555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3266401269022760725 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5415175254953046683, guid: a06557bb0382672488984c786b3e1b31,
-    type: 3}
-  m_PrefabInstance: {fileID: 7381971062827429262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &6175974610275792240 stripped

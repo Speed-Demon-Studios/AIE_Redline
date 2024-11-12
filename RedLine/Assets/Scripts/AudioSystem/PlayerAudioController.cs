@@ -6,6 +6,7 @@ namespace EAudioSystem
 {
     using FMODUnity;
     using System.Collections;
+    using System.Data;
     using System.Linq;
     using Unity.VisualScripting;
 
@@ -20,7 +21,8 @@ namespace EAudioSystem
         // * Redline audio (e.g. gaining redline, reaching the different levels of redline, etc...).
         // * Update the funcitionality for the engine audio so that when a players speed lowers while they are turning or crashing into a wall, the sound modulation will reflect those changes.
     
-        public bool variantSet = false; // BOOLEAN value to tell the game whether or not the ship variant has been selected and set-up.
+        [HideInInspector] public bool variantSet = false; // BOOLEAN value to tell the game whether or not the ship variant has been selected and set-up.
+        [HideInInspector] public bool resettingAudio = false;
 
         // Engine Audio -------------------------------------------------------------------------------------------------------------------------------------
         [Header("Engine Audio")]
@@ -47,8 +49,55 @@ namespace EAudioSystem
         [SerializeField] private List<float> m_gameplayAudioVolumes = new(); // List of audio volume values for each individual gameplay sound.
         //---------------------------------------------------------------------------------------------------------------------------------------------------
 
+        // Resetting --
+        // ------------
+        public void ResetPlayerAudio()
+        {
+            resettingAudio = true;
+
+            while (resettingAudio == true)
+            {
+                foreach (StudioEventEmitter emitter in m_engineEmitters)
+                {
+                    emitter.Stop();
+                }
+
+                m_engineAudioInfo = new();
+                m_engineEmitterPitches = new();
+                m_engineEmitterVolumes = new();
+
+                foreach (StudioEventEmitter emitter in m_gameplaySoundEmitters)
+                {
+                    emitter.Stop();
+                }
+
+                m_gameplayAudioInfo = new();
+                m_gameplayAudioPitches = new();
+                m_gameplayAudioVolumes = new();
+
+                foreach (StudioEventEmitter emitter in m_windEmitters)
+                {
+                    emitter.Stop();
+                }
+
+                m_windAudioInfo = new List<EventReference>();
+                m_windAudioVolumes = new();
+
+                variantSet = false;
+
+                resettingAudio = false;
+            }
+            return;
+        }
+
+
+
         public void UpdateEngineModulations(int shipSelected, int scenario, float breakingValue = 0.0f)
         {
+            if (resettingAudio == true)
+            {
+                return;
+            }
             // Scenario = what context the modulations are changing in. [0] = Accelerating, [1] = Slowing down VIA letting go of accelerator, [2] = Slowing down VIA breaking.
 
             switch (scenario)
@@ -77,6 +126,21 @@ namespace EAudioSystem
 
                                     UpdateEnginePitch(2, ((1.1f) * GameManager.gManager.difficultyChange), ((3.6f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
                                     UpdateEngineVolume(2, ((0.015f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, true, false, default, true);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    UpdateEnginePitch(0, ((1.3f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(0, ((0.05f) * GameManager.gManager.difficultyChange), ((0.27f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+
+                                    UpdateEnginePitch(1, ((3.5f) * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(1, ((0.2f) * GameManager.gManager.difficultyChange), ((0.49f) * GameManager.gManager.difficultyChange), true, true, false, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+
+                                    UpdateEnginePitch(2, ((5.5f) * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(2, ((0.01f) * GameManager.gManager.difficultyChange), ((0.03f) * GameManager.gManager.difficultyChange), true, true, false, default, true);
+
+                                    UpdateEnginePitch(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.77f) * GameManager.gManager.difficultyChange), true, true, false, default, true);
                                     break;
                                 }
                         }
@@ -110,6 +174,21 @@ namespace EAudioSystem
                                     UpdateEngineVolume(2, ((0.05f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
                                     break;
                                 }
+                            case 2:
+                                {
+                                    UpdateEnginePitch(0, ((0.55f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(0, ((0.015f) * GameManager.gManager.difficultyChange), ((0.27f) * GameManager.gManager.difficultyChange), true, false, true, 0.24f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+
+                                    UpdateEnginePitch(1, ((2.5f) * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(1, ((0.015f) * GameManager.gManager.difficultyChange), ((0.49f) * GameManager.gManager.difficultyChange), true, false, true, (float)0.1, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+
+                                    UpdateEnginePitch(2, ((0.55f) * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(2, ((0.015f) * GameManager.gManager.difficultyChange), ((0.03f) * GameManager.gManager.difficultyChange), true, false, true, 0.1f, true);
+
+                                    UpdateEnginePitch(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
+                                    UpdateEngineVolume(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.77f) * GameManager.gManager.difficultyChange), true, false, true, 0.3f, true);
+                                    break;
+                                }
                         }
                         break;
                     }
@@ -139,11 +218,32 @@ namespace EAudioSystem
                                     UpdateEngineVolume(2, ((0.05f) * GameManager.gManager.difficultyChange), ((0.41f) * GameManager.gManager.difficultyChange), true, false, true, 0.37f, true);                                                                          // Engine sound that is third  in the list  (Index [2]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
                                     break;
                                 }
+                            case 2:
+                                {
+                                    UpdateEnginePitch(0, (breakingValue * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                                    UpdateEngineVolume(0, ((0.05f) * GameManager.gManager.difficultyChange), ((0.27f) * GameManager.gManager.difficultyChange), true, false, true, 0.24f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+
+                                    UpdateEnginePitch(1, (breakingValue * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                                    UpdateEngineVolume(1, ((0.05f) * GameManager.gManager.difficultyChange), ((0.49f) * GameManager.gManager.difficultyChange), true, false, true, (float)0.1, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+
+                                    UpdateEnginePitch(2, (breakingValue * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                                    UpdateEngineVolume(2, ((0.015f) * GameManager.gManager.difficultyChange), ((0.03f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);
+
+                                    UpdateEnginePitch(3, (breakingValue * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, false, true, 0.33f, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                                    UpdateEngineVolume(3, ((0.05f) * GameManager.gManager.difficultyChange), ((0.77f) * GameManager.gManager.difficultyChange), true, false, true, 0.3f, true);
+                                    break;
+                                }
                         }
                         break;
                     }
 
             }
+
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
             return;
         }
 
@@ -195,6 +295,11 @@ namespace EAudioSystem
 
         public void PlayGPSFX(int soundIndex, int windIndex = 99)
         {
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
             switch (soundIndex)
             {
                 // Wall Crash SFX.
@@ -228,6 +333,11 @@ namespace EAudioSystem
                     break;
                 }
             }
+
+            if (resettingAudio == true)
+            {
+                return;
+            }
         }
 
         // Set up the default modulation values for the engine sounds (Pitch, Volume).
@@ -258,7 +368,12 @@ namespace EAudioSystem
         // whether you are adding or subtracting, the minimum value - which has a default of '999.0' which will bypass the minimum, and wheather or not you want to use the default MAX value set in the editor.
         public void UpdateEnginePitch(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minimumValue = 999.0f, bool useDefaultMax = false)
         {
-            if(index > m_engineEmitterPitches.Capacity)
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
+            if (index > m_engineEmitterPitches.Capacity)
             {
                 return;
             }
@@ -357,6 +472,11 @@ namespace EAudioSystem
         // whether you are adding or subtracting, the minimum value - which has a default of '999.0' which will bypass the minimum, and wheather or not you want to use the default MAX value set in the editor.
         public void UpdateEngineVolume(int index, float amount, float maxValue, bool addDT, bool add, bool subtract, float minValue = 999.0f, bool useDefaultMax = false)
         {
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
             if (add == true && subtract == true || add == false && subtract == false)
             {
                 int playerListIndex = 0;
@@ -447,6 +567,11 @@ namespace EAudioSystem
 
         public void UpdateWindVolume(int index, float amount, float maxValue, bool add, bool subtract, float minValue = 0.0f)
         {
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
             if (float.IsNaN(m_windAudioVolumes[index]) == true)
             {
                 m_windAudioVolumes[index] = 0.03f;
@@ -489,31 +614,34 @@ namespace EAudioSystem
                     GetComponentInChildren<SparksParticlesController>().PAC = this;
                 }
 
-                for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
+                if (resettingAudio == false)
                 {
-                    if (m_engineEmitters[i] != null) // If the emitter at the current index is not NULL
+                    for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
                     {
-                        StudioEventEmitter currentEngineEmitter = m_engineEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
-                        currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]); // Update the PITCH of the audio assigned to the current emitter.
-                        currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        if (m_engineEmitters[i] != null) // If the emitter at the current index is not NULL
+                        {
+                            StudioEventEmitter currentEngineEmitter = m_engineEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
+                            currentEngineEmitter.EventInstance.setPitch(m_engineEmitterPitches[i]); // Update the PITCH of the audio assigned to the current emitter.
+                            currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        }
                     }
-                }
 
-                for (int i = 0; i < m_gameplaySoundEmitters.Count; i++) // Iterate through the array of gameplay sound emmitters
-                {
-                    if (m_gameplaySoundEmitters[i] != null) // If the emitter at the current index is not NULL
+                    for (int i = 0; i < m_gameplaySoundEmitters.Count; i++) // Iterate through the array of gameplay sound emmitters
                     {
-                        StudioEventEmitter currentGameplayEmitter = m_gameplaySoundEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
-                        currentGameplayEmitter.EventInstance.setVolume(m_gameplayAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        if (m_gameplaySoundEmitters[i] != null) // If the emitter at the current index is not NULL
+                        {
+                            StudioEventEmitter currentGameplayEmitter = m_gameplaySoundEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
+                            currentGameplayEmitter.EventInstance.setVolume(m_gameplayAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        }
                     }
-                }
 
-                for (int i = 0; i < m_windEmitters.Count; i++) // Iterate through the array of wind sound emmitters
-                {
-                    if (m_windEmitters[i] != null) // If the emitter at the current index is not NULL
+                    for (int i = 0; i < m_windEmitters.Count; i++) // Iterate through the array of wind sound emmitters
                     {
-                        StudioEventEmitter currentWindEmitter = m_windEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
-                        currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        if (m_windEmitters[i] != null) // If the emitter at the current index is not NULL
+                        {
+                            StudioEventEmitter currentWindEmitter = m_windEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
+                            currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                        }
                     }
                 }
             }
@@ -522,6 +650,11 @@ namespace EAudioSystem
         // Start playing the engine audio from all of the engine audio emitters.
         public void StartEngineHum()
         {
+            if (resettingAudio == true)
+            {
+                return;
+            }
+
             foreach (StudioEventEmitter emitters in m_engineEmitters)
             {
                 emitters.Play();

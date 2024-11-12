@@ -1,3 +1,5 @@
+using EAudioSystem;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +7,8 @@ using UnityEngine;
 
 public class ShipsControls : MonoBehaviour
 {
+    [HideInInspector] public int shipSelected = 0;
+
     [Header("Refrences")]
     public ShipVariant VariantObject;
     public Rigidbody ReturnRB() { return m_rb; }
@@ -57,12 +61,12 @@ public class ShipsControls : MonoBehaviour
     public float ReturnBoost() { return m_currentBoost; }
     public int ReturnBoostLevel() { return m_boostLevel; }
     public bool wantingToBoost;
-    private bool m_isBoosting;
-    private bool m_isInRedline;
+    [HideInInspector] public bool m_isBoosting;
+    [HideInInspector] public bool m_isInRedline;
     public float accelerationForce;
     public float howFastYouGetBoost;
     public float howFastYouLooseBoost;
-    private bool m_isBoostingOnBoostPad;
+    [HideInInspector] public bool m_isBoostingOnBoostPad;
     private float m_maxSpeedDuringBoost;
     public float maxBoostSpeedChange;
     public List<float> boostingTimes = new();
@@ -447,6 +451,21 @@ public class ShipsControls : MonoBehaviour
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
+
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
+            // || [R = Result] [A = m_breakMultiplier] [B = VariantObject.BreakMultiplier] [C = multiplier] ||
+            // ||-------------------------------------------------------------------------------------------||
+            // ||                                                                                           ||
+            // ||                                 R = ((A x B x C) x 0.64)                                  ||
+            // ||                                                                                           ||
+            // ||-------------------------------------------------------------------------------------------||
+
+            PAC.UpdateEngineModulations(shipSelected, 2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f));
+            PAC.UpdateWindVolume(0, ((0.5f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+        }
     }
 
     /// <summary>
@@ -457,10 +476,30 @@ public class ShipsControls : MonoBehaviour
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+
         if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
+        {
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 1);
+                PAC.UpdateWindVolume(0, ((0.2f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+            }
+        }
         else
+        {
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 0);
+                PAC.UpdateWindVolume(0, ((0.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
+            }
+        }
 
         if(!m_isBoosting)
             m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
