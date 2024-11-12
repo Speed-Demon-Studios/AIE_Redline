@@ -7,7 +7,7 @@ public class RaceManager : MonoBehaviour
     bool coroutineStarted = false;
     public bool isTimeTrial = false;
 
-    public float GetTotalLaps() { return TotalLaps; }
+    public int GetTotalLaps() { return TotalLaps; }
 
     private void Awake()
     {
