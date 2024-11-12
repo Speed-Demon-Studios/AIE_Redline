@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -158,7 +159,7 @@ public class HUD : MonoBehaviour
 
     public void SetValues(float speed, int pos, int laps, int totalLaps, bool isInRedline, float energyFillAmount,
         float speedFillAmount, int currentBoostLevel, float currentLapTimeMiuntes, float currentLapTimeSeconds,
-        float bestLapTimeMinutes, float bestLapTimeSeconds)
+        float bestLapTimeMinutes, float bestLapTimeSeconds, int totalPos)
     {
         m_kph = speed;
         m_position = pos;
@@ -172,5 +173,6 @@ public class HUD : MonoBehaviour
         m_currentLapTimeSeconds = currentLapTimeSeconds;
         m_bestLapMiuntes = bestLapTimeMinutes;
         m_bestLapSeconds = bestLapTimeSeconds;
+        m_totalPositions = totalPos;
     }
 }

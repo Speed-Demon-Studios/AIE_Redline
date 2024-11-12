@@ -37,7 +37,7 @@ public class PlayerUiControl : MonoBehaviour
                 float energyfillValue = m_shipsControls.ReturnBoost() / 3;
                 float speedFillValue = m_shipsControls.ReturnRB().velocity.magnitude / m_shipsControls.GetDefaultMaxSpeed();
                 hud.SetValues(speed, pos, currentLap, totalLaps, isInRedline, energyfillValue, speedFillValue, m_shipsControls.ReturnBoostLevel(),
-                    rDetails.currentLapTimeMINUTES, rDetails.currentLapTimeSECONDS, rDetails.quickestLapTimeMINUTES, rDetails.quickestLapTimeSECONDS);
+                    rDetails.currentLapTimeMINUTES, rDetails.currentLapTimeSECONDS, rDetails.quickestLapTimeMINUTES, rDetails.quickestLapTimeSECONDS, GameManager.gManager.allRacers.Count);
                 hud.UpdateHUD();
             }
         }                                                                                                                                    
@@ -51,6 +51,7 @@ public class PlayerUiControl : MonoBehaviour
 
     IEnumerator WaitToHideFinish()
     {
+        finishAnim.SetTrigger("Play");
         yield return new WaitForSeconds(2f);
         finishAnim.gameObject.SetActive(false);
     }

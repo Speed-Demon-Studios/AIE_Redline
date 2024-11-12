@@ -32,6 +32,14 @@ namespace MenuManagement
         // Start is called before the first frame update
         void Start()
         {
+            if (PlayerPrefs.GetFloat("AfterRace") == 1)
+            {
+                PressStart();
+                m_gameLoadedAndStarted = false;
+            }
+            else
+                m_gameLoadedAndStarted = false;
+
 
         }
 

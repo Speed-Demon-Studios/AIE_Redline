@@ -79,11 +79,12 @@ public class ManageSceneLoading : MonoBehaviour
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         racerDeets.rCS.ClearList();
 
-        playerOBJ.SetActive(false);
+        //playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
     {
+        PlayerPrefs.SetFloat("AfterRace", 1);
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();
@@ -110,8 +111,6 @@ public class ManageSceneLoading : MonoBehaviour
         PlayerPrefs.SetInt("SceneID", 1);
         SceneManager.LoadSceneAsync(3);
         SceneManager.UnloadSceneAsync(2);
-
-
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());
