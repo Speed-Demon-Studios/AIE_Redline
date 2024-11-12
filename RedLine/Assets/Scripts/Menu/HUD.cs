@@ -12,17 +12,17 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private GameObject energyFullSegment1, energyFullSegment2, energyFullSegment3;
     [SerializeField]
-    private TextMeshProUGUI speedText, posText, lapText, lapTimeText;
+    private TextMeshProUGUI m_speedText, m_posText, m_lapText, m_lapTimeText, m_bestLapTime;
     [Range(0f, 1f)]
-    public float energyBarFillAmount, speedBarFillAmount;
+    private float m_energyBarFillAmount, m_speedBarFillAmount;
 
     [SerializeField]
-    private float leadingEdgeWidth;
+    private float m_leadingEdgeWidth;
 
-    public bool gainingRedline;
+    private bool m_gainingRedline;
 
     [Range(0, 3)]
-    public int currentBoostLevel;
+    private int m_currentBoostLevel;
 
     [SerializeField]
     private AnimationCurve energySegmentPulse;
@@ -33,9 +33,14 @@ public class HUD : MonoBehaviour
 
     public Vector2 energyBarFillRange, energyLeadingEdgeFillRange, speedBarFillRange;
 
-    public int kph, position, totalPositions, lap, totalLaps;
+    private int m_position, m_totalPositions, m_lap, m_totalLaps;
+    private float m_kph;
 
-    public float[] lapTimes;
+    private float m_currentLapTimeMiuntes;
+    private float m_currentLapTimeSeconds;
+    private float m_bestLapMiuntes;
+    private float m_bestLapSeconds;
+
 
     private void OnEnable()
     {
@@ -57,17 +62,17 @@ public class HUD : MonoBehaviour
     }
 
     // Updates the HUD display with current values
-    void UpdateHUD()
+    public void UpdateHUD()
     {
         // Energy bar
-        float energyFill = map(energyBarFillAmount, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
+        float energyFill = map(m_energyBarFillAmount, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
         energyBarFill.fillAmount = energyFill;
 
         // Energy bar full segments
 
         Color currentBoostColor = Color.white;
 
-        switch (currentBoostLevel)
+        switch (m_currentBoostLevel)
         {
             case 0:
                 energyFullSegment1.SetActive(false);
@@ -116,10 +121,10 @@ public class HUD : MonoBehaviour
         float intensity = Random.Range(0.5f, 1f);
         flickeringColor.a = intensity;
 
-        if (gainingRedline)
+        if (m_gainingRedline)
         {
-            float energyLELowerFill = map(energyBarFillAmount - leadingEdgeWidth, 0, 1, energyLeadingEdgeFillRange.x, energyLeadingEdgeFillRange.y);
-            float energyLEUpperFill = map(energyBarFillAmount, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
+            float energyLELowerFill = map(m_energyBarFillAmount - m_leadingEdgeWidth, 0, 1, energyLeadingEdgeFillRange.x, energyLeadingEdgeFillRange.y);
+            float energyLEUpperFill = map(m_energyBarFillAmount, 0, 1, energyBarFillRange.x, energyBarFillRange.y);
             energyLeadingEdgeLower.fillAmount = energyLELowerFill;
             energyLeadingEdgeUpper.fillAmount = energyLEUpperFill;
 
@@ -134,30 +139,36 @@ public class HUD : MonoBehaviour
         }
 
         // Speed bar
-        float speedFill = map(speedBarFillAmount, 0, 1, speedBarFillRange.x, speedBarFillRange.y);
+        float speedFill = map(m_speedBarFillAmount, 0, 1, speedBarFillRange.x, speedBarFillRange.y);
         speedBarFill.fillAmount = speedFill;
         speedbarRedFill.color = flickeringColor;
 
-        speedText.text = "<b>" + kph.ToString() + "</b> Kph";
+        m_speedText.text = "<b>" + m_kph.ToString() + "</b> Kph";
 
-        posText.text = position.ToString() + " / " + totalPositions.ToString();
+        m_posText.text = m_position.ToString() + " / " + m_totalPositions.ToString();
 
-        lapText.text = lap.ToString() + " / " + totalLaps.ToString();
+        m_lapText.text = m_lap.ToString() + " / " + m_totalLaps.ToString();
 
-        string lapTimeStr = "";
-
-        foreach (float time in lapTimes)
-        {
-            // Use correct time formatting here. eg 1:16:563 
-            lapTimeStr += time.ToString() + "\n"; 
-        }
-
-        lapTimeText.text = lapTimeStr;
+        m_lapTimeText.text = string.Format("{0:00}", m_currentLapTimeMiuntes) + ":" + string.Format("{0:00.00}", m_currentLapTimeSeconds);
+        m_bestLapTime.text = string.Format("{0:00}", m_bestLapMiuntes) + ":" + string.Format("{0:00.00}", m_bestLapSeconds);
     }
 
-    private void Update()
+    public void SetValues(float speed, int pos, int laps, int totalLaps, bool isInRedline, float energyFillAmount,
+        float speedFillAmount, int currentBoostLevel, float currentLapTimeMiuntes, float currentLapTimeSeconds,
+        float bestLapTimeMinutes, float bestLapTimeSeconds)
     {
-        UpdateHUD();
+        m_kph = speed;
+        m_position = pos;
+        m_lap = laps;
+        m_totalLaps = totalLaps;
+        m_gainingRedline = isInRedline;
+        m_energyBarFillAmount = energyFillAmount;
+        m_speedBarFillAmount = speedFillAmount;
+        m_currentBoostLevel = currentBoostLevel;
+        m_currentLapTimeMiuntes = currentLapTimeMiuntes;
+        m_currentLapTimeSeconds = currentLapTimeSeconds;
+        m_bestLapMiuntes = bestLapTimeMinutes;
+        m_bestLapSeconds = bestLapTimeSeconds;
     }
 
 }
