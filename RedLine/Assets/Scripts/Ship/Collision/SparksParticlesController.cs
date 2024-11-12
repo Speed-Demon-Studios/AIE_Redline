@@ -53,10 +53,10 @@ public class SparksParticlesController : MonoBehaviour
                 {
                     if (sT.isColliding == true)
                     {
-                        foreach (ParticleSystem sparksPE in sT.sparks)
-                        {
-                            ActivateSparks(sparksPE);
-                        }    
+                        //foreach (ParticleSystem sparksPE in sT.sparks)
+                        //{
+                        //    ActivateSparks(sparksPE);
+                        //}    
                     }
                 }
             }
