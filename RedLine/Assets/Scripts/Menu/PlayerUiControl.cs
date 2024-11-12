@@ -34,8 +34,8 @@ public class PlayerUiControl : MonoBehaviour
                 int currentLap = rDetails.currentLap;
                 int totalLaps = GameManager.gManager.rManager.GetTotalLaps();
                 bool isInRedline = m_shipsControls.ReturnIsInRedline();
-                float energyfillValue = hud.map(m_shipsControls.ReturnBoost() * 0.32f, 0, 1, 0.025f, 0.194f);
-                float speedFillValue = hud.map(((float)m_shipsControls.ReturnRB().velocity.magnitude * 0.0056f), 0, 1, 0.547f, 0.66f);
+                float energyfillValue = m_shipsControls.ReturnBoost() / 3;
+                float speedFillValue = m_shipsControls.ReturnRB().velocity.magnitude / m_shipsControls.GetDefaultMaxSpeed();
                 hud.SetValues(speed, pos, currentLap, totalLaps, isInRedline, energyfillValue, speedFillValue, m_shipsControls.ReturnBoostLevel(),
                     rDetails.currentLapTimeMINUTES, rDetails.currentLapTimeSECONDS, rDetails.quickestLapTimeMINUTES, rDetails.quickestLapTimeSECONDS);
                 hud.UpdateHUD();
