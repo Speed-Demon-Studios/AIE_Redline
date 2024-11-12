@@ -126,6 +126,7 @@ public class ShipSelection : MonoBehaviour
         if (m_ship.GetComponent<VariantAudioContainer>() != null)
         {
             m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
+            m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
         }
         //-------------------------------------------------------------------------------------------------|
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |

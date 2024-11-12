@@ -33,6 +33,8 @@ public class VariantAudioContainer : MonoBehaviour
             case 0:
                 {
                     PAC.SetEngineAudios(SplitwingEngineAudio);
+                    PAC.SetDefaultEngineModulations(m_SplitwingMaxEnginePitchValues[0], m_SplitwingMaxEngineVolumeValues[0]);
+                    PAC.SetDefaultEngineModulations(m_SplitwingMaxEnginePitchValues[1], m_SplitwingMaxEngineVolumeValues[1]);
                     break;
                 }
             case 1:
@@ -46,6 +48,8 @@ public class VariantAudioContainer : MonoBehaviour
             case 2:
                 {
                     PAC.SetEngineAudios(CutlassEngineAudio);
+                    PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[0], m_CutlassMaxEngineVolumeValues[0]);
+                    PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[1], m_CutlassMaxEngineVolumeValues[1]);
                     break;
                 }
         }

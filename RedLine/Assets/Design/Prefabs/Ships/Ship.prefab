@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipSelected: 0
   VariantObject: {fileID: 0}
   rotation: {fileID: 2868536069761448569}
   facingPoint: {fileID: 2868536069116041169}
@@ -540,10 +541,10 @@ MonoBehaviour:
     Path: event:/EnginePulse/MainEnginePulseLoop
   SplitwingEngineAudio:
   - Guid:
-      Data1: -855726295
-      Data2: 1196474829
-      Data3: -643299150
-      Data4: -2098144273
+      Data1: 425919509
+      Data2: 1254462782
+      Data3: -622912602
+      Data4: -1670916056
     Path: event:/SplitwingEngineLoop/SplitwingEngineLoop1.2
   - Guid:
       Data1: -1537893168
@@ -553,10 +554,10 @@ MonoBehaviour:
     Path: event:/EnginePulse/MainEnginePulseLoop
   CutlassEngineAudio:
   - Guid:
-      Data1: -2037933404
-      Data2: 1221429914
-      Data3: -82143102
-      Data4: -211552929
+      Data1: -1143761291
+      Data2: 1162560474
+      Data3: 2065030017
+      Data4: -1246360120
     Path: event:/CutlassEngineSound/CutlassEngineLoop1.1
   - Guid:
       Data1: 1911799846
@@ -575,10 +576,18 @@ MonoBehaviour:
   - 0.36
   - 0.3
   - 0.39
-  m_SplitwingMaxEnginePitchValues: []
-  m_SplitwingMaxEngineVolumeValues: []
-  m_CutlassMaxEnginePitchValues: []
-  m_CutlassMaxEngineVolumeValues: []
+  m_SplitwingMaxEnginePitchValues:
+  - 8.3
+  - 33
+  m_SplitwingMaxEngineVolumeValues:
+  - 1
+  - 1
+  m_CutlassMaxEnginePitchValues:
+  - 1
+  - 1
+  m_CutlassMaxEngineVolumeValues:
+  - 1
+  - 1
 --- !u!114 &3862740244906453385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variantSet: 0
+  variantSet: 1
   m_engineEmitters:
   - {fileID: 4813991537892134318}
   - {fileID: 7368745089848430234}
@@ -669,7 +678,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2868536069371765811}
-  m_LocalRotation: {x: 0.044044234, y: -0.07395424, z: 0.003269409, w: 0.99628323}
+  m_LocalRotation: {x: 0.04404427, y: -0.073954225, z: 0.0032694112, w: 0.99628323}
   m_LocalPosition: {x: 39.40865, y: 1.3191981, z: -4.7001624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
