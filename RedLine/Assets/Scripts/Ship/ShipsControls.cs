@@ -1,4 +1,3 @@
-using EAudioSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +5,6 @@ using UnityEngine;
 
 public class ShipsControls : MonoBehaviour
 {
-    public int shipSelected = 0;
-
     [Header("Refrences")]
     public ShipVariant VariantObject;
     public Rigidbody ReturnRB() { return m_rb; }
@@ -102,6 +99,19 @@ public class ShipsControls : MonoBehaviour
         m_acceleration = 0;
     }
 
+    /// <summary>
+    /// Spawn the models onto the ship for the ship that the player chose
+    /// </summary>
+    /// <param name="ship"> Which player ship controls is it </param>
+    public void AttachModels()
+    {
+        if (shipModel.transform.childCount > 0)
+            DestroyImmediate(shipModel.transform.GetChild(0).gameObject);
+
+        Instantiate(VariantObject.model, shipModel.transform);
+        Instantiate(VariantObject.collision, collisionParent);
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -122,7 +132,7 @@ public class ShipsControls : MonoBehaviour
 
     public void DifficultySpeedChange()
     {
-        m_defaultMaxSpeed *= GameManager.gManager.difficultyChange;
+        m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
         m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
     }
@@ -166,31 +176,34 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
-        if (m_fire.Count > 0)
+        if (!isTestShip)
         {
-            m_fireIndex = m_boostLevel;
-            switch (m_fireIndex)
+            if (m_fire.Count > 0)
             {
-                case 0:
-                    m_fire[0].SetActive(false);
-                    m_fire[1].SetActive(false);
-                    m_fire[2].SetActive(false);
-                    break;
-                case 1:
-                    m_fire[0].SetActive(true);
-                    m_fire[1].SetActive(false);
-                    m_fire[2].SetActive(false);
-                    break;
-                case 2:
-                    m_fire[1].SetActive(true);
-                    m_fire[2].SetActive(false);
-                    m_fire[0].SetActive(false);
-                    break;
-                case 3:
-                    m_fire[2].SetActive(true);
-                    m_fire[0].SetActive(false);
-                    m_fire[1].SetActive(false);
-                    break;
+                m_fireIndex = m_boostLevel;
+                switch (m_fireIndex)
+                {
+                    case 0:
+                        m_fire[0].SetActive(false);
+                        m_fire[1].SetActive(false);
+                        m_fire[2].SetActive(false);
+                        break;
+                    case 1:
+                        m_fire[0].SetActive(true);
+                        m_fire[1].SetActive(false);
+                        m_fire[2].SetActive(false);
+                        break;
+                    case 2:
+                        m_fire[1].SetActive(true);
+                        m_fire[2].SetActive(false);
+                        m_fire[0].SetActive(false);
+                        break;
+                    case 3:
+                        m_fire[2].SetActive(true);
+                        m_fire[0].SetActive(false);
+                        m_fire[1].SetActive(false);
+                        break;
+                }
             }
         }
 
@@ -398,31 +411,29 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
-        float time = 0.0f;
-        if ((m_boostLevel - 1) > boostingTimes.Capacity)
-        {
-             time = boostingTimes[m_boostLevel - 1];
-        }
+        float time = 0;
+
+        if (m_boostLevel > 0)
+            time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {
-            yield return new WaitForEndOfFrame();
             time -= Time.deltaTime;
 
-            Debug.Log("Boosting player");
+            Debug.Log(time + " Boosting time");
             m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
             Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
         }
 
-        if (m_fire[0] != null && m_fire[1] != null && m_fire[2] != null)
-        {
-            m_fire[0].SetActive(false);
-            m_fire[1].SetActive(false);
-            m_fire[2].SetActive(false);
-        }
+        yield return new WaitForEndOfFrame();
+
+        m_fire[0].SetActive(false);
+        m_fire[1].SetActive(false);
+        m_fire[2].SetActive(false);
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
+        Mathf.Clamp(m_rb.velocity.magnitude, 0, m_defaultMaxSpeed);
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;
@@ -436,57 +447,20 @@ public class ShipsControls : MonoBehaviour
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
-        
-        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
-        if (PAC != null)
-        {
-            // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
-            // || [R = Result] [A = m_breakMultiplier] [B = VariantObject.BreakMultiplier] [C = multiplier] ||
-            // ||-------------------------------------------------------------------------------------------||
-            // ||                                                                                           ||
-            // ||                                 R = ((A x B x C) x 0.64)                                  ||
-            // ||                                                                                           ||
-            // ||-------------------------------------------------------------------------------------------||
-
-            PAC.UpdateEngineModulations(shipSelected, 2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f));
-            PAC.UpdateWindVolume(0, ((0.5f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
-        }
     }
-
-    
 
     /// <summary>
     /// Accelerate is very simple. It basicly makes the car go foward when you press the accelerator and brake when you press the brake
     /// </summary>
     private void Accelerate()
     {
-        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
-
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
         if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
-        {
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
-
-            if (PAC != null)
-            {
-                // Audio Pitch & Volume Modulation
-                PAC.UpdateEngineModulations(shipSelected, 1);
-                PAC.UpdateWindVolume(0, ((0.2f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
-            }
-        }
         else
-        {
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
-
-            if (PAC != null)
-            {
-                // Audio Pitch & Volume Modulation
-                PAC.UpdateEngineModulations(shipSelected, 0);
-                PAC.UpdateWindVolume(0, ((0.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
-            }
-        }
 
         if(!m_isBoosting)
             m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);

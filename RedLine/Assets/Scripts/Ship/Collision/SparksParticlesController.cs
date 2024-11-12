@@ -1,4 +1,3 @@
-using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,6 @@ public class SparksParticlesController : MonoBehaviour
 {
     public SparksTrigger[] sparksList;
     public ParticleSystem[] sparksParticles;
-    public PlayerAudioController PAC;
 
     public void ActivateSparks(ParticleSystem particleToActivate)
     {
@@ -17,13 +15,6 @@ public class SparksParticlesController : MonoBehaviour
         if (particleToActivate.isPlaying == false)
         {
             mainModule.duration = 0.1f;
-            if (PAC != null)
-            {
-                if (PAC.IsEmitterPlaying(1, 0) == false)
-                {
-                    PAC.PlayGPSFX(0);
-                }
-            }
             particleToActivate.Play();
         }
     }
@@ -62,10 +53,10 @@ public class SparksParticlesController : MonoBehaviour
                 {
                     if (sT.isColliding == true)
                     {
-                        foreach (ParticleSystem sparksPE in sT.sparks)
-                        {
-                            ActivateSparks(sparksPE);
-                        }
+                        //foreach (ParticleSystem sparksPE in sT.sparks)
+                        //{
+                        //    ActivateSparks(sparksPE);
+                        //}    
                     }
                 }
             }

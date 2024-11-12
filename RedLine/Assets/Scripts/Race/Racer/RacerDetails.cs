@@ -11,7 +11,6 @@ public class RacerDetails : MonoBehaviour
     public GameObject corkscrewReset2;
     public IList<GameObject> resetNormalOBJs = new List<GameObject>();
 
-
     [Header("Script References")]
     public RedlineColliderSpawner rCS;
 
@@ -70,6 +69,7 @@ public class RacerDetails : MonoBehaviour
         distanceToCheckpoint = Vector3.Distance(transform.position, nextCheckpoint.transform.position);
         return distanceToCheckpoint;
     }
+
 
     public void ResetRacerVariables()
     {
