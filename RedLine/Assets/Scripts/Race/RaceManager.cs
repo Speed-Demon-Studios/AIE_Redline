@@ -106,7 +106,7 @@ public class RaceManager : MonoBehaviour
         {
             if(racer.finishedRacing == true && racer.crossedFinishLine == true)
             {
-                GameManager.gManager.DisableRMovement(racer.gameObject);
+                //GameManager.gManager.DisableRMovement(racer.gameObject);
             }
         }
     }
