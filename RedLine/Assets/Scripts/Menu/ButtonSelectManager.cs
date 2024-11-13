@@ -1,6 +1,9 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
+
 //using System.Drawing;
 //using UnityEditor.UIElements;
 using UnityEngine;
@@ -11,6 +14,19 @@ namespace DifficultyButtonSwitch
     public class ButtonSelectManager : MonoBehaviour
     {
         [SerializeField]
+        private GameObject m_pressAnyButton, m_title, m_speedClassSelect;
+
+        [Header("Title")]
+
+        [SerializeField]
+        private Animator m_titleAnim;
+        
+
+        [SerializeField] private AnimationCurve m_titleFillCurve;
+
+        [Header("Class Select")]
+
+        [SerializeField]
         private AnimationCurve m_barChangeTween;
         [SerializeField]
         private float m_barChangeDuration, m_barLength;
@@ -19,15 +35,32 @@ namespace DifficultyButtonSwitch
         [SerializeField]
         Animator m_debutAnimator, m_proAnimator, m_eliteAnimator;
 
+        [Header("Vehicle Select")]
+        [SerializeField]
+        private TextMeshProUGUI m_pressStartToJoinText;
+
         [SerializeField]
         private Material m_cursorMat;
 
         [SerializeField]
         private AnimationCurve m_cursorPulseCurve;
 
+        [SerializeField]
+        private float m_cursorPulseDuration;
+
         private void OnEnable()
         {
-            Tween.Color(m_cursorMat, Color.red, 1, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
+            m_cursorMat.color = Color.white;
+            Tween.Color(m_cursorMat, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
+            Tween.Color(m_pressStartToJoinText, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
+        }
+
+        public void TransitionToTitle()
+        {
+            m_pressAnyButton.SetActive(false);
+            m_title.SetActive(true);
+            m_titleAnim.SetTrigger("TitleIn");
+
         }
 
         public void SpeedBarFill(float fillAmount)
@@ -38,9 +71,6 @@ namespace DifficultyButtonSwitch
             Tween.LocalPosition(m_speedBarRed2, barPos, m_barChangeDuration, 0.1f, m_barChangeTween);
         }
     
-
-    
-
         public void CompetitionSkillBarFill(float fillAmount)
         {
             Vector3 barPos = new Vector3(m_barLength - (m_barLength * fillAmount), 0, 0);
