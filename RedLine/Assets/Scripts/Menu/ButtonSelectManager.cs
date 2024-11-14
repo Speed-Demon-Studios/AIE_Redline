@@ -10,14 +10,17 @@ namespace DifficultyButtonSwitch
 {
     public class ButtonSelectManager : MonoBehaviour
     {
+        [Header("Menus")]
+
         [SerializeField]
-        private GameObject m_pressAnyButton, m_title, m_speedClassSelect;
+        private GameObject m_pressAToStart;
+        [SerializeField]
+        private GameObject m_title, m_speedClassSelect;
 
         [Header("Title")]
 
         [SerializeField]
         private Animator m_titleAnim;
-        
 
         [SerializeField] private AnimationCurve m_titleFillCurve;
 
@@ -56,7 +59,7 @@ namespace DifficultyButtonSwitch
         [SerializeField]
         private Image m_manufacturerImage, m_manufacturerImageRed;
 
-
+        [Header("Other")]
 
         [SerializeField]
         private Material m_cursorMat;
@@ -88,7 +91,7 @@ namespace DifficultyButtonSwitch
 
         public void TransitionToTitle()
         {
-            m_pressAnyButton.SetActive(false);
+            m_pressAToStart.SetActive(false);
             m_title.SetActive(true);
             m_titleAnim.SetTrigger("TitleIn");
 
@@ -204,6 +207,7 @@ namespace DifficultyButtonSwitch
         {
             switch (m_manufacturer)
             {
+
                 case 1:
                     m_manufacturer = 2;
                     m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
