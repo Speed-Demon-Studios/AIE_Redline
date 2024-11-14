@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class WhatsInVisionCone : MonoBehaviour
 {
-    private List<VisionCone> m_visionCons;
+    private List<VisionCone> m_visionCons = new();
     public VisionCone frontLeft;
     public VisionCone frontRight;
     public VisionCone backLeft;
