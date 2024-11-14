@@ -9,13 +9,17 @@ public class ShipSelection : MonoBehaviour
     public List<GameObject> ships = new();
     public List<ShipVariant> variants = new();
     private GameObject m_currentShips;
-    private int m_shipIndex;
     public GameObject cam;
     private float m_y;
     public RenderTexture texture;
     public RawImage image;
     private GameObject m_ship;
-    public int playerNum;
+
+    private int m_playerNum;
+    private int m_shipIndex;
+
+    public void SetShipSelectionNumbers(int number) { m_playerNum = number; }
+
     public TextMeshProUGUI shipName;
     public List<Slider> sliders;
     public Color readyColor;
@@ -124,7 +128,7 @@ public class ShipSelection : MonoBehaviour
         //-------------------------------------------------------------------------------------------------|
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |
         //-------------------------------------------------------------------------------------------------|
-        GameManager.gManager.uiCInput.ReadyPlayer(playerNum); // Readys this player                        |
+        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player                        |
         //-------------------------------------------------------------------------------------------------|
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations             |
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations |

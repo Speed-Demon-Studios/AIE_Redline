@@ -47,21 +47,27 @@ public class ManageSceneLoading : MonoBehaviour
     {
         InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
         AIMoveInputs aiMove = playerOBJ.GetComponent<AIMoveInputs>();
-        Destroy(aiMove);
-        playerOBJ.GetComponent<ShipsControls>().enabled = false;
-        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
         ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
         IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
-        controls.FireList().Clear();
-        GameObject a = shipCollider.gameObject;
-        GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
-        a.transform.parent = null;
-        b.transform.parent = null;
-        Destroy(a);
-        Destroy(b);
-        controls.VariantObject = null;
-        playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
         RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
+        PlayerInputScript playerInputScript = playerOBJ.GetComponent<PlayerInputScript>();
+        ActionMappingControl acm = playerOBJ.GetComponent<ActionMappingControl>();
+
+        GameObject shipCollisionObject = shipCollider.gameObject;
+        GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
+        Destroy(aiMove);
+
+        controls.FireList().Clear();
+        controls.VariantObject = null;
+
+        shipCollisionObject.transform.parent = null;
+        shipModelObject.transform.parent = null;
+
+        Destroy(shipCollisionObject);
+        Destroy(shipModelObject);
+
+        playerInputScript.playerReadyInMenu = false;
+
         racerDeets.finishedRacing = false;
         racerDeets.currentLap = 0;
         racerDeets.totalRaceTimeSeconds = 0;
@@ -75,6 +81,16 @@ public class ManageSceneLoading : MonoBehaviour
         controls.SetTurnMultipliers(0);
         controls.SetStrafeMultiplier(0);
 
+        playerOBJ.GetComponent<ShipsControls>().enabled = false;
+        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+
+        if(playerInputScript.GetPlayerNumber() != 1)
+        {
+            GameManager.gManager.numberOfPlayers -= 1;
+
+            acm.GetPlayerInput().gameObject.SetActive(false);
+
+        }
 
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         racerDeets.rCS.ClearList();

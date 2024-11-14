@@ -38,29 +38,25 @@ public class PlayerInputScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent    |
-        gMan = GameManager.gManager; // seting a reference to the GameManager                                                              |
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
+        m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
+        gMan = GameManager.gManager; // seting a reference to the GameManager
+        if (gMan != null) // if there is a GameManager                                         
+            gMan.players.Add(gameObject); // add this object to the players list in GameManager
 
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
-                                                                                                                                         //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (player != null) // chech for player so that we dont get error later                                                            |
-        {                                                                                                                                //|
-            AssignController(); // calls a function that help setup controllers for feedback                                               |
-        }                                                                                                                                //|
+        if (gMan != null) // if there is a GameManager                                         
+            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number           
+                                                                                               
+        if (player != null) // chech for player so that we dont get error later                
+        {                                                                                      
+            AssignController(); // calls a function that help setup controllers for feedback   
+        }                                                                                      
         if (!m_shipControls.isTestShip)
         {
-            if (m_virtualCam != null && playerLayers.Count > 0)                                                                          //|
-                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                        //|
-            if (cam != null && playerLayers.Count > 0)                                                                                   //|
-                cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                      //|
+            if (m_virtualCam != null && playerLayers.Count > 0)                                
+                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];              
+            if (cam != null && playerLayers.Count > 0)                                         
+                cam.cullingMask = ignoreLayers[m_playerNumber - 1];                            
         }
-        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
     /// <summary>
@@ -68,13 +64,8 @@ public class PlayerInputScript : MonoBehaviour
     /// </summary>
     public void PlayerDisconnect()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if(m_selection != null) // check if the selection is null                                                                          |
-            GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list  |
-        Destroy(m_selection.gameObject); // destroy the selection screen object                                                            |
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3      |
-        // will now become player 2                                                                                                        |
+        // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3
+        // will now become player 2
         for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)                                                    //|
         {                                                                                                                                //|
             if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)                    //|

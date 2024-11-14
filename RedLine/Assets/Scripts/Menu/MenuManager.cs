@@ -34,6 +34,12 @@ namespace MenuManagement
         {
             if (PlayerPrefs.GetFloat("AfterRace") == 1)
             {
+                foreach(GameObject player in GameManager.gManager.players)
+                {
+                    player.GetComponent<SelectionScreenSpawn>().SpawnShipSelection();
+                    if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() != 1)
+                        player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
+                }
                 PressStart();
                 m_gameLoadedAndStarted = false;
             }
