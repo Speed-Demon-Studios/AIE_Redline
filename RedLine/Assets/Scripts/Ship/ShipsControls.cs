@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShipsControls : MonoBehaviour
@@ -70,6 +71,7 @@ public class ShipsControls : MonoBehaviour
     public bool ReturnIsInRedline() { return m_isInRedline; }
     [SerializeField, Range(0,3)] private int m_boostLevel;
 
+    public TextMeshProUGUI test;
     public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
     private IEnumerator RedlineFalse()
@@ -401,7 +403,6 @@ public class ShipsControls : MonoBehaviour
                         }
                 }
             }
-            //m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }
     }
@@ -412,17 +413,21 @@ public class ShipsControls : MonoBehaviour
     IEnumerator ShipBoostAcceleration()
     {
         float time = 0;
+        float currentAcclerationForce = 0;
 
         if (m_boostLevel > 0)
             time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {
-            time -= Time.deltaTime;
+            if (test != null)
+                test.text = time.ToString();
 
-            Debug.Log(time + " Boosting time");
-            m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
-            Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
+            if(currentAcclerationForce <= accelerationForce)
+                currentAcclerationForce += 0.1f;
+            time -= 0.1f * Time.fixedDeltaTime;
+
+            m_rb.AddForce(transform.forward * currentAcclerationForce, ForceMode.Acceleration);
         }
 
         yield return new WaitForEndOfFrame();
@@ -433,7 +438,6 @@ public class ShipsControls : MonoBehaviour
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
-        Mathf.Clamp(m_rb.velocity.magnitude, 0, m_defaultMaxSpeed);
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;

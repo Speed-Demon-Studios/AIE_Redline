@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3948600599449153757}
   eventSystem: {fileID: 3458273097799416325}
-  uiController: {fileID: 0}
+  uiController: {fileID: 7553494501944669859}
   playerLayers: 08000000090000000a0000000b000000
   ignoreLayers:
   - serializedVersion: 2
@@ -339,15 +339,16 @@ MonoBehaviour:
     m_RotationOrder: 4
   shipAdjustSpeed: 0.075
   wantingToBoost: 0
-  accelerationForce: 10
+  accelerationForce: 5
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
   maxBoostSpeedChange: 300
   boostingTimes:
-  - 2
-  - 2.5
   - 3
+  - 3.5
+  - 4
   m_boostLevel: 0
+  test: {fileID: 0}
 --- !u!54 &2868536069181459851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1227,6 +1228,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2868536069371765821}
+    - target: {fileID: 8636046614560781477, guid: 43abdb9ab90fbdf4d943369271365a07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43abdb9ab90fbdf4d943369271365a07, type: 3}
 --- !u!95 &3427563666025197537 stripped

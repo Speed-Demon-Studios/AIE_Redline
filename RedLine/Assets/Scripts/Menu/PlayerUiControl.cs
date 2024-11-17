@@ -40,7 +40,7 @@ public class PlayerUiControl : MonoBehaviour
                     rDetails.currentLapTimeMINUTES, rDetails.currentLapTimeSECONDS, rDetails.quickestLapTimeMINUTES, rDetails.quickestLapTimeSECONDS, GameManager.gManager.allRacers.Count);
                 hud.UpdateHUD();
             }
-        }                                                                                                                                    
+        }
     }
 
     public void FinishPopUp()
@@ -51,7 +51,6 @@ public class PlayerUiControl : MonoBehaviour
 
     IEnumerator WaitToHideFinish()
     {
-        finishAnim.SetTrigger("Play");
         yield return new WaitForSeconds(2f);
         finishAnim.gameObject.SetActive(false);
     }

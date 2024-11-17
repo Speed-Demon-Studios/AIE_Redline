@@ -120,24 +120,23 @@ public class PlayerInputScript : MonoBehaviour
 
     private void CalculateFOV()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;             //|
-        // if the ship is moving slightly                                                                                                  |
-        if(speedPercentage > 0.001)                                                                                                      //|
-        {                                                                                                                                //|
-            m_desiredFOV = ((maxFOV - minFOV) * speedPercentage) + minFOV; // calculate the desiredFOV                                     |
-        }                                                                                                                                //|
-        else // if its not moving                                                                                                          |
-        {                                                                                                                                //|
-            m_desiredFOV = minFOV; // then the FOV is now the min it can go                                                                |
-        }                                                                                                                                //|
-        //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
-                                                                                                                                         //|
-        m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        if(m_virtualCam != null)                                                                                                         //|
-            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                               |
-        //---------------------------------------------------------------------------------------------------------------------------------|
+        // calculating how fast the ships going compaired to the top speed as a percentage                                  
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;
+        // if the ship is moving slightly
+        if(speedPercentage > 0.001)
+        {
+            m_desiredFOV = ((maxFOV - minFOV) * speedPercentage) + minFOV; // calculate the desiredFOV                      
+        }
+        else // if its not moving
+        {
+            m_desiredFOV = minFOV; // then the FOV is now the min it can go
+        }
+        //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);
+
+        m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth
+        m_currentFOV = Mathf.Clamp(m_currentFOV, 0, maxFOV + 10);
+        if(m_virtualCam != null) 
+            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                
     }
 
     /// <summary>

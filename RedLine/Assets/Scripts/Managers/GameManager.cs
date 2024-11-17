@@ -180,10 +180,6 @@ public class GameManager : MonoBehaviour
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
                 ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
 
-                //rB.velocity = new Vector3(0, 0, 0);
-                //rB.angularVelocity = new Vector3(0, 0, 0);
-
-                //rDeets.DisableShipControls();
                 sControls.ResetAcceleration();
                 AIMoveInputs test;
                 if (!racerOBJ.TryGetComponent<AIMoveInputs>(out test))
