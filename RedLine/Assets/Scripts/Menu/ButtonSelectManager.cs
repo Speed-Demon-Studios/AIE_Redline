@@ -1,3 +1,4 @@
+using Cinemachine;
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,17 @@ namespace DifficultyButtonSwitch
 {
     public class ButtonSelectManager : MonoBehaviour
     {
+        [Header("Player Selections")]
+        public int speedClass;
+
         [Header("Menus")]
 
         [SerializeField]
         private GameObject m_pressAToStart;
         [SerializeField]
         private GameObject m_title, m_speedClassSelect;
+        [SerializeField]
+        private CinemachineVirtualCamera[] m_cameras;
 
         [Header("Title")]
 
@@ -43,7 +49,7 @@ namespace DifficultyButtonSwitch
         private Transform m_topSpeedBar, m_topSpeedBarRed1, m_topSpeedBarRed2, m_accelerationBar, m_accelerationBarRed1, m_accelerationBarRed2, m_handlingBar, m_handlingBarRed1, m_handlingBarRed2;
 
         [SerializeField]
-        Animator m_splitwingAnim, m_fulcrumAnim, m_cutlassAnim, m_shipDisplayAnim, m_manufacturerDisplayAnim;
+        private Animator m_splitwingAnim, m_fulcrumAnim, m_cutlassAnim, m_shipDisplayAnim, m_manufacturerDisplayAnim;
 
         [SerializeField]
         private GameObject[] m_SplitwingModel, m_FulcrumModel, m_CutlassModel;
@@ -85,7 +91,12 @@ namespace DifficultyButtonSwitch
             m_cursorMat.color = Color.white;
             Tween.Color(m_cursorMat, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
             Tween.Color(m_pressStartToJoinText, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
-            m_shipDisplayAnim.SetTrigger("RotateShipDisplay");
+            
+            foreach (CinemachineVirtualCamera cam in m_cameras)
+            {
+                cam.Priority = 0;
+            }
+            m_cameras[0].Priority = 1;
 
         }
 
@@ -93,9 +104,31 @@ namespace DifficultyButtonSwitch
         {
             m_pressAToStart.SetActive(false);
             m_title.SetActive(true);
-            m_titleAnim.SetTrigger("TitleIn");
 
+            foreach (CinemachineVirtualCamera cam in m_cameras)
+            {
+                cam.Priority = 0;
+            }
+            m_cameras[1].Priority = 1;
+
+            m_titleAnim.SetTrigger("TitleIn");
         }
+
+
+        public void TransitionToClassSelect()
+        {
+            foreach (CinemachineVirtualCamera cam in m_cameras)
+            {
+                cam.Priority = 0;
+            }
+            m_cameras[2].Priority = 1;
+        }
+
+        public void TransitionToShipSelect()
+        {
+            m_shipDisplayAnim.SetTrigger("RotateShipDisplay");
+        }
+ 
 
         public void SpeedBarFill(float fillAmount)
         {
@@ -112,6 +145,12 @@ namespace DifficultyButtonSwitch
             Tween.LocalPosition(m_competitionSkillBarRed1, barPos, m_barChangeDuration, 0, m_barChangeTween);
             Tween.LocalPosition(m_competitionSkillBarRed2, barPos, m_barChangeDuration, 0.1f, m_barChangeTween);
         }
+
+        public void SelectClass(int speed) 
+        {
+            speedClass = speed;
+        }
+
 
         public void SpeedClassInfoChange(int speed)
         {
