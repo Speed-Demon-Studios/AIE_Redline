@@ -31,6 +31,8 @@ namespace MenuManagement
         private bool HasInitialized = true;
 
         public MenuManager GetMenuManager() { return m_mManager; }
+
+        public void ChangeGameManagerDifficulty(float change) { GameManager.gManager.ChangeDifficulty(change); }
         /// <summary>
         /// Adds another selectionMenu in for when a player joins
         /// </summary>
@@ -75,7 +77,7 @@ namespace MenuManagement
                         if (child.GetComponent<RedlineColliderSpawner>()) // If the child object has a redline collider spawner script      
                             redline = child.GetComponent<RedlineColliderSpawner>(); // then assign it to the redline reference              
                     }                                                                                                                    
-                    player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race            
+                    //player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race            
                     foreach (Transform child in player.transform) // do another check on the redline collider spawner reference             
                     {                                                                                                                    
                         FindEveryChild(child, redline);                                                                                  

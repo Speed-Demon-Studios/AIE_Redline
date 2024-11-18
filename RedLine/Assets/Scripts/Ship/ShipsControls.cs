@@ -141,9 +141,11 @@ public class ShipsControls : MonoBehaviour
                 m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
             }
         }
+
+        DifficultySpeedChange();
     }
 
-    public void DifficultySpeedChange()
+    private void DifficultySpeedChange()
     {
         m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
@@ -389,7 +391,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void ShipBoost()
     {
-        if (m_boostLevel > 0)
+        if (m_boostLevel > 0 && !GameManager.gManager.raceFinished)
         {
             m_isBoosting = true;
             ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
@@ -453,6 +455,7 @@ public class ShipsControls : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;
+        StopCoroutine(ShipBoostAcceleration());
     }
 
     /// <summary>
