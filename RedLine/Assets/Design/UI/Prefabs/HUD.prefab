@@ -620,23 +620,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyBarFill: {fileID: 563531685452913977}
+  energyLeadingEdgeLower: {fileID: 0}
+  energyLeadingEdgeUpper: {fileID: 0}
   speedBarFill: {fileID: 563531686161986043}
-  speedText: {fileID: 563531686823672977}
-  posText: {fileID: 563531686281351255}
-  lapText: {fileID: 563531686360604155}
-  lapTimeText: {fileID: 563531685544341456}
-  energyBarFillAmount: 0
-  speedBarFillAmount: 0
+  speedbarRedFill: {fileID: 0}
+  energyFullSegment1: {fileID: 0}
+  energyFullSegment2: {fileID: 0}
+  energyFullSegment3: {fileID: 0}
+  m_speedText: {fileID: 0}
+  m_posText: {fileID: 0}
+  m_lapText: {fileID: 0}
+  m_lapTimeText: {fileID: 0}
+  m_bestLapTime: {fileID: 0}
+  m_leadingEdgeWidth: 0
+  energySegmentPulse:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pulseLength: 0
   energyBarFillRange: {x: 0.025, y: 0.194}
+  energyLeadingEdgeFillRange: {x: 0, y: 0}
   speedBarFillRange: {x: 0.547, y: 0.66}
-  kph: 524
-  position: 1
-  totalPositions: 8
-  lap: 2
-  totalLaps: 3
-  lapTimes:
-  - 22.538
-  - 96.356
 --- !u!1 &563531686161986022
 GameObject:
   m_ObjectHideFlags: 0

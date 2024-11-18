@@ -27,7 +27,7 @@ public class PositionHandler : MonoBehaviour
         {
             for (int i = 0; i < 9; i++)
             {
-                int index = Random.Range(0, aiRacePrefabs.Count - 1);
+                int index = Random.Range(0, aiRacePrefabs.Count);
 
                 GameObject a = Instantiate(aiRacePrefabs[index]);
 
