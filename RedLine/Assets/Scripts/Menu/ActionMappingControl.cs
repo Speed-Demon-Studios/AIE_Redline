@@ -13,7 +13,7 @@ public class ActionMappingControl : MonoBehaviour
     private bool controlMapChanged = false;
     private int playerRacingActionMapIndex;
 
-    public PlayerInput getPlayerInput()
+    public PlayerInput GetPlayerInput()
     {
         return _playerInputActions;
     }

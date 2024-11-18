@@ -159,7 +159,9 @@ public class GameManager : MonoBehaviour
         {
             ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
-            racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+            if(racer.GetComponent<PlayerInputScript>() != null)
+                racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+
             sControls.ResetAcceleration();
             AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
             aiMove.SetVariant(sControls.VariantObject);
@@ -174,10 +176,6 @@ public class GameManager : MonoBehaviour
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
                 ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
 
-                //rB.velocity = new Vector3(0, 0, 0);
-                //rB.angularVelocity = new Vector3(0, 0, 0);
-
-                //rDeets.DisableShipControls();
                 sControls.ResetAcceleration();
                 AIMoveInputs test;
                 if (!racerOBJ.TryGetComponent<AIMoveInputs>(out test))

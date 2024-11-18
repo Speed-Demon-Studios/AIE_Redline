@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MenuManagement;
 using System;
+using DifficultyButtonSwitch;
 
 namespace MenuManagement
 {
@@ -25,6 +26,7 @@ namespace MenuManagement
         public SetMenu start;
         public SetMenu mainMenu;
         private SetMenu m_currentMenu;
+        public ButtonSelectManager bSelect;
 
         public MenuType GetCurrentType() { return m_currentMenuType; }
         public SetMenu GetCurrentMenu() { return m_currentMenu; }
@@ -32,6 +34,20 @@ namespace MenuManagement
         // Start is called before the first frame update
         void Start()
         {
+            if (PlayerPrefs.GetFloat("AfterRace") == 1)
+            {
+                foreach(GameObject player in GameManager.gManager.players)
+                {
+                    player.GetComponent<SelectionScreenSpawn>().Initialize();
+                    if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() != 1)
+                        player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
+                }
+                PressStart();
+                m_gameLoadedAndStarted = false;
+            }
+            else
+                m_gameLoadedAndStarted = false;
+
 
         }
 
@@ -49,28 +65,20 @@ namespace MenuManagement
                 m_currentMenu = mainMenu;
                 m_currentMenu.gameObject.SetActive(true);
                 GameManager.gManager.uiCInput.ResetFirstButton(0, mainMenu.menuStartButtons[0]);
+                bSelect.TransitionToTitle();
                 m_gameLoadedAndStarted = true;
             }
         }
 
         public void BackOutMenu(int playerNumber)
         {
-            switch (m_currentMenuType)
+            if(m_currentMenuType != MenuType.ShipSelectionReady)
+                m_currentMenu.OnBackButton();
+            else
             {
-                case MenuType.Difficulty:
-                    Back();
-                    break;
-                case MenuType.Option:
-                    Back();
-                    break;
-                case MenuType.Credits:
-                    Back();
-                    break;
-                case MenuType.ShipSelectionReady:
-                    GameManager.gManager.uiCInput.UnReadyPlayer(playerNumber);
-                    break;
-
+                GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().GetShipSelection().UnReady();
             }
+
         }
 
         public void SwitchMenu(SetMenu switchingTo)
