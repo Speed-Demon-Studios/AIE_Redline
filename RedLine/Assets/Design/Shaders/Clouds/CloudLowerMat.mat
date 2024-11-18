@@ -10,14 +10,18 @@ Material:
   m_Name: CloudLowerMat
   m_Shader: {fileID: -6465566751694194690, guid: f92a3e66cde68bf4bac8c34a8126d770,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -47,12 +51,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 1
     - _Alpha_Clip: 0.27
     - _Alpha_Clip_Threshold: 0
+    - _Blend: 0
+    - _CastShadows: 0
     - _Cloud_Height: 7.2
     - _Cloud_Size: 60
     - _Cloud_Size_2: 25
     - _Cloud_intensity: 0.961
+    - _Cull: 2
+    - _DstBlend: 0
     - _Fluff_Scale_1: 600
     - _Fluff_Scale_2: 200
     - _Fluff_Texture_Strength: 0.19
@@ -60,13 +69,20 @@ Material:
     - _Normal_Influence: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 0
     - _SSS_Intensity: 2.22
     - _SSS_Power: 6.84
     - _Smoothness: 1.67
+    - _SrcBlend: 1
+    - _Surface: 0
     - _Tiling: 4
     - _Whisp_Density: 334.91
     - _Whisp_Intensity: 0
     - _Whisp_Power: 3.4
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Cloud_Color_1: {r: 4.474769, g: 5.3956666, b: 6.282457, a: 0.57254905}
