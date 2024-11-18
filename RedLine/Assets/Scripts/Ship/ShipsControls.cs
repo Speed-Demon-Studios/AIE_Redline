@@ -180,10 +180,12 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void SwitchFire()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
         if (!isTestShip)
         {
             if (m_fire.Count > 0)
             {
+                
                 m_fireIndex = m_boostLevel;
                 switch (m_fireIndex)
                 {
@@ -193,16 +195,34 @@ public class ShipsControls : MonoBehaviour
                         m_fire[2].SetActive(false);
                         break;
                     case 1:
+                        if (PAC != null && m_fire[0].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.0f);
+                            PAC.SetBoostPitch(1, 1.55f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[0].SetActive(true);
                         m_fire[1].SetActive(false);
                         m_fire[2].SetActive(false);
                         break;
                     case 2:
+                        if (PAC != null && m_fire[1].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.3f);
+                            PAC.SetBoostPitch(1, 1.3f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[1].SetActive(true);
                         m_fire[2].SetActive(false);
                         m_fire[0].SetActive(false);
                         break;
                     case 3:
+                        if (PAC != null && m_fire[2].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.5f);
+                            PAC.SetBoostPitch(1, 0.75f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[2].SetActive(true);
                         m_fire[0].SetActive(false);
                         m_fire[1].SetActive(false);
@@ -231,7 +251,10 @@ public class ShipsControls : MonoBehaviour
 
         }
         if (m_fire.Count > 0)
+        {
+            
             SwitchFire();
+        }
     }
 
     /// <summary>
@@ -360,6 +383,14 @@ public class ShipsControls : MonoBehaviour
     /// <param name="force"> How strong the boost is </param>
     public void BoostPadBoost(float force)
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            //PAC.SetBoostPitch(0, 1.0f);
+            PAC.SetBoostPitch(1, 1.0f);
+            //PAC.PlayBoostAudio(0);
+            PAC.PlayBoostAudio(1);
+        }
         m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
         if (m_fire.Count > 0)
@@ -405,6 +436,7 @@ public class ShipsControls : MonoBehaviour
                         }
                 }
             }
+            
             //m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }
@@ -415,6 +447,11 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+
+        PAC.PlayBoostAudio(0);
+        PAC.PlayBoostAudio(1);
+        PAC.PlayBoostAudio(2);
         float time = 0;
 
         if (m_boostLevel > 0)
@@ -441,6 +478,8 @@ public class ShipsControls : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;
+
+        StopCoroutine(ShipBoostAcceleration());
     }
 
     /// <summary>

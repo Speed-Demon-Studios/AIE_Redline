@@ -15,7 +15,6 @@ public class ShipToWallCollision : MonoBehaviour
     private float defaultAcceleration;
     private bool intoWall = false;
     private bool detailsSet = false;
-    private bool crashPlayed = false;
     private bool crashDelayFinished = true;
     private bool crashDelayStarted = false;
     private bool stillColliding = false;
@@ -55,23 +54,12 @@ public class ShipToWallCollision : MonoBehaviour
         if (other.transform.tag.ToLower() == "walls")
         {
             PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+            if (sControlScript == null)
+            {
+                sControlScript = this.GetComponent<ShipsControls>();
+            }
+            
             intoWall = true;
-            //if (stillColliding == false)
-            //{
-            //    if (crashPlayed == false)
-            //    {
-            //        crashPlayed = true;
-            //
-            //        if (crashDelayStarted == false && crashDelayFinished == true)
-            //        {
-            //            crashDelayFinished = false;
-            //            crashDelayStarted = true;
-            //
-            //            PAC.PlayGPSFX(0);
-            //            StartCoroutine(CrashDelayTimer());
-            //        }
-            //    }
-            //}
         }
     }
 

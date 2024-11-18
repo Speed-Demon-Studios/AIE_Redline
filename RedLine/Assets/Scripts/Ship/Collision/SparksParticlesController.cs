@@ -66,7 +66,7 @@ public class SparksParticlesController : MonoBehaviour
                     {
                         foreach (GameObject sparksPE in sT.sparks)
                         {
-                            if (sparksPE != null)
+                            if (sparksPE != null && sT != null)
                             {
                                 ActivateSparks(sparksPE);
                             }
