@@ -13,75 +13,47 @@ namespace DifficultyButtonSwitch
     {
         [Header("Player Selections")]
         public int speedClass;
+        public int m_manufacturer = 1;
+        public bool timeTrial;
 
         [Header("Menus")]
-
-        [SerializeField]
-        private GameObject m_pressAToStart;
-        [SerializeField]
-        private GameObject m_title, m_speedClassSelect;
-        [SerializeField]
-        private CinemachineVirtualCamera[] m_cameras;
+        [SerializeField] private GameObject m_pressAToStart;
+        [SerializeField] private GameObject m_title;
+        [SerializeField] private GameObject m_speedClassSelect;
+        [SerializeField] private GameObject m_transitionToLoadingScreen;
+        [SerializeField] private CinemachineVirtualCamera[] m_cameras;
 
         [Header("Title")]
-
-        [SerializeField]
-        private Animator m_titleAnim;
-
+        [SerializeField] private Animator m_titleAnim;
         [SerializeField] private AnimationCurve m_titleFillCurve;
 
         [Header("Class Select")]
-
-        [SerializeField]
-        private AnimationCurve m_barChangeTween;
-        [SerializeField]
-        private float m_barChangeDuration, m_barLength;
-        [SerializeField]
-        private Transform m_speedBar, m_speedBarRed1, m_speedBarRed2, m_competitionSkillBar, m_competitionSkillBarRed1, m_competitionSkillBarRed2;
-        [SerializeField]
-        Animator m_debutAnimator, m_proAnimator, m_eliteAnimator;
+        [SerializeField] private AnimationCurve m_barChangeTween;
+        [SerializeField] private float m_barChangeDuration, m_barLength;
+        [SerializeField] private Transform m_speedBar, m_speedBarRed1, m_speedBarRed2, m_competitionSkillBar, m_competitionSkillBarRed1, m_competitionSkillBarRed2;
+        [SerializeField] private Animator m_debutAnimator, m_proAnimator, m_eliteAnimator;
 
         [Header("Vehicle Select")]
-        [SerializeField]
-        private TextMeshProUGUI m_pressStartToJoinText;
-
-        [SerializeField]
-        private Transform m_topSpeedBar, m_topSpeedBarRed1, m_topSpeedBarRed2, m_accelerationBar, m_accelerationBarRed1, m_accelerationBarRed2, m_handlingBar, m_handlingBarRed1, m_handlingBarRed2;
-
-        [SerializeField]
-        private Animator m_splitwingAnim, m_fulcrumAnim, m_cutlassAnim, m_shipDisplayAnim, m_manufacturerDisplayAnim;
-
-        [SerializeField]
-        private GameObject[] m_SplitwingModel, m_FulcrumModel, m_CutlassModel;
-
-        [SerializeField]
-        private GameObject m_citadelShips, m_falconShips, m_monarchShips;
-
-        public int m_manufacturer = 1;
-
-        [SerializeField]
-        private Sprite m_citadelImage, m_falconImage, m_monarchImage;
-
-        [SerializeField]
-        private Image m_manufacturerImage, m_manufacturerImageRed;
+        [SerializeField] private TextMeshProUGUI m_pressStartToJoinText;
+        [SerializeField] private Transform m_topSpeedBar, m_topSpeedBarRed1, m_topSpeedBarRed2, m_accelerationBar, m_accelerationBarRed1, m_accelerationBarRed2, m_handlingBar, m_handlingBarRed1, m_handlingBarRed2;
+        [SerializeField] private Animator m_splitwingAnim, m_fulcrumAnim, m_cutlassAnim, m_shipDisplayAnim, m_manufacturerDisplayAnim, m_shipSelectAnimator;
+        [SerializeField] private GameObject[] m_SplitwingModel, m_FulcrumModel, m_CutlassModel;
+        [SerializeField] private GameObject m_citadelShips, m_falconShips, m_monarchShips;
+        [SerializeField] private Sprite m_citadelImage, m_falconImage, m_monarchImage;
+        [SerializeField] private Image m_manufacturerImage, m_manufacturerImageRed;
 
         [Header("Other")]
-
-        [SerializeField]
-        private Material m_cursorMat;
-
-        [SerializeField]
-        private AnimationCurve m_cursorPulseCurve;
-
-        [SerializeField]
-        private float m_cursorPulseDuration;
+        [SerializeField] private Material m_cursorMat;
+        [SerializeField] private AnimationCurve m_cursorPulseCurve;
+        [SerializeField] private float m_cursorPulseDuration;
+        [SerializeField] private GameObject m_sunFlare;
+        [SerializeField] private Animator m_blackoutAnimator;
 
         private void Update()
         {
-            // for testing manufacturer change
+            // For testing manufacturer change
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("CHAAAAAANGE");
                 ManufacturerChange();
             }
         }
@@ -89,6 +61,7 @@ namespace DifficultyButtonSwitch
         private void OnEnable()
         {
             m_cursorMat.color = Color.white;
+            m_pressStartToJoinText.color = Color.white;
             Tween.Color(m_cursorMat, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
             Tween.Color(m_pressStartToJoinText, Color.red, m_cursorPulseDuration, 0, m_cursorPulseCurve, Tween.LoopType.Loop);
             
@@ -115,8 +88,9 @@ namespace DifficultyButtonSwitch
         }
 
 
-        public void TransitionToClassSelect()
+        public void TransitionToClassSelect(bool timeTrialSelected)
         {
+            timeTrial = timeTrialSelected;
             foreach (CinemachineVirtualCamera cam in m_cameras)
             {
                 cam.Priority = 0;
@@ -128,7 +102,34 @@ namespace DifficultyButtonSwitch
         {
             m_shipDisplayAnim.SetTrigger("RotateShipDisplay");
         }
- 
+
+        public void Ready()
+        {
+            m_shipSelectAnimator.SetTrigger("Ready");
+            Invoke("TransitionToLoadingScreen", 1f);
+        }
+
+        public void Ready2Player()
+        {
+            m_shipSelectAnimator.SetTrigger("Ready2Player");
+            Invoke("TransitionToLoadingScreen", 1f);
+        }
+
+        public void Ready3Or4Player()
+        {
+            m_shipSelectAnimator.SetTrigger("Ready3Or4Player");
+            Invoke("TransitionToLoadingScreen", 1f);
+        }
+
+        public void TransitionToLoadingScreen()
+        {
+            m_transitionToLoadingScreen.SetActive(true);
+            m_sunFlare.SetActive(false);
+            m_blackoutAnimator.SetTrigger("Blackout");
+
+
+        }
+
 
         public void SpeedBarFill(float fillAmount)
         {
@@ -180,6 +181,7 @@ namespace DifficultyButtonSwitch
             }
         }
 
+        // SHIPS: 1 = Splitwing, 2 = Fulcrum, 3 = Cutlass
         public void VehicleInfoChange(int ship)
         {
             switch (ship)
@@ -240,6 +242,8 @@ namespace DifficultyButtonSwitch
 
             }
         }
+
+
 
         // MANUFACTURERS: 1 = Citadel, 2 = Falcon, 3 = Monarch
         public void ManufacturerChange()
