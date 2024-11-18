@@ -122,33 +122,22 @@ public class ShipSelection : MonoBehaviour
     /// </summary>
     public void Ready()
     {
-        //-------------------------------------------------------------------------------------------------|
-        // Sets ship variants                                                                              |
-        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];                      //|
-        //-------------------------------------------------------------------------------------------------|
-        m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement          |
-        //-------------------------------------------------------------------------------------------------|
-        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player                        |
-        //-------------------------------------------------------------------------------------------------|
-        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations             |
-            m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations |
-        //-------------------------------------------------------------------------------------------------|
-        border.GetComponent<RawImage>().color = readyColor; // switch to the red ready color               |
-        //-------------------------------------------------------------------------------------------------|
+        // Sets ship variants
+        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
+        m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement
+        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
+        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
+            m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
 
     }
     public void UnReady()
     {
-        //-------------------------------------------------------------------------------------------------|
-        // Sets ship variants                                                                              |
-        m_ship.GetComponent<ShipsControls>().VariantObject = null;                                       //|
-        //-------------------------------------------------------------------------------------------------|
-        m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement         |
-        //-------------------------------------------------------------------------------------------------|
-        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations    |
-        //-------------------------------------------------------------------------------------------------|
-        border.GetComponent<RawImage>().color = notReady; // switch to the red ready color                 |
-        //-------------------------------------------------------------------------------------------------|
+        // Sets ship variants
+        m_ship.GetComponent<ShipsControls>().VariantObject = null;
+        m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement 
+        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations 
+        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
+            m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
 
     }
 

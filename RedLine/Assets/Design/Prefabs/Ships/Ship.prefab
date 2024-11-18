@@ -276,12 +276,12 @@ MonoBehaviour:
     m_Bits: 1271
   - serializedVersion: 2
     m_Bits: 2295
-  m_virtualCam: {fileID: 8177504199516520170}
   cam: {fileID: 2868536069371765821}
-  playerReadyInMenu: 0
+  m_virtualCam: {fileID: 8177504199516520170}
   lerpTime: 0.05
   minFOV: 85
   maxFOV: 120
+  playerReadyInMenu: 0
 --- !u!114 &2868536069181459848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,8 +1278,23 @@ PrefabInstance:
       objectReference: {fileID: 4743079490640136170}
     - target: {fileID: 5096127917932451959, guid: 9fc4266d9e850bf45891b263eab70328,
         type: 3}
+      propertyPath: m_Priority
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096127917932451959, guid: 9fc4266d9e850bf45891b263eab70328,
+        type: 3}
       propertyPath: m_Lens.FieldOfView
       value: 96.7701
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096127917932451959, guid: 9fc4266d9e850bf45891b263eab70328,
+        type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096127917932451959, guid: 9fc4266d9e850bf45891b263eab70328,
+        type: 3}
+      propertyPath: m_Lens.m_SensorSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5096127917932451960, guid: 9fc4266d9e850bf45891b263eab70328,
         type: 3}
@@ -1340,6 +1355,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShipViewDefaultVC
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096127917932451961, guid: 9fc4266d9e850bf45891b263eab70328,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5096127917954527232, guid: 9fc4266d9e850bf45891b263eab70328,
         type: 3}

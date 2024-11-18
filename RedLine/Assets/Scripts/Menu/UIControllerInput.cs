@@ -16,7 +16,6 @@ namespace MenuManagement
         //private PlayerInputManager PIM;
 
         [SerializeField] private int currentMenuObjectIndex = 0;
-        public TextMeshProUGUI playerCountText;
         private int m_numberOfPalyers;
         public void SetNumberOfPlayers(int number) { m_numberOfPalyers = number; }
         public int GetNumberOfPlayers() { return m_numberOfPalyers; }
@@ -39,8 +38,6 @@ namespace MenuManagement
         public void AddToPlayers()
         {
             m_numberOfPalyers += 1;
-            if (playerCountText != null)
-                playerCountText.text = "Player Count: " + m_numberOfPalyers;
 
             GameManager.gManager.AddToNumberOfPlayers();
 
@@ -50,18 +47,12 @@ namespace MenuManagement
 
         private void Awake()
         {
+            m_mManager = GetComponent<MenuManager>();
             GameManager.gManager.uiCInput = this; // Sets the gameManagers reference to this script
             GameManager.gManager.CurrentScene = "MainMenu";// Sets a string to MainMenu to know when we are in main menu 
             GameManager.gManager.disablePlayerCams = true; // turns a bool on that will disaple all cameras when in the main menu
             GameManager.gManager.resetRacerVariables = true; // turns a bool on that will let the game know the players variables are ready
             GameManager.gManager.mSL.SetPlayerUIInputMM(); // Reseting player 1 main menu button 
-            m_mManager = GetComponent<MenuManager>();
-        }
-
-        private void Update()
-        {
-            if (playerCountText != null)
-                playerCountText.text = "Player Count: " + m_numberOfPalyers;
         }
 
         public void GoToRace()

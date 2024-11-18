@@ -13,31 +13,44 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class PlayerInputScript : MonoBehaviour
 {
+    [Header("References")]
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
     public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    private GameManager gMan;
+    private ShipSelection m_selection;
+
+    [Header("Player Camera Stuff")]
     public List<int> playerLayers = new();
     public List<LayerMask> ignoreLayers = new();
-
-    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
     public Camera cam;
-    private int m_playerNumber;
-    public void SetPlayerNumber(int number) { m_playerNumber = number; }
-    public int GetPlayerNumber() { return m_playerNumber; }
-    private GameManager gMan;
-    public bool playerReadyInMenu;
-    private ShipSelection m_selection;
-    public void SetSelection(ShipSelection selection) { m_selection = selection; }
-    public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
-    public ShipSelection ReturnShipSelection() { return m_selection; }
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
 
+    [Header("Camera Values")]
     private float m_currentFOV;
     private float m_desiredFOV;
     public float lerpTime;
     public float minFOV;
     public float maxFOV;
+
+    private int m_playerNumber;
+    public bool playerReadyInMenu;
+
+
+    /////////////////////////////////////////////////////////////////
+    ///                                                          ///
+    ///      All of the getters and setters in this script       ///
+    ///                                                          ///
+   /////////////////////////////////////////////////////////////////
+    public void SetPlayerNumber(int number) { m_playerNumber = number; }
+    public int GetPlayerNumber() { return m_playerNumber; }
+
+    public void SetSelection(ShipSelection selection) { m_selection = selection; }
+    public ShipSelection GetShipSelection() { return m_selection; }
+    public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
+    public ShipSelection ReturnShipSelection() { return m_selection; }
 
     // Start is called before the first frame update
     private void Awake()
@@ -140,10 +153,8 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
         if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
-            CalculateFOV(); // calculate the FOV for the camera                                                                            |
-        //---------------------------------------------------------------------------------------------------------------------------------|
+            CalculateFOV(); // calculate the FOV for the camera
     }
 
     private void CalculateFOV()
