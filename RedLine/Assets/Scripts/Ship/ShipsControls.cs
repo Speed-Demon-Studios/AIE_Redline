@@ -29,7 +29,9 @@ public class ShipsControls : MonoBehaviour
     private float m_acceleration;
     private float m_currentMaxSpeed;
     private float m_defaultMaxSpeed;
+    private bool m_hasDoneDifficultyChange;
 
+    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
     public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
     public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
     public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
@@ -73,6 +75,8 @@ public class ShipsControls : MonoBehaviour
 
     public TextMeshProUGUI test;
     public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
+
+
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
     private IEnumerator RedlineFalse()
     {
@@ -114,21 +118,28 @@ public class ShipsControls : MonoBehaviour
         Instantiate(VariantObject.collision, collisionParent);
     }
 
-    // Start is called before the first frame update
-    void Awake()
+    public void DeInitialize()
     {
-        m_rb = GetComponent<Rigidbody>();
+        ResetPositions(new Vector3(0, 0, 0));
+        ResetAcceleration();
+        ResetAngles(0, 0, 0);
     }
 
-    private void OnEnable()
+    public void Initialize(bool isAIShip = false)
     {
-        if (shipModel != null)
+        m_rb = GetComponent<Rigidbody>();
+
+        if (!isAIShip)
         {
-            FindChildWithTag(shipModel.transform);
-        }
-        if (VariantObject != null)
-        {
-            m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
+            AttachModels();
+            if (shipModel != null)
+            {
+                FindChildWithTag(shipModel.transform);
+            }
+            if (VariantObject != null && !m_hasDoneDifficultyChange)
+            {
+                m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
+            }
         }
     }
 
@@ -137,6 +148,7 @@ public class ShipsControls : MonoBehaviour
         m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
         m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
+        m_hasDoneDifficultyChange = true;
     }
 
     private void FindChildWithTag(Transform childParent)
@@ -519,5 +531,5 @@ public class ShipsControls : MonoBehaviour
     public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
     public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
-    public void IsBoosting() { ShipBoost(); }
+    public void WantToBoost() { ShipBoost(); }
 }

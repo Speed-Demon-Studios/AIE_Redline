@@ -15,6 +15,11 @@ public class RaceManager : MonoBehaviour
         GameManager.gManager.CurrentScene = "Race";
         GameManager.gManager.enablePlayerCams = true;
 
+        foreach(GameObject playerOBJ in GameManager.gManager.players)
+        {
+            playerOBJ.GetComponent<InitializeBeforeRace>().Initialize();
+        }
+
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
@@ -72,16 +77,13 @@ public class RaceManager : MonoBehaviour
 
                 if (playerInit != null)
                 {
-
-                    playerInit.InitializeForRace();
+                    playerInit.InitializeForRace(gObj);
                 }
                 yield return new WaitForEndOfFrame();
 
 
                 if (gObj.GetComponent<RacerDetails>() != null)
                     gObj.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
-                {
-                }
             }
         }
         coroutineStarted = false;

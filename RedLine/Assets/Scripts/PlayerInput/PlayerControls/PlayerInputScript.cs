@@ -1,4 +1,5 @@
 using Cinemachine;
+using MenuManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class PlayerInputScript : MonoBehaviour
 {
@@ -36,7 +40,7 @@ public class PlayerInputScript : MonoBehaviour
     public float maxFOV;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
         gMan = GameManager.gManager; // seting a reference to the GameManager
@@ -64,29 +68,53 @@ public class PlayerInputScript : MonoBehaviour
     /// </summary>
     public void PlayerDisconnect()
     {
-        // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3
-        // will now become player 2
-        for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)                                                    //|
-        {                                                                                                                                //|
-            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)                    //|
-            {                                                                                                                            //|
-                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);                                    //|
-            }                                                                                                                            //|
-        }                                                                                                                                //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (GameManager.gManager.players.Contains(this.gameObject)) // if the players list contains this object                            |
-        {                                                                                                                                //|
-            GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
-        }                                                                                                                                //|
-        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
-        {                                                                                                                                //|
-            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
-        }                                                                                                                                //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        GameManager.gManager.numberOfPlayers -= 1;                                                                                       //|
-        GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1); // -1 from number of player in the uicontroller script   |
-        Destroy(this.gameObject);                                                                                                        //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (GameManager.gManager.CurrentScene != "Race")
+        {
+            // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3
+            // will now become player 2
+            for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
+            {
+                if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)
+                {
+                    GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
+                }
+            }
+            foreach(Transform child in GameManager.gManager.uiCInput.GetMenuManager().gameObject.transform)
+            {
+                SetMenu temp;
+                if(child.TryGetComponent<SetMenu>(out temp))
+                {
+                    if(temp.typeOfMenu == MenuType.ShipSelectionReady)
+                    {
+                        temp.menuStartButtons.Remove(m_selection.GetComponentInChildren<Button>());
+                    }
+                }
+            }
+            foreach (InputDevice device in InputUser.GetUnpairedInputDevices())
+            {
+                InputUser.GetUnpairedInputDevices().Remove(device);
+            }
+
+            Destroy(m_selection.gameObject);
+
+            if (GameManager.gManager.players.Contains(this.gameObject)) // if the players list contains this object
+            {
+                GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list
+            }
+            if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object
+            {
+                GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list
+            }
+            GameManager.gManager.numberOfPlayers -= 1;
+
+            // -1 from number of player in the uicontroller script
+            GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1);
+            Destroy(this.gameObject);
+        }
+        else
+        {
+
+        }
     }
     
     /// <summary>
@@ -245,7 +273,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.IsBoosting();
+            m_shipControls.WantToBoost();
         }
     }
 

@@ -36,7 +36,7 @@ namespace MenuManagement
             {
                 foreach(GameObject player in GameManager.gManager.players)
                 {
-                    player.GetComponent<SelectionScreenSpawn>().SpawnShipSelection();
+                    player.GetComponent<SelectionScreenSpawn>().Initialize();
                     if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() != 1)
                         player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
                 }

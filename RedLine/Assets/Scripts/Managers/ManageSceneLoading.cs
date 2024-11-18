@@ -77,9 +77,8 @@ public class ManageSceneLoading : MonoBehaviour
         racerDeets.quickestLapTimeSECONDS = 99;
         racerDeets.quickestLapTimeMINUTES = 99;
 
-        controls.SetBrakeMultiplier(0);
-        controls.SetTurnMultipliers(0);
-        controls.SetStrafeMultiplier(0);
+        controls.ChangeDoneDifficulty(false);
+        controls.DeInitialize();
 
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;

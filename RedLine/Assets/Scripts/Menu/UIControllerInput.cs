@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -63,41 +64,43 @@ namespace MenuManagement
 
         public void GoToRace()
         {
-            if (HasInitialized == true) //                                                                                                  
-            { //                                                                                                                            
+            if (HasInitialized == true)                                                                                                  
+            {                                                                                                                            
                 foreach (GameObject player in GameManager.gManager.players) // For each player in the player list                           
-                { //                                                                                                                        
+                {                                                                                                                        
                     player.GetComponent<PlayerInputScript>().player.SwitchCurrentActionMap("Player"); // Switch the action map to player    
                     RedlineColliderSpawner redline = null; // Makes a new reference to the redline collider spawner script                  
                     foreach (Transform child in player.transform) // for each child object in the player object                             
-                    { //                                                                                                                    
+                    {                                                                                                                    
                         if (child.GetComponent<RedlineColliderSpawner>()) // If the child object has a redline collider spawner script      
                             redline = child.GetComponent<RedlineColliderSpawner>(); // then assign it to the redline reference              
-                    } //                                                                                                                    
-                    player.GetComponent<ShipsControls>().AttachModels(); // Attach the models of the ship the player selected               
+                    }                                                                                                                    
+                    player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race            
                     foreach (Transform child in player.transform) // do another check on the redline collider spawner reference             
-                    { //                                                                                                                    
-                        FindEveryChild(child, redline); //                                                                                  
-                    } //                                                                                                                    
+                    {                                                                                                                    
+                        FindEveryChild(child, redline);                                                                                  
+                    }                                                                                                                    
                     ActionMappingControl aMC = player.GetComponent<ActionMappingControl>(); // Reseting the first selected buttons 
-                    aMC.mES.firstSelectedGameObject = null; //                                           
-                    aMC.mES.SetSelectedGameObject(null); //                                              
-                } //                                                                                     
-                Debug.Log("Loading Race Scene"); //                                                      
-                Debug.Log("Ready To Start Race"); //                                                     
+                    aMC.mES.firstSelectedGameObject = null;                                          
+                    aMC.mES.SetSelectedGameObject(null);                                             
+                }
+                
+                //Debug.Log("Loading Race Scene");                                                     
+                //Debug.Log("Ready To Start Race");
+
                 GameManager.gManager.racerObjects = new List<GameObject>(); // Empty the racerObject List
                 for (int i = GameManager.gManager.allRacers.Count - 1; i >= 0; i--)                      
-                {                                                                                        
-                    GameObject temp = GameManager.gManager.allRacers[i];                                 
-                                                                                                         
+                {
+                    GameObject temp = GameManager.gManager.allRacers[i];
+               
                     if (temp == null)                                                                    
-                    {                                                                                    
+                    {   
                         GameManager.gManager.allRacers.Remove(temp);                                     
-                    }                                                                                    
-                }                                                                                        
+                    }
+                }
                 PlayerPrefs.SetInt("SceneID", 2);                                                        
                 SceneManager.LoadSceneAsync(3); // Load the new race scene                               
-            } //                                                                                         
+            }                                                                                          
         }
 
         /// <summary>

@@ -165,7 +165,9 @@ public class GameManager : MonoBehaviour
         {
             ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
-            racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+            if(racer.GetComponent<PlayerInputScript>() != null)
+                racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+
             sControls.ResetAcceleration();
             AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
             aiMove.SetVariant(sControls.VariantObject);

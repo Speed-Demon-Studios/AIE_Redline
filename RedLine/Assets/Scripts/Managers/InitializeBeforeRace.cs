@@ -31,9 +31,8 @@ public class InitializeBeforeRace : MonoBehaviour
     //    }
     //}
 
-    private void Awake()
+    public void Initialize()
     {
-
         if (!GetComponent<ShipsControls>().isTestShip)
         {
             foreach (GameObject playerOBJ in GameManager.gManager.players)
@@ -73,7 +72,7 @@ public class InitializeBeforeRace : MonoBehaviour
         sControls.enabled = true;
     }
 
-    public void InitializeForRace()
+    public void InitializeForRace(GameObject racerOBJ)
     {
         GameManager.gManager.raceFinished = false;
 
@@ -84,22 +83,20 @@ public class InitializeBeforeRace : MonoBehaviour
 
 
         GameManager.gManager.raceStarted = false;
-        foreach (GameObject racerOBJ in GameManager.gManager.players)
-        {
-            RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
-            //if (GetComponentInChildren<IsShipCollider>().gameObject != null && GetComponentInChildren<IsShipCollider>() != null)
-            //{
-            //    GetComponentInChildren<IsShipCollider>().shipControls = sControls;
-            //}
 
-            rDeets.finishedRacing = false;
-            rDeets.crossedFinishLine = false;
-            
-            rb.velocity = new Vector3(0, 0, 0);
-            rb.angularVelocity = new Vector3(0, 0, 0);
-            sControls.ResetAcceleration();
-            rb.isKinematic = true;
-            DisableShipControls();
-        }
+        RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
+        //if (GetComponentInChildren<IsShipCollider>().gameObject != null && GetComponentInChildren<IsShipCollider>() != null)
+        //{
+        //    GetComponentInChildren<IsShipCollider>().shipControls = sControls;
+        //}
+
+        rDeets.finishedRacing = false;
+        rDeets.crossedFinishLine = false;
+        
+        rb.velocity = new Vector3(0, 0, 0);
+        rb.angularVelocity = new Vector3(0, 0, 0);
+        sControls.ResetAcceleration();
+        rb.isKinematic = true;
+        DisableShipControls();
     }
 }

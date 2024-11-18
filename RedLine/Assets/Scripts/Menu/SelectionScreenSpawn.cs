@@ -10,10 +10,15 @@ public class SelectionScreenSpawn : MonoBehaviour
 
     private void Awake()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         SpawnShipSelection();
     }
 
-    public void SpawnShipSelection()
+    private void SpawnShipSelection()
     {
         m_playerNumber = GetComponent<PlayerInputScript>().GetPlayerNumber();// set player number
 
