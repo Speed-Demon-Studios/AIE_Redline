@@ -26,8 +26,8 @@ public class LoadingScreen : MonoBehaviour
 
         while (!operation.isDone)
         {
-            m_currentLoading = operation.progress / 0.9f;
-            loadingBar.fillAmount = m_currentLoading;
+            float currentLoading = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingBar.fillAmount = currentLoading;
             yield return null;
         }
 

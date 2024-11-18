@@ -22,7 +22,7 @@ namespace Dreamteck
         public int[] triangles = new int[0];
         public List<int[]> subMeshes = new List<int[]>();
         public TS_Bounds bounds = new TS_Bounds(Vector3.zero, Vector3.zero);
-        public UnityEngine.Rendering.IndexFormat indexFormat = UnityEngine.Rendering.IndexFormat.UInt16;
+        public UnityEngine.Rendering.IndexFormat indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
         public volatile bool hasUpdate = false;
 

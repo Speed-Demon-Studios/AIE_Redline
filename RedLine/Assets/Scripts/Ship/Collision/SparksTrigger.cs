@@ -7,7 +7,7 @@ public class SparksTrigger : MonoBehaviour
 {
     private SparksParticlesController m_spc;
 
-    public ParticleSystem[] sparks;
+    public GameObject[] sparks;
     public bool isColliding = false;
 
     public void SetSPC(SparksParticlesController spcScript)
@@ -24,9 +24,10 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            foreach (ParticleSystem sparkParticle in sparks)
+            foreach (GameObject sparkParticle in sparks)
             {
-                m_spc.ActivateSparks(sparkParticle);
+                sparkParticle.SetActive(true);
+                //m_spc.ActivateSparks(sparkParticle);
             }
             isColliding = true;
         }
@@ -36,10 +37,11 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            foreach (ParticleSystem sparkParticle in sparks)
+            foreach (GameObject sparkParticle in sparks)
             {
-                m_spc.DeactivateSparks(sparkParticle);
-                isColliding = false;
+                sparkParticle.SetActive(false);
+                //m_spc.DeactivateSparks(sparkParticle);
+                //isColliding = false;
             }
         }
     }
