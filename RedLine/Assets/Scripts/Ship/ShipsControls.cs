@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using UnityEngine;
 public class ShipsControls : MonoBehaviour
 {
     [Header("Refrences")]
+    [HideInInspector] public int shipSelected = 0;
     public ShipVariant VariantObject;
     public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
@@ -83,6 +85,15 @@ public class ShipsControls : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         m_isInRedline = false;
+    }
+    
+    public void ResetRedline()
+    {
+        m_isInRedline = false;
+        wantingToBoost = false;
+        m_isBoostingOnBoostPad = false;
+        m_currentBoost = 0.0f;
+        m_boostLevel = 0;
     }
 
     public void ResetAngles(float angle1, float angle2, float angle3)
@@ -194,6 +205,7 @@ public class ShipsControls : MonoBehaviour
     {
         if (!isTestShip)
         {
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
             if (m_fire.Count > 0)
             {
                 m_fireIndex = m_boostLevel;
@@ -205,16 +217,34 @@ public class ShipsControls : MonoBehaviour
                         m_fire[2].SetActive(false);
                         break;
                     case 1:
+                        if (PAC != null && m_fire[0].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.0f);
+                            PAC.SetBoostPitch(1, 1.55f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[0].SetActive(true);
                         m_fire[1].SetActive(false);
                         m_fire[2].SetActive(false);
                         break;
                     case 2:
+                        if (PAC != null && m_fire[1].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.3f);
+                            PAC.SetBoostPitch(1, 1.3f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[1].SetActive(true);
                         m_fire[2].SetActive(false);
                         m_fire[0].SetActive(false);
                         break;
                     case 3:
+                        if (PAC != null && m_fire[2].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.5f);
+                            PAC.SetBoostPitch(1, 0.75f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[2].SetActive(true);
                         m_fire[0].SetActive(false);
                         m_fire[1].SetActive(false);
@@ -372,6 +402,12 @@ public class ShipsControls : MonoBehaviour
     /// <param name="force"> How strong the boost is </param>
     public void BoostPadBoost(float force)
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            PAC.SetBoostPitch(1, 1.0f);
+            PAC.PlayBoostAudio(1);
+        }
         m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
         if (m_fire.Count > 0)
@@ -426,6 +462,11 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        PAC.PlayBoostAudio(0);
+        PAC.PlayBoostAudio(1);
+        PAC.PlayBoostAudio(2);
+
         float time = 0;
         float currentAcclerationForce = 0;
 
@@ -466,6 +507,21 @@ public class ShipsControls : MonoBehaviour
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
+
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
+            // || [R = Result] [A = m_breakMultiplier] [B = VariantObject.BreakMultiplier] [C = multiplier] ||
+            // ||-------------------------------------------------------------------------------------------||
+            // ||                                                                                           ||
+            // ||                                 R = ((A x B x C) x 0.64)                                  ||
+            // ||                                                                                           ||
+            // ||-------------------------------------------------------------------------------------------||
+
+            PAC.UpdateEngineModulations(shipSelected, 2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f));
+            PAC.UpdateWindVolume(0, ((0.5f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+        }
     }
 
     /// <summary>
@@ -476,10 +532,30 @@ public class ShipsControls : MonoBehaviour
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+
         if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
+        {
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 1);
+                PAC.UpdateWindVolume(0, ((0.2f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+            }
+        }
         else
+        {
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 0);
+                PAC.UpdateWindVolume(0, ((0.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
+            }
+        }
 
         if(!m_isBoosting)
             m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
