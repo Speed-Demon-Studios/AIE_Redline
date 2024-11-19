@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,33 +6,43 @@ using UnityEngine.ParticleSystemJobs;
 
 public class SparksParticlesController : MonoBehaviour
 {
+    [HideInInspector] public PlayerAudioController PAC;
+
     public SparksTrigger[] sparksList;
     public ParticleSystem[] sparksParticles;
 
-    public void ActivateSparks(ParticleSystem particleToActivate)
+    public void ActivateSparks(GameObject particleToActivate)
     {
-        ParticleSystem.MainModule mainModule = particleToActivate.main;
-        mainModule.loop = true;
-        if (particleToActivate.isPlaying == false)
+        if (particleToActivate != null && particleToActivate.activeSelf == false)
         {
-            mainModule.duration = 0.1f;
-            particleToActivate.Play();
+            if (PAC.IsEmitterPlaying(1, 0) == false)
+            {
+                PAC.PlayGPSFX(0, 0);
+            }
+            particleToActivate.SetActive(true);
         }
     }
 
-    public void DeactivateSparks(ParticleSystem particleToActivate)
+    public void DeactivateSparks(GameObject particleToDeactivate, SparksTrigger sT = null)
     {
-        ParticleSystem.MainModule mainModule = particleToActivate.main;
-        mainModule.loop = false;
+        if (particleToDeactivate != null && sT != null && particleToDeactivate.activeSelf == true)
+        {
+            if (sT.waiting == false)
+            {
+                sT.waiting = true;
+                StartCoroutine(DeactivateSPRKS(particleToDeactivate, sT));
+            }
+        }
     }
     
-    private IEnumerator DeactivateSPRKS(int particleToDeactivate)
+    private IEnumerator DeactivateSPRKS(GameObject particleToDeactivate, SparksTrigger sT)
     {
-        ParticleSystem.MainModule mainModule = sparksParticles[particleToDeactivate - 1].main;
-        mainModule.loop = false;
-
         yield return new WaitForEndOfFrame();
-        StopCoroutine(DeactivateSPRKS(particleToDeactivate));
+
+        particleToDeactivate.SetActive(false);
+
+        sT.waiting = false;
+        StopCoroutine(DeactivateSPRKS(particleToDeactivate, sT));
     }
 
     void Awake()
@@ -53,10 +64,23 @@ public class SparksParticlesController : MonoBehaviour
                 {
                     if (sT.isColliding == true)
                     {
-                        //foreach (ParticleSystem sparksPE in sT.sparks)
-                        //{
-                        //    ActivateSparks(sparksPE);
-                        //}    
+                        foreach (GameObject sparksPE in sT.sparks)
+                        {
+                            if (sparksPE != null && sT != null)
+                            {
+                                ActivateSparks(sparksPE);
+                            }
+                        }    
+                    }
+                    else if (sT.isColliding == false)
+                    {
+                        foreach (GameObject sparksPE in sT.sparks)
+                        {
+                            if (sparksPE != null)
+                            {
+                                DeactivateSparks(sparksPE, sT);
+                            }
+                        }
                     }
                 }
             }

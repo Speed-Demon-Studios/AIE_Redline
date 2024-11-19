@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MenuManagement;
+using EAudioSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
     public Nodes startNode;
+    public UIAudioController uAC;
 
     public GameObject[] StartingPoints;
 
@@ -142,14 +144,6 @@ public class GameManager : MonoBehaviour
 
     public void EnableRMovement()
     {
-        //foreach (GameObject racerOBJ in racerObjects)
-        //{
-        //    InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-        //    Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-        //    rDeets.EnableRacerMovement();
-        //    rB.isKinematic = false;
-        //}
-
         foreach (GameObject racerOBJ in allRacers)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();

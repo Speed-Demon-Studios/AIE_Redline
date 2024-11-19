@@ -1,6 +1,8 @@
+using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 public class ShipToWallCollision : MonoBehaviour
 {
@@ -13,6 +15,9 @@ public class ShipToWallCollision : MonoBehaviour
     private float defaultAcceleration;
     private bool intoWall = false;
     private bool detailsSet = false;
+    private bool crashDelayFinished = true;
+    private bool crashDelayStarted = false;
+    private bool stillColliding = false;
 
     public void ResetDetails()
     {
@@ -28,16 +33,32 @@ public class ShipToWallCollision : MonoBehaviour
         detailsSet = true;
         shipVariant = sControlScript.VariantObject;
         defaultTopSpeed = sControlScript.GetDefaultMaxSpeed();
-        //defaultAcceleration = shipVariant.MaxAcceleration;
 
         changedTopSpeed = (defaultTopSpeed * 0.53f); // The speed that ships will be capped at while colliding with walls.
-        //changedAcceleration = (defaultAcceleration * 0.55f); // The acceleration that ships will be capped at while colliding with walls.
+    }
+
+    private IEnumerator CrashDelayTimer()
+    {
+        crashDelayStarted = true;
+        crashDelayFinished = false;
+
+        yield return new WaitForSeconds(0.85f);
+
+        crashDelayFinished = true;
+        crashDelayStarted = false;
+        StopCoroutine(CrashDelayTimer());
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag.ToLower() == "walls")
         {
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+            if (sControlScript == null)
+            {
+                sControlScript = this.GetComponent<ShipsControls>();
+            }
+            
             intoWall = true;
         }
     }
@@ -46,8 +67,9 @@ public class ShipToWallCollision : MonoBehaviour
     {
         if (other.transform.tag.ToLower() == "walls" && intoWall == true)
         {
+            stillColliding = true;
             sControlScript.SetCurrentMaxSpeed(changedTopSpeed);
-            //shipVariant.MaxAcceleration = changedAcceleration;
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
         }
     }
 
@@ -55,7 +77,10 @@ public class ShipToWallCollision : MonoBehaviour
     {
         if (other.transform.tag.ToLower() == "walls" && intoWall == true)
         {
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
             intoWall = false;
+
+            //stillColliding = false;
         }
     }
 
@@ -80,14 +105,6 @@ public class ShipToWallCollision : MonoBehaviour
             {
                 sControlScript.SetCurrentMaxSpeed(defaultTopSpeed);
             }
-            //if (shipVariant.MaxAcceleration < defaultAcceleration)
-            //{
-            //    shipVariant.MaxAcceleration += 1.5f * Time.deltaTime;
-            //}
-            //else if (shipVariant.MaxAcceleration > defaultAcceleration)
-            //{
-            //    shipVariant.MaxAcceleration = defaultAcceleration;
-            //}
         }
     }
 }

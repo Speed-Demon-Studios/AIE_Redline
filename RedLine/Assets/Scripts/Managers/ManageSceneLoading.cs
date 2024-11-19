@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -81,6 +82,8 @@ public class ManageSceneLoading : MonoBehaviour
         controls.ChangeDoneDifficulty(false);
         controls.DeInitialize();
 
+        controls.ResetRedline();
+
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
 
@@ -92,8 +95,31 @@ public class ManageSceneLoading : MonoBehaviour
 
         }
 
-        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
         racerDeets.rCS.ClearList();
+        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+
+        SparksParticlesController SPC = playerOBJ.GetComponentInChildren<SparksParticlesController>();
+        if (SPC != null)
+        {
+            foreach (SparksTrigger sT in SPC.sparksList)
+            {
+                if (sT != null)
+                {
+                    sT.isColliding = false;
+
+                    foreach (GameObject sparksOBJ in sT.sparks)
+                    {
+                        if (sparksOBJ != null)
+                        {
+                            SPC.DeactivateSparks(sparksOBJ, sT);
+                        }
+                    }
+                }
+            }
+        }
+
+        PlayerAudioController PAC = playerOBJ.GetComponent<PlayerAudioController>();
+        PAC.ResetPlayerAudio();
 
         //playerOBJ.SetActive(false);
     }
