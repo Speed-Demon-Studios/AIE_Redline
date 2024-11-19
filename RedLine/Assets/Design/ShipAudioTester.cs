@@ -7,7 +7,8 @@ using UnityEngine;
 public class ShipAudioTester : MonoBehaviour
 
 {
-
+    [SerializeField] private bool m_mute;
+    
     [SerializeField]
 
     [Range(0f, 1f)]
@@ -26,21 +27,28 @@ public class ShipAudioTester : MonoBehaviour
 
     {
 
-        m_mainEngine.pitch = m_mainEnginePitch.Evaluate(m_shipSpeed);
+        if (m_mute)
+        {
+            m_mainEngine.volume = 0;
+            m_hum.volume = 0;
+            m_wind.volume = 0;
+        }
+        else
+        {
+            m_mainEngine.pitch = m_mainEnginePitch.Evaluate(m_shipSpeed);
 
-        m_hum.pitch = m_humPitch.Evaluate(m_shipSpeed);
+            m_hum.pitch = m_humPitch.Evaluate(m_shipSpeed);
 
-        m_wind.pitch = m_windPitch.Evaluate(m_shipSpeed);
+            m_wind.pitch = m_windPitch.Evaluate(m_shipSpeed);
 
-        m_mainEngine.volume = m_mainEngineVolume.Evaluate(m_shipSpeed);
+            m_mainEngine.volume = m_mainEngineVolume.Evaluate(m_shipSpeed);
 
-        m_hum.volume = m_humVolume.Evaluate(m_shipSpeed);
+            m_hum.volume = m_humVolume.Evaluate(m_shipSpeed);
 
-        m_wind.volume = m_windVolume.Evaluate(m_shipSpeed);
+            m_wind.volume = m_windVolume.Evaluate(m_shipSpeed);
+        }
 
     }
-
-    //
 
 }
 
