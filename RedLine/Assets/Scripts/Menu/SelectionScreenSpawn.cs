@@ -28,9 +28,7 @@ public class SelectionScreenSpawn : MonoBehaviour
 
         selectionMenu.GetComponent<ShipSelection>().SetShipSelectionNumbers(m_playerNumber - 1);
 
-        GameManager.gManager.uiCInput.shipSelectionMenu.menuStartButtons.Add(selectionMenu.GetComponentInChildren<Button>()); // Adds the button to the GameManager list 
-
-        selectionMenu.GetComponent<ShipSelection>().texture = GameManager.gManager.uiCInput.textures[m_playerNumber - 1]; // Assigns the texture which displays the ship
+        GameManager.gManager.uiCInput.shipSelectionMenu.menuStartButtons.Add(selectionMenu.GetComponent<ShipSelection>().readyButton); // Adds the button to the GameManager list
     }
 
     IEnumerator SetShipSelection(GameObject selection)

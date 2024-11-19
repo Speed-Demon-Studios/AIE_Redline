@@ -206,6 +206,15 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    public void OnSwitch(InputAction.CallbackContext context)
+    {
+        if (m_selection != null)
+        {
+            if (context.performed && !playerReadyInMenu)
+                m_selection.OnNextMat();
+        }
+    }
+
     /// <summary>
     /// Pause is to pause the game when the pause button is pressed
     /// </summary>
