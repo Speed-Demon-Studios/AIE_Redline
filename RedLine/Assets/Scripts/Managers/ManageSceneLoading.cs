@@ -67,6 +67,7 @@ public class ManageSceneLoading : MonoBehaviour
         Destroy(shipModelObject);
 
         playerInputScript.playerReadyInMenu = false;
+        playerInputScript.DeActivateVirtualCam();
 
         racerDeets.finishedRacing = false;
         racerDeets.currentLap = 0;

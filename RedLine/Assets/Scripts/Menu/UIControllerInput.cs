@@ -45,7 +45,7 @@ namespace MenuManagement
                 m_mManager.SetButtons(m_mManager.GetCurrentMenu());
         }
 
-        private void Awake()
+        private void Start()
         {
             m_mManager = GetComponent<MenuManager>();
             GameManager.gManager.uiCInput = this; // Sets the gameManagers reference to this script
@@ -62,17 +62,18 @@ namespace MenuManagement
                 foreach (GameObject player in GameManager.gManager.players) // For each player in the player list                           
                 {                                                                                                                        
                     player.GetComponent<PlayerInputScript>().player.SwitchCurrentActionMap("Player"); // Switch the action map to player    
-                    RedlineColliderSpawner redline = null; // Makes a new reference to the redline collider spawner script                  
+                    RedlineColliderSpawner redline = null; // Makes a new reference to the redline collider spawner script
+                    player.GetComponent<PlayerInputScript>().ActivateVirtualCam();
                     foreach (Transform child in player.transform) // for each child object in the player object                             
                     {                                                                                                                    
                         if (child.GetComponent<RedlineColliderSpawner>()) // If the child object has a redline collider spawner script      
                             redline = child.GetComponent<RedlineColliderSpawner>(); // then assign it to the redline reference              
                     }                                                                                                                    
-                    //player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race            
+                    player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race            
                     foreach (Transform child in player.transform) // do another check on the redline collider spawner reference             
-                    {                                                                                                                    
-                        FindEveryChild(child, redline);                                                                                  
-                    }                                                                                                                    
+                    {
+                        FindEveryChild(child, redline);
+                    }
                     ActionMappingControl aMC = player.GetComponent<ActionMappingControl>(); // Reseting the first selected buttons 
                     aMC.mES.firstSelectedGameObject = null;                                          
                     aMC.mES.SetSelectedGameObject(null);                                             

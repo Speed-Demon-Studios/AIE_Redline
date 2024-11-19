@@ -14,27 +14,27 @@ public class NodePlacer : MonoBehaviour
     private int maxIndex;
     private int currentIndex;
 
-    //public void SpawnNode()
-    //{
-    //    if(prefabToSpawn == null)
-    //    {
-    //        //EditorUtility.DisplayDialog("Error", "No prefab to spawn", "OK");
-    //        //return;
-    //    }
-    //    
-    //    //Nodes spawnNode = PrefabUtility.InstantiatePrefab(prefabToSpawn) as Nodes;
-    //    
-    //    spawnNode.gameObject.transform.localPosition = this.gameObject.transform.localPosition;
-    //    spawnNode.gameObject.transform.localRotation = this.gameObject.transform.localRotation;
-    //    
-    //    if(prevNode != null)
-    //    {
-    //        prevNode.nextNode.Add(spawnNode);
-    //    }
-    //    
-    //    prevNode = spawnNode;
-    //
-    //}
+    public void SpawnNode()
+    {
+        if(prefabToSpawn == null)
+        {
+            EditorUtility.DisplayDialog("Error", "No prefab to spawn", "OK");
+            return;
+        }
+        
+        Nodes spawnNode = PrefabUtility.InstantiatePrefab(prefabToSpawn) as Nodes;
+        
+        spawnNode.gameObject.transform.localPosition = this.gameObject.transform.localPosition;
+        spawnNode.gameObject.transform.localRotation = this.gameObject.transform.localRotation;
+        
+        if(prevNode != null)
+        {
+            prevNode.nextNode.Add(spawnNode);
+        }
+        
+        prevNode = spawnNode;
+    
+    }
 
     public void OrderNodes()
     {

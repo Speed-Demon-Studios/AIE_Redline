@@ -5,10 +5,15 @@ using UnityEngine.EventSystems;
 using DifficultyButtonSwitch;
 using UnityEngine.Events;
 
-public class ButtonOnSelected : MonoBehaviour, ISelectHandler
+public class ButtonOnSelected : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public UnityEvent onSelectEvent;
+    public UnityEvent onDeSelectEvent;
 
+    public void OnDeselect(BaseEventData eventData)
+    {
+        onDeSelectEvent.Invoke();
+    }
 
     public void OnSelect(BaseEventData eventData)
     {

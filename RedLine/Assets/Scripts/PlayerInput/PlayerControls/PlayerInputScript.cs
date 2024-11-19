@@ -51,6 +51,8 @@ public class PlayerInputScript : MonoBehaviour
     public ShipSelection GetShipSelection() { return m_selection; }
     public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
     public ShipSelection ReturnShipSelection() { return m_selection; }
+    public void ActivateVirtualCam() { m_virtualCam.gameObject.SetActive(true); }
+    public void DeActivateVirtualCam() { m_virtualCam.gameObject.SetActive(false); }
 
     // Start is called before the first frame update
     private void Awake()
