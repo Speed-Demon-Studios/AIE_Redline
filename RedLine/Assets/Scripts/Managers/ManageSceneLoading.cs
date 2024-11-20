@@ -36,11 +36,11 @@ public class ManageSceneLoading : MonoBehaviour
 
         ResetGameManager();
 
-        reloadingmenu = true;
         if (coroutineStarted == false)
         {
             coroutineStarted = true;
             StartCoroutine(LoadMenuScene());
+            reloadingmenu = false;
         }
     }
 
@@ -79,25 +79,6 @@ public class ManageSceneLoading : MonoBehaviour
         racerDeets.quickestLapTimeSECONDS = 99;
         racerDeets.quickestLapTimeMINUTES = 99;
 
-        controls.ChangeDoneDifficulty(false);
-        controls.DeInitialize();
-
-        controls.ResetRedline();
-
-        playerOBJ.GetComponent<ShipsControls>().enabled = false;
-        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
-
-        if(playerInputScript.GetPlayerNumber() != 1)
-        {
-            GameManager.gManager.numberOfPlayers -= 1;
-
-            acm.GetPlayerInput().gameObject.SetActive(false);
-
-        }
-
-        racerDeets.rCS.ClearList();
-        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
-
         SparksParticlesController SPC = playerOBJ.GetComponentInChildren<SparksParticlesController>();
         if (SPC != null)
         {
@@ -117,6 +98,23 @@ public class ManageSceneLoading : MonoBehaviour
                 }
             }
         }
+
+        playerOBJ.GetComponent<ShipsControls>().enabled = false;
+        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+
+        if(playerInputScript.GetPlayerNumber() != 1)
+        {
+            GameManager.gManager.numberOfPlayers -= 1;
+
+            acm.GetPlayerInput().gameObject.SetActive(false);
+
+        }
+
+        controls.ChangeDoneDifficulty(false);
+        controls.DeInitialize();
+
+        controls.ResetRedline();
+        racerDeets.rCS.ClearList();
 
         foreach (GameObject player in GameManager.gManager.players)
         {
@@ -153,9 +151,9 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-        PlayerPrefs.SetInt("SceneID", 1);
-        SceneManager.LoadSceneAsync(3);
-        SceneManager.UnloadSceneAsync(2);
+        //PlayerPrefs.SetInt("SceneID", 1);
+        SceneManager.LoadScene(1);
+        //SceneManager.UnloadSceneAsync(2);
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());
