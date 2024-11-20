@@ -118,8 +118,11 @@ public class ManageSceneLoading : MonoBehaviour
             }
         }
 
-        PlayerAudioController PAC = playerOBJ.GetComponent<PlayerAudioController>();
-        PAC.ResetPlayerAudio();
+        foreach (GameObject player in GameManager.gManager.players)
+        {
+            player.GetComponent<PlayerAudioController>().ResetPlayerAudio();
+        }
+
 
         //playerOBJ.SetActive(false);
     }
