@@ -59,11 +59,15 @@ public class PlayerInputScript : MonoBehaviour
     {
         m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
         gMan = GameManager.gManager; // seting a reference to the GameManager
+        
         if (gMan != null) // if there is a GameManager                                         
             gMan.players.Add(gameObject); // add this object to the players list in GameManager
 
+
         if (gMan != null) // if there is a GameManager                                         
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number           
+        
+        gMan.uiCInput.sssManager.ReOrderShipSelection();
                                                                                                
         if (player != null) // chech for player so that we dont get error later                
         {                                                                                      

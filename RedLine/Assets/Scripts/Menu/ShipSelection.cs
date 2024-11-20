@@ -10,6 +10,7 @@ public class ShipSelection : MonoBehaviour
     public List<ShipVariant> variants = new();
 
     private GameObject m_currentShips;
+    public ShipSelectionInfo sInfo;
 
     public Button readyButton;
 
@@ -19,9 +20,6 @@ public class ShipSelection : MonoBehaviour
     private int m_shipIndex;
     private int m_materialIndex;
 
-
-    public TextMeshProUGUI shipName;
-    public List<Slider> sliders;
 
     /////////////////////////////////////////////////////////////////
     ///                                                          ///
@@ -61,11 +59,21 @@ public class ShipSelection : MonoBehaviour
         StopAllCoroutines();
         // starts the text coroutine
         StartCoroutine(NameChange(variants[0].VariantName));
-        // all the sliders are set to the right ships stats
-        sliders[0].value = variants[0].DefaultMaxSpeed;
-        sliders[1].value = variants[0].TurnSpeed;
-        sliders[2].value = variants[0].DefaultMaxAcceleration;
 
+        GameManager.gManager.uiCInput.bSManager.TransitionToShipSelect(sInfo.shipDisplayAnim);
+
+        List<Animator> tempList = new();
+        int index = 0;
+        foreach (Animator anim in sInfo.shipAnimators)
+        {
+            if (index != m_shipIndex)
+            {
+                tempList.Add(anim);
+            }
+            index++;
+        }
+
+        GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -76,6 +84,8 @@ public class ShipSelection : MonoBehaviour
         if (m_materialIndex >= 3)
             m_materialIndex = 0;
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
+        GameManager.gManager.uiCInput.bSManager.ManufacturerChange(sInfo.manufacturerSprites[m_materialIndex], sInfo.manufacturerDisplayAnim,
+            sInfo.manufacturerImage, sInfo.manufacturerImageRed);
     }
 
     /// <summary>
@@ -91,11 +101,23 @@ public class ShipSelection : MonoBehaviour
         }
         m_currentShips = ships[m_shipIndex]; // set the current ship to the index
         m_currentShips.SetActive(true); // then set that current ship to true so it shows up
-        StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing
-        StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
-        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        //StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing
+        //StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
+        //sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
+        //sliders[1].value = variants[m_shipIndex].TurnSpeed;
+        //sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        List<Animator> tempList = new();
+        int index = 0;
+        foreach(Animator anim in sInfo.shipAnimators)
+        {
+            if(index != m_shipIndex)
+            {
+                tempList.Add(anim);
+            }
+            index++;
+        }
+
+        GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -113,11 +135,22 @@ public class ShipSelection : MonoBehaviour
         }                                                                                         
         m_currentShips = ships[m_shipIndex]; // set the current ship to the index                 
         m_currentShips.SetActive(true); // then set that current ship to true so it shows up      
-        StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing     
-        StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
-        sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        //StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing     
+        //StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
+        //sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
+        //sliders[1].value = variants[m_shipIndex].TurnSpeed;
+        //sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        List<Animator> tempList = new();
+        int index = 0;
+        foreach (Animator anim in sInfo.shipAnimators)
+        {
+            if (index != m_shipIndex)
+            {
+                tempList.Add(anim);
+            }
+            index++;
+        }
+        GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -171,7 +204,7 @@ public class ShipSelection : MonoBehaviour
             tempName = tempName.Remove(j, 1); // j being the index remove the letter at point j         
             tempName = tempName.Insert(j, randomLetter.ToString()); // replace it with the random letter
                                                                                                         
-            this.shipName.text = tempName; // set the text to the new text                              
+            //this.shipName.text = tempName; // set the text to the new text                              
         }                                                                                               
         // this is doing the same as before but now it will slow choose the correct letter                            
         for (int i = 0; i < stringLength; i++)                                                                        
@@ -188,7 +221,7 @@ public class ShipSelection : MonoBehaviour
                 tempName = tempName.Remove(j, 1); // remove at index j                                           
                 tempName = tempName.Insert(j, randomLetter.ToString()); // replace with random letter              
             }                                                                                                    
-            this.shipName.text = tempName; // set text to new word                                                    
+            //this.shipName.text = tempName; // set text to new word                                                    
             yield return new WaitForSeconds(0.008f); // wait before doing it again                                    
                                                                                                                       
         }                                                                                                             
