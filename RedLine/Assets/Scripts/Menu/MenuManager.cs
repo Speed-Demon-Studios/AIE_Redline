@@ -29,17 +29,18 @@ namespace MenuManagement
 
         public ButtonSelectManager bSelect;
 
+        public void SetGameLoaded(bool change) { m_gameLoadedAndStarted = change; }
         public MenuType GetCurrentType() { return m_currentMenuType; }
         public SetMenu GetCurrentMenu() { return m_currentMenu; }
 
         // Start is called before the first frame update
-        void Start()
+        public void Inistialize()
         {
             if (GameManager.gManager.firstLoadIntoGame)
             {
                 foreach(GameObject player in GameManager.gManager.players)
                 {
-                    //player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
+                    player.GetComponent<PlayerInputScript>().Inistialize();
                 }
                 m_gameLoadedAndStarted = false;
                 PressStart();

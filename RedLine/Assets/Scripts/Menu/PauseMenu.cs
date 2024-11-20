@@ -8,15 +8,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseButtonFirst;
 
     // Start is called before the first frame update
-    void Start()
+    public void Inistialize()
     {
         GameManager.gManager.pMenu = this;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SwitchPlayerOneButton()

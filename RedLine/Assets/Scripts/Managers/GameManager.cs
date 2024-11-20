@@ -63,9 +63,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gManager { get; private set; }
 
-    // Start is called before the first frame update
     void Start()
     {
+        if (gManager != null && gManager != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            gManager = this;
+        }
+
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -191,16 +199,4 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddToNumberOfPlayers() { numberOfPlayers += 1; }
-
-    private void Awake()
-    {
-        if (gManager != null && gManager != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            gManager = this;
-        }
-    }
 }

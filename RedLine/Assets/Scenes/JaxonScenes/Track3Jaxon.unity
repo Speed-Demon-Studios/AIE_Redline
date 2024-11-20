@@ -2586,7 +2586,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1806375590}
         m_TargetAssemblyTypeName: FinishRace, Assembly-CSharp
-        m_MethodName: DebugForFunction
+        m_MethodName: GoToFinishRace
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2900,6 +2900,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67284fa8b27541a4c84522534385c514, type: 3}
+--- !u!114 &212736793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4081713601088407085, guid: 67284fa8b27541a4c84522534385c514,
+    type: 3}
+  m_PrefabInstance: {fileID: 212736792}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b5fb631a05bce4c863dc778d1f729d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &213071887
 GameObject:
   m_ObjectHideFlags: 0
@@ -20888,7 +20900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b063555f5b33634e96e5fb2ae5dcdcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalLaps: 2
+  TotalLaps: 0
   isTimeTrial: 0
 --- !u!114 &1396100324
 MonoBehaviour:
@@ -30436,6 +30448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2049019259}
+  - component: {fileID: 2049019260}
   m_Layer: 0
   m_Name: RacingSystemStuff
   m_TagString: Untagged
@@ -30463,6 +30476,105 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2049019260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049019258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd01844828ecf7d4c994f8884062527a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1396100323}
+        m_TargetAssemblyTypeName: RaceManager, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1396100326}
+        m_TargetAssemblyTypeName: PositionHandler, Assembly-CSharp
+        m_MethodName: OnRaceLoaded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1974713564}
+        m_TargetAssemblyTypeName: RacerStartPositions, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1346274937}
+        m_TargetAssemblyTypeName: CheckpointHandler, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1806375590}
+        m_TargetAssemblyTypeName: FinishRace, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 212736793}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1396100325}
+        m_TargetAssemblyTypeName: RaceCountdown, Assembly-CSharp
+        m_MethodName: Inistialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2054336456
 PrefabInstance:
   m_ObjectHideFlags: 0
