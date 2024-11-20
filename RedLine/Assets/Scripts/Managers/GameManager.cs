@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public bool timeStopped = false;
 
+    public bool firstLoadIntoGame = false;
+
     public int countdownIndex = 2;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;

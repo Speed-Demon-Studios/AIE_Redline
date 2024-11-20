@@ -66,7 +66,10 @@ public class PlayerInputScript : MonoBehaviour
 
         if (gMan != null) // if there is a GameManager                                         
             m_playerNumber = gMan.numberOfPlayers; // Set this objects player number           
-        
+
+        if (m_playerNumber == 1)
+            GameManager.gManager.uiCInput.GetMenuManager().PressStart();
+
         gMan.uiCInput.sssManager.ReOrderShipSelection();
                                                                                                
         if (player != null) // chech for player so that we dont get error later                

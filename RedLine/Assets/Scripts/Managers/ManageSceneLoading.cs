@@ -56,7 +56,7 @@ public class ManageSceneLoading : MonoBehaviour
 
         GameObject shipCollisionObject = shipCollider.gameObject;
         GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
-        Destroy(aiMove);
+        DestroyImmediate(aiMove);
 
         controls.FireList().Clear();
         controls.VariantObject = null;
@@ -87,13 +87,9 @@ public class ManageSceneLoading : MonoBehaviour
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
 
-        if(playerInputScript.GetPlayerNumber() != 1)
-        {
-            GameManager.gManager.numberOfPlayers -= 1;
+        GameManager.gManager.numberOfPlayers -= 1;
 
-            acm.GetPlayerInput().gameObject.SetActive(false);
-
-        }
+        //acm.GetPlayerInput().gameObject.SetActive(false);
 
         racerDeets.rCS.ClearList();
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
@@ -129,7 +125,7 @@ public class ManageSceneLoading : MonoBehaviour
 
     public void ResetGameManager()
     {
-        PlayerPrefs.SetFloat("AfterRace", 1);
+        GameManager.gManager.firstLoadIntoGame = true;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();

@@ -35,20 +35,15 @@ namespace MenuManagement
         // Start is called before the first frame update
         void Start()
         {
-            if (PlayerPrefs.GetFloat("AfterRace") == 1)
+            if (GameManager.gManager.firstLoadIntoGame)
             {
                 foreach(GameObject player in GameManager.gManager.players)
                 {
-                    if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() != 1)
-                        player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
+                    //player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
                 }
+                m_gameLoadedAndStarted = false;
                 PressStart();
-                m_gameLoadedAndStarted = false;
             }
-            else
-                m_gameLoadedAndStarted = false;
-
-
         }
 
         // Update is called once per frame
