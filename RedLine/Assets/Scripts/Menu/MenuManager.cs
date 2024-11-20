@@ -26,6 +26,7 @@ namespace MenuManagement
         public SetMenu start;
         public SetMenu mainMenu;
         private SetMenu m_currentMenu;
+
         public ButtonSelectManager bSelect;
 
         public MenuType GetCurrentType() { return m_currentMenuType; }
@@ -38,7 +39,6 @@ namespace MenuManagement
             {
                 foreach(GameObject player in GameManager.gManager.players)
                 {
-                    player.GetComponent<SelectionScreenSpawn>().Initialize();
                     if(player.GetComponent<PlayerInputScript>().GetPlayerNumber() != 1)
                         player.GetComponent<ActionMappingControl>().GetPlayerInput().gameObject.SetActive(true);
                 }

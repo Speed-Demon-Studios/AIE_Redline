@@ -1,3 +1,4 @@
+using DifficultyButtonSwitch;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace MenuManagement
 
         private MenuManager m_mManager;
         public SetMenu shipSelectionMenu;
+        public ShipSelectionSpawnerManager sssManager;
+        public ButtonSelectManager bSManager;
         // Testing
         private bool HasInitialized = true;
 
@@ -43,6 +46,7 @@ namespace MenuManagement
 
             if (m_mManager != null && m_mManager.GetCurrentType() == MenuType.ShipSelectionReady)
                 m_mManager.SetButtons(m_mManager.GetCurrentMenu());
+
         }
 
         private void Start()
