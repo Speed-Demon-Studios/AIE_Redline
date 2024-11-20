@@ -5,9 +5,11 @@ using UnityEngine;
 namespace EAudioSystem
 {
     using FMODUnity;
+    using System;
     using System.Collections;
     using System.Data;
     using System.Linq;
+    using Unity.VisualScripting;
 
     public class PlayerAudioController : MonoBehaviour
     {
@@ -57,11 +59,22 @@ namespace EAudioSystem
 // --------------------------------------------------
         public void ResetPlayerAudio()
         {
+            variantSet = false;
             resettingAudio = true;
 
             while (resettingAudio == true)
             {
-                foreach (StudioEventEmitter emitter in m_engineEmitters) { emitter.Stop(); }
+
+                for (int i = 0; i < m_engineEmitters.Count(); i++)
+                {
+                    StudioEventEmitter emitter = m_engineEmitters[i];
+
+                    GameObject emitterParent = emitter.gameObject;
+                    emitter.Stop();
+                    Destroy(emitter);
+                    m_engineEmitters[i] = emitterParent.AddComponent<StudioEventEmitter>();
+                }
+
 
                 m_engineAudioInfo = new();
                 m_engineEmitterPitches = new();
@@ -81,7 +94,6 @@ namespace EAudioSystem
                 m_windAudioInfo = new List<EventReference>();
                 m_windAudioVolumes = new();
 
-                variantSet = false;
 
                 resettingAudio = false;
             }

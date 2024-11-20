@@ -151,9 +151,9 @@ public class ManageSceneLoading : MonoBehaviour
             DestroyImmediate(collider.gameObject);
         }
 
-        //PlayerPrefs.SetInt("SceneID", 1);
-        SceneManager.LoadScene(1);
-        //SceneManager.UnloadSceneAsync(2);
+        PlayerPrefs.SetInt("SceneID", 1);
+        SceneManager.LoadScene(3);
+        SceneManager.UnloadSceneAsync(2);
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());
