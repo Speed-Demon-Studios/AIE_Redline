@@ -25,6 +25,7 @@ namespace DifficultyButtonSwitch
 
         [Header("Title")]
         [SerializeField] private Animator m_titleAnim;
+        [SerializeField] private Animator m_titleGlowAnim;
         [SerializeField] private AnimationCurve m_titleFillCurve;
 
         [Header("Class Select")]
@@ -85,6 +86,7 @@ namespace DifficultyButtonSwitch
             m_cameras[1].Priority = 1;
 
             m_titleAnim.SetTrigger("TitleIn");
+            m_titleGlowAnim.SetTrigger("TitleInGlow");
         }
 
 
