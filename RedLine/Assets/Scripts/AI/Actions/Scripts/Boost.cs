@@ -10,7 +10,7 @@ public class Boost : Action
 
     public override void ExecuteAction(NPCController npc, ShipsControls controls)
     {
-        controls.IsBoosting();
+        controls.WantToBoost();
         Debug.Log("AI boosted");
         isFinished = true;
     }

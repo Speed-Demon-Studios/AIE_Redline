@@ -1,3 +1,4 @@
+using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -47,21 +48,28 @@ public class ManageSceneLoading : MonoBehaviour
     {
         InitializeBeforeRace IBR = playerOBJ.GetComponent<InitializeBeforeRace>();
         AIMoveInputs aiMove = playerOBJ.GetComponent<AIMoveInputs>();
-        Destroy(aiMove);
-        playerOBJ.GetComponent<ShipsControls>().enabled = false;
-        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
         ShipsControls controls = playerOBJ.GetComponent<ShipsControls>();
         IsShipCollider shipCollider = controls.collisionParent.GetComponentInChildren<IsShipCollider>();
-        controls.FireList().Clear();
-        GameObject a = shipCollider.gameObject;
-        GameObject b = controls.shipModel.transform.GetChild(0).gameObject;
-        a.transform.parent = null;
-        b.transform.parent = null;
-        Destroy(a);
-        Destroy(b);
-        controls.VariantObject = null;
-        playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu = false;
         RacerDetails racerDeets = playerOBJ.GetComponent<RacerDetails>();
+        PlayerInputScript playerInputScript = playerOBJ.GetComponent<PlayerInputScript>();
+        ActionMappingControl acm = playerOBJ.GetComponent<ActionMappingControl>();
+
+        GameObject shipCollisionObject = shipCollider.gameObject;
+        GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
+        DestroyImmediate(aiMove);
+
+        controls.FireList().Clear();
+        controls.VariantObject = null;
+
+        shipCollisionObject.transform.parent = null;
+        shipModelObject.transform.parent = null;
+
+        Destroy(shipCollisionObject);
+        Destroy(shipModelObject);
+
+        playerInputScript.playerReadyInMenu = false;
+        playerInputScript.DeActivateVirtualCam();
+
         racerDeets.finishedRacing = false;
         racerDeets.currentLap = 0;
         racerDeets.totalRaceTimeSeconds = 0;
@@ -71,19 +79,53 @@ public class ManageSceneLoading : MonoBehaviour
         racerDeets.quickestLapTimeSECONDS = 99;
         racerDeets.quickestLapTimeMINUTES = 99;
 
-        controls.SetBrakeMultiplier(0);
-        controls.SetTurnMultipliers(0);
-        controls.SetStrafeMultiplier(0);
+        controls.ChangeDoneDifficulty(false);
+        controls.DeInitialize();
 
+        controls.ResetRedline();
 
-        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+        playerOBJ.GetComponent<ShipsControls>().enabled = false;
+        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+
+        GameManager.gManager.numberOfPlayers -= 1;
+
+        //acm.GetPlayerInput().gameObject.SetActive(false);
+
         racerDeets.rCS.ClearList();
+        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
 
-        playerOBJ.SetActive(false);
+        SparksParticlesController SPC = playerOBJ.GetComponentInChildren<SparksParticlesController>();
+        if (SPC != null)
+        {
+            foreach (SparksTrigger sT in SPC.sparksList)
+            {
+                if (sT != null)
+                {
+                    sT.isColliding = false;
+
+                    foreach (GameObject sparksOBJ in sT.sparks)
+                    {
+                        if (sparksOBJ != null)
+                        {
+                            SPC.DeactivateSparks(sparksOBJ, sT);
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach (GameObject player in GameManager.gManager.players)
+        {
+            player.GetComponent<PlayerAudioController>().ResetPlayerAudio();
+        }
+
+
+        //playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
     {
+        GameManager.gManager.firstLoadIntoGame = true;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();
@@ -110,8 +152,6 @@ public class ManageSceneLoading : MonoBehaviour
         PlayerPrefs.SetInt("SceneID", 1);
         SceneManager.LoadSceneAsync(3);
         SceneManager.UnloadSceneAsync(2);
-
-
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());

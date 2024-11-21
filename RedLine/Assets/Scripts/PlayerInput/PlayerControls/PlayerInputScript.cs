@@ -1,4 +1,5 @@
 using Cinemachine;
+using MenuManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,61 +7,91 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class PlayerInputScript : MonoBehaviour
 {
+    [Header("References")]
     public PlayerInput player;
     public MultiplayerEventSystem eventSystem;
     public PlayerUiControl uiController;
     private ShipsControls m_shipControls;
     private Gamepad m_playerGamepad;
+    private GameManager gMan;
+    private ShipSelection m_selection;
+
+    [Header("Player Camera Stuff")]
     public List<int> playerLayers = new();
     public List<LayerMask> ignoreLayers = new();
-
-    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
     public Camera cam;
-    private int m_playerNumber;
-    public void SetPlayerNumber(int number) { m_playerNumber = number; }
-    public int GetPlayerNumber() { return m_playerNumber; }
-    private GameManager gMan;
-    public bool playerReadyInMenu;
-    private ShipSelection m_selection;
-    public void SetSelection(ShipSelection selection) { m_selection = selection; }
-    public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
-    public ShipSelection ReturnShipSelection() { return m_selection; }
+    [SerializeField] private CinemachineVirtualCamera m_virtualCam;
 
+    [Header("Camera Values")]
     private float m_currentFOV;
     private float m_desiredFOV;
     public float lerpTime;
     public float minFOV;
     public float maxFOV;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent    |
-        gMan = GameManager.gManager; // seting a reference to the GameManager                                                              |
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            gMan.players.Add(gameObject); // add this object to the players list in GameManager                                            |
+    private int m_playerNumber;
+    public bool playerReadyInMenu;
 
-        if (gMan != null) // if there is a GameManager                                                                                     |
-            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number                                                       |
-                                                                                                                                         //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (player != null) // chech for player so that we dont get error later                                                            |
-        {                                                                                                                                //|
-            AssignController(); // calls a function that help setup controllers for feedback                                               |
-        }                                                                                                                                //|
+
+    /////////////////////////////////////////////////////////////////
+    ///                                                          ///
+    ///      All of the getters and setters in this script       ///
+    ///                                                          ///
+   /////////////////////////////////////////////////////////////////
+    public void SetPlayerNumber(int number) { m_playerNumber = number; }
+    public int GetPlayerNumber() { return m_playerNumber; }
+
+    public void SetSelection(ShipSelection selection) { m_selection = selection; }
+    public ShipSelection GetShipSelection() { return m_selection; }
+    public Gamepad GetPlayerGamepad() { return m_playerGamepad; }
+    public ShipSelection ReturnShipSelection() { return m_selection; }
+    public void ActivateVirtualCam() { m_virtualCam.gameObject.SetActive(true); }
+    public void DeActivateVirtualCam() { m_virtualCam.gameObject.SetActive(false); }
+
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        Inistialize();
+    }
+
+    public void Inistialize()
+    {
+        m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
+        gMan = GameManager.gManager; // seting a reference to the GameManager
+
+        if (gMan != null) // if there is a GameManager
+            if(!gMan.players.Contains(this.gameObject))
+                gMan.players.Add(gameObject); // add this object to the players list in GameManager
+
+
+        if (gMan != null) // if there is a GameManager                                         
+            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number           
+
+        if (m_playerNumber == 1)
+        {
+            GameManager.gManager.uiCInput.GetMenuManager().SetGameLoaded(false);
+            GameManager.gManager.uiCInput.GetMenuManager().PressStart();
+        }
+
+        gMan.uiCInput.sssManager.ReOrderShipSelection();
+
+        if (player != null) // chech for player so that we dont get error later                
+        {
+            AssignController(); // calls a function that help setup controllers for feedback   
+        }
         if (!m_shipControls.isTestShip)
         {
-            if (m_virtualCam != null && playerLayers.Count > 0)                                                                          //|
-                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];                                                        //|
-            if (cam != null && playerLayers.Count > 0)                                                                                   //|
-                cam.cullingMask = ignoreLayers[m_playerNumber - 1];                                                                      //|
+            if (m_virtualCam != null && playerLayers.Count > 0)
+                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];
+            if (cam != null && playerLayers.Count > 0)
+                cam.cullingMask = ignoreLayers[m_playerNumber - 1];
         }
-        //---------------------------------------------------------------------------------------------------------------------------------|
     }
 
     /// <summary>
@@ -68,34 +99,53 @@ public class PlayerInputScript : MonoBehaviour
     /// </summary>
     public void PlayerDisconnect()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if(m_selection != null) // check if the selection is null                                                                          |
-            GameManager.gManager.uiCInput.DeleteSelection(m_selection.gameObject); // delete the selection screen from the selection list  |
-        Destroy(m_selection.gameObject); // destroy the selection screen object                                                            |
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3      |
-        // will now become player 2                                                                                                        |
-        for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)                                                    //|
-        {                                                                                                                                //|
-            if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)                    //|
-            {                                                                                                                            //|
-                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);                                    //|
-            }                                                                                                                            //|
-        }                                                                                                                                //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        if (GameManager.gManager.players.Contains(this.gameObject)) // if the players list contains this object                            |
-        {                                                                                                                                //|
-            GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list                                          |
-        }                                                                                                                                //|
-        if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object                |
-        {                                                                                                                                //|
-            GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list                            |
-        }                                                                                                                                //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        GameManager.gManager.numberOfPlayers -= 1;                                                                                       //|
-        GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1); // -1 from number of player in the uicontroller script   |
-        Destroy(this.gameObject);                                                                                                        //|
-        //---------------------------------------------------------------------------------------------------------------------------------|
+        if (GameManager.gManager.CurrentScene != "Race")
+        {
+            // this for loop will go through all other player and set their player number down 1 so if player 2 disconnects then player 3
+            // will now become player 2
+            for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
+            {
+                if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)
+                {
+                    GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
+                }
+            }
+            foreach(Transform child in GameManager.gManager.uiCInput.GetMenuManager().gameObject.transform)
+            {
+                SetMenu temp;
+                if(child.TryGetComponent<SetMenu>(out temp))
+                {
+                    if(temp.typeOfMenu == MenuType.ShipSelectionReady)
+                    {
+                        temp.menuStartButtons.Remove(m_selection.GetComponentInChildren<Button>());
+                    }
+                }
+            }
+            foreach (InputDevice device in InputUser.GetUnpairedInputDevices())
+            {
+                InputUser.GetUnpairedInputDevices().Remove(device);
+            }
+
+            Destroy(m_selection.gameObject);
+
+            if (GameManager.gManager.players.Contains(this.gameObject)) // if the players list contains this object
+            {
+                GameManager.gManager.players.Remove(this.gameObject); // then remove it from the list
+            }
+            if (GameManager.gManager.allRacers.Contains(this.gameObject)) // if the playerObjects list contains this object
+            {
+                GameManager.gManager.allRacers.Remove(this.gameObject); // then remove the object from the list
+            }
+            GameManager.gManager.numberOfPlayers -= 1;
+
+            // -1 from number of player in the uicontroller script
+            GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1);
+            Destroy(this.gameObject);
+        }
+        else
+        {
+
+        }
     }
     
     /// <summary>
@@ -121,32 +171,29 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
         if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
-            CalculateFOV(); // calculate the FOV for the camera                                                                            |
-        //---------------------------------------------------------------------------------------------------------------------------------|
+            CalculateFOV(); // calculate the FOV for the camera
     }
 
     private void CalculateFOV()
     {
-        //---------------------------------------------------------------------------------------------------------------------------------|
-        // calculating how fast the ships going compaired to the top speed as a percentage                                                 |
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;             //|
-        // if the ship is moving slightly                                                                                                  |
-        if(speedPercentage > 0.001)                                                                                                      //|
-        {                                                                                                                                //|
-            m_desiredFOV = ((maxFOV - minFOV) * speedPercentage) + minFOV; // calculate the desiredFOV                                     |
-        }                                                                                                                                //|
-        else // if its not moving                                                                                                          |
-        {                                                                                                                                //|
-            m_desiredFOV = minFOV; // then the FOV is now the min it can go                                                                |
-        }                                                                                                                                //|
-        //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);                                                                      |
-                                                                                                                                         //|
-        m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth                      |
-        if(m_virtualCam != null)                                                                                                         //|
-            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                               |
-        //---------------------------------------------------------------------------------------------------------------------------------|
+        // calculating how fast the ships going compaired to the top speed as a percentage                                  
+        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;
+        // if the ship is moving slightly
+        if(speedPercentage > 0.001)
+        {
+            m_desiredFOV = ((maxFOV - minFOV) * speedPercentage) + minFOV; // calculate the desiredFOV                      
+        }
+        else // if its not moving
+        {
+            m_desiredFOV = minFOV; // then the FOV is now the min it can go
+        }
+        //m_desiredPOV = Mathf.Lerp(minPOV, maxPOV, speedPercentage);
+
+        m_currentFOV = Mathf.Lerp(m_currentFOV, m_desiredFOV, lerpTime); // lerp to the desiredFOV so that its smooth
+        m_currentFOV = Mathf.Clamp(m_currentFOV, 0, maxFOV + 10);
+        if(m_virtualCam != null) 
+            m_virtualCam.m_Lens.FieldOfView = m_currentFOV; // set the FOV to the currentFOV                                
     }
 
     /// <summary>
@@ -172,6 +219,15 @@ public class PlayerInputScript : MonoBehaviour
         {
             if (context.performed && !playerReadyInMenu)
                 m_selection.OnPrev();
+        }
+    }
+
+    public void OnSwitch(InputAction.CallbackContext context)
+    {
+        if (m_selection != null)
+        {
+            if (context.performed && !playerReadyInMenu)
+                m_selection.OnNextMat();
         }
     }
 
@@ -255,7 +311,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (m_shipControls != null)
         {
-            m_shipControls.IsBoosting();
+            m_shipControls.WantToBoost();
         }
     }
 

@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using EAudioSystem;
 
 public class RacerStartPositions : MonoBehaviour
 {
     [SerializeField] private GameObject[] startPositions;
     private bool placingRacers = false;
-    private int placementIndexer = 0;
 
-
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.racersPlaced = false;
         GameManager.gManager.readyForCountdown = false;
@@ -79,6 +78,13 @@ public class RacerStartPositions : MonoBehaviour
                             break;
                         }
 
+                    }
+
+
+                    if (GameManager.gManager.players[i].GetComponent<PlayerAudioController>() != null)
+                    {
+                        PlayerAudioController pAC = GameManager.gManager.players[i].GetComponent<PlayerAudioController>();
+                        pAC.StartEngineHum();
                     }
                 }
 

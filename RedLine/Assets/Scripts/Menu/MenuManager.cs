@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MenuManagement;
 using System;
+using DifficultyButtonSwitch;
 
 namespace MenuManagement
 {
@@ -26,13 +27,24 @@ namespace MenuManagement
         public SetMenu mainMenu;
         private SetMenu m_currentMenu;
 
+        public ButtonSelectManager bSelect;
+
+        public void SetGameLoaded(bool change) { m_gameLoadedAndStarted = change; }
         public MenuType GetCurrentType() { return m_currentMenuType; }
         public SetMenu GetCurrentMenu() { return m_currentMenu; }
 
         // Start is called before the first frame update
-        void Start()
+        public void Inistialize()
         {
-
+            if (GameManager.gManager.firstLoadIntoGame)
+            {
+                foreach(GameObject player in GameManager.gManager.players)
+                {
+                    player.GetComponent<PlayerInputScript>().Inistialize();
+                }
+                m_gameLoadedAndStarted = false;
+                PressStart();
+            }
         }
 
         // Update is called once per frame
@@ -49,28 +61,20 @@ namespace MenuManagement
                 m_currentMenu = mainMenu;
                 m_currentMenu.gameObject.SetActive(true);
                 GameManager.gManager.uiCInput.ResetFirstButton(0, mainMenu.menuStartButtons[0]);
+                bSelect.TransitionToTitle();
                 m_gameLoadedAndStarted = true;
             }
         }
 
         public void BackOutMenu(int playerNumber)
         {
-            switch (m_currentMenuType)
+            if(m_currentMenuType != MenuType.ShipSelectionReady)
+                m_currentMenu.OnBackButton();
+            else
             {
-                case MenuType.Difficulty:
-                    Back();
-                    break;
-                case MenuType.Option:
-                    Back();
-                    break;
-                case MenuType.Credits:
-                    Back();
-                    break;
-                case MenuType.ShipSelectionReady:
-                    GameManager.gManager.uiCInput.UnReadyPlayer(playerNumber);
-                    break;
-
+                GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().GetShipSelection().UnReady();
             }
+
         }
 
         public void SwitchMenu(SetMenu switchingTo)

@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfActions:
-  - {fileID: 11400000, guid: 404a7830dba608c47876b111dd57d3cf, type: 2}
   - {fileID: 11400000, guid: 4db6ad1ae77703847a2dc7ea9451f8d7, type: 2}
   - {fileID: 11400000, guid: 478821fed14ab86448c90f609dfbad1c, type: 2}
   - {fileID: 11400000, guid: 2359fb904ae13524fad8983d7bf0448c, type: 2}
@@ -368,13 +367,40 @@ MonoBehaviour:
   cameraTurnAngle: 11
   modelRotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7520871
+      value: 0.28697905
+      inSlope: -0.07099292
+      outSlope: -0.07099292
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09073286
+      outWeight: 0.22222584
+    - serializedVersion: 3
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -2.2439308
+      outSlope: -2.2439308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.114574745
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   shipAdjustSpeed: 0.75
   wantingToBoost: 0
-  accelerationForce: 10
+  accelerationForce: 2
   howFastYouGetBoost: 1
   howFastYouLooseBoost: 0.15
   maxBoostSpeedChange: 0
@@ -383,6 +409,7 @@ MonoBehaviour:
   - 2
   - 2.5
   m_boostLevel: 0
+  test: {fileID: 0}
 --- !u!54 &2819560891871692963
 Rigidbody:
   m_ObjectHideFlags: 0

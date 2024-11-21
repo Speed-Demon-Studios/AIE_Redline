@@ -16,7 +16,8 @@ public class Nodes : MonoBehaviour
     {
         if (this.CompareTag("StartNode"))
         {
-            GameManager.gManager.startNode = this;
+            if(GameManager.gManager != null)
+                GameManager.gManager.startNode = this;
         }
     }
 

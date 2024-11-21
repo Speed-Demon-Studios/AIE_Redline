@@ -44,15 +44,12 @@ public class TestingEditor : EditorWindow
                 {
                     case 0:
                         GameManager.gManager.difficultyChange = 0.8f;
-                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
                         break;
                     case 1:
                         GameManager.gManager.difficultyChange = 1f;
-                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
                         break;
                     case 2:
                         GameManager.gManager.difficultyChange = 1.2f;
-                        m_player.GetComponent<ShipsControls>().DifficultySpeedChange();
                         break;
                 }
             }
