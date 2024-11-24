@@ -154,12 +154,12 @@ namespace EAudioSystem
             if (m_boostEmitters[soundIndex] != null && m_boostAudioInfo[soundIndex].IsNull == false)
             {
                 m_boostEmitters[soundIndex].AllowFadeout = true;
-                if (m_boostEmitters[soundIndex].EventReference.Path != m_boostAudioInfo[soundIndex].Path)
+                if (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
                 {
-                    while (m_boostEmitters[soundIndex].EventReference.Path != m_boostAudioInfo[soundIndex].Path)
+                    while (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
                     {
                         m_boostEmitters[soundIndex].EventReference = m_boostAudioInfo[soundIndex];
-                        Debug.Log(m_boostEmitters[soundIndex].EventReference.Path);
+                        Debug.Log(m_boostEmitters[soundIndex].EventReference.Guid);
                     }
                 }
                 m_boostEmitters[soundIndex].Play();
