@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MenuManagement;
 
 public class ShipSelection : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class ShipSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        SetUp();
+        //SetUp();
     }
 
     private void Update()
@@ -72,6 +73,9 @@ public class ShipSelection : MonoBehaviour
             }
             index++;
         }
+
+        if (GameManager.gManager.uiCInput.GetMenuManager().GetCurrentType() == MenuType.ShipSelectionReady)
+            GameManager.gManager.uiCInput.GetMenuManager().SetButtons(GameManager.gManager.uiCInput.GetMenuManager().GetCurrentMenu());
 
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
@@ -163,18 +167,14 @@ public class ShipSelection : MonoBehaviour
         // Sets ship variants
         m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement
-        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
-        if (m_ship.GetComponent<VariantAudioContainer>() != null)
-        {
-            m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
-            m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
-        }
+        m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
 
         m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
 
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
 
+        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
     }
     public void UnReady()
     {

@@ -62,11 +62,7 @@ public class PositionHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (racersAdded == false)
-        {
-            OnRaceLoaded();
-        }
-        else if (racersAdded == true)
+        if (racersAdded == true)
         {
             GameManager.gManager.indexListSorted = false;
             if(GameManager.gManager.raceFinished == false)

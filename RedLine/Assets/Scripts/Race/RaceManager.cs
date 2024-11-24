@@ -9,21 +9,33 @@ public class RaceManager : MonoBehaviour
 
     public int GetTotalLaps() { return TotalLaps; }
 
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.rManager = this;
         GameManager.gManager.CurrentScene = "Race";
         GameManager.gManager.enablePlayerCams = true;
+        GameManager.gManager.raceFinished = false;
+        GameManager.gManager.raceStarted = false;
 
-        foreach(GameObject playerOBJ in GameManager.gManager.players)
+        foreach (GameObject playerOBJ in GameManager.gManager.players)
         {
             playerOBJ.GetComponent<InitializeBeforeRace>().Initialize();
         }
 
-        if (coroutineStarted == false)
+        foreach (GameObject gObj in GameManager.gManager.allRacers)
         {
-            coroutineStarted = true;
-            StartCoroutine(InitPlayers());
+            if (gObj != null)
+            {
+                InitializeBeforeRace playerInit = gObj.GetComponent<InitializeBeforeRace>();
+
+                if (playerInit != null)
+                {
+                    playerInit.InitializeForRace(gObj);
+                }
+
+                if (gObj.GetComponent<RacerDetails>() != null)
+                    gObj.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
+            }
         }
     }
 
@@ -63,31 +75,6 @@ public class RaceManager : MonoBehaviour
     {
         GameManager.gManager.raceFinished = true;
         GameManager.gManager.raceFinisher.ShowFinalPlacements();
-    }
-
-    IEnumerator InitPlayers()
-    {
-        yield return new WaitForEndOfFrame();
-
-        foreach (GameObject gObj in GameManager.gManager.allRacers)
-        {
-            if (gObj != null)
-            {
-                InitializeBeforeRace playerInit = gObj.GetComponent<InitializeBeforeRace>();
-
-                if (playerInit != null)
-                {
-                    playerInit.InitializeForRace(gObj);
-                }
-                yield return new WaitForEndOfFrame();
-
-
-                if (gObj.GetComponent<RacerDetails>() != null)
-                    gObj.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
-            }
-        }
-        coroutineStarted = false;
-        StopCoroutine(InitPlayers());
     }
 
     public void DisableFinishedRacerMovement(RacerDetails racer = null)
@@ -149,9 +136,6 @@ public class RaceManager : MonoBehaviour
                 racer.currentLap = 1;
             }
         }
-
-
-        //GameManager.gManager.raceFinisher.CheckAllRacersFinished();
 
         return;
     }

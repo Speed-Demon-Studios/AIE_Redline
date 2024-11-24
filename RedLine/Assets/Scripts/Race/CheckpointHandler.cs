@@ -12,7 +12,7 @@ public class CheckpointHandler : MonoBehaviour
         return transform.GetChild(index);
     }
 
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.checkpointParent = this;
     }

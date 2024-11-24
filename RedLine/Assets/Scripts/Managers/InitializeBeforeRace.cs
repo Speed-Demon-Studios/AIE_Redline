@@ -11,25 +11,11 @@ public class InitializeBeforeRace : MonoBehaviour
     public bool movementEnabled = false;
     public GameObject playerCamOBJECT;
     public ShipsControls sControls;
-    [SerializeField] private Camera playerCamera;
+
     [SerializeField] private PlayerInputScript pInput;
     [SerializeField] private AIMoveInputs aiInput;
     [SerializeField] private Rigidbody rb;
 
-    //private void Update()
-    //{
-    //    if (GameManager.gManager.CurrentScene == "MainMenu" || (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == false))
-    //    {
-    //        rb.velocity = new Vector3(0, 0, 0);
-    //        rb.angularVelocity = new Vector3(0, 0, 0);
-    //        sControls.ResetAcceleration();
-    //        rb.isKinematic = true;
-    //    }
-    //    else if (GameManager.gManager.CurrentScene == "Race" && GameManager.gManager.raceStarted == true)
-    //    {
-    //        rb.isKinematic = false;
-    //    }
-    //}
 
     public void Initialize()
     {
@@ -57,8 +43,9 @@ public class InitializeBeforeRace : MonoBehaviour
 
             if (playerCamOBJECT != null)
             {
-                playerCamOBJECT.SetActive(false);
+                playerCamOBJECT.SetActive(true);
             }
+
         }
     }
 
@@ -74,21 +61,7 @@ public class InitializeBeforeRace : MonoBehaviour
 
     public void InitializeForRace(GameObject racerOBJ)
     {
-        GameManager.gManager.raceFinished = false;
-
-        if (playerCamOBJECT != null)
-        {
-            playerCamOBJECT.SetActive(true);
-        }
-
-
-        GameManager.gManager.raceStarted = false;
-
         RacerDetails rDeets = racerOBJ.GetComponent<RacerDetails>();
-        //if (GetComponentInChildren<IsShipCollider>().gameObject != null && GetComponentInChildren<IsShipCollider>() != null)
-        //{
-        //    GetComponentInChildren<IsShipCollider>().shipControls = sControls;
-        //}
 
         rDeets.finishedRacing = false;
         rDeets.crossedFinishLine = false;
