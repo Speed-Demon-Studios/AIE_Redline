@@ -77,22 +77,30 @@ namespace EAudioSystem
 
 
                 m_engineAudioInfo = new();
-                m_engineEmitterPitches = new();
-                m_engineEmitterVolumes = new();
+                for (int i = 0; i < m_engineEmitterPitches.Count(); i++)
+                {
+                    m_engineEmitterPitches[i] = 0.0f;
+                }
+                for (int i = 0; i < m_engineEmitterVolumes.Count(); i++)
+                {
+                    m_engineEmitterVolumes[i] = 0.0f;
+                }
+                //m_engineEmitterPitches = new();
+                //m_engineEmitterVolumes = new();
 
                 foreach (StudioEventEmitter emitter in m_gameplaySoundEmitters) { emitter.Stop(); }
 
-                m_gameplayAudioInfo = new();
-                m_gameplayAudioPitches = new();
-                m_gameplayAudioVolumes = new();
+                //m_gameplayAudioInfo = new();
+                //m_gameplayAudioPitches = new();
+                //m_gameplayAudioVolumes = new();
 
                 foreach (StudioEventEmitter emitter in m_windEmitters)
                 {
                     emitter.Stop();
                 }
 
-                m_windAudioInfo = new List<EventReference>();
-                m_windAudioVolumes = new();
+                //m_windAudioInfo = new List<EventReference>();
+                //m_windAudioVolumes = new();
 
 
                 resettingAudio = false;
