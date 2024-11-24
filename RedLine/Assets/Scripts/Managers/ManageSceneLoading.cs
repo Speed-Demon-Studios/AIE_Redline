@@ -79,21 +79,6 @@ public class ManageSceneLoading : MonoBehaviour
         racerDeets.quickestLapTimeSECONDS = 99;
         racerDeets.quickestLapTimeMINUTES = 99;
 
-        controls.ChangeDoneDifficulty(false);
-        controls.DeInitialize();
-
-        controls.ResetRedline();
-
-        playerOBJ.GetComponent<ShipsControls>().enabled = false;
-        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
-
-        GameManager.gManager.numberOfPlayers -= 1;
-
-        //acm.GetPlayerInput().gameObject.SetActive(false);
-
-        racerDeets.rCS.ClearList();
-        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
-
         SparksParticlesController SPC = playerOBJ.GetComponentInChildren<SparksParticlesController>();
         if (SPC != null)
         {
@@ -113,6 +98,22 @@ public class ManageSceneLoading : MonoBehaviour
                 }
             }
         }
+
+        controls.ChangeDoneDifficulty(false);
+        controls.DeInitialize();
+
+        controls.ResetRedline();
+
+        playerOBJ.GetComponent<ShipsControls>().enabled = false;
+        playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
+
+        GameManager.gManager.numberOfPlayers -= 1;
+
+        //acm.GetPlayerInput().gameObject.SetActive(false);
+
+        racerDeets.rCS.ClearList();
+        ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
+
 
         foreach (GameObject player in GameManager.gManager.players)
         {
