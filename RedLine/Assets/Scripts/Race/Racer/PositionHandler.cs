@@ -36,6 +36,9 @@ public class PositionHandler : MonoBehaviour
                 aiShip.GetComponent<InitializeBeforeRace>().Initialize();
                 racers.Add(aiShip.GetComponent<RacerDetails>());
 
+                if (aiShip.GetComponent<RacerDetails>() != null)
+                    aiShip.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
+
                 GameManager.gManager.racerObjects.Add(aiShip);
             }
         }
