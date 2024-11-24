@@ -11,4 +11,7 @@ public class ShipSelectionInfo : MonoBehaviour
     public List<Sprite> manufacturerSprites;
     public Image manufacturerImage;
     public Image manufacturerImageRed;
+    public string readyTriggerString;
+    public string unReadyTriggerString;
+    public Animator readyAnimator;
 }
