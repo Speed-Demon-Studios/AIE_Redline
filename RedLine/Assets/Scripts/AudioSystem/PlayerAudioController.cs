@@ -207,15 +207,6 @@ namespace EAudioSystem
                         }
                     case 1:
                         {
-                            //if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0])
-                            //{
-                            //    m_redlineAudioPitches[0] += 5.5 * Time.deltaTime;
-                            //
-                            //    if (m_redlineAudioPitches[0] > m_redlineMaxPitches[0])
-                            //    {
-                            //        m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
-                            //    }
-                            //}
                             if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[1])
                             {
                                 m_redlineAudioVolume[0] += 0.45 * Time.deltaTime;
@@ -342,27 +333,7 @@ namespace EAudioSystem
                         }
                     case 3:
                         {
-                            //if (m_redlineAudioVolume[0] > 0.0)
-                            //{
-                            //    m_redlineAudioVolume[0] -= 0.05;
-                            //}
-                            //if (m_redlineAudioVolume[0] <= 0.0)
-                            //{
-                            //    m_redlineAudioVolume[0] = 0.0;
-                            //}
-                            //
-                            //if (m_redlineAudioPitches[0] > 0.0)
-                            //{
-                            //    m_redlineAudioPitches[0] -= 0.05f * Time.deltaTime;
-                            //}
-                            //if (m_redlineAudioPitches[0] < 0)
-                            //{
-                            //    m_redlineAudioVolume[0] = 0.0;
-                            //}
-                            //if (m_redlineAudioVolume[0] > 0.0)
-                            //{
-                            //    m_redlineAudioPitches[0] -= 0.05f * Time.deltaTime;
-                            //}
+                            
                             break;
                         }
                 }
