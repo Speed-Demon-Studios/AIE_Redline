@@ -20,7 +20,7 @@ public class ShipsControls : MonoBehaviour
     private List<FireInfo> m_fire = new();
     public GameObject cameraRotationPoint;
     private int m_fireIndex;
-
+    private int m_shipManiIndex;
     public bool isTestShip;
 
     [Space]
@@ -69,6 +69,7 @@ public class ShipsControls : MonoBehaviour
     ///      All of the getters and setters in this script        ///
     ///                                                           ///
     /////////////////////////////////////////////////////////////////
+    public void SetMaterialIndex(int index) { m_shipManiIndex = index; }
     public Rigidbody ReturnRB() { return m_rb; }
     public List<FireInfo> FireList() { return m_fire; }
     public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
@@ -161,6 +162,8 @@ public class ShipsControls : MonoBehaviour
             {
                 fire.TurnFireOff();
             }
+            gameObject.GetComponent<ShipBlendAnimations>().Inistialize();
+            shipModel.transform.GetComponentInChildren<ShipTypeInfo>().SwitchMaterials(m_shipManiIndex);
         }
 
         DifficultySpeedChange();

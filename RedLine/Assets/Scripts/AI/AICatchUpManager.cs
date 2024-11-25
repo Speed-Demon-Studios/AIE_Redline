@@ -6,6 +6,8 @@ public class AICatchUpManager : MonoBehaviour
 {
     List<GameObject> m_playerOBJS = new();
     public float multiplier;
+    public float aheadMultiplier;
+    float m_catchUpChange;
 
     public void Inistialize()
     {
@@ -14,13 +16,27 @@ public class AICatchUpManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(GameObject AIOBJ in GameManager.gManager.racerObjects)
+        float score = 1f;
+        foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
         {
-            ChangeCatchUp(AIOBJ);
+            if(ChangeCatchUp(AIOBJ) > 0)
+                score *= ChangeCatchUp(AIOBJ);
+        }
+
+        float originalScore = score;
+        float modFactor = 1 - (1 / GameManager.gManager.racerObjects.Count);
+        float makeupValue = (1 - originalScore) * modFactor;
+        float percentage = originalScore + (makeupValue * originalScore);
+
+        m_catchUpChange = percentage;
+
+        foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
+        {
+            AIOBJ.GetComponent<ShipsControls>().MaxSpeedCatchupChange(percentage);
         }
     }
 
-    void ChangeCatchUp(GameObject ai)
+    float ChangeCatchUp(GameObject ai)
     {
         RacerDetails aIRacerDets = ai.GetComponent<RacerDetails>();
         float numberOfCheckPoints = GameManager.gManager.checkpointParent.GetNumberOfChildren();
@@ -34,8 +50,11 @@ public class AICatchUpManager : MonoBehaviour
             float aiCheckPointPercentage = (aIRacerDets.currentCheckpoint / numberOfCheckPoints) + aIRacerDets.currentLap;
 
             float difference = aiCheckPointPercentage - playerCheckPointPercentage;
-            float reversDiff = 1 - difference;
-            score += reversDiff;
+            if (difference > 0)
+            {
+                float reversDiff = 1 - difference;
+                score += reversDiff * multiplier;
+            }
         }
 
         float originalScore = score;
@@ -43,9 +62,6 @@ public class AICatchUpManager : MonoBehaviour
         float makeupValue = (1 - originalScore) * modFactor;
         float percentage = originalScore + (makeupValue * originalScore);
 
-        if (percentage < 1)
-            percentage *= multiplier;
-
-        ai.GetComponent<ShipsControls>().MaxSpeedCatchupChange(percentage);
+        return percentage;
     }
 }

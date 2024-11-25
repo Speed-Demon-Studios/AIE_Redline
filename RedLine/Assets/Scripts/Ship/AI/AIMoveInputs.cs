@@ -102,8 +102,8 @@ public class AIMoveInputs : MonoBehaviour
 
         Debug.DrawLine(this.transform.position, desiredNode.transform.position);
 
-        m_controls.SetStrafeMultiplier(-(m_currentTurnAngle + Variant.turnMultiplier));
-        m_controls.SetTurnMultipliers(-(m_currentTurnAngle + Variant.turnMultiplier));
+        m_controls.SetStrafeMultiplier(-(m_currentTurnAngle * Variant.turnMultiplier));
+        m_controls.SetTurnMultipliers(-(m_currentTurnAngle * Variant.turnMultiplier));
     }
 
     /// <summary>
