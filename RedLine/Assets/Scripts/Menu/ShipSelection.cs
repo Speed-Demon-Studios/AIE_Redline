@@ -17,6 +17,10 @@ public class ShipSelection : MonoBehaviour
 
     private GameObject m_ship;
 
+    public RawImage image;
+    public RenderTexture texture;
+    public Camera cam;
+
     private int m_playerNum;
     private int m_shipIndex;
     private int m_materialIndex;
@@ -36,8 +40,8 @@ public class ShipSelection : MonoBehaviour
         m_currentShips = ships[0];
 
         // sets up the camera texture to display the ship
-        //cam.GetComponentInChildren<Camera>().targetTexture = texture;
-        //image.texture = texture;
+        //
+        //
     }
 
     private void OnEnable()
@@ -57,9 +61,13 @@ public class ShipSelection : MonoBehaviour
     public void SetUp()
     {
         // stops all the current coroutines
-        StopAllCoroutines();
+        //StopAllCoroutines();
         // starts the text coroutine
-        StartCoroutine(NameChange(variants[0].VariantName));
+        //StartCoroutine(NameChange(variants[0].VariantName));
+
+        texture = GameManager.gManager.uiCInput.textures[m_playerNum];
+        cam.GetComponentInChildren<Camera>().targetTexture = texture;
+        image.texture = texture;
 
         GameManager.gManager.uiCInput.bSManager.TransitionToShipSelect(sInfo.shipDisplayAnim);
 
@@ -178,17 +186,28 @@ public class ShipSelection : MonoBehaviour
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
 
-        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
+        Invoke(nameof(ReadyPlayer), 2); // Readys this player
+
+        sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
+    }
+
+    void ReadyPlayer()
+    {
+        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum);
     }
     public void UnReady()
     {
         // Sets ship variants
         m_ship.GetComponent<ShipsControls>().VariantObject = null;
         m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement 
-        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations 
+        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
+
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
 
+        GameManager.gManager.uiCInput.UnReadyPlayer(m_playerNum); // Readys this player
+
+        sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
     }
 
     /// <summary>

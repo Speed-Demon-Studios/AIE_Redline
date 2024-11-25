@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gManager { get; private set; }
 
-    void Start()
+    void Awake()
     {
         if (gManager != null && gManager != this)
         {
