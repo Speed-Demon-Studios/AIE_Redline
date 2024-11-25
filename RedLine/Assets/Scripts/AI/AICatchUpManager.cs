@@ -43,11 +43,6 @@ public class AICatchUpManager : MonoBehaviour
         float makeupValue = (1 - originalScore) * modFactor;
         float percentage = originalScore + (makeupValue * originalScore);
 
-        //if (percentage < 0)
-        //    percentage = -percentage;
-        //else if(percentage > 0)
-        //    percentage += 1;
-
         if (percentage < 1)
             percentage *= multiplier;
 

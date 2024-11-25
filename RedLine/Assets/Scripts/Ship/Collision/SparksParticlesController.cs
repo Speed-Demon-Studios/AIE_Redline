@@ -1,8 +1,10 @@
 using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ParticleSystemJobs;
+using UnityEngine.VFX;
 
 public class SparksParticlesController : MonoBehaviour
 {
@@ -10,22 +12,23 @@ public class SparksParticlesController : MonoBehaviour
 
     public SparksTrigger[] sparksList;
     public ParticleSystem[] sparksParticles;
+    public VisualEffect vfx;
 
-    public void ActivateSparks(GameObject particleToActivate)
+    public void ActivateSparks(VisualEffect particleToActivate)
     {
-        if (particleToActivate != null && particleToActivate.activeSelf == false)
+        if (particleToActivate != null)
         {
             if (PAC.IsEmitterPlaying(1, 0) == false)
             {
                 PAC.PlayGPSFX(0, 0);
             }
-            particleToActivate.SetActive(true);
+            particleToActivate.Play();
         }
     }
 
-    public void DeactivateSparks(GameObject particleToDeactivate, SparksTrigger sT = null)
+    public void DeactivateSparks(VisualEffect particleToDeactivate, SparksTrigger sT = null)
     {
-        if (particleToDeactivate != null && sT != null && particleToDeactivate.activeSelf == true)
+        if (particleToDeactivate != null && sT != null && particleToDeactivate.isActiveAndEnabled)
         {
             if (sT.waiting == false)
             {
@@ -35,11 +38,11 @@ public class SparksParticlesController : MonoBehaviour
         }
     }
     
-    private IEnumerator DeactivateSPRKS(GameObject particleToDeactivate, SparksTrigger sT)
+    private IEnumerator DeactivateSPRKS(VisualEffect particleToDeactivate, SparksTrigger sT)
     {
         yield return new WaitForEndOfFrame();
 
-        particleToDeactivate.SetActive(false);
+        particleToDeactivate.Stop();
 
         sT.waiting = false;
         StopCoroutine(DeactivateSPRKS(particleToDeactivate, sT));
@@ -64,7 +67,7 @@ public class SparksParticlesController : MonoBehaviour
                 {
                     if (sT.isColliding == true)
                     {
-                        foreach (GameObject sparksPE in sT.sparks)
+                        foreach (VisualEffect sparksPE in sT.sparks)
                         {
                             if (sparksPE != null && sT != null)
                             {
@@ -74,7 +77,7 @@ public class SparksParticlesController : MonoBehaviour
                     }
                     else if (sT.isColliding == false)
                     {
-                        foreach (GameObject sparksPE in sT.sparks)
+                        foreach (VisualEffect sparksPE in sT.sparks)
                         {
                             if (sparksPE != null)
                             {

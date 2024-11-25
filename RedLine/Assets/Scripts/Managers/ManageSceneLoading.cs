@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class ManageSceneLoading : MonoBehaviour
 {
@@ -88,7 +89,7 @@ public class ManageSceneLoading : MonoBehaviour
                 {
                     sT.isColliding = false;
 
-                    foreach (GameObject sparksOBJ in sT.sparks)
+                    foreach (VisualEffect sparksOBJ in sT.sparks)
                     {
                         if (sparksOBJ != null)
                         {
