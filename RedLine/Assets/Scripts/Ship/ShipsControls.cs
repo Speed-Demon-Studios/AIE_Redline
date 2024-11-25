@@ -411,7 +411,10 @@ public class ShipsControls : MonoBehaviour
         if (PAC != null)
         {
             PAC.SetBoostPitch(1, 1.0f);
+            PAC.PlayBoostAudio(3);
+            PAC.PlayBoostAudio(0);
             PAC.PlayBoostAudio(1);
+            PAC.PlayBoostAudio(2);
         }
         m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);

@@ -616,6 +616,7 @@ MonoBehaviour:
   - {fileID: 2650814648570606231}
   - {fileID: 3284658452991705591}
   - {fileID: 9220337167276204022}
+  - {fileID: 4229608971099045565}
   m_boostAudioInfo:
   - Guid:
       Data1: 1463001767
@@ -635,7 +636,14 @@ MonoBehaviour:
       Data3: -907354722
       Data4: -2102314217
     Path: event:/Boost/BoostSound#1
+  - Guid:
+      Data1: 1249628521
+      Data2: 1163245878
+      Data3: -1913547864
+      Data4: 818137180
+    Path: event:/Boost/BoostLevelUp
   m_boostAudioPitches:
+  - 1
   - 1
   - 1
   - 1
@@ -653,10 +661,28 @@ MonoBehaviour:
   - 1
   m_gameplayAudioVolumes:
   - 0.5
-  m_redlineSoundEmitters: []
-  m_redlineAudioInfo: []
-  m_redlineAudioPitches: []
-  m_redlineAudioVolume: []
+  m_redlineSoundEmitters:
+  - {fileID: 7225176986604874999}
+  m_redlineAudioInfo:
+  - Guid:
+      Data1: -957722253
+      Data2: 1112487255
+      Data3: 533376155
+      Data4: -393363119
+    Path: event:/Boost/RedlineBoostChargingVER2
+  m_redlineMaxPitches:
+  - 0.2
+  - 0.8
+  - 1.5
+  m_redlineMaxVolumes:
+  - 1.43
+  - 1.8
+  - 2.3
+  m_redlineAudioPitches:
+  - 0
+  m_redlineAudioVolume:
+  - 0
+  m_redlineBLVolumes: []
 --- !u!114 &5522469426596937146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,6 +1311,8 @@ GameObject:
   - component: {fileID: 3284658452991705591}
   - component: {fileID: 9220337167276204022}
   - component: {fileID: 7541992265674552916}
+  - component: {fileID: 4229608971099045565}
+  - component: {fileID: 7225176986604874999}
   m_Layer: 0
   m_Name: EmitterParent
   m_TagString: Untagged
@@ -1586,6 +1614,68 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!114 &4229608971099045565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932143015045508699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &7225176986604874999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932143015045508699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -957722253
+      Data2: 1112487255
+      Data3: 533376155
+      Data4: -393363119
+    Path: event:/Boost/RedlineBoostChargingVER2
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7341607018904620202
 GameObject:
   m_ObjectHideFlags: 0

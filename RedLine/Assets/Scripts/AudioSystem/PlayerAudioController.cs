@@ -57,8 +57,11 @@ namespace EAudioSystem
 
         [SerializeField] private List<StudioEventEmitter> m_redlineSoundEmitters = new();
         [SerializeField] private List<EventReference> m_redlineAudioInfo = new();
+        [SerializeField] private List<double> m_redlineMaxPitches = new();
+        [SerializeField] private List<double> m_redlineMaxVolumes = new();
         [SerializeField] private List<double> m_redlineAudioPitches = new();
         [SerializeField] private List<double> m_redlineAudioVolume = new();
+        [SerializeField] private List<double> m_redlineBLVolumes = new();
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,6 +154,232 @@ namespace EAudioSystem
             }
 
             return false;
+        }
+
+// --------------------------------------------------
+// ** REDLINE **
+// --------------------------------------------------
+        public void ChargeRedlineSound()
+        {
+            if (m_redlineAudioPitches[0] < 0.1)
+            {
+                m_redlineAudioPitches[0] = 0.1;
+            }
+            if (m_redlineAudioVolume[0] < 0.1)
+            {
+                m_redlineAudioVolume[0] = 0.1;
+            }
+
+            ShipsControls sControls = this.GetComponent<ShipsControls>();
+
+            if (sControls.wantingToBoost == true)
+            {
+                m_redlineAudioPitches[0] = 0.0;
+                if (m_redlineAudioPitches[0] < 0.0)
+                {
+                    m_redlineAudioPitches[0] = 0.0;
+                }
+
+            }
+
+
+            if (sControls.ReturnIsInRedline() == true)
+            {
+                switch (sControls.ReturnBoostLevel())
+                {
+                    case 0:
+                        {
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0])
+                            {
+                                m_redlineAudioVolume[0] += 0.55 * Time.deltaTime;
+                            }
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[0])
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[0];
+                            }
+
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0])
+                            {
+                                m_redlineAudioPitches[0] += 0.1f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[0])
+                            {
+                                m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            //if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0])
+                            //{
+                            //    m_redlineAudioPitches[0] += 5.5 * Time.deltaTime;
+                            //
+                            //    if (m_redlineAudioPitches[0] > m_redlineMaxPitches[0])
+                            //    {
+                            //        m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
+                            //    }
+                            //}
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[1])
+                            {
+                                m_redlineAudioVolume[0] += 0.45 * Time.deltaTime;
+                            }
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[1])
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[1];
+                            }
+
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1])
+                            {
+                                m_redlineAudioPitches[0] += 0.25f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[1])
+                            {
+                                m_redlineAudioPitches[0] = m_redlineMaxPitches[1];
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[2])
+                            {
+                                m_redlineAudioVolume[0] += 0.15 * Time.deltaTime;
+                            }
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[2])
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[2];
+                            }
+
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[2])
+                            {
+                                m_redlineAudioPitches[0] += 0.15f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[2])
+                            {
+                                m_redlineAudioPitches[0] = m_redlineMaxPitches[2];
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (sControls.ReturnBoostLevel() == 3)
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[3];
+                                //if (m_redlineAudioVolume[0] > 0.0)
+                                //{
+                                //    m_redlineAudioVolume[0] -= 2.5 * Time.deltaTime;
+                                //}
+                                //if (m_redlineAudioVolume[0] <= 0.0)
+                                //{
+                                //    m_redlineAudioVolume[0] = 0.0;
+                                //}
+                                //m_redlineSoundEmitters[0].Stop();
+                                break;
+                            }
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                switch (sControls.ReturnBoostLevel())
+                {
+                    case 0:
+                        {
+                            if (m_redlineAudioVolume[0] > 0.0)
+                            {
+                                m_redlineAudioVolume[0] -= 0.15 * Time.deltaTime;
+                            }
+                            if (m_redlineAudioVolume[0] <= 0.0)
+                            {
+                                m_redlineAudioVolume[0] = 0.0;
+                            }
+
+                            if (m_redlineAudioPitches[0] > 0.0)
+                            {
+                                m_redlineAudioPitches[0] -= 0.08f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] < 0 && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            {
+                                m_redlineAudioPitches[0] = 0.0;
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[0])
+                            {
+                                m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
+                            }
+                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[0])
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[0];
+                            }
+
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[0])
+                            {
+                                m_redlineAudioPitches[0] -= 0.08f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            {
+                                m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[1])
+                            {
+                                if (m_redlineAudioPitches[0] < (m_redlineMaxPitches[1] + 0.06))
+                                {
+                                    m_redlineAudioVolume[0] -= 0.01 * Time.deltaTime;
+                                }
+                                else
+                                {
+                                    m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
+                                }
+                            }
+                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1])
+                            {
+                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[1];
+                            }
+
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[1])
+                            {
+                                m_redlineAudioPitches[0] -= 0.06f * Time.deltaTime;
+                            }
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            {
+                                m_redlineAudioPitches[0] = m_redlineMaxPitches[1];
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            //if (m_redlineAudioVolume[0] > 0.0)
+                            //{
+                            //    m_redlineAudioVolume[0] -= 0.05;
+                            //}
+                            //if (m_redlineAudioVolume[0] <= 0.0)
+                            //{
+                            //    m_redlineAudioVolume[0] = 0.0;
+                            //}
+                            //
+                            //if (m_redlineAudioPitches[0] > 0.0)
+                            //{
+                            //    m_redlineAudioPitches[0] -= 0.05f * Time.deltaTime;
+                            //}
+                            //if (m_redlineAudioPitches[0] < 0)
+                            //{
+                            //    m_redlineAudioVolume[0] = 0.0;
+                            //}
+                            //if (m_redlineAudioVolume[0] > 0.0)
+                            //{
+                            //    m_redlineAudioPitches[0] -= 0.05f * Time.deltaTime;
+                            //}
+                            break;
+                        }
+                }
+            }
         }
 
 // --------------------------------------------------
@@ -696,6 +925,20 @@ namespace EAudioSystem
 
                 if (resettingAudio == false)
                 {
+                    if (m_redlineSoundEmitters[0].IsPlaying() == false)
+                    {
+                        m_redlineSoundEmitters[0].Play();
+                    }
+
+                    ChargeRedlineSound();
+
+                    for (int i = 0; i < m_redlineSoundEmitters.Count(); i++)
+                    {
+                        StudioEventEmitter currentRedlineEmitter = m_redlineSoundEmitters[i];
+                        currentRedlineEmitter.EventInstance.setPitch((float)m_redlineAudioPitches[0]);
+                        currentRedlineEmitter.EventInstance.setVolume((float)m_redlineAudioVolume[0]);
+                    }
+
                     for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
                     {
                         if (m_engineEmitters[i] != null) // If the emitter at the current index is not NULL
