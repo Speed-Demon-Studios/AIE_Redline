@@ -30,6 +30,7 @@ public class SparksParticlesController : MonoBehaviour
     {
         if (particleToDeactivate != null && sT != null && particleToDeactivate.isActiveAndEnabled)
         {
+            particleToDeactivate.Stop();
             if (sT.waiting == false)
             {
                 sT.waiting = true;
@@ -73,7 +74,7 @@ public class SparksParticlesController : MonoBehaviour
                             {
                                 ActivateSparks(sparksPE);
                             }
-                        }    
+                        }
                     }
                     else if (sT.isColliding == false)
                     {

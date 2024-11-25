@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ShipsControls : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ShipsControls : MonoBehaviour
     public GameObject shipModel;
     public Transform rayCastPoint;
     private Rigidbody m_rb;
-    private List<GameObject> m_fire = new();
+    private List<FireInfo> m_fire = new();
     public GameObject cameraRotationPoint;
     private int m_fireIndex;
 
@@ -69,7 +70,7 @@ public class ShipsControls : MonoBehaviour
     ///                                                           ///
     /////////////////////////////////////////////////////////////////
     public Rigidbody ReturnRB() { return m_rb; }
-    public List<GameObject> FireList() { return m_fire; }
+    public List<FireInfo> FireList() { return m_fire; }
     public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
     public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
     public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
@@ -148,13 +149,17 @@ public class ShipsControls : MonoBehaviour
         if (!isAIShip)
         {
             AttachModels();
-            if (shipModel != null)
+            if(shipModel != null)
             {
                 FindChildWithTag(shipModel.transform);
             }
             if (VariantObject != null && !m_hasDoneDifficultyChange)
             {
                 m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
+            }
+            foreach(FireInfo fire in m_fire)
+            {
+                fire.TurnFireOff();
             }
         }
 
@@ -173,9 +178,9 @@ public class ShipsControls : MonoBehaviour
     {
         foreach (Transform child in childParent)
         {
-            if (child.CompareTag("Fire"))
+            if (child.GetComponent<FireInfo>() != null)
             {
-                m_fire.Add(child.gameObject);
+                m_fire.Add(child.GetComponent<FireInfo>());
             }
 
             if (child.childCount > 0)
@@ -217,42 +222,43 @@ public class ShipsControls : MonoBehaviour
                 switch (m_fireIndex)
                 {
                     case 0:
-                        m_fire[0].SetActive(false);
-                        m_fire[1].SetActive(false);
-                        m_fire[2].SetActive(false);
+                        foreach(FireInfo fire in m_fire)
+                        {
+                            fire.TurnFireOff();
+                        }
                         break;
                     case 1:
-                        if (PAC != null && m_fire[0].activeSelf == false)
+                        if (PAC != null)
                         {
                             PAC.SetBoostPitch(0, 1.0f);
                             PAC.SetBoostPitch(1, 1.55f);
                             PAC.PlayBoostAudio(0);
                         }
-                        m_fire[0].SetActive(true);
-                        m_fire[1].SetActive(false);
-                        m_fire[2].SetActive(false);
+                        m_fire[0].TurnFireOn();
+                        m_fire[1].TurnFireOff();
+                        m_fire[2].TurnFireOff();
                         break;
                     case 2:
-                        if (PAC != null && m_fire[1].activeSelf == false)
+                        if (PAC != null)
                         {
                             PAC.SetBoostPitch(0, 1.3f);
                             PAC.SetBoostPitch(1, 1.3f);
                             PAC.PlayBoostAudio(0);
                         }
-                        m_fire[1].SetActive(true);
-                        m_fire[2].SetActive(false);
-                        m_fire[0].SetActive(false);
+                        m_fire[1].TurnFireOn();
+                        m_fire[2].TurnFireOff();
+                        m_fire[0].TurnFireOff();
                         break;
                     case 3:
-                        if (PAC != null && m_fire[2].activeSelf == false)
+                        if (PAC != null)
                         {
                             PAC.SetBoostPitch(0, 1.5f);
                             PAC.SetBoostPitch(1, 0.75f);
                             PAC.PlayBoostAudio(0);
                         }
-                        m_fire[2].SetActive(true);
-                        m_fire[0].SetActive(false);
-                        m_fire[1].SetActive(false);
+                        m_fire[2].TurnFireOn();
+                        m_fire[0].TurnFireOff();
+                        m_fire[1].TurnFireOff();
                         break;
                 }
             }
@@ -492,9 +498,9 @@ public class ShipsControls : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
 
-        m_fire[0].SetActive(false);
-        m_fire[1].SetActive(false);
-        m_fire[2].SetActive(false);
+        m_fire[0].TurnFireOff();
+        m_fire[1].TurnFireOff();
+        m_fire[2].TurnFireOff();
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
