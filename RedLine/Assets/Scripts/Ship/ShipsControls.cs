@@ -10,7 +10,6 @@ public class ShipsControls : MonoBehaviour
     [Header("Refrences")]
     [HideInInspector] public int shipSelected = 0;
     public ShipVariant VariantObject;
-    public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
     public Transform collisionParent;
@@ -22,7 +21,6 @@ public class ShipsControls : MonoBehaviour
     private int m_fireIndex;
 
     public bool isTestShip;
-    public List<GameObject> FireList() { return m_fire; }
 
     [Space]
     [Header("Speed Variables")]
@@ -33,12 +31,6 @@ public class ShipsControls : MonoBehaviour
     private float m_defaultMaxSpeed;
     private bool m_hasDoneDifficultyChange;
 
-    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
-    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
-    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
-    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
-    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
-    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
     [Space]
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -50,7 +42,6 @@ public class ShipsControls : MonoBehaviour
     public float cameraTurnAngle;
     public AnimationCurve modelRotationCurve;
 
-    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
     [Space]
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -59,8 +50,6 @@ public class ShipsControls : MonoBehaviour
     [Space]
     [Header("Boost Variables")]
     private float m_currentBoost;
-    public float ReturnBoost() { return m_currentBoost; }
-    public int ReturnBoostLevel() { return m_boostLevel; }
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
@@ -71,15 +60,31 @@ public class ShipsControls : MonoBehaviour
     private float m_maxSpeedDuringBoost;
     public float maxBoostSpeedChange;
     public List<float> boostingTimes = new();
+    [SerializeField, Range(0,3)] private int m_boostLevel;
+    public TextMeshProUGUI test;
+
+    /////////////////////////////////////////////////////////////////
+    ///                                                           ///
+    ///      All of the getters and setters in this script        ///
+    ///                                                           ///
+    /////////////////////////////////////////////////////////////////
+    public Rigidbody ReturnRB() { return m_rb; }
+    public List<GameObject> FireList() { return m_fire; }
+    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
+    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
+    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
+    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
+    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
+    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
+    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
+    public float ReturnBoost() { return m_currentBoost; }
+    public int ReturnBoostLevel() { return m_boostLevel; }
     public bool ReturnIsBoosting() { return m_isBoosting; }
     public bool ReturnIsInRedline() { return m_isInRedline; }
-    [SerializeField, Range(0,3)] private int m_boostLevel;
-
-    public TextMeshProUGUI test;
     public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
-
-
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
+    public void MaxSpeedCatchupChange(float multiplier) { m_currentMaxSpeed = m_defaultMaxSpeed * multiplier; }
+
     private IEnumerator RedlineFalse()
     {
         yield return new WaitForSeconds(0.2f);
