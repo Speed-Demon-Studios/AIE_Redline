@@ -50,6 +50,15 @@ public class RacerDetails : MonoBehaviour
 
     private bool nameSet = false;         // Whether or not the racers name has been set.
 
+    private void Awake()
+    {
+        if (GameManager.gManager.players.Contains(this.gameObject))
+        {
+            //GameManager.gManager.uAC.PlayerJoinSound();
+        }
+    }
+
+
     /// <summary>
     /// Calculates the distance to the next checkpoint
     /// </summary>

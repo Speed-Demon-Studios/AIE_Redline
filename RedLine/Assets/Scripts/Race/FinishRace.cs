@@ -24,28 +24,17 @@ public class FinishRace : MonoBehaviour
     private bool timingsListsUpdated = false;
     private bool textListSorted = false;
 
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.raceFinisher = this;
         m_alreadyShowingPlacements = false;
     }
 
-    public void DebugForFunction()
+    public void GoToFinishRace()
     {
         Debug.Log("Pressed");
         placementWindow.SetActive(false);
         GameManager.gManager.mSL.InitializeForMainMenu();
-    }
-
-    private void Update()
-    {
-        //CheckAllRacersFinished();
-        //if (Input.GetKeyUp(KeyCode.R))
-        //{
-        //    Steamworks.SteamUserStats.SetAchievement("RedlineCadet");
-        //    Steamworks.SteamUserStats.SetAchievement("FirstTimer");
-        //    Steamworks.SteamUserStats.StoreStats();
-        //}
     }
 
     /// <summary>

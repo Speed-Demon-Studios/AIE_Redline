@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CheckpointHandler : MonoBehaviour
 {
+
+    public int GetNumberOfChildren()
+    {
+        return transform.childCount;
+    }
     /// <summary>
     /// Return the position of the checkpoint at the given index.
     /// </summary>
@@ -12,7 +17,7 @@ public class CheckpointHandler : MonoBehaviour
         return transform.GetChild(index);
     }
 
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.checkpointParent = this;
     }

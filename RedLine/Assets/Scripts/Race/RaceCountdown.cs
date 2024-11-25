@@ -24,8 +24,7 @@ public class RaceCountdown : MonoBehaviour
         return m_countdownText;
     }
 
-
-    private void Awake()
+    public void Inistialize()
     {
         GameManager.gManager.raceCountdown = this;
         GameManager.gManager.raceStarted = false;
@@ -77,12 +76,6 @@ public class RaceCountdown : MonoBehaviour
         {
             GameManager.gManager.raceStarted = false;
             StartCoroutine(RaceCountdownTimer());
-        }
-
-        if (m_countdownFinished == true)
-        {
-            //GameManager.gManager.raceStarted = true;
-            //GameManager.gManager.enableRacerMovement = true;
         }
     }
 }

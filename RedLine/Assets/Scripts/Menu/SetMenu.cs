@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using MenuManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using Cinemachine;
+using DifficultyButtonSwitch;
 
 public class SetMenu : MonoBehaviour
 {
     public MenuType typeOfMenu;
     public List<Button> menuStartButtons;
     public SetMenu prevMenu;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public UnityEvent back;
 
-    // Update is called once per frame
-    void Update()
+    public void OnBackButton()
     {
-        
+        back.Invoke();
     }
 }

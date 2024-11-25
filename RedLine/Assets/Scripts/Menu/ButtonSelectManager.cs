@@ -52,10 +52,10 @@ namespace DifficultyButtonSwitch
         private void Update()
         {
             // For testing manufacturer change
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ManufacturerChange();
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    //ManufacturerChange();
+            //}
         }
 
         private void OnEnable()
@@ -98,9 +98,9 @@ namespace DifficultyButtonSwitch
             m_cameras[2].Priority = 1;
         }
 
-        public void TransitionToShipSelect()
+        public void TransitionToShipSelect(Animator anim)
         {
-            m_shipDisplayAnim.SetTrigger("RotateShipDisplay");
+            anim.SetTrigger("RotateShipDisplay");
         }
 
         public void Ready()
@@ -182,106 +182,114 @@ namespace DifficultyButtonSwitch
         }
 
         // SHIPS: 1 = Splitwing, 2 = Fulcrum, 3 = Cutlass
-        public void VehicleInfoChange(int ship)
+        public void VehicleInfoChange(int ship, Animator inAnimator, List<Animator> outAniators)
         {
-            switch (ship)
+            inAnimator.SetTrigger("TransitionIn");
+            foreach(Animator anim in outAniators)
             {
-                case 1:
-                    m_splitwingAnim.SetTrigger("TransitionIn");
-                    m_fulcrumAnim.SetTrigger("TransitionOut");
-                    m_cutlassAnim.SetTrigger("TransitionOut");
-                    foreach (GameObject model in m_SplitwingModel)
-                    {
-                        model.SetActive(true);
-                    }
-                    foreach (GameObject model in m_FulcrumModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    foreach (GameObject model in m_CutlassModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    break;
-
-                case 2:
-                    m_splitwingAnim.SetTrigger("TransitionOut");
-                    m_fulcrumAnim.SetTrigger("TransitionIn");
-                    m_cutlassAnim.SetTrigger("TransitionOut");
-                    foreach (GameObject model in m_SplitwingModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    foreach (GameObject model in m_FulcrumModel)
-                    {
-                        model.SetActive(true);
-                    }
-                    foreach (GameObject model in m_CutlassModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    break;
-
-                case 3:
-                    m_splitwingAnim.SetTrigger("TransitionOut");
-                    m_fulcrumAnim.SetTrigger("TransitionOut");
-                    m_cutlassAnim.SetTrigger("TransitionIn");
-                    foreach (GameObject model in m_SplitwingModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    foreach (GameObject model in m_FulcrumModel)
-                    {
-                        model.SetActive(false);
-                    }
-                    foreach (GameObject model in m_CutlassModel)
-                    {
-                        model.SetActive(true);
-                    }
-                    break;
-
+                anim.SetTrigger("TransitionOut");
             }
+            //switch (ship)
+            //{
+            //    case 1:
+            //        m_splitwingAnim.SetTrigger("TransitionIn");
+            //        m_fulcrumAnim.SetTrigger("TransitionOut");
+            //        m_cutlassAnim.SetTrigger("TransitionOut");
+            //        foreach (GameObject model in m_SplitwingModel)
+            //        {
+            //            model.SetActive(true);
+            //        }
+            //        foreach (GameObject model in m_FulcrumModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        foreach (GameObject model in m_CutlassModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        break;
+            //
+            //    case 2:
+            //        m_splitwingAnim.SetTrigger("TransitionOut");
+            //        m_fulcrumAnim.SetTrigger("TransitionIn");
+            //        m_cutlassAnim.SetTrigger("TransitionOut");
+            //        foreach (GameObject model in m_SplitwingModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        foreach (GameObject model in m_FulcrumModel)
+            //        {
+            //            model.SetActive(true);
+            //        }
+            //        foreach (GameObject model in m_CutlassModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        break;
+            //
+            //    case 3:
+            //        m_splitwingAnim.SetTrigger("TransitionOut");
+            //        m_fulcrumAnim.SetTrigger("TransitionOut");
+            //        m_cutlassAnim.SetTrigger("TransitionIn");
+            //        foreach (GameObject model in m_SplitwingModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        foreach (GameObject model in m_FulcrumModel)
+            //        {
+            //            model.SetActive(false);
+            //        }
+            //        foreach (GameObject model in m_CutlassModel)
+            //        {
+            //            model.SetActive(true);
+            //        }
+            //        break;
+            //
+            //}
         }
 
 
 
         // MANUFACTURERS: 1 = Citadel, 2 = Falcon, 3 = Monarch
-        public void ManufacturerChange()
+        public void ManufacturerChange(Sprite turnOn, Animator anim, Image img, Image imgRed)
         {
-            switch (m_manufacturer)
-            {
-
-                case 1:
-                    m_manufacturer = 2;
-                    m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
-                    m_manufacturerImage.sprite = m_falconImage;
-                    m_manufacturerImageRed.sprite = m_falconImage;
-                    m_citadelShips.SetActive(false);
-                    m_falconShips.SetActive(true);
-                    m_monarchShips.SetActive(false);
-
-                    break;
-
-                case 2:
-                    m_manufacturer = 3;
-                    m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
-                    m_manufacturerImage.sprite = m_monarchImage;
-                    m_manufacturerImageRed.sprite = m_monarchImage;
-                    m_citadelShips.SetActive(false);
-                    m_falconShips.SetActive(false);
-                    m_monarchShips.SetActive(true);
-                    break;
-
-                case 3:
-                    m_manufacturer = 1;
-                    m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
-                    m_manufacturerImage.sprite = m_citadelImage;
-                    m_manufacturerImageRed.sprite = m_citadelImage;
-                    m_citadelShips.SetActive(true);
-                    m_falconShips.SetActive(false);
-                    m_monarchShips.SetActive(false);
-                    break;
-            }
+            anim.SetTrigger("ChangeManufacturer");
+            img.sprite = turnOn;
+            imgRed.sprite = turnOn;
+            //switch (m_manufacturer)
+            //{
+            //
+            //    case 1:
+            //        m_manufacturer = 2;
+            //        m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
+            //        m_manufacturerImage.sprite = m_falconImage;
+            //        m_manufacturerImageRed.sprite = m_falconImage;
+            //        m_citadelShips.SetActive(false);
+            //        m_falconShips.SetActive(true);
+            //        m_monarchShips.SetActive(false);
+            //
+            //        break;
+            //
+            //    case 2:
+            //        m_manufacturer = 3;
+            //        m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
+            //        m_manufacturerImage.sprite = m_monarchImage;
+            //        m_manufacturerImageRed.sprite = m_monarchImage;
+            //        m_citadelShips.SetActive(false);
+            //        m_falconShips.SetActive(false);
+            //        m_monarchShips.SetActive(true);
+            //        break;
+            //
+            //    case 3:
+            //        m_manufacturer = 1;
+            //        m_manufacturerDisplayAnim.SetTrigger("ChangeManufacturer");
+            //        m_manufacturerImage.sprite = m_citadelImage;
+            //        m_manufacturerImageRed.sprite = m_citadelImage;
+            //        m_citadelShips.SetActive(true);
+            //        m_falconShips.SetActive(false);
+            //        m_monarchShips.SetActive(false);
+            //        break;
+            //}
         }
 
         public void TopSpeedBarFill(float fillAmount)

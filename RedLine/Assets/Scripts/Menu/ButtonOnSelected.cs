@@ -8,10 +8,11 @@ using UnityEngine.Events;
 public class ButtonOnSelected : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public UnityEvent onSelectEvent;
+    public UnityEvent onDeSelectEvent;
 
     public void OnDeselect(BaseEventData eventData)
     {
-        throw new System.NotImplementedException();
+        onDeSelectEvent.Invoke();
     }
 
     public void OnSelect(BaseEventData eventData)

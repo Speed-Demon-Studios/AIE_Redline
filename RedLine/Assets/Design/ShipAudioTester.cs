@@ -48,10 +48,7 @@ public class ShipAudioTester : MonoBehaviour
             m_wind.volume = m_windVolume.Evaluate(m_shipSpeed);
         }
 
-
     }
-
-    //
 
 }
 

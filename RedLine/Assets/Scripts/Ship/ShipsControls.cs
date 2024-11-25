@@ -1,13 +1,15 @@
+using EAudioSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShipsControls : MonoBehaviour
 {
     [Header("Refrences")]
+    [HideInInspector] public int shipSelected = 0;
     public ShipVariant VariantObject;
-    public Rigidbody ReturnRB() { return m_rb; }
     public Transform rotation;
     public Transform facingPoint;
     public Transform collisionParent;
@@ -19,7 +21,6 @@ public class ShipsControls : MonoBehaviour
     private int m_fireIndex;
 
     public bool isTestShip;
-    public List<GameObject> FireList() { return m_fire; }
 
     [Space]
     [Header("Speed Variables")]
@@ -28,12 +29,8 @@ public class ShipsControls : MonoBehaviour
     private float m_acceleration;
     private float m_currentMaxSpeed;
     private float m_defaultMaxSpeed;
+    private bool m_hasDoneDifficultyChange;
 
-    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
-    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
-    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
-    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
-    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
     [Space]
     [Header("Turning Varibles")]
     private float m_targetAngle;
@@ -45,7 +42,6 @@ public class ShipsControls : MonoBehaviour
     public float cameraTurnAngle;
     public AnimationCurve modelRotationCurve;
 
-    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
     [Space]
     [Header("TrackStick")]
     private Vector3 m_targetPos;
@@ -54,8 +50,6 @@ public class ShipsControls : MonoBehaviour
     [Space]
     [Header("Boost Variables")]
     private float m_currentBoost;
-    public float ReturnBoost() { return m_currentBoost; }
-    public int ReturnBoostLevel() { return m_boostLevel; }
     public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
@@ -66,17 +60,45 @@ public class ShipsControls : MonoBehaviour
     private float m_maxSpeedDuringBoost;
     public float maxBoostSpeedChange;
     public List<float> boostingTimes = new();
+    [SerializeField, Range(0,3)] private int m_boostLevel;
+    public TextMeshProUGUI test;
+
+    /////////////////////////////////////////////////////////////////
+    ///                                                           ///
+    ///      All of the getters and setters in this script        ///
+    ///                                                           ///
+    /////////////////////////////////////////////////////////////////
+    public Rigidbody ReturnRB() { return m_rb; }
+    public List<GameObject> FireList() { return m_fire; }
+    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
+    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
+    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
+    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
+    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
+    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
+    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
+    public float ReturnBoost() { return m_currentBoost; }
+    public int ReturnBoostLevel() { return m_boostLevel; }
     public bool ReturnIsBoosting() { return m_isBoosting; }
     public bool ReturnIsInRedline() { return m_isInRedline; }
-    [SerializeField, Range(0,3)] private int m_boostLevel;
-
     public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
+    public void MaxSpeedCatchupChange(float multiplier) { m_currentMaxSpeed = m_defaultMaxSpeed * multiplier; }
+
     private IEnumerator RedlineFalse()
     {
         yield return new WaitForSeconds(0.2f);
 
         m_isInRedline = false;
+    }
+    
+    public void ResetRedline()
+    {
+        m_isInRedline = false;
+        wantingToBoost = false;
+        m_isBoostingOnBoostPad = false;
+        m_currentBoost = 0.0f;
+        m_boostLevel = 0;
     }
 
     public void ResetAngles(float angle1, float angle2, float angle3)
@@ -112,29 +134,39 @@ public class ShipsControls : MonoBehaviour
         Instantiate(VariantObject.collision, collisionParent);
     }
 
-    // Start is called before the first frame update
-    void Awake()
+    public void DeInitialize()
+    {
+        ResetPositions(new Vector3(0, 0, 0));
+        ResetAcceleration();
+        ResetAngles(0, 0, 0);
+    }
+
+    public void Initialize(bool isAIShip = false)
     {
         m_rb = GetComponent<Rigidbody>();
+
+        if (!isAIShip)
+        {
+            AttachModels();
+            if (shipModel != null)
+            {
+                FindChildWithTag(shipModel.transform);
+            }
+            if (VariantObject != null && !m_hasDoneDifficultyChange)
+            {
+                m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
+            }
+        }
+
+        DifficultySpeedChange();
     }
 
-    private void OnEnable()
-    {
-        if (shipModel != null)
-        {
-            FindChildWithTag(shipModel.transform);
-        }
-        if (VariantObject != null)
-        {
-            m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed;
-        }
-    }
-
-    public void DifficultySpeedChange()
+    private void DifficultySpeedChange()
     {
         m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
         m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
+        m_hasDoneDifficultyChange = true;
     }
 
     private void FindChildWithTag(Transform childParent)
@@ -178,6 +210,7 @@ public class ShipsControls : MonoBehaviour
     {
         if (!isTestShip)
         {
+            PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
             if (m_fire.Count > 0)
             {
                 m_fireIndex = m_boostLevel;
@@ -189,16 +222,34 @@ public class ShipsControls : MonoBehaviour
                         m_fire[2].SetActive(false);
                         break;
                     case 1:
+                        if (PAC != null && m_fire[0].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.0f);
+                            PAC.SetBoostPitch(1, 1.55f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[0].SetActive(true);
                         m_fire[1].SetActive(false);
                         m_fire[2].SetActive(false);
                         break;
                     case 2:
+                        if (PAC != null && m_fire[1].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.3f);
+                            PAC.SetBoostPitch(1, 1.3f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[1].SetActive(true);
                         m_fire[2].SetActive(false);
                         m_fire[0].SetActive(false);
                         break;
                     case 3:
+                        if (PAC != null && m_fire[2].activeSelf == false)
+                        {
+                            PAC.SetBoostPitch(0, 1.5f);
+                            PAC.SetBoostPitch(1, 0.75f);
+                            PAC.PlayBoostAudio(0);
+                        }
                         m_fire[2].SetActive(true);
                         m_fire[0].SetActive(false);
                         m_fire[1].SetActive(false);
@@ -356,6 +407,15 @@ public class ShipsControls : MonoBehaviour
     /// <param name="force"> How strong the boost is </param>
     public void BoostPadBoost(float force)
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            PAC.SetBoostPitch(1, 1.0f);
+            PAC.PlayBoostAudio(3);
+            PAC.PlayBoostAudio(0);
+            PAC.PlayBoostAudio(1);
+            PAC.PlayBoostAudio(2);
+        }
         m_isBoostingOnBoostPad = true;
         m_rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
         if (m_fire.Count > 0)
@@ -375,7 +435,7 @@ public class ShipsControls : MonoBehaviour
     /// </summary>
     private void ShipBoost()
     {
-        if (m_boostLevel > 0)
+        if (m_boostLevel > 0 && !GameManager.gManager.raceFinished)
         {
             m_isBoosting = true;
             ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
@@ -401,7 +461,6 @@ public class ShipsControls : MonoBehaviour
                         }
                 }
             }
-            //m_rb.AddForce(transform.forward * forceMultiplier, ForceMode.VelocityChange);
             StartCoroutine(ShipBoostAcceleration());
         }
     }
@@ -411,18 +470,27 @@ public class ShipsControls : MonoBehaviour
      /// <returns></returns>
     IEnumerator ShipBoostAcceleration()
     {
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        PAC.PlayBoostAudio(0);
+        PAC.PlayBoostAudio(1);
+        PAC.PlayBoostAudio(2);
+
         float time = 0;
+        float currentAcclerationForce = 0;
 
         if (m_boostLevel > 0)
             time = boostingTimes[m_boostLevel - 1];
 
         while (time > 0)
         {
-            time -= Time.deltaTime;
+            if (test != null)
+                test.text = time.ToString();
 
-            Debug.Log(time + " Boosting time");
-            m_rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
-            Mathf.Clamp(m_rb.velocity.magnitude, 0, m_maxSpeedDuringBoost);
+            if(currentAcclerationForce <= accelerationForce)
+                currentAcclerationForce += 0.1f;
+            time -= 0.1f * Time.fixedDeltaTime;
+
+            m_rb.AddForce(transform.forward * currentAcclerationForce, ForceMode.Acceleration);
         }
 
         yield return new WaitForEndOfFrame();
@@ -433,10 +501,10 @@ public class ShipsControls : MonoBehaviour
         wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
-        Mathf.Clamp(m_rb.velocity.magnitude, 0, m_defaultMaxSpeed);
 
         yield return new WaitForSeconds(1f);
         m_isBoosting = false;
+        StopCoroutine(ShipBoostAcceleration());
     }
 
     /// <summary>
@@ -447,6 +515,21 @@ public class ShipsControls : MonoBehaviour
         float multiplier = VariantObject.breakCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
 
         m_acceleration -= m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier * Time.deltaTime;
+
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+        if (PAC != null)
+        {
+            // ||------------------------//Ship Breaking Pitch Modulation Equation\\------------------------||
+            // || [R = Result] [A = m_breakMultiplier] [B = VariantObject.BreakMultiplier] [C = multiplier] ||
+            // ||-------------------------------------------------------------------------------------------||
+            // ||                                                                                           ||
+            // ||                                 R = ((A x B x C) x 0.64)                                  ||
+            // ||                                                                                           ||
+            // ||-------------------------------------------------------------------------------------------||
+
+            PAC.UpdateEngineModulations(shipSelected, 2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f));
+            PAC.UpdateWindVolume(0, (((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.35f) * GameManager.gManager.difficultyChange), ((1.0f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+        }
     }
 
     /// <summary>
@@ -457,10 +540,30 @@ public class ShipsControls : MonoBehaviour
         float speedMultiplier = VariantObject.SpeedCurve.Evaluate(m_rb.velocity.magnitude / m_currentMaxSpeed);
         float accelerationMultiplier = VariantObject.accelerationCurve.Evaluate(m_acceleration / VariantObject.DefaultMaxAcceleration);
 
+        PlayerAudioController PAC = this.GetComponent<PlayerAudioController>();
+
         if (m_accelerateMultiplier == 0 && m_brakeMultiplier == 0 && !m_isBoosting)
+        {
             m_acceleration -= (VariantObject.AccelerationMultiplier * 0.4f) * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 1);
+                PAC.UpdateWindVolume(0, ((0.38f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+            }
+        }
         else
+        {
             m_acceleration += VariantObject.AccelerationMultiplier * m_accelerateMultiplier * accelerationMultiplier * Time.deltaTime;
+
+            if (PAC != null)
+            {
+                // Audio Pitch & Volume Modulation
+                PAC.UpdateEngineModulations(shipSelected, 0);
+                PAC.UpdateWindVolume(0, ((1.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
+            }
+        }
 
         if(!m_isBoosting)
             m_acceleration = Mathf.Clamp(m_acceleration, 0, VariantObject.DefaultMaxAcceleration);
@@ -515,5 +618,5 @@ public class ShipsControls : MonoBehaviour
     public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
     public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
-    public void IsBoosting() { ShipBoost(); }
+    public void WantToBoost() { ShipBoost(); }
 }

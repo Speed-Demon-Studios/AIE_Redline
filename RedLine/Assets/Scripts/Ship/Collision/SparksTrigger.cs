@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class SparksTrigger : MonoBehaviour
 {
-    private SparksParticlesController m_spc;
+    [SerializeField] private SparksParticlesController m_spc;
 
     public GameObject[] sparks;
     public bool isColliding = false;
+    public bool waiting = false;
 
     public void SetSPC(SparksParticlesController spcScript)
     {
@@ -24,25 +25,22 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            foreach (GameObject sparkParticle in sparks)
-            {
-                sparkParticle.SetActive(true);
-                //m_spc.ActivateSparks(sparkParticle);
-            }
             isColliding = true;
         }
     }
+
+
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.ToLower() == "walls")
         {
-            foreach (GameObject sparkParticle in sparks)
-            {
-                sparkParticle.SetActive(false);
-                //m_spc.DeactivateSparks(sparkParticle);
-                //isColliding = false;
-            }
+            //foreach (GameObject sparkParticle in sparks)
+            //{
+            //    //sparkParticle.SetActive(false);
+            //    m_spc.DeactivateSparks(sparkParticle);
+            //}
+            isColliding = false;
         }
     }
 

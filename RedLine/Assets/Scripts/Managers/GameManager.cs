@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MenuManagement;
+using EAudioSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public ControllerHaptics hapticsController;
     public PauseMenu pMenu;
     public Nodes startNode;
+    public UIAudioController uAC;
 
     public GameObject[] StartingPoints;
 
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public bool timeStopped = false;
 
+    public bool firstLoadIntoGame = false;
+
     public int countdownIndex = 2;
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
@@ -59,9 +63,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gManager { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        if (gManager != null && gManager != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            gManager = this;
+        }
+
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -142,14 +154,6 @@ public class GameManager : MonoBehaviour
 
     public void EnableRMovement()
     {
-        //foreach (GameObject racerOBJ in racerObjects)
-        //{
-        //    InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
-        //    Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
-        //    rDeets.EnableRacerMovement();
-        //    rB.isKinematic = false;
-        //}
-
         foreach (GameObject racerOBJ in allRacers)
         {
             InitializeBeforeRace rDeets = racerOBJ.GetComponent<InitializeBeforeRace>();
@@ -165,7 +169,9 @@ public class GameManager : MonoBehaviour
         {
             ShipsControls sControls = racer.GetComponent<ShipsControls>();
 
-            racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+            if(racer.GetComponent<PlayerInputScript>() != null)
+                racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+
             sControls.ResetAcceleration();
             AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
             aiMove.SetVariant(sControls.VariantObject);
@@ -180,10 +186,6 @@ public class GameManager : MonoBehaviour
                 Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
                 ShipsControls sControls = racerOBJ.GetComponent<ShipsControls>();
 
-                //rB.velocity = new Vector3(0, 0, 0);
-                //rB.angularVelocity = new Vector3(0, 0, 0);
-
-                //rDeets.DisableShipControls();
                 sControls.ResetAcceleration();
                 AIMoveInputs test;
                 if (!racerOBJ.TryGetComponent<AIMoveInputs>(out test))
@@ -197,16 +199,4 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddToNumberOfPlayers() { numberOfPlayers += 1; }
-
-    private void Awake()
-    {
-        if (gManager != null && gManager != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            gManager = this;
-        }
-    }
 }

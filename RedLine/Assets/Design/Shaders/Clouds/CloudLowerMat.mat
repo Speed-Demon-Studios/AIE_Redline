@@ -13,15 +13,17 @@ Material:
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _RECEIVE_SHADOWS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: TransparentCutout
+    RenderType: Transparent
   disabledShaderPasses:
   - SHADOWCASTER
+  - DepthOnly
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -61,7 +63,7 @@ Material:
     - _Cloud_Size_2: 25
     - _Cloud_intensity: 0.961
     - _Cull: 2
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _Fluff_Scale_1: 600
     - _Fluff_Scale_2: 200
     - _Fluff_Texture_Strength: 0.19
@@ -73,15 +75,15 @@ Material:
     - _SSS_Intensity: 2.22
     - _SSS_Power: 6.84
     - _Smoothness: 1.67
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _Tiling: 4
     - _Whisp_Density: 334.91
     - _Whisp_Intensity: 0
     - _Whisp_Power: 3.4
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}

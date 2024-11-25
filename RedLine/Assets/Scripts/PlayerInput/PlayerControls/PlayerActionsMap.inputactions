@@ -499,6 +499,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Switch",
+                    "type": "Button",
+                    "id": "7d0ccdb1-cc72-40f6-bbec-3ad3b77c77e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1335,6 +1344,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "NavigateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19d0b468-d9cb-4541-858e-9ddf47d1bcc1",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

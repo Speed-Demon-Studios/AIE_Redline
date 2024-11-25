@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +14,14 @@ public class HUD : MonoBehaviour
     private GameObject energyFullSegment1, energyFullSegment2, energyFullSegment3;
     [SerializeField]
     private TextMeshProUGUI m_speedText, m_posText, m_lapText, m_lapTimeText, m_bestLapTime;
+    [SerializeField]
     [Range(0f, 1f)]
     private float m_energyBarFillAmount, m_speedBarFillAmount;
 
     [SerializeField]
     private float m_leadingEdgeWidth;
 
+    [SerializeField]
     private bool m_gainingRedline;
 
     [Range(0, 3)]
@@ -31,6 +34,7 @@ public class HUD : MonoBehaviour
 
     private Color flickeringColor = Color.white, pulsingColor = new Color(0,0,0,0.5f), fullSegment1Color, fullSegment2Color, fullSegment3Color;
 
+    [SerializeField]
     public Vector2 energyBarFillRange, energyLeadingEdgeFillRange, speedBarFillRange;
 
     private int m_position, m_totalPositions, m_lap, m_totalLaps;
@@ -155,7 +159,7 @@ public class HUD : MonoBehaviour
 
     public void SetValues(float speed, int pos, int laps, int totalLaps, bool isInRedline, float energyFillAmount,
         float speedFillAmount, int currentBoostLevel, float currentLapTimeMiuntes, float currentLapTimeSeconds,
-        float bestLapTimeMinutes, float bestLapTimeSeconds)
+        float bestLapTimeMinutes, float bestLapTimeSeconds, int totalPos)
     {
         m_kph = speed;
         m_position = pos;
@@ -169,6 +173,6 @@ public class HUD : MonoBehaviour
         m_currentLapTimeSeconds = currentLapTimeSeconds;
         m_bestLapMiuntes = bestLapTimeMinutes;
         m_bestLapSeconds = bestLapTimeSeconds;
+        m_totalPositions = totalPos;
     }
-
 }
