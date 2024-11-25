@@ -34,6 +34,8 @@ namespace EAudioSystem
         private List<double> m_minEnginePitches = new(); // Default MAX pitch values for the individual engine sounds.
         private List<double> m_maxEnginePitches = new(); // Default MAX pitch values for the individual engine sounds.
         private List<float> m_maxEngineVolumes = new(); // Default MAX volume values for the individual engine sounds.
+        private ShipsControls m_sControls;
+
         //---------------------------------------------------------------------------------------------------------------------------------------------------
 
         [Space]
@@ -62,6 +64,7 @@ namespace EAudioSystem
         [SerializeField] private List<double> m_redlineAudioPitches = new();
         [SerializeField] private List<double> m_redlineAudioVolume = new();
         [SerializeField] private List<double> m_redlineBLVolumes = new();
+        private double tempRLVolume = 0.0;
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -161,25 +164,19 @@ namespace EAudioSystem
 // --------------------------------------------------
         public void ChargeRedlineSound()
         {
-            if (m_redlineAudioPitches[0] < 0.1)
+            if (m_sControls == null)
             {
-                m_redlineAudioPitches[0] = 0.1;
-            }
-            if (m_redlineAudioVolume[0] < 0.1)
-            {
-                m_redlineAudioVolume[0] = 0.1;
+                m_sControls = this.GetComponent<ShipsControls>();
             }
 
             ShipsControls sControls = this.GetComponent<ShipsControls>();
 
-            if (sControls.wantingToBoost == true)
+            if (sControls.ReturnIsBoosting() == true || sControls.wantingToBoost == true)
             {
-                m_redlineAudioPitches[0] = 0.0;
-                if (m_redlineAudioPitches[0] < 0.0)
+                if (m_redlineAudioPitches[0] != 0.0)
                 {
                     m_redlineAudioPitches[0] = 0.0;
                 }
-
             }
 
 
@@ -261,26 +258,16 @@ namespace EAudioSystem
                         }
                     case 3:
                         {
-                            if (sControls.ReturnBoostLevel() == 3)
-                            {
-                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[3];
-                                //if (m_redlineAudioVolume[0] > 0.0)
-                                //{
-                                //    m_redlineAudioVolume[0] -= 2.5 * Time.deltaTime;
-                                //}
-                                //if (m_redlineAudioVolume[0] <= 0.0)
-                                //{
-                                //    m_redlineAudioVolume[0] = 0.0;
-                                //}
-                                //m_redlineSoundEmitters[0].Stop();
-                                break;
-                            }
+                            m_redlineAudioPitches[0] = m_redlineMaxPitches[3];
+                            m_redlineAudioVolume[0] = m_redlineMaxVolumes[3];
                             break;
                         }
                 }
             }
             else
             {
+                tempRLVolume = m_redlineAudioVolume[0];
+
                 switch (sControls.ReturnBoostLevel())
                 {
                     case 0:
@@ -298,7 +285,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioPitches[0] -= 0.08f * Time.deltaTime;
                             }
-                            if (m_redlineAudioPitches[0] < 0 && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioPitches[0] < 0)
                             {
                                 m_redlineAudioPitches[0] = 0.0;
                             }
@@ -310,7 +297,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                             }
-                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[0])
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[0];
                             }
@@ -329,16 +316,16 @@ namespace EAudioSystem
                         {
                             if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[1])
                             {
-                                if (m_redlineAudioPitches[0] < (m_redlineMaxPitches[1] + 0.06))
+                                if (m_redlineAudioPitches[0] <= m_redlineMaxPitches[1] + 0.1)
                                 {
-                                    m_redlineAudioVolume[0] -= 0.01 * Time.deltaTime;
+                                    m_redlineAudioVolume[0] -= 0.04 * Time.deltaTime;
                                 }
                                 else
                                 {
                                     m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                                 }
                             }
-                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1])
+                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[1];
                             }
@@ -378,6 +365,14 @@ namespace EAudioSystem
                             //}
                             break;
                         }
+                }
+            }
+
+            if (sControls.ReturnIsBoosting() == true || sControls.wantingToBoost == true)
+            {
+                if (m_redlineAudioPitches[0] != 0.0)
+                {
+                    m_redlineAudioPitches[0] = 0.0;
                 }
             }
         }
@@ -930,6 +925,8 @@ namespace EAudioSystem
                         m_redlineSoundEmitters[0].Play();
                     }
 
+                    
+
                     ChargeRedlineSound();
 
                     for (int i = 0; i < m_redlineSoundEmitters.Count(); i++)
@@ -938,6 +935,7 @@ namespace EAudioSystem
                         currentRedlineEmitter.EventInstance.setPitch((float)m_redlineAudioPitches[0]);
                         currentRedlineEmitter.EventInstance.setVolume((float)m_redlineAudioVolume[0]);
                     }
+
 
                     for (int i = 0; i < m_engineEmitters.Length; i++) // Iterate through the array of engine sound emmitters
                     {
