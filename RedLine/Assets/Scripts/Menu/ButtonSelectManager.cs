@@ -33,6 +33,7 @@ namespace DifficultyButtonSwitch
         [SerializeField] private float m_barChangeDuration, m_barLength;
         [SerializeField] private Transform m_speedBar, m_speedBarRed1, m_speedBarRed2, m_competitionSkillBar, m_competitionSkillBarRed1, m_competitionSkillBarRed2;
         [SerializeField] private Animator m_debutAnimator, m_proAnimator, m_eliteAnimator;
+        [SerializeField] private float m_debutSpeed, m_debutCompetition, m_proSpeed, m_proCompetition, m_eliteSpeed, m_eliteCompetition;
 
         [Header("Vehicle Select")]
         [SerializeField] private TextMeshProUGUI m_pressStartToJoinText;
@@ -133,6 +134,8 @@ namespace DifficultyButtonSwitch
         }
 
 
+
+
         public void SpeedBarFill(float fillAmount)
         {
             Vector3 barPos = new Vector3(m_barLength - (m_barLength * fillAmount), 0, 0);
@@ -154,7 +157,7 @@ namespace DifficultyButtonSwitch
             speedClass = speed;
         }
 
-
+        // CLASS: 1 = Debut, 2 = Pro, 3 = Elite;
         public void SpeedClassInfoChange(int speed)
         {
             switch (speed)
@@ -163,6 +166,8 @@ namespace DifficultyButtonSwitch
                     m_debutAnimator.SetTrigger("TransitionIn");
                     m_proAnimator.SetTrigger("TransitionOut");
                     m_eliteAnimator.SetTrigger("TransitionOut");
+                    SpeedBarFill(m_debutSpeed);
+                    CompetitionSkillBarFill(m_debutCompetition);
                     Debug.Log("Debut");
                     break;
 
@@ -170,6 +175,8 @@ namespace DifficultyButtonSwitch
                     m_debutAnimator.SetTrigger("TransitionOut");
                     m_proAnimator.SetTrigger("TransitionIn");
                     m_eliteAnimator.SetTrigger("TransitionOut");
+                    SpeedBarFill(m_proSpeed);
+                    CompetitionSkillBarFill(m_proCompetition);
                     Debug.Log("Pro");
                     break;
 
@@ -177,6 +184,8 @@ namespace DifficultyButtonSwitch
                     m_debutAnimator.SetTrigger("TransitionOut");
                     m_proAnimator.SetTrigger("TransitionOut");
                     m_eliteAnimator.SetTrigger("TransitionIn");
+                    SpeedBarFill(m_eliteSpeed);
+                    CompetitionSkillBarFill(m_eliteCompetition);
                     Debug.Log("Elite");
                     break;
 
