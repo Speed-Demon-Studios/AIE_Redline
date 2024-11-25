@@ -117,6 +117,7 @@ public class TestingEditor : EditorWindow
             m_player.GetComponent<ShipsControls>().AttachModels();
 
             m_player.GetComponent<ShipsControls>().enabled = true;
+            m_player.GetComponent<ShipsControls>().Initialize();
         }
     }
 
