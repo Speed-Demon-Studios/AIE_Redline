@@ -70,6 +70,7 @@ namespace MenuManagement
                             redline = child.GetComponent<RedlineColliderSpawner>(); // then assign it to the redline reference
                     }
                     player.GetComponent<ShipsControls>().Initialize(); // Initialize Player ready for race
+                    player.GetComponent<ShipsControls>().MaxSpeedCatchupChange(1);
                     foreach (Transform child in player.transform) // do another check on the redline collider spawner reference
                     {
                         FindEveryChild(child, redline);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AICatchUpManager : MonoBehaviour
 {
     List<GameObject> m_playerOBJS = new();
+    public float multiplier;
 
     public void Inistialize()
     {
@@ -22,25 +23,33 @@ public class AICatchUpManager : MonoBehaviour
     void ChangeCatchUp(GameObject ai)
     {
         RacerDetails aIRacerDets = ai.GetComponent<RacerDetails>();
-        int numberOfCheckPoints = GameManager.gManager.checkpointParent.GetNumberOfChildren();
-        float score = 1f;
+        float numberOfCheckPoints = GameManager.gManager.checkpointParent.GetNumberOfChildren();
+        float score = 0f;
 
         foreach(GameObject playerObj in m_playerOBJS)
         {
             RacerDetails playerRacerDets = playerObj.GetComponent<RacerDetails>();
 
-            float playerCheckPointPercentage = playerRacerDets.currentCheckpoint / numberOfCheckPoints;
-            float aiCheckPointPercentage = aIRacerDets.currentCheckpoint / numberOfCheckPoints;
+            float playerCheckPointPercentage = (playerRacerDets.currentCheckpoint / numberOfCheckPoints) + playerRacerDets.currentLap;
+            float aiCheckPointPercentage = (aIRacerDets.currentCheckpoint / numberOfCheckPoints) + aIRacerDets.currentLap;
 
-            float difference = playerCheckPointPercentage - aiCheckPointPercentage;
-
-            score *= difference;
+            float difference = aiCheckPointPercentage - playerCheckPointPercentage;
+            float reversDiff = 1 - difference;
+            score += reversDiff;
         }
 
         float originalScore = score;
         float modFactor = 1 - (1 / m_playerOBJS.Count);
         float makeupValue = (1 - originalScore) * modFactor;
         float percentage = originalScore + (makeupValue * originalScore);
+
+        //if (percentage < 0)
+        //    percentage = -percentage;
+        //else if(percentage > 0)
+        //    percentage += 1;
+
+        if (percentage < 1)
+            percentage *= multiplier;
 
         ai.GetComponent<ShipsControls>().MaxSpeedCatchupChange(percentage);
     }
