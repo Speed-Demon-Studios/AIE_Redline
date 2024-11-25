@@ -520,7 +520,7 @@ public class ShipsControls : MonoBehaviour
             // ||-------------------------------------------------------------------------------------------||
 
             PAC.UpdateEngineModulations(shipSelected, 2, ((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.8f));
-            PAC.UpdateWindVolume(0, ((0.5f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+            PAC.UpdateWindVolume(0, (((m_brakeMultiplier * VariantObject.BreakMultiplier * multiplier) * 0.35f) * GameManager.gManager.difficultyChange), ((1.0f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
         }
     }
 
@@ -542,7 +542,7 @@ public class ShipsControls : MonoBehaviour
             {
                 // Audio Pitch & Volume Modulation
                 PAC.UpdateEngineModulations(shipSelected, 1);
-                PAC.UpdateWindVolume(0, ((0.2f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
+                PAC.UpdateWindVolume(0, ((0.38f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
             }
         }
         else
@@ -553,7 +553,7 @@ public class ShipsControls : MonoBehaviour
             {
                 // Audio Pitch & Volume Modulation
                 PAC.UpdateEngineModulations(shipSelected, 0);
-                PAC.UpdateWindVolume(0, ((0.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
+                PAC.UpdateWindVolume(0, ((1.3f) * GameManager.gManager.difficultyChange), ((1.9f) * GameManager.gManager.difficultyChange), true, false);
             }
         }
 
