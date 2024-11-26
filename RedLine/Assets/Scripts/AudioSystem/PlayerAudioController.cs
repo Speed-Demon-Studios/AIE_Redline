@@ -873,7 +873,7 @@ namespace EAudioSystem
 
         void Update()
         {
-            if (GameManager.gManager.raceCountdown.m_countdownFinished == false)
+            if (GameManager.gManager.raceCountdown != null && GameManager.gManager.raceCountdown.m_countdownFinished == false)
             {
                 if (variantSet == true)
                 {
