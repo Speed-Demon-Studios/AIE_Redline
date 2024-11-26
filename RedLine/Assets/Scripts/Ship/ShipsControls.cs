@@ -63,6 +63,9 @@ public class ShipsControls : MonoBehaviour
     public List<float> boostingTimes = new();
     [SerializeField, Range(0,3)] private int m_boostLevel;
     public TextMeshProUGUI test;
+    bool chargeSound0Played = false;
+    bool chargeSound1Played = false;
+    bool chargeSound2Played = false;
 
     /////////////////////////////////////////////////////////////////
     ///                                                           ///
@@ -235,7 +238,11 @@ public class ShipsControls : MonoBehaviour
                         {
                             PAC.SetBoostPitch(0, 1.0f);
                             PAC.SetBoostPitch(1, 1.55f);
-                            PAC.PlayBoostAudio(0);
+                            if (chargeSound0Played == false)
+                            {
+                                chargeSound0Played = true;
+                                PAC.PlayBoostAudio(0);
+                            }
                         }
                         m_fire[0].TurnFireOn();
                         m_fire[1].TurnFireOff();
@@ -246,7 +253,11 @@ public class ShipsControls : MonoBehaviour
                         {
                             PAC.SetBoostPitch(0, 1.3f);
                             PAC.SetBoostPitch(1, 1.3f);
-                            PAC.PlayBoostAudio(0);
+                            if (chargeSound1Played == false)
+                            {
+                                chargeSound1Played = true;
+                                PAC.PlayBoostAudio(0);
+                            }
                         }
                         m_fire[1].TurnFireOn();
                         m_fire[2].TurnFireOff();
@@ -257,7 +268,11 @@ public class ShipsControls : MonoBehaviour
                         {
                             PAC.SetBoostPitch(0, 1.5f);
                             PAC.SetBoostPitch(1, 0.75f);
-                            PAC.PlayBoostAudio(0);
+                            if (chargeSound2Played == false)
+                            {
+                                chargeSound2Played = true;
+                                PAC.PlayBoostAudio(0);
+                            }
                         }
                         m_fire[2].TurnFireOn();
                         m_fire[0].TurnFireOff();
@@ -447,6 +462,9 @@ public class ShipsControls : MonoBehaviour
         if (m_boostLevel > 0 && !GameManager.gManager.raceFinished)
         {
             m_isBoosting = true;
+            chargeSound0Played = false;
+            chargeSound1Played = false;
+            chargeSound2Played = false;
             ControllerHaptics cRumble = this.gameObject.GetComponent<ControllerHaptics>();
             PlayerInputScript pInput = this.gameObject.GetComponent<PlayerInputScript>();
             if (cRumble != null && pInput != null)
