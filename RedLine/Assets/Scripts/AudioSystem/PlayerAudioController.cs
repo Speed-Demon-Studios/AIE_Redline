@@ -418,7 +418,7 @@ namespace EAudioSystem
                 m_engineEmitterPitches[index] = minimumValue;
             }
 
-            if (addDT == true)
+            if (addDT == true && gameObject.GetComponent<ShipsControls>().isTestShip == false)
             {
                 if (add == true)
                 {
