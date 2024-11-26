@@ -23,7 +23,7 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        if (!GameManager.gManager.rManager.isTimeTrial)
+        if (!GameManager.gManager.isTimeTrial)
         {
             for (int i = 0; i < 9; i++)
             {

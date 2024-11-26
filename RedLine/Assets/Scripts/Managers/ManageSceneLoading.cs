@@ -2,6 +2,7 @@ using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -127,6 +128,7 @@ public class ManageSceneLoading : MonoBehaviour
 
     public void ResetGameManager()
     {
+        GameManager.gManager.isTimeTrial = false;
         GameManager.gManager.firstLoadIntoGame = true;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();

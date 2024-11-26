@@ -33,7 +33,7 @@ namespace MenuManagement
         private bool HasInitialized = true;
 
         public MenuManager GetMenuManager() { return m_mManager; }
-
+        public void SetTimeTrial(bool isTrue) { GameManager.gManager.isTimeTrial = isTrue; }
         public void ChangeGameManagerDifficulty(float change) { GameManager.gManager.ChangeDifficulty(change); }
         /// <summary>
         /// Adds another selectionMenu in for when a player joins
