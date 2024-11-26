@@ -22,47 +22,47 @@ namespace EAudioSystem
 
         public void GamePauseSound()
         {
-            fmodEmitters[0].Play();
+            fmodEmitters[1].Play();
         }
     
         public void PlayerJoinSound()
         {
-            fmodEmitters[1].Play();
+            fmodEmitters[0].Play();
         }
     
         public void MenuConfirmSound()
         {
-            pitchSelected = UnityEngine.Random.Range(0.0f, 25.0f);
-    
-            switch (pitchSelected)
-            {
-                case <= 5:
-                    {
-                        selectedVariation = pitchVariations[0];
-                        break;
-                    }
-                case float v when (v > 5 && v <= 10):
-                    {
-                        selectedVariation = pitchVariations[1];
-                        break;
-                    }
-                case float v when (v > 10 && v <= 15):
-                    {
-                        selectedVariation = pitchVariations[2];
-                        break;
-                    }
-                case float v when (v > 15 && v <= 20):
-                    {
-                        selectedVariation = pitchVariations[3];
-                        break;
-                    }
-                case float v when (v > 20 && v <= 25):
-                    {
-                        selectedVariation = pitchVariations[4];
-                        break;
-                    }
-            }
-            fmodEmitters[2].EventInstance.setPitch(selectedVariation);
+            //pitchSelected = UnityEngine.Random.Range(0.0f, 25.0f);
+            //
+            //switch (pitchSelected)
+            //{
+            //    case <= 5:
+            //        {
+            //            selectedVariation = pitchVariations[0];
+            //            break;
+            //        }
+            //    case float v when (v > 5 && v <= 10):
+            //        {
+            //            selectedVariation = pitchVariations[1];
+            //            break;
+            //        }
+            //    case float v when (v > 10 && v <= 15):
+            //        {
+            //            selectedVariation = pitchVariations[2];
+            //            break;
+            //        }
+            //    case float v when (v > 15 && v <= 20):
+            //        {
+            //            selectedVariation = pitchVariations[3];
+            //            break;
+            //        }
+            //    case float v when (v > 20 && v <= 25):
+            //        {
+            //            selectedVariation = pitchVariations[4];
+            //            break;
+            //        }
+            //}
+            //fmodEmitters[2].EventInstance.setPitch(selectedVariation);
             fmodEmitters[2].Play();
         }
 
@@ -149,10 +149,11 @@ namespace EAudioSystem
     
         private void Update()
         {
-            if (detectedERROR == false)
-            {
-                fmodEmitters[2].EventInstance.setPitch(selectedVariation);
-            }
+            //if (detectedERROR == false)
+            //{
+            //    fmodEmitters[2].EventInstance.setPitch(selectedVariation);
+            //}
+            fmodEmitters[0].EventInstance.setVolume(0.15f);
         }
     }
 }

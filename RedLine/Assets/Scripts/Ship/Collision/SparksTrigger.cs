@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SparksTrigger : MonoBehaviour
 {
     [SerializeField] private SparksParticlesController m_spc;
 
-    public GameObject[] sparks;
+    public VisualEffect[] sparks;
     public bool isColliding = false;
     public bool waiting = false;
 

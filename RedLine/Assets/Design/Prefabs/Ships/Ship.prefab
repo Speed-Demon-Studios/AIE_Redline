@@ -508,6 +508,12 @@ MonoBehaviour:
       Data3: 1997540799
       Data4: 2070873256
     Path: event:/EnginePulse/MainEnginePulseLoop
+  - Guid:
+      Data1: -1537893168
+      Data2: 1260994752
+      Data3: 1997540799
+      Data4: 2070873256
+    Path: event:/EnginePulse/MainEnginePulseLoop
   CutlassEngineAudio:
   - Guid:
       Data1: -1143761291
@@ -540,6 +546,10 @@ MonoBehaviour:
   - 7.44
   - 19.4
   - 2.1
+  m_FulcrumMinEnginePitchValues:
+  - 0.33
+  - 0.33
+  - 0.18
   m_FulcrumMaxEngineVolumeValues:
   - 0.36
   - 0.3
@@ -547,19 +557,21 @@ MonoBehaviour:
   m_SplitwingMaxEnginePitchValues:
   - 5.95
   - 15.35
+  - 3.45
   m_SplitwingMaxEngineVolumeValues:
-  - 1
-  - 1
+  - 0.45
+  - 0.09
+  - 0.23
   m_CutlassMaxEnginePitchValues:
-  - 5.8
+  - 5.7
   - 8.5
   - 22.2
-  - 0.67
+  - 1.17
   m_CutlassMaxEngineVolumeValues:
-  - 0.24
   - 0.45
-  - 0.03
-  - 0.75
+  - 0.45
+  - 0.06
+  - 0.87
 --- !u!114 &435336634424752418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emitterParent: {fileID: 6932143015045508699}
   variantSet: 0
   resettingAudio: 0
   m_engineEmitters:
@@ -604,13 +617,14 @@ MonoBehaviour:
   - {fileID: 2650814648570606231}
   - {fileID: 3284658452991705591}
   - {fileID: 9220337167276204022}
+  - {fileID: 4229608971099045565}
   m_boostAudioInfo:
   - Guid:
-      Data1: 1249628521
-      Data2: 1163245878
-      Data3: -1913547864
-      Data4: 818137180
-    Path: event:/Boost/BoostLevelUp
+      Data1: 1463001767
+      Data2: 1152376217
+      Data3: 1407760309
+      Data4: 1770067162
+    Path: event:/Boost/BoostLevelUpVersion2
   - Guid:
       Data1: 1348132724
       Data2: 1325313014
@@ -623,7 +637,14 @@ MonoBehaviour:
       Data3: -907354722
       Data4: -2102314217
     Path: event:/Boost/BoostSound#1
+  - Guid:
+      Data1: 1249628521
+      Data2: 1163245878
+      Data3: -1913547864
+      Data4: 818137180
+    Path: event:/Boost/BoostLevelUp
   m_boostAudioPitches:
+  - 1
   - 1
   - 1
   - 1
@@ -641,6 +662,28 @@ MonoBehaviour:
   - 1
   m_gameplayAudioVolumes:
   - 0.5
+  m_redlineSoundEmitters:
+  - {fileID: 7225176986604874999}
+  m_redlineAudioInfo:
+  - Guid:
+      Data1: -957722253
+      Data2: 1112487255
+      Data3: 533376155
+      Data4: -393363119
+    Path: event:/Boost/RedlineBoostChargingVER2
+  m_redlineMaxPitches:
+  - 0.3
+  - 0.9
+  - 1.6
+  m_redlineMaxVolumes:
+  - 0.7
+  - 0.75
+  - 0.8
+  m_redlineAudioPitches:
+  - 0
+  m_redlineAudioVolume:
+  - 0
+  m_redlineBLVolumes: []
 --- !u!114 &5522469426596937146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,6 +1263,79 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &5037699842962480249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5004718312109705052}
+  - component: {fileID: 7159589033996177997}
+  - component: {fileID: 8262449705397779669}
+  m_Layer: 0
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5004718312109705052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037699842962480249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0018279252}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7136114195085947045}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.004760742, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7159589033996177997
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037699842962480249}
+  m_CullTransparentMesh: 1
+--- !u!114 &8262449705397779669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037699842962480249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 63fb924108560f846bc6896c5b62d8be, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 00f985c9fdbe8d547ad0ffbe43d93d5d, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &6241893629016962924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1385,8 @@ GameObject:
   - component: {fileID: 3284658452991705591}
   - component: {fileID: 9220337167276204022}
   - component: {fileID: 7541992265674552916}
+  - component: {fileID: 4229608971099045565}
+  - component: {fileID: 7225176986604874999}
   m_Layer: 0
   m_Name: EmitterParent
   m_TagString: Untagged
@@ -1570,6 +1688,68 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!114 &4229608971099045565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932143015045508699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &7225176986604874999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932143015045508699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -957722253
+      Data2: 1112487255
+      Data3: 533376155
+      Data4: -393363119
+    Path: event:/Boost/RedlineBoostChargingVER2
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 0
+  TriggerOnce: 0
+  Preload: 1
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7341607018904620202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1964,12 @@ MonoBehaviour:
 --- !u!4 &7136114194503167075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5961451083190328799, guid: 43abdb9ab90fbdf4d943369271365a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3581423977359651260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7136114195085947045 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5961451083504992537, guid: 43abdb9ab90fbdf4d943369271365a07,
     type: 3}
   m_PrefabInstance: {fileID: 3581423977359651260}
   m_PrefabAsset: {fileID: 0}

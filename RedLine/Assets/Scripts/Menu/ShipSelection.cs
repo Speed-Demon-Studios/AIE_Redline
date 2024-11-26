@@ -83,7 +83,10 @@ public class ShipSelection : MonoBehaviour
         }
 
         if (GameManager.gManager.uiCInput.GetMenuManager().GetCurrentType() == MenuType.ShipSelectionReady)
+        {
             GameManager.gManager.uiCInput.GetMenuManager().SetButtons(GameManager.gManager.uiCInput.GetMenuManager().GetCurrentMenu());
+            GameManager.gManager.uiCInput.GetMenuManager().BackGroundPanelForSelection();
+        }
 
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
@@ -176,6 +179,7 @@ public class ShipSelection : MonoBehaviour
         m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
         m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement
         m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
+        m_ship.GetComponent<ShipsControls>().SetMaterialIndex(m_materialIndex);
 
         if (m_ship.GetComponent<VariantAudioContainer>() != null)
         {
@@ -186,14 +190,9 @@ public class ShipSelection : MonoBehaviour
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
 
-        Invoke(nameof(ReadyPlayer), 2); // Readys this player
+        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
 
         sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
-    }
-
-    void ReadyPlayer()
-    {
-        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum);
     }
     public void UnReady()
     {
@@ -204,8 +203,6 @@ public class ShipSelection : MonoBehaviour
 
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
-
-        GameManager.gManager.uiCInput.UnReadyPlayer(m_playerNum); // Readys this player
 
         sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
     }

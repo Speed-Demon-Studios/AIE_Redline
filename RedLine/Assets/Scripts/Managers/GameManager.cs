@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public bool racersAdded = false;
     public bool racersPlaced = false;
+    public bool isTimeTrial = false;
 
     public bool disablePlayerCams = false;
     public bool enablePlayerCams = false;

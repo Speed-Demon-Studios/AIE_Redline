@@ -2,9 +2,11 @@ using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class ManageSceneLoading : MonoBehaviour
 {
@@ -88,7 +90,7 @@ public class ManageSceneLoading : MonoBehaviour
                 {
                     sT.isColliding = false;
 
-                    foreach (GameObject sparksOBJ in sT.sparks)
+                    foreach (VisualEffect sparksOBJ in sT.sparks)
                     {
                         if (sparksOBJ != null)
                         {
@@ -126,6 +128,7 @@ public class ManageSceneLoading : MonoBehaviour
 
     public void ResetGameManager()
     {
+        GameManager.gManager.isTimeTrial = false;
         GameManager.gManager.firstLoadIntoGame = true;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();

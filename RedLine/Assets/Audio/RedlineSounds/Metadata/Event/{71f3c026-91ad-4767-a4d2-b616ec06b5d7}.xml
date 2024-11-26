@@ -133,7 +133,14 @@
 			<destination>{d81650f2-96f6-4b04-a784-4e1955b019e2}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{88d273c0-e187-4935-86dd-b40cbe5e1605}" />
+	<object class="MixerBusPanner" id="{88d273c0-e187-4935-86dd-b40cbe5e1605}">
+		<property name="surroundPanExtent">
+			<value>214</value>
+		</property>
+		<property name="surroundLFELevel">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{22578044-ec8e-43d8-b745-3ba0e54b7748}" />
 	<object class="MixerBusEffectChain" id="{a61c5020-4eab-4ee5-b4f5-57259bcaa8b0}">
 		<relationship name="effects">
@@ -142,6 +149,16 @@
 	</object>
 	<object class="MixerBusPanner" id="{f4afec9e-03fc-4e0f-abb9-9a0943ecf667}" />
 	<object class="MixerBusFader" id="{53a6a860-5cdc-49bf-a61a-01a7009c849e}" />
-	<object class="SpatialiserEffect" id="{d81650f2-96f6-4b04-a784-4e1955b019e2}" />
+	<object class="SpatialiserEffect" id="{d81650f2-96f6-4b04-a784-4e1955b019e2}">
+		<property name="panBlend">
+			<value>0.589999974</value>
+		</property>
+		<property name="userLFELevel">
+			<value>5</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>180</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{27118da4-7d71-4a16-b5a2-a9a34b0edf6a}" />
 </objects>

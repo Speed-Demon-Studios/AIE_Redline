@@ -31,7 +31,7 @@ public class ShipBlendAnimations : MonoBehaviour
     public float flapSpeed;
 
     // Start is called before the first frame update
-    void OnEnable()
+    public void Inistialize()
     {
         m_controls = GetComponent<ShipsControls>();
         FindEveryChild(m_controls.shipModel.transform);
@@ -46,10 +46,10 @@ public class ShipBlendAnimations : MonoBehaviour
     {
         foreach (Transform child in parent)
         {
-            Animator outPut;
-            if (child.TryGetComponent<Animator>(out outPut))
+            ShipTypeInfo outPut;
+            if (child.TryGetComponent<ShipTypeInfo>(out outPut))
             {
-                m_controller = outPut;
+                m_controller = outPut.animator;
                 return;
             }
             else if(child.childCount > 0)

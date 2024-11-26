@@ -23,7 +23,7 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        if (!GameManager.gManager.rManager.isTimeTrial)
+        if (!GameManager.gManager.isTimeTrial)
         {
             for (int i = 0; i < 9; i++)
             {
@@ -35,6 +35,9 @@ public class PositionHandler : MonoBehaviour
                 aiShip.GetComponent<ShipsControls>().Initialize(true);
                 aiShip.GetComponent<InitializeBeforeRace>().Initialize();
                 racers.Add(aiShip.GetComponent<RacerDetails>());
+
+                if (aiShip.GetComponent<RacerDetails>() != null)
+                    aiShip.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
 
                 GameManager.gManager.racerObjects.Add(aiShip);
             }

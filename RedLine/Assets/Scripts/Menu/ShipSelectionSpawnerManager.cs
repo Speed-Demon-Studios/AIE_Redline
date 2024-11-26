@@ -11,7 +11,7 @@ public class ShipSelectionSpawnerManager : MonoBehaviour
 
     private void SpawnSelectionScreens(int number, GameObject prefab)
     {
-        GameManager.gManager.players[number].GetComponent<SelectionScreenSpawn>().SpawnShipSelection(prefab);
+        GameManager.gManager.players[number].GetComponent<SelectionScreenSpawn>().SpawnShipSelection(prefab, number);
     }
 
     public void ReOrderShipSelection()

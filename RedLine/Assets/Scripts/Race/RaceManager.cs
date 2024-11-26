@@ -102,7 +102,7 @@ public class RaceManager : MonoBehaviour
 
     public void LapComplete(RacerDetails racer)
     {
-        if (isTimeTrial == false)
+        if (GameManager.gManager.isTimeTrial == false)
         {
             if (racer.currentLap >= TotalLaps)
             {

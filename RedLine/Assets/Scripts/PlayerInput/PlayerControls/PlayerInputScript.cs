@@ -57,7 +57,8 @@ public class PlayerInputScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        Inistialize();
+        if(!GameManager.gManager.firstLoadIntoGame)
+            Inistialize();
     }
 
     public void Inistialize()

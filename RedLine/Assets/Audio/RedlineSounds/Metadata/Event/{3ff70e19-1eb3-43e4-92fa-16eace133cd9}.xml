@@ -112,6 +112,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{4c907efc-baf1-45bb-a467-6f1e5ac6928d}">
 		<relationship name="effects">
+			<destination>{bd7cadea-b0ae-43e6-aa07-230913eef256}</destination>
 			<destination>{cb507074-1ca0-43c8-8ca1-e8563ff1eaf1}</destination>
 			<destination>{82720878-ecce-4aeb-80c2-7f34ba11d5a6}</destination>
 		</relationship>
@@ -124,7 +125,25 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{7649ac43-d619-4584-95e7-27caac419642}" />
+	<object class="SFXReverbEffect" id="{bd7cadea-b0ae-43e6-aa07-230913eef256}">
+		<property name="decayTime">
+			<value>1000</value>
+		</property>
+		<property name="wetLevel">
+			<value>-32</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{cb507074-1ca0-43c8-8ca1-e8563ff1eaf1}" />
-	<object class="SpatialiserEffect" id="{82720878-ecce-4aeb-80c2-7f34ba11d5a6}" />
+	<object class="SpatialiserEffect" id="{82720878-ecce-4aeb-80c2-7f34ba11d5a6}">
+		<property name="panBlend">
+			<value>0.435000002</value>
+		</property>
+		<property name="userLFELevel">
+			<value>-26</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>150</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{e39a9dd6-5688-46bc-bbcc-c233d7d37edd}" />
 </objects>
