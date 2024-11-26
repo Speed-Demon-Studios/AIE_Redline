@@ -559,19 +559,19 @@ MonoBehaviour:
   - 15.35
   - 3.45
   m_SplitwingMaxEngineVolumeValues:
-  - 1
-  - 1
-  - 0.4
+  - 0.45
+  - 0.09
+  - 0.23
   m_CutlassMaxEnginePitchValues:
-  - 5.8
+  - 5.7
   - 8.5
   - 22.2
-  - 0.67
+  - 1.17
   m_CutlassMaxEngineVolumeValues:
-  - 0.24
   - 0.45
-  - 0.03
-  - 0.75
+  - 0.45
+  - 0.06
+  - 0.87
 --- !u!114 &435336634424752418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a165579b92fba941b7db5820210efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emitterParent: {fileID: 6932143015045508699}
   variantSet: 0
   resettingAudio: 0
   m_engineEmitters:
@@ -1668,9 +1669,9 @@ MonoBehaviour:
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
-  AllowFadeout: 1
+  AllowFadeout: 0
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
