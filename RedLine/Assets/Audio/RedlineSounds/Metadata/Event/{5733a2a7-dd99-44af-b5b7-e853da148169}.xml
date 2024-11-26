@@ -119,15 +119,35 @@
 			<destination>{0620d2d9-9bbf-4b1f-9004-275ee964916e}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{62adcb6d-8717-4840-b7f2-663d0979d1bd}" />
+	<object class="MixerBusPanner" id="{62adcb6d-8717-4840-b7f2-663d0979d1bd}">
+		<property name="surroundPanExtent">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{8a9654f3-de48-48e0-b859-0d88debb9f77}" />
 	<object class="MixerBusEffectChain" id="{14e344e3-5472-422a-8be9-2a7ff0f2770e}">
 		<relationship name="effects">
 			<destination>{79b20291-0bfd-465a-97e6-cbeb0bbd566a}</destination>
+			<destination>{4cb7f9e8-6d3e-43a3-878d-e3cb07728ea6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{86359edb-137b-4eee-a725-013a685dc5a6}" />
 	<object class="MixerBusFader" id="{d354cff5-05e4-463f-94ad-e599f4c73d79}" />
-	<object class="SpatialiserEffect" id="{0620d2d9-9bbf-4b1f-9004-275ee964916e}" />
+	<object class="SpatialiserEffect" id="{0620d2d9-9bbf-4b1f-9004-275ee964916e}">
+		<property name="panBlend">
+			<value>0.504999995</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>92</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{79b20291-0bfd-465a-97e6-cbeb0bbd566a}" />
+	<object class="SFXReverbEffect" id="{4cb7f9e8-6d3e-43a3-878d-e3cb07728ea6}">
+		<property name="decayTime">
+			<value>1600</value>
+		</property>
+		<property name="wetLevel">
+			<value>-14</value>
+		</property>
+	</object>
 </objects>

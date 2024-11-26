@@ -226,6 +226,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{9ec26a15-a031-48a2-b947-08d64c36cd0f}">
 		<relationship name="effects">
+			<destination>{1810173a-99ac-4bb0-90cd-b3698259df10}</destination>
 			<destination>{6b65e812-b13e-47dc-9f79-c3655a66771f}</destination>
 			<destination>{4696657a-7686-46c7-89da-dd18360ed0ed}</destination>
 		</relationship>
@@ -243,7 +244,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{b059dabc-84ad-4f65-8223-7d197106cf81}" />
-	<object class="SpatialiserEffect" id="{c826260e-67c2-41e5-a4ab-47acfa9164d6}" />
+	<object class="SpatialiserEffect" id="{c826260e-67c2-41e5-a4ab-47acfa9164d6}">
+		<property name="panBlend">
+			<value>0.494999975</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>180</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{bbd6ffe8-502f-4184-ad73-de242cb8cb97}">
 		<property name="position">
 			<value>0.080000000000000002</value>
@@ -280,6 +288,14 @@
 		</property>
 		<property name="value">
 			<value>1</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{1810173a-99ac-4bb0-90cd-b3698259df10}">
+		<property name="decayTime">
+			<value>1000</value>
+		</property>
+		<property name="wetLevel">
+			<value>-17</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{6b65e812-b13e-47dc-9f79-c3655a66771f}" />

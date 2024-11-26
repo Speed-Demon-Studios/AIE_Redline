@@ -119,7 +119,11 @@
 			<destination>{36b7b1c1-0c6a-49ab-993b-3e624d523ebc}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{026e39cc-a131-4b78-b67e-9fade877d921}" />
+	<object class="MixerBusPanner" id="{026e39cc-a131-4b78-b67e-9fade877d921}">
+		<property name="surroundPanExtent">
+			<value>182</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{8dd0db67-6ce5-42b6-950b-038733363a96}" />
 	<object class="MixerBusEffectChain" id="{48fa8690-7618-4a46-98dd-cf7c14d53abc}">
 		<relationship name="effects">
@@ -128,6 +132,16 @@
 	</object>
 	<object class="MixerBusPanner" id="{f57313ae-6c01-4e97-bc76-47d08ec29310}" />
 	<object class="MixerBusFader" id="{32550391-73e8-48c3-b655-e9e4229be594}" />
-	<object class="SpatialiserEffect" id="{36b7b1c1-0c6a-49ab-993b-3e624d523ebc}" />
+	<object class="SpatialiserEffect" id="{36b7b1c1-0c6a-49ab-993b-3e624d523ebc}">
+		<property name="panBlend">
+			<value>0.289999992</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>180</value>
+		</property>
+		<property name="userStereoAxis">
+			<value>180</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{b1106e61-da7e-4d88-b4ee-5293abc59012}" />
 </objects>
