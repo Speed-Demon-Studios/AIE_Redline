@@ -341,16 +341,22 @@ namespace EAudioSystem
 
             if (m_boostEmitters[soundIndex] != null && m_boostAudioInfo[soundIndex].IsNull == false)
             {
-                m_boostEmitters[soundIndex].AllowFadeout = true;
-                if (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                if (m_boostEmitters[soundIndex].IsPlaying() == false)
                 {
-                    while (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                    if (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
                     {
-                        m_boostEmitters[soundIndex].EventReference = m_boostAudioInfo[soundIndex];
-                        Debug.Log(m_boostEmitters[soundIndex].EventReference.Guid);
+                        while (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                        {
+                            m_boostEmitters[soundIndex].EventReference = m_boostAudioInfo[soundIndex];
+                            Debug.Log(m_boostEmitters[soundIndex].EventReference.Guid);
+                        }
                     }
+                    m_boostEmitters[soundIndex].Play();
                 }
-                m_boostEmitters[soundIndex].Play();
+                else
+                {
+                    return;
+                }
             }
             else
                 return;
@@ -884,13 +890,13 @@ namespace EAudioSystem
                             m_engineEmitterVolumes[i] = 0.0000f;
                             m_engineEmitters[i].EventInstance.setVolume(m_engineEmitterVolumes[i]);
                         }
-
+            
                         for (int i = 0; i < m_windEmitters.Count; i++) // Iterate through the array of wind sound emmitters
                         {
                             if (m_windEmitters[i] != null) // If the emitter at the current index is not NULL
                             {
                                 m_windAudioVolumes[i] = 0.0000f;
-
+            
                                 StudioEventEmitter currentWindEmitter = m_windEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
                                 currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                             }
