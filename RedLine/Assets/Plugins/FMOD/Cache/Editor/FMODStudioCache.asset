@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8710422006817207896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Boost/RedlineBoostChargingVER2
+  m_EditorClassIdentifier: 
+  Path: event:/Boost/RedlineBoostChargingVER2
+  Guid:
+    Data1: -957722253
+    Data2: 1112487255
+    Data3: 533376155
+    Data4: -393363119
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8000
 --- !u!114 &-7647445765421691336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +128,7 @@ MonoBehaviour:
     Data4: -1283528731
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -128,7 +155,7 @@ MonoBehaviour:
     Data4: -1246360120
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -155,7 +182,7 @@ MonoBehaviour:
     Data4: -610016872
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -182,7 +209,7 @@ MonoBehaviour:
     Data4: 963345092
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -209,7 +236,7 @@ MonoBehaviour:
     Data4: 1107571111
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -236,7 +263,7 @@ MonoBehaviour:
     Data4: 1641758963
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -263,7 +290,7 @@ MonoBehaviour:
     Data4: -351592047
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -290,7 +317,7 @@ MonoBehaviour:
     Data4: -1450442892
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -317,7 +344,7 @@ MonoBehaviour:
     Data4: -650374194
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -344,7 +371,7 @@ MonoBehaviour:
     Data4: 818137180
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -391,12 +418,15 @@ MonoBehaviour:
   - {fileID: 4866731878624705197}
   - {fileID: -2811234961157940369}
   - {fileID: 4257434774658806998}
+  - {fileID: -8710422006817207896}
+  - {fileID: 270072319019106177}
+  - {fileID: 8833108797558054114}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638681617523115568
+  cacheTime: 638683021902226514
   cacheVersion: 131620
 --- !u!114 &258234696783266387
 MonoBehaviour:
@@ -425,6 +455,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 148
+--- !u!114 &270072319019106177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Boost/BoostLevelUpVersion2
+  m_EditorClassIdentifier: 
+  Path: event:/Boost/BoostLevelUpVersion2
+  Guid:
+    Data1: 1463001767
+    Data2: 1152376217
+    Data3: 1407760309
+    Data4: 1770067162
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 850
 --- !u!114 &2368922772598688561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +502,7 @@ MonoBehaviour:
     Data4: -1670916056
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -467,10 +524,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638678136072185021
+  lastModified: 638683021902226514
   FileSizes:
   - Name: Desktop
-    Value: 2144
+    Value: 2324
   Exists: 1
 --- !u!114 &2658546784528882239
 MonoBehaviour:
@@ -492,7 +549,7 @@ MonoBehaviour:
     Data4: -676002068
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -519,7 +576,7 @@ MonoBehaviour:
     Data4: 2060307264
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -546,7 +603,7 @@ MonoBehaviour:
     Data4: -809761278
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -600,7 +657,7 @@ MonoBehaviour:
     Data4: -2102314217
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
@@ -627,7 +684,7 @@ MonoBehaviour:
     Data4: -1228485050
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -654,7 +711,7 @@ MonoBehaviour:
     Data4: 2070873256
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -676,10 +733,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638681617523115568
+  lastModified: 638683021902196514
   FileSizes:
   - Name: Desktop
-    Value: 11550208
+    Value: 12346560
   Exists: 1
 --- !u!114 &8380050900478668021
 MonoBehaviour:
@@ -701,13 +758,40 @@ MonoBehaviour:
     Data4: 332200547
   Banks:
   - {fileID: 7530275692248856671}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 42000
+--- !u!114 &8833108797558054114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UIPlayerJoinedGameVER2
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UIPlayerJoinedGameVER2
+  Guid:
+    Data1: -1687994639
+    Data2: 1184200353
+    Data3: -1859903852
+    Data4: -1645290867
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 300
 --- !u!114 &9140701790237856491
 MonoBehaviour:
   m_ObjectHideFlags: 0
