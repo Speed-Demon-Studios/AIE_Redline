@@ -16,23 +16,26 @@ public class AICatchUpManager : MonoBehaviour
 
     private void Update()
     {
-        float score = 1f;
-        foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
+        if (GameManager.gManager.raceStarted && !GameManager.gManager.raceFinished)
         {
-            if(ChangeCatchUp(AIOBJ) > 0)
-                score *= ChangeCatchUp(AIOBJ);
-        }
+            float score = 1f;
+            foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
+            {
+                if (ChangeCatchUp(AIOBJ) > 0)
+                    score *= ChangeCatchUp(AIOBJ);
+            }
 
-        float originalScore = score;
-        float modFactor = 1 - (1 / GameManager.gManager.racerObjects.Count);
-        float makeupValue = (1 - originalScore) * modFactor;
-        float percentage = originalScore + (makeupValue * originalScore);
+            float originalScore = score;
+            float modFactor = 1 - (1 / GameManager.gManager.racerObjects.Count);
+            float makeupValue = (1 - originalScore) * modFactor;
+            float percentage = originalScore + (makeupValue * originalScore);
 
-        m_catchUpChange = percentage;
+            m_catchUpChange = percentage;
 
-        foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
-        {
-            AIOBJ.GetComponent<ShipsControls>().MaxSpeedCatchupChange(percentage);
+            foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
+            {
+                AIOBJ.GetComponent<ShipsControls>().MaxSpeedCatchupChange(percentage);
+            }
         }
     }
 
@@ -48,6 +51,11 @@ public class AICatchUpManager : MonoBehaviour
 
             float playerCheckPointPercentage = (playerRacerDets.currentCheckpoint / numberOfCheckPoints) + playerRacerDets.currentLap;
             float aiCheckPointPercentage = (aIRacerDets.currentCheckpoint / numberOfCheckPoints) + aIRacerDets.currentLap;
+
+            if (playerCheckPointPercentage < 1)
+                playerCheckPointPercentage += 1;
+            if (aiCheckPointPercentage < 1)
+                aiCheckPointPercentage += 1;
 
             float difference = aiCheckPointPercentage - playerCheckPointPercentage;
             if (difference > 0)

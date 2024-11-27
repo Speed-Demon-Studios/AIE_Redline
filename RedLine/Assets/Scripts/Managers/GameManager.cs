@@ -80,11 +80,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
-        Debug.Log(allRacers.Count + " Racers");
-        Debug.Log(racerObjects.Count + " Ai Racers");
-        Debug.Log(players.Count + " players");
-
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;
@@ -161,6 +156,12 @@ public class GameManager : MonoBehaviour
             Rigidbody rB = racerOBJ.GetComponent<Rigidbody>();
             rDeets.EnableRacerMovement();
             rB.isKinematic = false;
+            racerOBJ.GetComponent<ShipsControls>().ResetAcceleration();
+            racerOBJ.GetComponent<ShipsControls>().ResetAngles(0,0,0);
+            racerOBJ.GetComponent<ShipsControls>().SetBrakeMultiplier(0);
+            racerOBJ.GetComponent<ShipsControls>().SetSpeedMultiplier(0);
+            racerOBJ.GetComponent<ShipsControls>().SetTurnMultipliers(0);
+            racerOBJ.GetComponent<ShipsControls>().SetStrafeMultiplier(0);
         }
     }
 
@@ -174,9 +175,14 @@ public class GameManager : MonoBehaviour
                 racer.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
 
             sControls.ResetAcceleration();
-            AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
-            aiMove.SetVariant(sControls.VariantObject);
-            aiMove.desiredNode = startNode;
+            AIMoveInputs temp;
+            if (!racer.TryGetComponent(out temp))
+            {
+                AIMoveInputs aiMove = racer.AddComponent<AIMoveInputs>();
+                aiMove.SetVariant(sControls.VariantObject);
+                aiMove.desiredNode = startNode;
+            }
+
 
         }
         else if (racer == null)
