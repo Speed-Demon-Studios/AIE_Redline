@@ -152,6 +152,9 @@
         },
         {
             "m_Id": "a2c85088fbb040c9acf2b9516ac9ccc9"
+        },
+        {
+            "m_Id": "e6cdaaf6d36c4f199e2c23952b102f55"
         }
     ],
     "m_GroupDatas": [
@@ -545,6 +548,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "e6cdaaf6d36c4f199e2c23952b102f55"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "2f4ee153b3554078b653ccea2257feec"
+                },
+                "m_SlotId": -2039878768
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "e711319299374b44abf613528acba9ca"
                 },
                 "m_SlotId": 0
@@ -768,10 +785,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -937.0,
-            "y": 1747.9998779296875,
-            "width": 159.99993896484376,
-            "height": 34.0001220703125
+            "x": -937.0001220703125,
+            "y": 1773.0,
+            "width": 160.00006103515626,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -1155,6 +1172,9 @@
             "m_Id": "4bb39ec8fce64c7099344d91a719cc89"
         },
         {
+            "m_Id": "72124afa0f164985a8e4436336815dbe"
+        },
+        {
             "m_Id": "7b8a8696e74b4efb8921e17a3379aff0"
         },
         {
@@ -1177,11 +1197,13 @@
     "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"7187529bae2e3ae4cb5b7c11533cac9c\",\n        \"type\": 3\n    }\n}",
     "m_PropertyGuids": [
         "6aac314e-438b-40a6-8c3f-1a0505b28eef",
-        "cec6286c-c6a1-4046-8cfd-1800975a7138"
+        "cec6286c-c6a1-4046-8cfd-1800975a7138",
+        "8213c0c7-8d61-4010-9cc5-4cd6aa632692"
     ],
     "m_PropertyIds": [
         -1063321780,
-        -1226225194
+        -1226225194,
+        -2039878768
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -2124,6 +2146,27 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "72124afa0f164985a8e4436336815dbe",
+    "m_Id": -2039878768,
+    "m_DisplayName": "Tiling",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_Tiling",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "733caf67bd8b49c6896251c1890ba1d5",
     "m_Id": 0,
@@ -2169,6 +2212,27 @@
     },
     "m_Labels": [],
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "764c242749e943c4babc29a31b729ce3",
+    "m_Id": 0,
+    "m_DisplayName": "Tiling",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -3917,6 +3981,41 @@
     "m_Value": 0.5,
     "m_DefaultValue": 0.5,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "e6cdaaf6d36c4f199e2c23952b102f55",
+    "m_Group": {
+        "m_Id": "5b5743ab03d84205ad2dcd068a70f5d2"
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -886.0000610351563,
+            "y": 1841.0,
+            "width": 104.99993896484375,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "764c242749e943c4babc29a31b729ce3"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "bc0f5060a37d4b1b98c6413226e7916d"
+    }
 }
 
 {

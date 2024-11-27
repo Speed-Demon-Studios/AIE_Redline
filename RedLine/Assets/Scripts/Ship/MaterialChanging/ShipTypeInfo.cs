@@ -13,6 +13,8 @@ public class ShipTypeInfo : MonoBehaviour
     public Material[] monarcMatDouble;
     public Material[] monarcMatSingle;
 
+    public Animator animator;
+
     public void SwitchMaterials(int index)
     {
         foreach(SkinnedMeshRenderer renderer in partsOfTheShipDouble)

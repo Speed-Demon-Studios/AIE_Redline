@@ -92,11 +92,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{49c4ae2e-efcb-40af-b9b3-6ea074d3d467}" />
 	<object class="SingleSound" id="{9c121e10-8428-40e0-a651-006467030bb2}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>42</value>
 		</property>
 		<property name="timelockedOffset">
 			<value>3</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{5e58387f-6bcc-4ae9-bc2c-04b0445f9df2}</destination>
@@ -148,6 +154,13 @@
 	</object>
 	<object class="MixerBusPanner" id="{301f06be-c095-41f2-b81c-4c17da42f2b1}" />
 	<object class="MixerBusFader" id="{c9713dd4-4f41-456b-905e-d0616fe74002}" />
-	<object class="SpatialiserEffect" id="{a94bf4a3-e948-4afe-bb88-cca45a57f0aa}" />
+	<object class="SpatialiserEffect" id="{a94bf4a3-e948-4afe-bb88-cca45a57f0aa}">
+		<property name="panBlend">
+			<value>0.504999995</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>180</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{e82d9b97-31d2-4608-8fcb-bdf90a99e5d8}" />
 </objects>
