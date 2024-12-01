@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SparksTrigger : MonoBehaviour
 {
     [SerializeField] private SparksParticlesController m_spc;
 
-    public GameObject[] sparks;
+    public VisualEffect[] sparks;
     public bool isColliding = false;
     public bool waiting = false;
 
@@ -35,11 +36,6 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            //foreach (GameObject sparkParticle in sparks)
-            //{
-            //    //sparkParticle.SetActive(false);
-            //    m_spc.DeactivateSparks(sparkParticle);
-            //}
             isColliding = false;
         }
     }

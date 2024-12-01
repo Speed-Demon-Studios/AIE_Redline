@@ -2,9 +2,11 @@ using EAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class ManageSceneLoading : MonoBehaviour
 {
@@ -56,7 +58,7 @@ public class ManageSceneLoading : MonoBehaviour
 
         GameObject shipCollisionObject = shipCollider.gameObject;
         GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
-        DestroyImmediate(aiMove);
+        DestroyImmediate(playerOBJ.GetComponent<AIMoveInputs>());
 
         controls.FireList().Clear();
         controls.VariantObject = null;
@@ -88,7 +90,7 @@ public class ManageSceneLoading : MonoBehaviour
                 {
                     sT.isColliding = false;
 
-                    foreach (GameObject sparksOBJ in sT.sparks)
+                    foreach (VisualEffect sparksOBJ in sT.sparks)
                     {
                         if (sparksOBJ != null)
                         {
@@ -107,10 +109,6 @@ public class ManageSceneLoading : MonoBehaviour
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
 
-        GameManager.gManager.numberOfPlayers -= 1;
-
-        //acm.GetPlayerInput().gameObject.SetActive(false);
-
         racerDeets.rCS.ClearList();
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
 
@@ -119,13 +117,11 @@ public class ManageSceneLoading : MonoBehaviour
         {
             player.GetComponent<PlayerAudioController>().ResetPlayerAudio();
         }
-
-
-        //playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
     {
+        GameManager.gManager.isTimeTrial = false;
         GameManager.gManager.firstLoadIntoGame = true;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
@@ -152,7 +148,7 @@ public class ManageSceneLoading : MonoBehaviour
 
         PlayerPrefs.SetInt("SceneID", 1);
         SceneManager.LoadSceneAsync(3);
-        SceneManager.UnloadSceneAsync(2);
+        //SceneManager.UnloadSceneAsync(2);
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());

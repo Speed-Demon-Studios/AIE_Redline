@@ -174,7 +174,14 @@
 			<destination>{9b33b2c8-6859-475b-a582-9ee3b8b8c1a0}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{46d8236a-854e-43f9-a15a-7fc6e0891b46}" />
+	<object class="MixerBusPanner" id="{46d8236a-854e-43f9-a15a-7fc6e0891b46}">
+		<property name="surroundPanExtent">
+			<value>268</value>
+		</property>
+		<property name="surroundLFELevel">
+			<value>5</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{ff7e1666-4a9a-453d-9024-aa70e6d3b990}" />
 	<object class="TransitionSourceFadeOutCurve" id="{9a078abb-8c77-42f1-88e2-5de1b6160732}">
 		<relationship name="startPoint">
@@ -213,7 +220,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{9a707cf7-b288-4ff7-aca2-3ff8a03449d1}" />
-	<object class="SpatialiserEffect" id="{9b33b2c8-6859-475b-a582-9ee3b8b8c1a0}" />
+	<object class="SpatialiserEffect" id="{9b33b2c8-6859-475b-a582-9ee3b8b8c1a0}">
+		<property name="panBlend">
+			<value>0.555000007</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>120</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{7d9c98e9-623e-4e82-b470-da95ba5b6af1}">
 		<property name="position">
 			<value>0</value>

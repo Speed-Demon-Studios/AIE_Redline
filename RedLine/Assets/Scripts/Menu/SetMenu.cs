@@ -11,6 +11,7 @@ public class SetMenu : MonoBehaviour
 {
     public MenuType typeOfMenu;
     public List<Button> menuStartButtons;
+    public List<GameObject> backGroundPanel;
     public SetMenu prevMenu;
     public UnityEvent back;
 

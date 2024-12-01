@@ -22,8 +22,11 @@ namespace EAudioSystem
         // * Redline audio (e.g. gaining redline, reaching the different levels of redline, etc...).
         // * Update the funcitionality for the engine audio so that when a players speed lowers while they are turning or crashing into a wall, the sound modulation will reflect those changes.
 
+        [SerializeField] private GameObject emitterParent;
+
         [HideInInspector] public bool variantSet = false; // BOOLEAN value to tell the game whether or not the ship variant has been selected and set-up.
         [HideInInspector] public bool resettingAudio = false;
+        private bool engineSoundsPlaying = false;
 
         // Engine Audio -------------------------------------------------------------------------------------------------------------------------------------
         [Header("Engine Audio")]
@@ -164,14 +167,7 @@ namespace EAudioSystem
 // --------------------------------------------------
         public void ChargeRedlineSound()
         {
-            if (m_sControls == null)
-            {
-                m_sControls = this.GetComponent<ShipsControls>();
-            }
-
-            ShipsControls sControls = this.GetComponent<ShipsControls>();
-
-            if (sControls.ReturnIsBoosting() == true || sControls.wantingToBoost == true)
+            if (m_sControls.ReturnIsBoosting() == true || m_sControls.wantingToBoost == true)
             {
                 if (m_redlineAudioPitches[0] != 0.0)
                 {
@@ -180,9 +176,9 @@ namespace EAudioSystem
             }
 
 
-            if (sControls.ReturnIsInRedline() == true)
+            if (m_sControls.ReturnIsInRedline() == true)
             {
-                switch (sControls.ReturnBoostLevel())
+                switch (m_sControls.ReturnBoostLevel())
                 {
                     case 0:
                         {
@@ -228,29 +224,18 @@ namespace EAudioSystem
                         }
                     case 2:
                         {
-                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[2])
-                            {
-                                m_redlineAudioVolume[0] += 0.15 * Time.deltaTime;
-                            }
-                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[2])
-                            {
-                                m_redlineAudioVolume[0] = m_redlineMaxVolumes[2];
-                            }
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[2]) { m_redlineAudioVolume[0] += 0.15 * Time.deltaTime; }
+                            if (m_redlineAudioVolume[0] > m_redlineMaxVolumes[2]) { m_redlineAudioVolume[0] = m_redlineMaxVolumes[2]; }
 
-                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[2])
-                            {
-                                m_redlineAudioPitches[0] += 0.15f * Time.deltaTime;
-                            }
-                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[2])
-                            {
-                                m_redlineAudioPitches[0] = m_redlineMaxPitches[2];
-                            }
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[2]) { m_redlineAudioPitches[0] += 0.15f * Time.deltaTime; }
+                            if (m_redlineAudioPitches[0] > m_redlineMaxPitches[2]) { m_redlineAudioPitches[0] = m_redlineMaxPitches[2]; }
                             break;
                         }
                     case 3:
                         {
-                            m_redlineAudioPitches[0] = m_redlineMaxPitches[3];
-                            m_redlineAudioVolume[0] = m_redlineMaxVolumes[3];
+                            if (3 < m_redlineMaxPitches.Count()) { m_redlineAudioPitches[0] = m_redlineMaxPitches[3]; }
+                            if (3 < m_redlineMaxVolumes.Count()) { m_redlineAudioVolume[0] = m_redlineMaxVolumes[3]; }
+                            else { m_redlineAudioVolume[0] = m_redlineMaxVolumes[2]; }
                             break;
                         }
                 }
@@ -259,7 +244,7 @@ namespace EAudioSystem
             {
                 tempRLVolume = m_redlineAudioVolume[0];
 
-                switch (sControls.ReturnBoostLevel())
+                switch (m_sControls.ReturnBoostLevel())
                 {
                     case 0:
                         {
@@ -288,7 +273,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                             }
-                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[0];
                             }
@@ -297,7 +282,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioPitches[0] -= 0.08f * Time.deltaTime;
                             }
-                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
                             }
@@ -316,7 +301,7 @@ namespace EAudioSystem
                                     m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                                 }
                             }
-                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[1];
                             }
@@ -325,7 +310,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioPitches[0] -= 0.06f * Time.deltaTime;
                             }
-                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1] && sControls.wantingToBoost == false && sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
                             {
                                 m_redlineAudioPitches[0] = m_redlineMaxPitches[1];
                             }
@@ -339,7 +324,7 @@ namespace EAudioSystem
                 }
             }
 
-            if (sControls.ReturnIsBoosting() == true || sControls.wantingToBoost == true)
+            if (m_sControls.ReturnIsBoosting() == true || m_sControls.wantingToBoost == true)
             {
                 if (m_redlineAudioPitches[0] != 0.0)
                 {
@@ -356,16 +341,22 @@ namespace EAudioSystem
 
             if (m_boostEmitters[soundIndex] != null && m_boostAudioInfo[soundIndex].IsNull == false)
             {
-                m_boostEmitters[soundIndex].AllowFadeout = true;
-                if (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                if (m_boostEmitters[soundIndex].IsPlaying() == false)
                 {
-                    while (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                    if (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
                     {
-                        m_boostEmitters[soundIndex].EventReference = m_boostAudioInfo[soundIndex];
-                        Debug.Log(m_boostEmitters[soundIndex].EventReference.Guid);
+                        while (m_boostEmitters[soundIndex].EventReference.Guid != m_boostAudioInfo[soundIndex].Guid)
+                        {
+                            m_boostEmitters[soundIndex].EventReference = m_boostAudioInfo[soundIndex];
+                            Debug.Log(m_boostEmitters[soundIndex].EventReference.Guid);
+                        }
                     }
+                    m_boostEmitters[soundIndex].Play();
                 }
-                m_boostEmitters[soundIndex].Play();
+                else
+                {
+                    return;
+                }
             }
             else
                 return;
@@ -543,7 +534,7 @@ namespace EAudioSystem
                                 }
                             case 2:
                                 {
-                                    UpdateEnginePitch(0, (breakingValue * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
+                                    UpdateEnginePitch(0, ((breakingValue * 0.7f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
                                     UpdateEngineVolume(0, ((0.05f) * GameManager.gManager.difficultyChange), ((0.27f) * GameManager.gManager.difficultyChange), true, false, true, default, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
                                     UpdateEnginePitch(1, (breakingValue * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
@@ -617,13 +608,19 @@ namespace EAudioSystem
                 }
             }
 
-            if (double.IsNaN(m_engineEmitterPitches[index]) == true)
+            if (double.IsNaN(m_engineEmitterPitches[index]) == true || m_engineEmitterPitches[index] < 0.05f)
             {
-                m_engineEmitterPitches[index] = 0.05;
-                m_engineEmitterPitches[index] = minimumValue;
+                if (minimumValue > 0.05)
+                {
+                    m_engineEmitterPitches[index] = minimumValue;
+                }
+                else
+                {
+                    m_engineEmitterPitches[index] = 0.05;
+                }
             }
 
-            if (addDT == true)
+            if (addDT == true && !gameObject.GetComponent<ShipsControls>().isTestShip)
             {
                 if (add == true)
                 {
@@ -652,7 +649,7 @@ namespace EAudioSystem
                     }
                 }
 
-                if (subtract == true)
+                if (subtract == true && !gameObject.GetComponent<ShipsControls>().isTestShip)
                 {
                     //if (minimumValue >= 800.0f)
                     //{
@@ -882,21 +879,42 @@ namespace EAudioSystem
 
         void Update()
         {
+            if (GameManager.gManager.raceCountdown != null && GameManager.gManager.raceCountdown.m_countdownFinished == false)
+            {
+                if (variantSet == true)
+                {
+                    if (resettingAudio == false)
+                    {
+                        for (int i = 0; i < m_engineEmitterVolumes.Count(); i++)
+                        {
+                            m_engineEmitterVolumes[i] = 0.0000f;
+                            m_engineEmitters[i].EventInstance.setVolume(m_engineEmitterVolumes[i]);
+                        }
+            
+                        for (int i = 0; i < m_windEmitters.Count; i++) // Iterate through the array of wind sound emmitters
+                        {
+                            if (m_windEmitters[i] != null) // If the emitter at the current index is not NULL
+                            {
+                                m_windAudioVolumes[i] = 0.0000f;
+            
+                                StudioEventEmitter currentWindEmitter = m_windEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
+                                currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
+                            }
+                        }
+                    }
+                }
+            }
+
             if (variantSet == true) // If the variant has been selected
             {
-                if (GetComponentInChildren<SparksParticlesController>() != null && GetComponentInChildren<SparksParticlesController>().PAC != this)
-                {
-                    GetComponentInChildren<SparksParticlesController>().PAC = this;
-                }
 
-                if (resettingAudio == false)
+                if (resettingAudio == false && GameManager.gManager.raceCountdown.m_countdownFinished == true)
                 {
-                    if (m_redlineSoundEmitters[0].IsPlaying() == false)
+                    if (engineSoundsPlaying == false)
                     {
-                        m_redlineSoundEmitters[0].Play();
+                        engineSoundsPlaying = true;
+                        StartEngineHum();
                     }
-
-                    
 
                     ChargeRedlineSound();
 
@@ -945,6 +963,29 @@ namespace EAudioSystem
                         }
                     }
                 }
+            }
+        }
+
+        private void Start()
+        {
+            if (GetComponentInChildren<SparksParticlesController>() != null && GetComponentInChildren<SparksParticlesController>().PAC != this)
+            {
+                GetComponentInChildren<SparksParticlesController>().PAC = this;
+            }
+
+            if (m_sControls == null)
+            {
+                m_sControls = this.GetComponent<ShipsControls>();
+            }
+            m_redlineSoundEmitters[0].EventInstance.setPitch(1.0f);
+            m_redlineSoundEmitters[0].EventInstance.setVolume(1.0f);
+            m_redlineSoundEmitters[0].Play();
+            m_redlineSoundEmitters[0].EventInstance.setPitch(0.1f);
+            m_redlineSoundEmitters[0].EventInstance.setVolume(0.00f);
+
+            if (m_redlineSoundEmitters[0].IsPlaying() == false)
+            {
+                m_redlineSoundEmitters[0].Play();
             }
         }
 

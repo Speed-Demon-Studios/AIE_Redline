@@ -57,27 +57,34 @@ public class PlayerInputScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        Inistialize();
+        if(!GameManager.gManager.firstLoadIntoGame)
+            Inistialize();
     }
 
     public void Inistialize()
     {
         m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
         gMan = GameManager.gManager; // seting a reference to the GameManager
+        m_virtualCam.gameObject.SetActive(true);
 
-        if (gMan != null) // if there is a GameManager
-            if(!gMan.players.Contains(this.gameObject))
-                gMan.players.Add(gameObject); // add this object to the players list in GameManager
-
-
-        if (gMan != null) // if there is a GameManager                                         
-            m_playerNumber = gMan.numberOfPlayers; // Set this objects player number           
-
-        if (m_playerNumber == 1)
+        if (!GameManager.gManager.firstLoadIntoGame)
         {
-            GameManager.gManager.uiCInput.GetMenuManager().SetGameLoaded(false);
-            GameManager.gManager.uiCInput.GetMenuManager().PressStart();
+            GameManager.gManager.uiCInput.AddToPlayers();
+
+            if (gMan != null) // if there is a GameManager
+                if(!gMan.players.Contains(this.gameObject))
+                    gMan.players.Add(gameObject); // add this object to the players list in GameManager
+
+            if (gMan != null) // if there is a GameManager
+                m_playerNumber = gMan.numberOfPlayers; // Set this objects player number
+
+            if (m_playerNumber == 1)
+            {
+                GameManager.gManager.uiCInput.GetMenuManager().SetGameLoaded(false);
+                GameManager.gManager.uiCInput.GetMenuManager().PressStart();
+            }
         }
+
 
         gMan.uiCInput.sssManager.ReOrderShipSelection();
 
@@ -92,6 +99,7 @@ public class PlayerInputScript : MonoBehaviour
             if (cam != null && playerLayers.Count > 0)
                 cam.cullingMask = ignoreLayers[m_playerNumber - 1];
         }
+
     }
 
     /// <summary>

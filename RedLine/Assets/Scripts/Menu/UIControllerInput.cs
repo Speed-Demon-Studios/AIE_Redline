@@ -33,7 +33,7 @@ namespace MenuManagement
         private bool HasInitialized = true;
 
         public MenuManager GetMenuManager() { return m_mManager; }
-
+        public void SetTimeTrial(bool isTrue) { GameManager.gManager.isTimeTrial = isTrue; }
         public void ChangeGameManagerDifficulty(float change) { GameManager.gManager.ChangeDifficulty(change); }
         /// <summary>
         /// Adds another selectionMenu in for when a player joins
@@ -137,11 +137,15 @@ namespace MenuManagement
                     playersReady += 1; // add 1 to the number of players ready
             } 
             if (playersReady >= GameManager.gManager.players.Count) // if the number of player ready is equal to the number of players         
-            { 
-                GoToRace(); // then go to race
+            {
+                Invoke(nameof(DelayGoToRace), 1.5f);// then go to race
             } 
         }        
-        
+        void DelayGoToRace()
+        {
+            GoToRace();
+        }
+
         /// <summary>
         /// Check if each player is ready
         /// </summary>
@@ -149,23 +153,27 @@ namespace MenuManagement
         public void UnReadyPlayer(int playerNumber)
         {
             bool unReadyedThisTurn = false;
-            GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu = false;//the number of players ready
+
+            if (GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu == true)
+            {
+                GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().playerReadyInMenu = false;//the number of players ready
+                GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().ReturnShipSelection().UnReady();
+                unReadyedThisTurn = true;
+            }
+            else { unReadyedThisTurn = false; }
+
             int playersReady = 0;                                                                    
             // for each player in the players list                                                       
             foreach (GameObject player in GameManager.gManager.players)                             
             {                                                                                         
                 if (player.GetComponent<PlayerInputScript>().playerReadyInMenu) // if the player is ready
-                    playersReady += 1; // add 1 to the number of players ready                           
-                else                                                                                     
-                {                                                                                        
-                    player.GetComponent<PlayerInputScript>().ReturnShipSelection().UnReady();            
-                    unReadyedThisTurn = true;                                                            
-                }                                                                                        
+                    playersReady += 1; // add 1 to the number of players ready                                                                                                               
             }                                                                                        
                                                                                                          
             if(playersReady == 0 && !unReadyedThisTurn)                                                  
-            {                                                                                            
-                m_mManager.Back();                                                                       
+            {
+                GameManager.gManager.uiCInput.bSManager.TransitionToClassSelect(false);
+                m_mManager.Back();
             }                                                                                            
             // go to that players inputScript and change the bool to say they are ready                  
                                                                                                          

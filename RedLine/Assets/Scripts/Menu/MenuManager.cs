@@ -36,8 +36,10 @@ namespace MenuManagement
         // Start is called before the first frame update
         public void Inistialize()
         {
+            m_currentMenu = start;
             if (GameManager.gManager.firstLoadIntoGame)
             {
+                m_currentMenuType = start.typeOfMenu;
                 foreach(GameObject player in GameManager.gManager.players)
                 {
                     player.GetComponent<PlayerInputScript>().Inistialize();
@@ -57,9 +59,7 @@ namespace MenuManagement
         {
             if (!m_gameLoadedAndStarted)
             {
-                start.gameObject.SetActive(false);
-                m_currentMenu = mainMenu;
-                m_currentMenu.gameObject.SetActive(true);
+                SwitchMenu(mainMenu);
                 GameManager.gManager.uiCInput.ResetFirstButton(0, mainMenu.menuStartButtons[0]);
                 bSelect.TransitionToTitle();
                 m_gameLoadedAndStarted = true;
@@ -72,7 +72,7 @@ namespace MenuManagement
                 m_currentMenu.OnBackButton();
             else
             {
-                GameManager.gManager.players[playerNumber].GetComponent<PlayerInputScript>().GetShipSelection().UnReady();
+                GameManager.gManager.uiCInput.UnReadyPlayer(playerNumber);
             }
 
         }
@@ -81,6 +81,11 @@ namespace MenuManagement
         {
             GameObject switchingToGameObject = switchingTo.gameObject;
 
+            foreach(GameObject panel in m_currentMenu.backGroundPanel)
+            {
+                panel.SetActive(false);
+            }
+
             m_currentMenu.gameObject.SetActive(false);
             switchingToGameObject.SetActive(true);
 
@@ -88,7 +93,40 @@ namespace MenuManagement
 
             m_currentMenuType = switchingTo.typeOfMenu;
 
+            if (m_currentMenuType != MenuType.ShipSelectionReady)
+            {
+                foreach (GameObject panel in m_currentMenu.backGroundPanel)
+                {
+                    panel.SetActive(true);
+                }
+            }
+
+
             SetButtons(switchingTo);
+        }
+
+        public void BackGroundPanelForSelection()
+        {
+            foreach (GameObject panel in m_currentMenu.backGroundPanel)
+            {
+                panel.SetActive(false);
+            }
+
+            int index = 0;
+            int numberOfPlayers = GameManager.gManager.players.Count - 1;
+            foreach (GameObject panel in m_currentMenu.backGroundPanel)
+            {
+                if(index == numberOfPlayers)
+                {
+                    panel.SetActive(true);
+                }
+                else if(index > 3)
+                {
+                    panel.SetActive(true);
+                }
+
+                index++;
+            }
         }
 
         public void SetButtons(SetMenu menu)
@@ -103,14 +141,7 @@ namespace MenuManagement
 
         public void Back()
         {
-            GameObject prevObject = m_currentMenu.prevMenu.gameObject;
-            GameObject currentObject = m_currentMenu.gameObject;
-
-            currentObject.SetActive(false);
-            prevObject.SetActive(true);
-
-            m_currentMenu = m_currentMenu.prevMenu;
-            SetButtons(m_currentMenu);
+            SwitchMenu(m_currentMenu.prevMenu);
         }
     }
 }
