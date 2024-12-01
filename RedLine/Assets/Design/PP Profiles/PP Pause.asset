@@ -60,33 +60,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: PP Play
+  m_Name: PP Pause
   m_EditorClassIdentifier: 
   components:
   - {fileID: 7864878814732217716}
   - {fileID: -4097356218033656310}
   - {fileID: -2191830067656952797}
   - {fileID: 5360816156565096687}
-  - {fileID: 1726985918234443405}
   - {fileID: 5486749517610831505}
-  - {fileID: 8962606718355721125}
   - {fileID: 3460913292820411812}
---- !u!114 &1726985918234443405
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
-  m_Name: ChromaticAberration
-  m_EditorClassIdentifier: 
-  active: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.117
 --- !u!114 &3460913292820411812
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -99,12 +81,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 2
   gaussianStart:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 10
   gaussianEnd:
     m_OverrideState: 0
@@ -119,8 +101,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.1
   aperture:
-    m_OverrideState: 1
-    m_Value: 5
+    m_OverrideState: 0
+    m_Value: 5.6
   focalLength:
     m_OverrideState: 1
     m_Value: 300
@@ -154,7 +136,7 @@ MonoBehaviour:
     m_Value: 18
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 0
@@ -230,28 +212,3 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 3.59
---- !u!114 &8962606718355721125
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
-  m_Name: FilmGrain
-  m_EditorClassIdentifier: 
-  active: 1
-  type:
-    m_OverrideState: 1
-    m_Value: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.233
-  response:
-    m_OverrideState: 1
-    m_Value: 0.654
-  texture:
-    m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 0c50fb96451f6124ea16ba43e59cfb2e, type: 3}
