@@ -11,6 +11,7 @@ public class PlayerUiControl : MonoBehaviour
     [SerializeField] private ShipsControls m_shipsControls;
 
     public Animator finishAnim;
+    public Animator newLapAnim;
     public HUD hud;
 
     private void Update()
@@ -46,6 +47,7 @@ public class PlayerUiControl : MonoBehaviour
     public void FinishPopUp()
     {
         finishAnim.gameObject.SetActive(true);
+        finishAnim.SetTrigger("Finished");
         StartCoroutine(WaitToHideFinish());
     }
 

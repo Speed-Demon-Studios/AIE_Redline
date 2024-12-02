@@ -65,7 +65,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
         gMan = GameManager.gManager; // seting a reference to the GameManager
-        m_virtualCam.gameObject.SetActive(true);
+        //m_virtualCam.gameObject.SetActive(true);
 
         if (!GameManager.gManager.firstLoadIntoGame)
         {

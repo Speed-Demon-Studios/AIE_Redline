@@ -89,7 +89,8 @@ namespace DifficultyButtonSwitch
 
             m_titleAnim.SetTrigger("TitleIn");
             m_titleGlowAnim.SetTrigger("TitleInGlow");
-            m_titleAudio.Play();
+            if(m_titleAudio != null)
+                m_titleAudio.Play();
         }
 
 

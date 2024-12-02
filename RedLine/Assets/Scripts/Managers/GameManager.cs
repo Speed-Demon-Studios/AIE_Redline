@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool namesAssigned = false;
 
     public bool readyForCountdown = false;
+    public bool startCamerasFinished = false;
 
     public bool raceStarted = false;
     public bool raceFinished = false;
