@@ -65,7 +65,7 @@ public class PlayerInputScript : MonoBehaviour
     {
         m_shipControls = GetComponentInParent<ShipsControls>(); // getting the objects shipControls script which would be on the parent
         gMan = GameManager.gManager; // seting a reference to the GameManager
-        m_virtualCam.gameObject.SetActive(true);
+        //m_virtualCam.gameObject.SetActive(true);
 
         if (!GameManager.gManager.firstLoadIntoGame)
         {
@@ -148,6 +148,10 @@ public class PlayerInputScript : MonoBehaviour
 
             // -1 from number of player in the uicontroller script
             GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1);
+
+            gMan.uiCInput.sssManager.ReOrderShipSelection();
+            GameManager.gManager.uiCInput.GetMenuManager().BackGroundPanelForSelection();
+
             Destroy(this.gameObject);
         }
         else

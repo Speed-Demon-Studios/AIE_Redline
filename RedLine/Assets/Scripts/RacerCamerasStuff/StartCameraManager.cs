@@ -9,6 +9,7 @@ namespace StartCameras {
         public List<StartCamera> cameras = new();
         StartCamera m_currentCamera;
         StartCamera m_prevCamera;
+        public Animator preRaceCanvasAnim;
         int m_cameraIndex = 0;
         bool m_switching;
 
@@ -18,6 +19,7 @@ namespace StartCameras {
             this.gameObject.SetActive(true);
             m_currentCamera = cameras[0];
             m_currentCamera.gameObject.SetActive(true);
+            preRaceCanvasAnim.SetTrigger("PreRace");
         }
 
         // Update is called once per frame
@@ -38,7 +40,9 @@ namespace StartCameras {
             m_cameraIndex++;
             if (m_cameraIndex > cameras.Count - 1)
             {
+                preRaceCanvasAnim.SetTrigger("PreRaceFadeOut");
                 GameManager.gManager.readyForCountdown = true;
+                GameManager.gManager.startCamerasFinished = true;
                 m_cameraIndex = 0;
             }
 
