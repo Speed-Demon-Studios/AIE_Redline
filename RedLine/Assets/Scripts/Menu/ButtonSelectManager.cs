@@ -27,6 +27,7 @@ namespace DifficultyButtonSwitch
         [SerializeField] private Animator m_titleAnim;
         [SerializeField] private Animator m_titleGlowAnim;
         [SerializeField] private AnimationCurve m_titleFillCurve;
+        [SerializeField] private AudioSource m_titleAudio;
 
         [Header("Class Select")]
         [SerializeField] private AnimationCurve m_barChangeTween;
@@ -88,6 +89,7 @@ namespace DifficultyButtonSwitch
 
             m_titleAnim.SetTrigger("TitleIn");
             m_titleGlowAnim.SetTrigger("TitleInGlow");
+            m_titleAudio.Play();
         }
 
 

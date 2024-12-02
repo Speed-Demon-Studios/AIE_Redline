@@ -70,7 +70,7 @@ MonoBehaviour:
   - {fileID: 1726985918234443405}
   - {fileID: 5486749517610831505}
   - {fileID: 8962606718355721125}
-  - {fileID: 2362410390968948646}
+  - {fileID: 3460913292820411812}
 --- !u!114 &1726985918234443405
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -87,7 +87,7 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0.117
---- !u!114 &2362410390968948646
+--- !u!114 &3460913292820411812
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,74 +96,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9669dd43d41362b826cb959e024e98, type: 3}
-  m_Name: TinyMotionComponent
+  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
+  m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
-  blurMode:
+  active: 0
+  mode:
     m_OverrideState: 1
-    m_Value: 0
-  sampleCountMode:
-    m_OverrideState: 1
-    m_Value: 0
-  samples:
-    m_OverrideState: 0
-    m_Value: 6
-  minSampleCount:
-    m_OverrideState: 0
-    m_Value: 2
-  maxSampleCount:
-    m_OverrideState: 0
-    m_Value: 6
-  motionTextureQuality:
-    m_OverrideState: 0
     m_Value: 1
-  downsample:
-    m_OverrideState: 0
-    m_Value: 1
-  noiseMode:
+  gaussianStart:
     m_OverrideState: 1
-    m_Value: 2
-  animateNoise:
+    m_Value: 10
+  gaussianEnd:
+    m_OverrideState: 1
+    m_Value: 31.54
+  gaussianMaxRadius:
+    m_OverrideState: 1
+    m_Value: 0.941
+  highQualitySampling:
     m_OverrideState: 0
     m_Value: 0
-  skipSecondPass:
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 0.1
+  aperture:
+    m_OverrideState: 1
+    m_Value: 5
+  focalLength:
+    m_OverrideState: 1
+    m_Value: 300
+  bladeCount:
     m_OverrideState: 0
-    m_Value: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.274
-  intensityCamera:
-    m_OverrideState: 0
-    m_Value: 0
-  shutterSpeed:
-    m_OverrideState: 0
-    m_Value: 250
-  threshold:
-    m_OverrideState: 1
-    m_Value: 0
-  depthSeparationTreshold:
-    m_OverrideState: 1
-    m_Value: 0.131
-  depthSeparationBothWays:
-    m_OverrideState: 1
-    m_Value: 1
-  depthSeparationVelocity:
-    m_OverrideState: 1
-    m_Value: 1
-  depthSeparationVelocityTreshold:
-    m_OverrideState: 1
-    m_Value: 0.55
-  clampVelocity:
+    m_Value: 5
+  bladeCurvature:
     m_OverrideState: 0
     m_Value: 1
-  viewInEditor:
-    m_OverrideState: 0
-    m_Value: 1
-  includeTransparentObjects:
-    m_OverrideState: 1
-    m_Value: 1
-  debugMode:
+  bladeRotation:
     m_OverrideState: 0
     m_Value: 0
 --- !u!114 &5360816156565096687
@@ -186,7 +153,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 18
   colorFilter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 0
