@@ -58,7 +58,7 @@ public class ManageSceneLoading : MonoBehaviour
 
         GameObject shipCollisionObject = shipCollider.gameObject;
         GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
-        DestroyImmediate(aiMove);
+        DestroyImmediate(playerOBJ.GetComponent<AIMoveInputs>());
 
         controls.FireList().Clear();
         controls.VariantObject = null;
@@ -109,10 +109,6 @@ public class ManageSceneLoading : MonoBehaviour
         playerOBJ.GetComponent<ShipsControls>().enabled = false;
         playerOBJ.GetComponent<ShipBlendAnimations>().enabled = false;
 
-        GameManager.gManager.numberOfPlayers -= 1;
-
-        //acm.GetPlayerInput().gameObject.SetActive(false);
-
         racerDeets.rCS.ClearList();
         ShipToWallCollision stwc = playerOBJ.GetComponent<ShipToWallCollision>();
 
@@ -121,9 +117,6 @@ public class ManageSceneLoading : MonoBehaviour
         {
             player.GetComponent<PlayerAudioController>().ResetPlayerAudio();
         }
-
-
-        //playerOBJ.SetActive(false);
     }
 
     public void ResetGameManager()
@@ -155,7 +148,7 @@ public class ManageSceneLoading : MonoBehaviour
 
         PlayerPrefs.SetInt("SceneID", 1);
         SceneManager.LoadSceneAsync(3);
-        SceneManager.UnloadSceneAsync(2);
+        //SceneManager.UnloadSceneAsync(2);
 
         coroutineStarted = false;
         StopCoroutine(LoadMenuScene());

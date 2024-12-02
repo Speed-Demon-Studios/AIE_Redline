@@ -620,7 +620,7 @@ namespace EAudioSystem
                 }
             }
 
-            if (addDT == true)
+            if (addDT == true && !gameObject.GetComponent<ShipsControls>().isTestShip)
             {
                 if (add == true)
                 {
@@ -649,7 +649,7 @@ namespace EAudioSystem
                     }
                 }
 
-                if (subtract == true)
+                if (subtract == true && !gameObject.GetComponent<ShipsControls>().isTestShip)
                 {
                     //if (minimumValue >= 800.0f)
                     //{

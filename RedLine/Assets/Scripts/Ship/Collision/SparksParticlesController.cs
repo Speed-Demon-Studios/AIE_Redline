@@ -18,11 +18,11 @@ public class SparksParticlesController : MonoBehaviour
     {
         if (particleToActivate != null)
         {
+            particleToActivate.Play();
             if (PAC.IsEmitterPlaying(1, 0) == false)
             {
                 PAC.PlayGPSFX(0, 0);
             }
-            particleToActivate.Play();
         }
     }
 

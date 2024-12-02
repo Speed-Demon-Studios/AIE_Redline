@@ -36,11 +36,6 @@ public class SparksTrigger : MonoBehaviour
     {
         if (other.tag.ToLower() == "walls")
         {
-            //foreach (GameObject sparkParticle in sparks)
-            //{
-            //    //sparkParticle.SetActive(false);
-            //    m_spc.DeactivateSparks(sparkParticle);
-            //}
             isColliding = false;
         }
     }
