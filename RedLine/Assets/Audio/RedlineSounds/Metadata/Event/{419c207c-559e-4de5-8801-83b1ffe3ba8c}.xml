@@ -140,7 +140,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{2c83ae5b-8e58-4a64-bd29-cb88274664ec}" />
 	<object class="MixerBusFader" id="{dbf0f37f-d5f1-4734-8c54-da166e5c3d6b}" />
-	<object class="SpatialiserEffect" id="{6aeffb47-2a8a-4fbb-8d15-3ae035239dd8}" />
+	<object class="SpatialiserEffect" id="{6aeffb47-2a8a-4fbb-8d15-3ae035239dd8}">
+		<property name="panBlend">
+			<value>0</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{c8a02ff8-ddae-421d-b383-473631468302}">
 		<property name="position">
 			<value>0.10799999999999998</value>

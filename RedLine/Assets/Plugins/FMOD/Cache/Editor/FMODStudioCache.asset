@@ -103,7 +103,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7530275692248856671}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -336,6 +336,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2900
+--- !u!114 &-3036983066808662327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UIDeclineVER2
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UIDeclineVER2
+  Guid:
+    Data1: -1589419248
+    Data2: 1261104520
+    Data3: -1801659260
+    Data4: -224909501
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130
 --- !u!114 &-3024552468761438937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,13 +604,16 @@ MonoBehaviour:
   - {fileID: 1778980401390251707}
   - {fileID: 2433845644824573182}
   - {fileID: 946929144837594943}
+  - {fileID: 6361046141408350954}
+  - {fileID: -3036983066808662327}
+  - {fileID: 7821424255209551234}
   EditorParameters:
   - {fileID: 2767285069615592140}
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638688150312085299
+  cacheTime: 638688165912915084
   cacheVersion: 131620
 --- !u!114 &258234696783266387
 MonoBehaviour:
@@ -606,7 +636,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7530275692248856671}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -736,10 +766,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638688150312085299
+  lastModified: 638688165912915084
   FileSizes:
   - Name: Desktop
-    Value: 2802
+    Value: 2930
   Exists: 1
 --- !u!114 &2658546784528882239
 MonoBehaviour:
@@ -918,7 +948,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7530275692248856671}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -978,6 +1008,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19983
+--- !u!114 &6361046141408350954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UIFlickVER2
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UIFlickVER2
+  Guid:
+    Data1: -463837427
+    Data2: 1288613995
+    Data3: 2136896134
+    Data4: 2102355825
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 177
 --- !u!114 &6485689676080109701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,7 +1162,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7530275692248856671}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1153,11 +1210,38 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638688150312031118
+  lastModified: 638688165912865216
   FileSizes:
   - Name: Desktop
-    Value: 14070272
+    Value: 14084512
   Exists: 1
+--- !u!114 &7821424255209551234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UIConfirmVER2
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UIConfirmVER2
+  Guid:
+    Data1: -1957949709
+    Data2: 1105626873
+    Data3: 1853341337
+    Data4: 198423917
+  Banks:
+  - {fileID: 7530275692248856671}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 54
 --- !u!114 &8380050900478668021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1285,7 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/FulcrumEngine.bank
   Name: FulcrumEngine
   StudioPath: bank:/FulcrumEngine
-  lastModified: 638687529806901298
+  lastModified: 638688165869431058
   FileSizes:
   - Name: Desktop
     Value: 1537824
@@ -1227,7 +1311,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7530275692248856671}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
