@@ -128,6 +128,16 @@
 	</object>
 	<object class="MixerBusPanner" id="{990030b1-f163-47c8-ba9e-09698c31b298}" />
 	<object class="MixerBusFader" id="{c6a3e230-9043-4ab5-a443-2c56b021d3da}" />
-	<object class="SpatialiserEffect" id="{ead8bda8-7275-4ad3-888b-319d32e4cab4}" />
+	<object class="SpatialiserEffect" id="{ead8bda8-7275-4ad3-888b-319d32e4cab4}">
+		<property name="panBlend">
+			<value>0.414999992</value>
+		</property>
+		<property name="LFEUpmixEnabled">
+			<value>true</value>
+		</property>
+		<property name="userStereoSeparation">
+			<value>166</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{c59bbb82-f1c4-4657-bd1e-8af5b3758b72}" />
 </objects>

@@ -973,6 +973,7 @@ namespace EAudioSystem
             {
                 m_sControls = this.GetComponent<ShipsControls>();
             }
+
             m_redlineSoundEmitters[0].EventInstance.setPitch(1.0f);
             m_redlineSoundEmitters[0].EventInstance.setVolume(1.0f);
             m_redlineSoundEmitters[0].Play();

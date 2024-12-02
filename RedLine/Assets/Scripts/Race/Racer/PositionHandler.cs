@@ -58,8 +58,8 @@ public class PositionHandler : MonoBehaviour
         {
             rD.placement = racers.IndexOf(rD) + 1;
         }
-        StopCoroutine(SortRacers());
         yield return new WaitForEndOfFrame();
+        StopCoroutine(SortRacers());
     }
 
     // Update is called once per frame
