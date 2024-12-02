@@ -141,6 +141,10 @@ public class PlayerInputScript : MonoBehaviour
 
             // -1 from number of player in the uicontroller script
             GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1);
+
+            gMan.uiCInput.sssManager.ReOrderShipSelection();
+            GameManager.gManager.uiCInput.GetMenuManager().BackGroundPanelForSelection();
+
             Destroy(this.gameObject);
         }
         else
