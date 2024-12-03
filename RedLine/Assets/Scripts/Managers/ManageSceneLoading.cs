@@ -70,6 +70,7 @@ public class ManageSceneLoading : MonoBehaviour
         Destroy(shipModelObject);
 
         playerInputScript.playerReadyInMenu = false;
+        playerInputScript.cam.gameObject.SetActive(false);
         playerInputScript.DeActivateVirtualCam();
 
         racerDeets.finishedRacing = false;
@@ -123,6 +124,8 @@ public class ManageSceneLoading : MonoBehaviour
     {
         GameManager.gManager.isTimeTrial = false;
         GameManager.gManager.firstLoadIntoGame = true;
+        GameManager.gManager.raceAboutToStart = false;
+        GameManager.gManager.readyForCountdown = false;
         GameManager.gManager.pHandler.racerFinder = new List<RacerDetails>();
         GameManager.gManager.pHandler.racers = new List<RacerDetails>();
         GameManager.gManager.racerObjects = new List<GameObject>();

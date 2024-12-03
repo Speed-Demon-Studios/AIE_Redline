@@ -25,6 +25,15 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitToMenu()
     {
-        GameManager.gManager.mSL.InitializeForMainMenu();
+        foreach(GameObject playerobj in GameManager.gManager.players)
+        {
+            playerobj.GetComponent<RacerDetails>().crossedFinishLine = true;
+            playerobj.GetComponent<RacerDetails>().finishedRacing = true;
+            playerobj.GetComponent<PlayerInputScript>().uiController.FinishPopUp();
+        }
+        if (GameManager.gManager.raceFinisher.AllRacersFinishedCheck())
+        {
+            GameManager.gManager.rManager.FinishRace();
+        }
     }
 }
