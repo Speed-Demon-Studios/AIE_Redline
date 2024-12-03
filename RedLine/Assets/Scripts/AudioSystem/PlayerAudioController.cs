@@ -46,9 +46,12 @@ namespace EAudioSystem
 
         // Gameplay Audio -----------------------------------------------------------------------------------------------------------------------------------
         [Header("Gameplay Audio")]
+        [SerializeField] private List<float> m_gameplayAudioVolumes = new(); // GAMEPLAY Audio Volume float variables.
+        [SerializeField] private List<float> m_windAudioVolumes = new(); // WIND Audio Volume float variables.
+
         [SerializeField] private List<StudioEventEmitter> m_windEmitters = new(); // References to the FMOD "StudioEventEmitter" components for the wind.
         [SerializeField] private List<EventReference> m_windAudioInfo = new(); // References to the FMOD audio Events for the wind.
-        [SerializeField] private List<float> m_windAudioVolumes = new(); // WIND Audio Volume float variables.
+        [SerializeField] private List<double> m_redlineAudioVolume = new();
 
         [SerializeField] private List<StudioEventEmitter> m_boostEmitters = new(); // References to the FMOD "StudioEventEmitter" components for boosts.
         [SerializeField] private List<EventReference> m_boostAudioInfo = new(); // References to the FMOD audio Events for boosts.
@@ -58,14 +61,12 @@ namespace EAudioSystem
         [SerializeField] private List<StudioEventEmitter> m_gameplaySoundEmitters = new(); // References to the FMOD "StudioEventEmitter" components for gameplay sounds.
         [SerializeField] private List<EventReference> m_gameplayAudioInfo = new(); // References to the FMOD audio Events for gameplay (e.g. wall crashing sound, sparks sound, etc..)
         [SerializeField] private List<float> m_gameplayAudioPitches = new(); // GAMEPLAY Pitch/Frequency float variables.
-        [SerializeField] private List<float> m_gameplayAudioVolumes = new(); // GAMEPLAY Audio Volume float variables.
 
         [SerializeField] private List<StudioEventEmitter> m_redlineSoundEmitters = new();
         [SerializeField] private List<EventReference> m_redlineAudioInfo = new();
         [SerializeField] private List<double> m_redlineMaxPitches = new();
         [SerializeField] private List<double> m_redlineMaxVolumes = new();
         [SerializeField] private List<double> m_redlineAudioPitches = new();
-        [SerializeField] private List<double> m_redlineAudioVolume = new();
         [SerializeField] private List<double> m_redlineBLVolumes = new();
         private double tempRLVolume = 0.0;
 
@@ -919,6 +920,12 @@ namespace EAudioSystem
                         StudioEventEmitter currentRedlineEmitter = m_redlineSoundEmitters[i];
                         currentRedlineEmitter.EventInstance.setPitch((float)m_redlineAudioPitches[0]);
                         currentRedlineEmitter.EventInstance.setVolume((float)m_redlineAudioVolume[0]);
+                    }
+
+                    for (int i = 0; i < m_boostEmitters.Count(); i++)
+                    {
+                        StudioEventEmitter currentBoostEmitter = m_boostEmitters[i];
+                        currentBoostEmitter.EventInstance.setVolume((float)m_boostAudioVolumes[i]);
                     }
 
 
