@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public bool raceStarted = false;
     public bool raceFinished = false;
+    public bool raceAboutToStart = false;
 
     public bool racersAdded = false;
     public bool racersPlaced = false;

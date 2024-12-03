@@ -175,7 +175,7 @@ public class RacerDetails : MonoBehaviour
                             currentLapTimeSECONDS = 0;
                             GameManager.gManager.timingsListUpdated = true;
                         } 
-                        if (currentLap != 0 && currentLap != GameManager.gManager.rManager.GetTotalLaps())
+                        if (currentLap != 0 && currentLap != GameManager.gManager.rManager.GetTotalLaps() && this.gameObject.GetComponent<PlayerInputScript>() != null)
                         {
                             this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.gameObject.SetActive(true);
                             this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.SetTrigger("NewLap");

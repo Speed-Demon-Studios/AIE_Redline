@@ -13,7 +13,7 @@ public class WaitForIntro : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
         PlayerPrefs.SetFloat("AfterRace", 0);
         SceneManager.LoadSceneAsync(1);
     }
