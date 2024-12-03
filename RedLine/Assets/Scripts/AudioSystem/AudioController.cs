@@ -3,6 +3,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace EAudioSystem
@@ -14,12 +15,52 @@ namespace EAudioSystem
         bool displayedBankInfo = false;
         EventDescription[] testDesc;
 
+        public float paramValue = 0.0f;
+
+        public StudioEventEmitter a;
+
         public double m_masterVolume = 1.0f;
         public double m_gameplayVolume = 1.0f;
         public double m_musicVolume = 1.0f;
 
+        public void SetParamValue(string paramName, float value)
+        {
+            float currentParamValue = 0.0f;
+            a.EventInstance.getParameterByName(paramName, out currentParamValue);
+
+            if (currentParamValue == value)
+            {
+                return;
+            }
+
+            float oldParamValue = currentParamValue;
+
+            Debug.Log("Audio Parameter '" + paramName + "' Current Value: " + currentParamValue);
+
+            a.EventInstance.setParameterByName(paramName, value);
+            a.EventInstance.getParameterByName(paramName, out currentParamValue);
+
+            if (currentParamValue == value)
+            {
+                Debug.Log("Audio Parameter '" + paramName + "' Value successfully changed from (" + oldParamValue + ") to (" + currentParamValue + ")");
+            }
+            else
+            {
+                Debug.Log("Audio Parameter '" + paramName + "' value failed to update");
+            }
+        }
+
         private void Update()
         {
+            //SetParamValue("AudioTriggerValue", paramValue);
+
+            if (a.IsPlaying() == false)
+            {
+                a.Play();
+            }
+
+            Debug.Log("VALUE " + a.Params[0].Value);
+
             //if (displayedBankInfo == false)
             //{
             //    displayedBankInfo = true;
