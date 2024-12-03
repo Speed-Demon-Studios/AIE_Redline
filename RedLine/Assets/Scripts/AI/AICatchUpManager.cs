@@ -26,13 +26,13 @@ public class AICatchUpManager : MonoBehaviour
             }
 
             float originalScore = score;
-            float modFactor = 1.2f - (1.2f / GameManager.gManager.racerObjects.Count);
-            float makeupValue = (1.2f - originalScore) * modFactor;
+            float modFactor = 1.6f - (1.6f / GameManager.gManager.racerObjects.Count);
+            float makeupValue = (1.6f - originalScore) * modFactor;
             float percentage = originalScore + (makeupValue * originalScore);
 
             m_catchUpChange = percentage;
 
-            m_catchUpChange = Mathf.Clamp(m_catchUpChange, 0.5f, 1.5f);
+            m_catchUpChange = Mathf.Clamp(m_catchUpChange, 0.5f, 1.6f);
 
             foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
             {
