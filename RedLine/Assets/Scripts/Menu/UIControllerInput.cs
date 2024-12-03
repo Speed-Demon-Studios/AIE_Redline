@@ -138,6 +138,7 @@ namespace MenuManagement
             } 
             if (playersReady >= GameManager.gManager.players.Count) // if the number of player ready is equal to the number of players         
             {
+                GameManager.gManager.raceAboutToStart = true;
                 Invoke(nameof(DelayGoToRace), 1.5f);// then go to race
             } 
         }        
