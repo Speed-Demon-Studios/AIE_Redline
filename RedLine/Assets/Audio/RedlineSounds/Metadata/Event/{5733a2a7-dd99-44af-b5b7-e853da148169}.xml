@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{6d41990a-fa30-4051-9220-bf433082d1a5}">
+		<property name="volume">
+			<value>5.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{9a2cb867-e0b2-4dad-9970-8543487e46e1}</destination>
 		</relationship>
@@ -89,6 +92,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{7c396c30-0ae0-4fbb-ad70-6d9255e02a6f}" />
 	<object class="SingleSound" id="{fca64b97-297b-4546-9e09-d35543881a13}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>0.84999999999999998</value>
 		</property>
@@ -100,6 +106,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{fabe83d8-de38-4ac8-8a7b-0a40ad4aab9e}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -119,7 +128,11 @@
 			<destination>{0620d2d9-9bbf-4b1f-9004-275ee964916e}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{62adcb6d-8717-4840-b7f2-663d0979d1bd}" />
+	<object class="MixerBusPanner" id="{62adcb6d-8717-4840-b7f2-663d0979d1bd}">
+		<property name="surroundPanExtent">
+			<value>60</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{8a9654f3-de48-48e0-b859-0d88debb9f77}" />
 	<object class="MixerBusEffectChain" id="{14e344e3-5472-422a-8be9-2a7ff0f2770e}">
 		<relationship name="effects">
@@ -129,8 +142,11 @@
 	<object class="MixerBusPanner" id="{86359edb-137b-4eee-a725-013a685dc5a6}" />
 	<object class="MixerBusFader" id="{d354cff5-05e4-463f-94ad-e599f4c73d79}" />
 	<object class="SpatialiserEffect" id="{0620d2d9-9bbf-4b1f-9004-275ee964916e}">
+		<property name="panBlend">
+			<value>0.504999995</value>
+		</property>
 		<property name="userStereoSeparation">
-			<value>0</value>
+			<value>62</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{79b20291-0bfd-465a-97e6-cbeb0bbd566a}" />

@@ -201,7 +201,6 @@ public class ShipsControls : MonoBehaviour
     {
         if (isTestShip || this.enabled && GameManager.gManager.raceStarted)
         {
-            AddToBoost();
             if(m_fire.Count > 0)
                 SwitchFire();
             CheckBoost();
@@ -211,6 +210,7 @@ public class ShipsControls : MonoBehaviour
             Accelerate();
             DownForce();
             RotateShip();
+            AddToBoost();
         }
     }
 
@@ -390,14 +390,14 @@ public class ShipsControls : MonoBehaviour
             {
                 m_targetPos = hit.normal;
 
+                m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
+                m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
+                m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
+
                 if (hit.distance < 1f)
                     m_rb.AddForce(transform.up * 4000, ForceMode.Force);
             }
         }
-
-        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
-        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
-        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
 
         if (hit.distance > 1.5f)
             m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);

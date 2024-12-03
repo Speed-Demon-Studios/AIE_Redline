@@ -29,6 +29,11 @@ namespace EAudioSystem
         {
             fmodEmitters[0].Play();
         }
+
+        public void PlayUISound(int soundIndex)
+        {
+            fmodEmitters[soundIndex].Play();
+        }
     
         public void MenuConfirmSound()
         {

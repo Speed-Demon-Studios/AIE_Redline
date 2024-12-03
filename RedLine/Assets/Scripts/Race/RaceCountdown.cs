@@ -12,6 +12,8 @@ public class RaceCountdown : MonoBehaviour
     public bool m_countdownCoroutineStarted = false;
     public bool m_countdownFinished = false;
     public bool m_countdownStarted = false;
+    private bool m_countDownStarted;
+    public Animator countDownAnim;
 
     public void SetCountdownTextObj(TextMeshProUGUI textOBJ)
     {
@@ -42,12 +44,12 @@ public class RaceCountdown : MonoBehaviour
         {
             m_countdownStarted = true;
         }
-        if (m_countdownText.enabled == false)
-        {
-            m_countdownText.enabled = true;
-        }
+        //if (m_countdownText.enabled == false)
+        //{
+        //    m_countdownText.enabled = true;
+        //}
 
-        m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
+        //m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
 
         if (GameManager.gManager.countdownIndex > 0)
         {
@@ -58,13 +60,13 @@ public class RaceCountdown : MonoBehaviour
         {
             m_countdownFinished = true;
             m_countdownCoroutineStarted = false;
-            m_countdownText.enabled = false;
+            //m_countdownText.enabled = false;
             GameManager.gManager.rManager.StartRace();
             StopCoroutine(RaceCountdownTimer());
         }
         yield return new WaitForSecondsRealtime(1);
 
-        m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
+        //m_countdownText.text = GameManager.gManager.countdownIndex.ToString();
         m_countdownCoroutineStarted = false;
         StopCoroutine(RaceCountdownTimer());
     }
@@ -72,9 +74,14 @@ public class RaceCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gManager.racersPlaced == true && GameManager.gManager.readyForCountdown == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
+        if (GameManager.gManager.racersPlaced == true && GameManager.gManager.readyForCountdown == true && GameManager.gManager.startCamerasFinished == true && m_countdownFinished == false && m_countdownCoroutineStarted == false)
         {
             GameManager.gManager.raceStarted = false;
+            if (!m_countDownStarted)
+            {
+                m_countDownStarted = true;
+                countDownAnim.SetTrigger("CountDown");
+            }
             StartCoroutine(RaceCountdownTimer());
         }
     }

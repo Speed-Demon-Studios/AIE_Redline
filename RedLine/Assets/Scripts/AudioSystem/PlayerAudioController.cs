@@ -94,8 +94,10 @@ namespace EAudioSystem
                 m_maxEngineVolumes.Clear();
 
                 m_minEnginePitches.Clear();
+                engineSoundsPlaying = false;
 
                 m_engineAudioInfo = new();
+
                 for (int i = 0; i < m_engineEmitterPitches.Count(); i++)
                 {
                     m_engineEmitterPitches[i] = 0.0f;
@@ -149,14 +151,8 @@ namespace EAudioSystem
 
             if (EmitterToCheck != null)
             {
-                if (EmitterToCheck.IsPlaying() == true)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                if (EmitterToCheck.IsPlaying() == true) { return true; }
+                else { return false; }
             }
 
             return false;
@@ -977,6 +973,7 @@ namespace EAudioSystem
             {
                 m_sControls = this.GetComponent<ShipsControls>();
             }
+
             m_redlineSoundEmitters[0].EventInstance.setPitch(1.0f);
             m_redlineSoundEmitters[0].EventInstance.setVolume(1.0f);
             m_redlineSoundEmitters[0].Play();

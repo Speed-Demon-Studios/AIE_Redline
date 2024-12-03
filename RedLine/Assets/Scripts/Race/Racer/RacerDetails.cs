@@ -156,6 +156,8 @@ public class RacerDetails : MonoBehaviour
                 {
                     if (trigger.finalCheckpoint == true)
                     {
+                        float currnetLapSecs = currentLapTimeSECONDS;
+                        float currentLapMins = currentLapTimeMINUTES;
                         if (currentLap > 0)
                         {
                             GameManager.gManager.timingsListUpdated = false;
@@ -173,6 +175,22 @@ public class RacerDetails : MonoBehaviour
                             currentLapTimeSECONDS = 0;
                             GameManager.gManager.timingsListUpdated = true;
                         } 
+                        if (currentLap != 0 && currentLap != GameManager.gManager.rManager.GetTotalLaps() && this.gameObject.GetComponent<PlayerInputScript>() != null)
+                        {
+                            this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.gameObject.SetActive(true);
+                            this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.SetTrigger("NewLap");
+                            if (GameManager.gManager.rManager.GetTotalLaps() - 1 == currentLap)
+                            {
+                                this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.GetComponent<NewLapInfo>().lapText.text = "Final Lap";
+                                this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.GetComponent<NewLapInfo>().lapTextRed.text = "Final Lap";
+                            }
+                            else
+                            {
+                                this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.GetComponent<NewLapInfo>().lapText.text = "New Lap";
+                                this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.GetComponent<NewLapInfo>().lapTextRed.text = "New Lap";
+                            }
+                            this.gameObject.GetComponent<PlayerInputScript>().uiController.newLapAnim.GetComponent<NewLapInfo>().lapTextTime.text = string.Format("{0:00}", currentLapMins) + ":" + string.Format("{0:00.00}", currnetLapSecs);
+                        }
                         GameManager.gManager.rManager.LapComplete(this);
                     }
                     else

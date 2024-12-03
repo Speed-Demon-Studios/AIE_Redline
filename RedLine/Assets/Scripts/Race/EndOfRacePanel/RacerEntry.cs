@@ -10,15 +10,4 @@ public class RacerEntry : MonoBehaviour
     public TextMeshProUGUI Time1Object;
     public TextMeshProUGUI Time2Object;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

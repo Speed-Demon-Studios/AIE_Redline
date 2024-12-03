@@ -173,6 +173,7 @@ namespace MenuManagement
             if(playersReady == 0 && !unReadyedThisTurn)                                                  
             {
                 GameManager.gManager.uiCInput.bSManager.TransitionToClassSelect(false);
+                GameManager.gManager.uAC.PlayUISound(3);
                 m_mManager.Back();
             }                                                                                            
             // go to that players inputScript and change the bool to say they are ready                  

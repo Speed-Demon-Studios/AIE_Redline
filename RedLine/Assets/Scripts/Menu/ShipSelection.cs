@@ -20,6 +20,7 @@ public class ShipSelection : MonoBehaviour
     public RawImage image;
     public RenderTexture texture;
     public Camera cam;
+    private List<List<float>> allLists = new();
 
     private int m_playerNum;
     private int m_shipIndex;
@@ -36,12 +37,7 @@ public class ShipSelection : MonoBehaviour
 
     private void Start()
     {
-        // makest sure that the first ship is the one that shows up at the start
         m_currentShips = ships[0];
-
-        // sets up the camera texture to display the ship
-        //
-        //
     }
 
     private void OnEnable()
@@ -90,6 +86,16 @@ public class ShipSelection : MonoBehaviour
 
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
+        allLists.Add(sInfo.m_splitwingStats);
+        allLists.Add(sInfo.m_fulcrumStats);
+        allLists.Add(sInfo.m_cutlassStats);
+
+        List<float> tempListOfFloats = allLists[m_shipIndex];
+
+        sInfo.TopSpeedBarFill(tempListOfFloats[0]);
+        sInfo.AccelerationBarFill(tempListOfFloats[1]);
+        sInfo.HandlingBarFill(tempListOfFloats[2]);
+
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
 
@@ -101,6 +107,7 @@ public class ShipSelection : MonoBehaviour
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
         GameManager.gManager.uiCInput.bSManager.ManufacturerChange(sInfo.manufacturerSprites[m_materialIndex], sInfo.manufacturerDisplayAnim,
             sInfo.manufacturerImage, sInfo.manufacturerImageRed);
+        GameManager.gManager.uAC.PlayUISound(1);
     }
 
     /// <summary>
@@ -116,11 +123,13 @@ public class ShipSelection : MonoBehaviour
         }
         m_currentShips = ships[m_shipIndex]; // set the current ship to the index
         m_currentShips.SetActive(true); // then set that current ship to true so it shows up
-        //StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing
-        //StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
-        //sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        //sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        //sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+
+        List<float> tempListOfFloats = allLists[m_shipIndex];
+
+        sInfo.TopSpeedBarFill(tempListOfFloats[0]);
+        sInfo.AccelerationBarFill(tempListOfFloats[1]);
+        sInfo.HandlingBarFill(tempListOfFloats[2]);
+
         List<Animator> tempList = new();
         int index = 0;
         foreach(Animator anim in sInfo.shipAnimators)
@@ -133,6 +142,8 @@ public class ShipSelection : MonoBehaviour
         }
 
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
+
+        GameManager.gManager.uAC.PlayUISound(1);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -149,12 +160,14 @@ public class ShipSelection : MonoBehaviour
             m_shipIndex = ships.Count - 1;                                                        
         }                                                                                         
         m_currentShips = ships[m_shipIndex]; // set the current ship to the index                 
-        m_currentShips.SetActive(true); // then set that current ship to true so it shows up      
-        //StopAllCoroutines(); // stop all Coroutines just incase the text one is still playing     
-        //StartCoroutine(NameChange(variants[m_shipIndex].VariantName)); // start a new text coroutine
-        //sliders[0].value = variants[m_shipIndex].DefaultMaxSpeed;
-        //sliders[1].value = variants[m_shipIndex].TurnSpeed;
-        //sliders[2].value = variants[m_shipIndex].DefaultMaxAcceleration;
+        m_currentShips.SetActive(true); // then set that current ship to true so it shows up
+                                        // 
+        List<float> tempListOfFloats = allLists[m_shipIndex];
+
+        sInfo.TopSpeedBarFill(tempListOfFloats[0]);
+        sInfo.AccelerationBarFill(tempListOfFloats[1]);
+        sInfo.HandlingBarFill(tempListOfFloats[2]);
+
         List<Animator> tempList = new();
         int index = 0;
         foreach (Animator anim in sInfo.shipAnimators)
@@ -166,6 +179,8 @@ public class ShipSelection : MonoBehaviour
             index++;
         }
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
+
+        GameManager.gManager.uAC.PlayUISound(1);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -192,6 +207,8 @@ public class ShipSelection : MonoBehaviour
 
         GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
 
+        GameManager.gManager.uAC.PlayUISound(2);
+
         sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
     }
     public void UnReady()
@@ -203,6 +220,8 @@ public class ShipSelection : MonoBehaviour
 
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
+
+        GameManager.gManager.uAC.PlayUISound(3);
 
         sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
     }
