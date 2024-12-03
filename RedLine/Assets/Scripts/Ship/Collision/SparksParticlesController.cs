@@ -21,7 +21,7 @@ public class SparksParticlesController : MonoBehaviour
             particleToActivate.Play();
             if (PAC.IsEmitterPlaying(1, 0) == false)
             {
-                PAC.PlayGPSFX(0, 0);
+                PAC.PlayGPSFX(0);
             }
         }
     }
@@ -70,9 +70,9 @@ public class SparksParticlesController : MonoBehaviour
                     {
                         foreach (VisualEffect sparksPE in sT.sparks)
                         {
-                            if (sparksPE != null && sT != null)
+                            if (PAC != null && sparksPE != null && sparksPE.isActiveAndEnabled && sT != null && sT.isActiveAndEnabled)
                             {
-                                ActivateSparks(sparksPE);
+                                this.ActivateSparks(sparksPE);
                             }
                         }
                     }
