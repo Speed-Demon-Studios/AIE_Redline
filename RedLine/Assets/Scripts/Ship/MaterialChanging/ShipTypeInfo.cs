@@ -5,8 +5,8 @@ using UnityEngine.VFX;
 
 public class ShipTypeInfo : MonoBehaviour
 {
-    public List<SkinnedMeshRenderer> partsOfTheShipDouble = new();
-    public List<SkinnedMeshRenderer> partsOfTheShipSingle = new();
+    public List<Renderer> partsOfTheShipDouble = new();
+    public List<Renderer> partsOfTheShipSingle = new();
     public Material[] citadelMatDouble;
     public Material[] citadelMatSingle;
     public Material[] falconMatDouble;
@@ -20,7 +20,7 @@ public class ShipTypeInfo : MonoBehaviour
 
     public void SwitchMaterials(int index)
     {
-        foreach(SkinnedMeshRenderer renderer in partsOfTheShipDouble)
+        foreach(Renderer renderer in partsOfTheShipDouble)
         {
             switch (index)
             {
@@ -36,7 +36,7 @@ public class ShipTypeInfo : MonoBehaviour
             }
         }
         
-        foreach(SkinnedMeshRenderer renderer in partsOfTheShipSingle)
+        foreach(Renderer renderer in partsOfTheShipSingle)
         {
             switch (index)
             {

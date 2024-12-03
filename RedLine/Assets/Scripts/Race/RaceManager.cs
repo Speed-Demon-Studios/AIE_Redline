@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class RaceManager : MonoBehaviour
@@ -6,6 +7,10 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private int TotalLaps;
     bool coroutineStarted = false;
     public bool isTimeTrial = false;
+    public TMP_Text classText;
+    public TMP_Text classTextRed;
+
+    public void ClassTextChange() { classText.text = GameManager.gManager.classString; classTextRed.text = GameManager.gManager.classString; }
 
     public int GetTotalLaps() { return TotalLaps; }
 

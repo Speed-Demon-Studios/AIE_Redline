@@ -65,12 +65,30 @@ public class GameManager : MonoBehaviour
     public int neededLaps = 0;
     public int numberOfPlayers = 0;
     public float difficultyChange = 1;
+    public float catchUpMultiplier = 1;
+    public string classString = "Debut";
 
     public float m_masterVolume = 1.0f;
     public float m_sfxVolume = 1.0f;
     public float m_musicVolume = 1.0f;
 
-    public void ChangeDifficulty(float change) { difficultyChange = change; }
+    public void ChangeCatchUp(float change) { catchUpMultiplier = change; }
+    public void ChangeDifficulty(float change) { difficultyChange = change; ChangeClassString(); }
+    public void ChangeClassString()
+    {
+        switch (difficultyChange)
+        {
+            case 0.8f:
+                classString = "Debut Class";
+                break;
+            case 1f:
+                classString = "Pro Class";
+                break;
+            case 1.2f:
+                classString = "Elite Class";
+                break;
+        }
+    }
 
     public static GameManager gManager { get; private set; }
 
