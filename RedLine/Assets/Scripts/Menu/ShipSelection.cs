@@ -107,6 +107,7 @@ public class ShipSelection : MonoBehaviour
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
         GameManager.gManager.uiCInput.bSManager.ManufacturerChange(sInfo.manufacturerSprites[m_materialIndex], sInfo.manufacturerDisplayAnim,
             sInfo.manufacturerImage, sInfo.manufacturerImageRed);
+        GameManager.gManager.uAC.PlayUISound(1);
     }
 
     /// <summary>
@@ -141,6 +142,8 @@ public class ShipSelection : MonoBehaviour
         }
 
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
+
+        GameManager.gManager.uAC.PlayUISound(1);
 
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
@@ -177,6 +180,8 @@ public class ShipSelection : MonoBehaviour
         }
         GameManager.gManager.uiCInput.bSManager.VehicleInfoChange(0, sInfo.shipAnimators[m_shipIndex], tempList);
 
+        GameManager.gManager.uAC.PlayUISound(1);
+
         ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
 
@@ -202,6 +207,8 @@ public class ShipSelection : MonoBehaviour
 
         GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
 
+        GameManager.gManager.uAC.PlayUISound(2);
+
         sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
     }
     public void UnReady()
@@ -213,6 +220,8 @@ public class ShipSelection : MonoBehaviour
 
         if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
             m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
+
+        GameManager.gManager.uAC.PlayUISound(3);
 
         sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
     }
