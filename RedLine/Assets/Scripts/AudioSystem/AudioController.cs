@@ -10,21 +10,15 @@ namespace EAudioSystem
 {
     public class AudioController : MonoBehaviour
     {
-        public FMOD.Studio.Bank[] banksTest;
-        public StudioBankLoader bankLoaderTest;
-        bool displayedBankInfo = false;
-        EventDescription[] testDesc;
-
         public float paramValue = 0.0f;
 
         public StudioEventEmitter a;
-
-        public double m_masterVolume = 1.0f;
-        public double m_gameplayVolume = 1.0f;
-        public double m_musicVolume = 1.0f;
+        public StudioGlobalParameterTrigger sgpt;
+        public GameObject musicParentGO;
 
         public void SetParamValue(string paramName, float value)
         {
+            sgpt.Value = 0.0f;
             float currentParamValue = 0.0f;
             a.EventInstance.getParameterByName(paramName, out currentParamValue);
 
@@ -52,67 +46,28 @@ namespace EAudioSystem
 
         private void Update()
         {
-            //SetParamValue("AudioTriggerValue", paramValue);
-
-            if (a.IsPlaying() == false)
+            if (GameManager.gManager.musicEmitter != null && GameManager.gManager.musicEmitter.IsPlaying() == false)
             {
-                a.Play();
+                GameManager.gManager.musicEmitter.Play();
             }
 
-            Debug.Log("VALUE " + a.Params[0].Value);
-
-            //if (displayedBankInfo == false)
-            //{
-            //    displayedBankInfo = true;
-            //    Debug.Log(bankLoaderTest.Banks[0]);
-            //    RuntimeManager.StudioSystem.getBankList(out banksTest);
-            //    
-            //    for (int i = 0; i < banksTest.Count(); i++)
-            //    {
-            //        string path;
-            //        banksTest[i].getPath(out path);
-            //        if (RuntimeManager.HasBankLoaded(bankLoaderTest.Banks[0]))
-            //        {
-            //            Debug.Log(path + " LOADED SUCCESSFULLY");
-            //            int a;
-            //            banksTest[i].getEventCount(out a);
-            //
-            //            banksTest[i].getEventList(out testDesc);
-            //
-            //            string eventPath;
-            //            Debug.Log("Event '" + a + "' in BANK '" + path);
-            //        }
-            //        else
-            //        {
-            //            Debug.Log(path + " HAS NOT LOADED");
-            //        }
-            //
-            //    }
-            //
-            //    foreach (EventDescription desc in testDesc)
-            //    {
-            //        string ePath = "";
-            //        desc.getPath(out ePath);
-            //        Debug.Log(ePath);
-            //    }
-            //}
-        }
-
-        public void LoadEngineBank(int engineBank)
-        {
-            switch (engineBank)
+            if (GameManager.gManager.m_musicVolume > 5.0f)
             {
-                case 1:
-                    {
-                        Bank[] banks;
-                        RuntimeManager.StudioSystem.getBankList(out banks);
+                GameManager.gManager.m_musicVolume = 5.0f;
+            }
 
-                        RuntimeManager.UnloadBank("Master");
-                        RuntimeManager.LoadBank("FulcrumEngine");
-                        break;
-                    }
+            if (GameManager.gManager.m_musicVolume < 0.0f)
+            {
+                GameManager.gManager.m_musicVolume = 0.0f;
+            }
+
+            if (GameManager.gManager.aC.sgpt.Value != GameManager.gManager.m_musicVolume)
+            {
+                musicParentGO.SetActive(true);
+                GameManager.gManager.aC.sgpt.Value = GameManager.gManager.m_musicVolume;
+                musicParentGO.SetActive(false);
+                musicParentGO.SetActive(true);
             }
         }
-
     }
 }

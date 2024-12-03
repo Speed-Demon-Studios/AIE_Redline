@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MenuManagement;
 using EAudioSystem;
+using FMODUnity;
+using UnityEditor.ShaderGraph.Internal;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
     public PauseMenu pMenu;
     public Nodes startNode;
     public UIAudioController uAC;
+    public StudioEventEmitter musicEmitter;
+    public AudioController aC;
 
     public GameObject[] StartingPoints;
 
@@ -62,6 +66,10 @@ public class GameManager : MonoBehaviour
     public int numberOfPlayers = 0;
     public float difficultyChange = 1;
 
+    public float m_masterVolume = 1.0f;
+    public float m_sfxVolume = 1.0f;
+    public float m_musicVolume = 1.0f;
+
     public void ChangeDifficulty(float change) { difficultyChange = change; }
 
     public static GameManager gManager { get; private set; }
@@ -82,6 +90,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_sfxVolume < 0.0f)
+        {
+            m_sfxVolume = 0.0f;
+        }
+
+        if (musicEmitter != null)
+        {
+            if (musicEmitter.IsPlaying())
+            {
+                float currentVolume = 0.0f;
+                musicEmitter.EventInstance.getVolume(out currentVolume);
+
+                currentVolume = currentVolume * m_musicVolume;
+                musicEmitter.EventInstance.setVolume(currentVolume);
+            }
+        }
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)
         {
             enableRacerMovement = false;

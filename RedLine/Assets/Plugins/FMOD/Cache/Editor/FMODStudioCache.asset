@@ -310,6 +310,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10448
+--- !u!114 &-5152718037083755294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusicVolume
+  m_EditorClassIdentifier: 
+  Name: RaceMusicVolume
+  StudioPath: parameter:/RaceMusicVolume
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 991830749
+    data2: 1131433585
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-5048260660568121574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +388,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2900
+--- !u!114 &-4538654409565157545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic/RaceMusicLowPass
+  m_EditorClassIdentifier: 
+  Name: RaceMusicLowPass
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 2408736322
+    data2: 2924274743
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-3036983066808662327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +520,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 335
+--- !u!114 &-2719847745259103076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusicLowPass
+  m_EditorClassIdentifier: 
+  Name: RaceMusicLowPass
+  StudioPath: parameter:/RaceMusicLowPass
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 2408736322
+    data2: 2924274743
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-2205534202152425613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,11 +710,13 @@ MonoBehaviour:
   - {fileID: -6929421546792127114}
   EditorParameters:
   - {fileID: 2767285069615592140}
+  - {fileID: -2719847745259103076}
+  - {fileID: -5152718037083755294}
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638688336556042380
+  cacheTime: 638688406319735271
   cacheVersion: 131620
 --- !u!114 &258234696783266387
 MonoBehaviour:
@@ -723,6 +797,8 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: 6607927915455976103}
+  - {fileID: -4538654409565157545}
+  - {fileID: 7992538246621728974}
   MinDistance: 1
   MaxDistance: 20
   Length: 130295
@@ -795,10 +871,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638688336556042380
+  lastModified: 638688406319735271
   FileSizes:
   - Name: Desktop
-    Value: 2988
+    Value: 3096
   Exists: 1
 --- !u!114 &2658546784528882239
 MonoBehaviour:
@@ -1263,10 +1339,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638688336555972426
+  lastModified: 638688406319685397
   FileSizes:
   - Name: Desktop
-    Value: 14085856
+    Value: 14087168
   Exists: 1
 --- !u!114 &7821424255209551234
 MonoBehaviour:
@@ -1295,6 +1371,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 54
+--- !u!114 &7992538246621728974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic/RaceMusicVolume
+  m_EditorClassIdentifier: 
+  Name: RaceMusicVolume
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 991830749
+    data2: 1131433585
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &8380050900478668021
 MonoBehaviour:
   m_ObjectHideFlags: 0
