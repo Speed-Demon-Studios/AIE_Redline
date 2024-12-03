@@ -31,6 +31,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: da603bdc08587f148997878bc7698e44, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture_Normal:
+        m_Texture: {fileID: 2800000, guid: 0d0abf21433c91c4da2671cc1d636d3f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -46,28 +50,29 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _Barrier_Colour_Strength: 0.5
-    - _Base_Alpha: 0.5
+    - _Barrier_Colour_Strength: 0.698
+    - _Base_Alpha: 0.763
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
     - _Distortion_Strength: 0.1
     - _DstBlend: 0
-    - _Normal_Strength: 1
+    - _Normal_Strength: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Refraction_Scale: 1.5
-    - _Refraction_Strength: 1
+    - _Refraction_Strength: 2.89
     - _Smoothness: 0.8
     - _SrcBlend: 1
     - _Surface: 0
+    - _Texture_Normal_Strength: 0
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Barrier_Colour: {r: 2, g: 0, b: 0.07058824, a: 0}
+    - _Barrier_Colour: {r: 2.5082276, g: 0.41409412, b: 0.4907087, a: 0}
     - _Tiling: {r: 3, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5348286640678185782
