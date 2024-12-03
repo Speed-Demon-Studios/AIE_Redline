@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ShipTypeInfo : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ShipTypeInfo : MonoBehaviour
     public Material[] falconMatSingle;
     public Material[] monarcMatDouble;
     public Material[] monarcMatSingle;
+
+    public List<VisualEffect> eSteering;
 
     public Animator animator;
 

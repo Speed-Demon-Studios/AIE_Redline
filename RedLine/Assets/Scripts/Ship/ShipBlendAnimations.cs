@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public enum ShipType
 {
@@ -14,6 +15,7 @@ public class ShipBlendAnimations : MonoBehaviour
     private ShipsControls m_controls;
     private Animator m_controller;
     private ShipType shipType;
+    private List<VisualEffect> eSteeringEffects;
 
     //cutlass wings float
     float m_currentWingPos;
@@ -36,6 +38,7 @@ public class ShipBlendAnimations : MonoBehaviour
         m_controls = GetComponent<ShipsControls>();
         FindEveryChild(m_controls.shipModel.transform);
         shipType = GetComponent<ShipsControls>().VariantObject.shipType;
+        eSteeringEffects = GetComponent<ShipsControls>().shipModel.transform.GetComponentInChildren<ShipTypeInfo>().eSteering;
     }
 
     /// <summary>
@@ -97,6 +100,17 @@ public class ShipBlendAnimations : MonoBehaviour
             else if(shipType == ShipType.Splitwing)
             {
                 m_controller.SetFloat("WingRight", m_currentFlapPos);
+            }
+
+            if(m_controls.GetTurnMultiplier() > 0)
+            {
+                eSteeringEffects[0].SetFloat("Particle Alpha", m_controls.GetTurnMultiplier());
+                eSteeringEffects[1].SetFloat("Particle Alpha", 0);
+            }
+            else
+            {
+                eSteeringEffects[1].SetFloat("Particle Alpha", -m_controls.GetTurnMultiplier());
+                eSteeringEffects[0].SetFloat("Particle Alpha", 0);
             }
         }
         
