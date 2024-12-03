@@ -95,7 +95,7 @@ public class FinishRace : MonoBehaviour
         for (int i = 0; i < GameManager.gManager.allRacers.Count; i++)
         {
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             placementTexts[i].SetActive(true); // Activate a text object in the placement window for each racer.
             RacerEntry rEntry = placementTexts[i].GetComponent<RacerEntry>();
             TextMeshProUGUI placementText = rEntry.placementObject; // Get a reference to the PLACEMENT text object.
