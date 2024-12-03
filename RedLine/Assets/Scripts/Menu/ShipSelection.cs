@@ -213,17 +213,20 @@ public class ShipSelection : MonoBehaviour
     }
     public void UnReady()
     {
-        // Sets ship variants
-        m_ship.GetComponent<ShipsControls>().VariantObject = null;
-        m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement 
-        m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
-
-        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
+        if (!GameManager.gManager.raceAboutToStart)
+        {
+            // Sets ship variants
+            m_ship.GetComponent<ShipsControls>().VariantObject = null;
+            m_ship.GetComponent<ShipsControls>().enabled = false; // Enables shipControls for movement 
             m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
 
-        GameManager.gManager.uAC.PlayUISound(3);
+            if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
+                m_ship.GetComponent<ShipBlendAnimations>().enabled = false; // set the refrenece for animations
 
-        sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
+            GameManager.gManager.uAC.PlayUISound(3);
+
+            sInfo.readyAnimator.SetTrigger(sInfo.unReadyTriggerString);
+        }
     }
 
     /// <summary>

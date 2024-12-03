@@ -587,17 +587,32 @@ MonoBehaviour:
   emitterParent: {fileID: 6932143015045508699}
   variantSet: 0
   resettingAudio: 0
+  m_redlineMaxVolumes:
+  - 0.7
+  - 0.75
+  - 0.8
+  m_engineEmitterVolumes:
+  - 0
+  - 0
+  - 0
+  - 0
+  m_redlineAudioVolume:
+  - 0
+  m_gameplayAudioVolumes:
+  - 0.5
+  m_windAudioVolumes:
+  - 0.14
+  m_boostAudioVolumes:
+  - 1
+  - 1
+  - 1
+  - 1
   m_engineEmitters:
   - {fileID: 6688360859456402854}
   - {fileID: 2903305875256400031}
   - {fileID: 5567752962336757614}
   - {fileID: 8386112659542704592}
   m_engineEmitterPitches:
-  - 0
-  - 0
-  - 0
-  - 0
-  m_engineEmitterVolumes:
   - 0
   - 0
   - 0
@@ -611,8 +626,6 @@ MonoBehaviour:
       Data3: 271125669
       Data4: -1450442892
     Path: event:/Wind/StrongWind/StrongWind
-  m_windAudioVolumes:
-  - 0.14
   m_boostEmitters:
   - {fileID: 2650814648570606231}
   - {fileID: 3284658452991705591}
@@ -648,7 +661,6 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  m_boostAudioVolumes: []
   m_gameplaySoundEmitters:
   - {fileID: 7541992265674552916}
   m_gameplayAudioInfo:
@@ -660,8 +672,6 @@ MonoBehaviour:
     Path: event:/GameplaySFX/RealisticCrashSoundMedium
   m_gameplayAudioPitches:
   - 1
-  m_gameplayAudioVolumes:
-  - 0.5
   m_redlineSoundEmitters:
   - {fileID: 7225176986604874999}
   m_redlineAudioInfo:
@@ -675,15 +685,8 @@ MonoBehaviour:
   - 0.3
   - 0.9
   - 1.6
-  m_redlineMaxVolumes:
-  - 0.7
-  - 0.75
-  - 0.8
   m_redlineAudioPitches:
   - 0
-  m_redlineAudioVolume:
-  - 0
-  m_redlineBLVolumes: []
 --- !u!114 &5522469426596937146
 MonoBehaviour:
   m_ObjectHideFlags: 0
