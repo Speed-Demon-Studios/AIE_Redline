@@ -788,10 +788,10 @@ namespace EAudioSystem
 
         public void PlayGPSFX(int soundIndex, int windIndex = 99)
         {
-            if (resettingAudio == true)
-            {
-                return;
-            }
+            //if (resettingAudio == true)
+            //{
+            //    return;
+            //}
 
             switch (soundIndex)
             {
@@ -878,6 +878,11 @@ namespace EAudioSystem
 
         void Update()
         {
+            if (GetComponentInChildren<SparksParticlesController>() != null && GetComponentInChildren<SparksParticlesController>().PAC != this)
+            {
+                GetComponentInChildren<SparksParticlesController>().PAC = this;
+            }
+
             if (GameManager.gManager.raceCountdown != null && GameManager.gManager.raceCountdown.m_countdownFinished == false)
             {
                 if (variantSet == true)
@@ -973,10 +978,7 @@ namespace EAudioSystem
 
         private void Start()
         {
-            if (GetComponentInChildren<SparksParticlesController>() != null && GetComponentInChildren<SparksParticlesController>().PAC != this)
-            {
-                GetComponentInChildren<SparksParticlesController>().PAC = this;
-            }
+            
 
             if (m_sControls == null)
             {
