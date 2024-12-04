@@ -65,26 +65,26 @@ public class ShipBlendAnimations : MonoBehaviour
     {
         if (this.enabled && m_controller != null) // check for null refreneces so there are no errors
         {
-            m_targetEnginePos = m_controls.GetAccelerationMultiplier();
+            m_targetEnginePos = m_controls.GetAccelerationMultiplier;
             m_currentEnginePos = Mathf.Lerp(m_currentEnginePos, m_targetEnginePos, engineSpeed);
             m_controller.SetFloat("Engine", m_currentEnginePos); // blend engine to speed
 
-            m_targetFlapPos = m_controls.GetTurnMultiplier();
+            m_targetFlapPos = m_controls.GetTurnMultiplier;
             m_currentFlapPos = Mathf.Lerp(m_currentFlapPos, m_targetFlapPos, flapSpeed);
             m_controller.SetFloat("Flaps", m_currentFlapPos); // blend wing to the direction of turning
 
             if (shipType == ShipType.Cutlass)
             {
-                if (m_controls.ReturnRB().velocity.magnitude > 0.5f && m_controls.GetBrakeMultiplier() == 0)
+                if (m_controls.RB.velocity.magnitude > 0.5f && m_controls.GetBrakeMultiplier == 0)
                 {
-                    m_targetWingPos = m_controls.GetAccelerationMultiplier();
+                    m_targetWingPos = m_controls.GetAccelerationMultiplier;
                     m_currentWingPos = Mathf.Lerp(m_currentWingPos, m_targetWingPos, wingSpeed);
                     m_controller.SetFloat("WingRight", m_currentWingPos);
                     m_controller.SetFloat("WingLeft", m_currentWingPos);
                 }
-                else if (m_controls.GetBrakeMultiplier() != 0) // if the ship is braking         
+                else if (m_controls.GetBrakeMultiplier != 0) // if the ship is braking         
                 {
-                    m_targetWingPos = -m_controls.GetBrakeMultiplier();
+                    m_targetWingPos = -m_controls.GetBrakeMultiplier;
                     m_currentWingPos = Mathf.Lerp(m_currentWingPos, m_targetWingPos, wingSpeed);
                     m_controller.SetFloat("WingRight", m_currentWingPos);
                     m_controller.SetFloat("WingLeft", m_currentWingPos);
@@ -102,14 +102,14 @@ public class ShipBlendAnimations : MonoBehaviour
                 m_controller.SetFloat("WingRight", m_currentFlapPos);
             }
 
-            if(m_controls.GetTurnMultiplier() > 0)
+            if(m_controls.GetTurnMultiplier > 0)
             {
-                eSteeringEffects[0].SetFloat("Particle Alpha", m_controls.GetTurnMultiplier());
+                eSteeringEffects[0].SetFloat("Particle Alpha", m_controls.GetTurnMultiplier);
                 eSteeringEffects[1].SetFloat("Particle Alpha", 0);
             }
             else
             {
-                eSteeringEffects[1].SetFloat("Particle Alpha", -m_controls.GetTurnMultiplier());
+                eSteeringEffects[1].SetFloat("Particle Alpha", -m_controls.GetTurnMultiplier);
                 eSteeringEffects[0].SetFloat("Particle Alpha", 0);
             }
         }

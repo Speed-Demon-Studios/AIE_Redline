@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     public int numberOfPlayers = 0;
     public float difficultyChange = 1;
     public float catchUpMultiplier = 1;
+    public float catchUpTopCap = 1;
     public string classString = "Debut";
 
     public float m_masterVolume = 1.0f;

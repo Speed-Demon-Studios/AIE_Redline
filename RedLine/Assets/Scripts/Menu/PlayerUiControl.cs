@@ -20,7 +20,7 @@ public class PlayerUiControl : MonoBehaviour
         {
             if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false)
             {
-                float speed = ((int)m_shipsControls.ReturnRB().velocity.magnitude) * 7f;
+                float speed = ((int)m_shipsControls.RB.velocity.magnitude) * 7f;
                 int pos = 0;
                 if (GameManager.gManager.indexListSorted == true) // if the list of racers is sorted
                 {
@@ -34,10 +34,10 @@ public class PlayerUiControl : MonoBehaviour
                 }
                 int currentLap = rDetails.currentLap;
                 int totalLaps = GameManager.gManager.rManager.GetTotalLaps();
-                bool isInRedline = m_shipsControls.ReturnIsInRedline();
-                float energyfillValue = m_shipsControls.ReturnBoost() / 3;
-                float speedFillValue = m_shipsControls.ReturnRB().velocity.magnitude / m_shipsControls.GetDefaultMaxSpeed();
-                hud.SetValues(speed, pos, currentLap, totalLaps, isInRedline, energyfillValue, speedFillValue, m_shipsControls.ReturnBoostLevel(),
+                bool isInRedline = m_shipsControls.ReturnIsInRedline;
+                float energyfillValue = m_shipsControls.ReturnBoost / 3;
+                float speedFillValue = m_shipsControls.RB.velocity.magnitude / m_shipsControls.GetDefaultMaxSpeed;
+                hud.SetValues(speed, pos, currentLap, totalLaps, isInRedline, energyfillValue, speedFillValue, m_shipsControls.ReturnBoostLevel,
                     rDetails.currentLapTimeMINUTES, rDetails.currentLapTimeSECONDS, rDetails.quickestLapTimeMINUTES, rDetails.quickestLapTimeSECONDS, GameManager.gManager.allRacers.Count);
                 hud.UpdateHUD();
             }

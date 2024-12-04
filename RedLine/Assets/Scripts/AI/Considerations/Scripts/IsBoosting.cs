@@ -8,7 +8,7 @@ public class IsBoosting : Consideration
 {
     public override float Score(NPCController npc, ShipsControls controls)
     {
-        if (controls.ReturnIsBoosting())
+        if (controls.ReturnIsBoosting)
             score = 0;
         else
             score = 1;

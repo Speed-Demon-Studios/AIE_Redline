@@ -6,11 +6,13 @@ public class AICatchUpManager : MonoBehaviour
 {
     List<GameObject> m_playerOBJS = new();
     public float multiplier;
-    public float aheadMultiplier;
+    private float m_topSpeedCap;
     float m_catchUpChange;
 
     public void Inistialize()
     {
+        m_topSpeedCap = GameManager.gManager.catchUpTopCap;
+        multiplier = GameManager.gManager.catchUpMultiplier;
         m_playerOBJS = GameManager.gManager.players;
     }
 
@@ -21,18 +23,19 @@ public class AICatchUpManager : MonoBehaviour
             float score = 1f;
             foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
             {
-                if (ChangeCatchUp(AIOBJ) > 0)
-                    score *= ChangeCatchUp(AIOBJ);
+                if(AIOBJ.GetComponent<RacerDetails>().finishedRacing || AIOBJ.GetComponent<RacerDetails>().currentLap != 0)
+                    if (ChangeCatchUp(AIOBJ) > 0)
+                        score *= ChangeCatchUp(AIOBJ);
             }
 
             float originalScore = score;
-            float modFactor = 1.4f - (1.4f / GameManager.gManager.racerObjects.Count);
-            float makeupValue = (1.4f - originalScore) * modFactor;
+            float modFactor = m_topSpeedCap - (m_topSpeedCap / GameManager.gManager.racerObjects.Count);
+            float makeupValue = (m_topSpeedCap - originalScore) * modFactor;
             float percentage = originalScore + (makeupValue * originalScore);
 
             m_catchUpChange = percentage;
 
-            m_catchUpChange = Mathf.Clamp(m_catchUpChange, 0.5f, 1.4f);
+            m_catchUpChange = Mathf.Clamp(m_catchUpChange, 0.5f, m_topSpeedCap);
 
             foreach (GameObject AIOBJ in GameManager.gManager.racerObjects)
             {
