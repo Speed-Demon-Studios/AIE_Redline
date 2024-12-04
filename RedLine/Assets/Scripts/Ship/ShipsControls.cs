@@ -81,6 +81,8 @@ public class ShipsControls : MonoBehaviour
     public bool WantingToBoost => m_wantingToBoost;
     public Rigidbody RB => m_rb;
     public List<FireInfo> FireList => m_fire;
+    public float TurnFireAngle => m_turnFireAngle;
+    public float StrafeAnimAngle => m_strafeAnimAngle;
     public float GetDefaultMaxSpeed => m_defaultMaxSpeed;
     public float GetCurrentMaxSpeed => m_currentMaxSpeed;
     public float GetBrakeMultiplier => m_brakeMultiplier;
