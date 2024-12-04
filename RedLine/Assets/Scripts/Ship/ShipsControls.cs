@@ -384,23 +384,55 @@ public class ShipsControls : MonoBehaviour
         // raycasting to find the track and its normal.
         // raycasts from a 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -rayCastPoint.up, out hit))
+        if (Physics.Raycast(transform.position, transform.position - facingPoint.position, out hit))
         {
-            if (hit.transform.tag == "Road")
+            Debug.DrawRay(transform.position, facingPoint.position - transform.position);
+            if (hit.distance < 25)
             {
-                m_targetPos = hit.normal;
+                if (hit.transform.tag == "Road")
+                {
+                    m_targetPos = hit.normal;
 
-                m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
-                m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
-                m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
+                    m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.09f);
+                    m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.09f);
+                    m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.09f);
 
-                if (hit.distance < 1f)
-                    m_rb.AddForce(transform.up * 4000, ForceMode.Force);
+                    if (hit.distance < 1f)
+                        m_rb.AddForce(transform.up * 4000, ForceMode.Force);
+                }
+
+                if (hit.distance > 1.5f)
+                    m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
+            }
+            else
+            {
+                RaycastHit hit1;
+                if (Physics.Raycast(transform.position, -rayCastPoint.up, out hit1))
+                {
+                    Debug.DrawRay(transform.position, transform.position - facingPoint.position);
+
+                    if (hit1.transform.tag == "Road")
+                    {
+                        m_targetPos = hit1.normal;
+
+                        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
+                        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
+                        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
+
+                        if (hit1.distance < 1f)
+                            m_rb.AddForce(transform.up * 4000, ForceMode.Force);
+                    }
+
+                    if (hit1.distance > 1.5f)
+                        m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
+                }
             }
         }
+        else
+        {
 
-        if (hit.distance > 1.5f)
-            m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
+        }
+
 
 
     }

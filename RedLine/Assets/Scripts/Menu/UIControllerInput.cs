@@ -195,10 +195,10 @@ namespace MenuManagement
             }                                                                                                                
         }
 
-        public void ResetFirstButton(int playerNumber, Button button)
+        public void ResetFirstButton(int playerNumber, GameObject button)
         {
-            GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button.gameObject);
-            GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.firstSelectedGameObject = button.gameObject;
+            GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(button);
+            GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.firstSelectedGameObject = button;
         }
 
         /// <summary>

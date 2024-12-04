@@ -132,7 +132,7 @@ namespace MenuManagement
         public void SetButtons(SetMenu menu)
         {
             int index = 0;
-            foreach (Button startButton in menu.menuStartButtons)
+            foreach (GameObject startButton in menu.menuStartButtons)
             {
                 GameManager.gManager.uiCInput.ResetFirstButton(index, startButton);
                 index++;

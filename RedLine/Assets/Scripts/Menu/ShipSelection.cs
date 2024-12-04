@@ -13,7 +13,7 @@ public class ShipSelection : MonoBehaviour
     private GameObject m_currentShips;
     public ShipSelectionInfo sInfo;
 
-    public Button readyButton;
+    public GameObject readyButton;
 
     private GameObject m_ship;
 

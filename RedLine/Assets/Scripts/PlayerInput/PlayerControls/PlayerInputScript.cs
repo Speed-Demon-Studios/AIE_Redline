@@ -125,7 +125,7 @@ public class PlayerInputScript : MonoBehaviour
                 {
                     if(temp.typeOfMenu == MenuType.ShipSelectionReady)
                     {
-                        temp.menuStartButtons.Remove(m_selection.GetComponentInChildren<Button>());
+                        temp.menuStartButtons.Remove(m_selection.GetComponentInChildren<Button>().gameObject);
                     }
                 }
             }
