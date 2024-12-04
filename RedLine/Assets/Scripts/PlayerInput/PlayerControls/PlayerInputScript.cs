@@ -99,7 +99,6 @@ public class PlayerInputScript : MonoBehaviour
             if (cam != null && playerLayers.Count > 0)
                 cam.cullingMask = ignoreLayers[m_playerNumber - 1];
         }
-
     }
 
     /// <summary>
@@ -150,6 +149,7 @@ public class PlayerInputScript : MonoBehaviour
             GameManager.gManager.uiCInput.SetNumberOfPlayers(GameManager.gManager.uiCInput.GetNumberOfPlayers() - 1);
 
             gMan.uiCInput.sssManager.ReOrderShipSelection();
+            gMan.uiCInput.GetMenuManager().SetButtons(gMan.uiCInput.GetMenuManager().GetCurrentMenu());
             GameManager.gManager.uiCInput.GetMenuManager().BackGroundPanelForSelection();
 
             Destroy(this.gameObject);
@@ -190,7 +190,7 @@ public class PlayerInputScript : MonoBehaviour
     private void CalculateFOV()
     {
         // calculating how fast the ships going compaired to the top speed as a percentage                                  
-        float speedPercentage = m_shipControls.ReturnRB().velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;
+        float speedPercentage = m_shipControls.RB.velocity.magnitude / m_shipControls.VariantObject.DefaultMaxSpeed;
         // if the ship is moving slightly
         if(speedPercentage > 0.001)
         {

@@ -34,61 +34,71 @@ public class ShipsControls : MonoBehaviour
 
     [Space]
     [Header("Turning Varibles")]
+    [SerializeField] private float m_cameraTurnAngle;
+    [SerializeField] private AnimationCurve m_modelRotationCurve;
+    [SerializeField] private float m_strafeStrength;
+
     private float m_targetAngle;
     private float m_currentAngle;
     private float m_shipAngle;
     private float m_strafeMultiplier;
-    public float strafeStrength;
     private float m_turningAngle;
-    public float cameraTurnAngle;
-    public AnimationCurve modelRotationCurve;
+    private float m_turnFireAngle;
+    private float m_strafeAnimAngle;
 
     [Space]
     [Header("TrackStick")]
+    [SerializeField] private float m_shipAdjustSpeed;
     private Vector3 m_targetPos;
     private Vector3 m_currentPos;
-    public float shipAdjustSpeed;
+
     [Space]
     [Header("Boost Variables")]
+    [SerializeField] private float m_accelerationForce;
+    private bool m_wantingToBoost;
+    [SerializeField] private float m_howFastYouGetBoost;
+    [SerializeField] private float m_howFastYouLooseBoost;
+    [SerializeField] private float m_maxBoostSpeedChange;
+    [SerializeField] private List<float> m_boostingTimes = new();
+
     private float m_currentBoost;
-    public bool wantingToBoost;
     private bool m_isBoosting;
     private bool m_isInRedline;
-    public float accelerationForce;
-    public float howFastYouGetBoost;
-    public float howFastYouLooseBoost;
     private bool m_isBoostingOnBoostPad;
     private float m_maxSpeedDuringBoost;
-    public float maxBoostSpeedChange;
-    public List<float> boostingTimes = new();
     [SerializeField, Range(0,3)] private int m_boostLevel;
-    public TextMeshProUGUI test;
     bool chargeSound0Played = false;
     bool chargeSound1Played = false;
     bool chargeSound2Played = false;
 
+    public TextMeshProUGUI test;
     /////////////////////////////////////////////////////////////////
     ///                                                           ///
     ///      All of the getters and setters in this script        ///
     ///                                                           ///
     /////////////////////////////////////////////////////////////////
-    public void SetMaterialIndex(int index) { m_shipManiIndex = index; }
-    public Rigidbody ReturnRB() { return m_rb; }
-    public List<FireInfo> FireList() { return m_fire; }
-    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
-    public float GetDefaultMaxSpeed() { return m_defaultMaxSpeed; }
-    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
-    public float GetCurrentMaxSpeed() { return m_currentMaxSpeed; }
-    public float GetBrakeMultiplier() { return m_brakeMultiplier; }
-    public float GetAccelerationMultiplier() { return m_accelerateMultiplier; }
-    public float GetTurnMultiplier() { return m_turningAngle + m_strafeMultiplier; }
-    public float ReturnBoost() { return m_currentBoost; }
-    public int ReturnBoostLevel() { return m_boostLevel; }
-    public bool ReturnIsBoosting() { return m_isBoosting; }
-    public bool ReturnIsInRedline() { return m_isInRedline; }
-    public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
+
+    public bool WantingToBoost => m_wantingToBoost;
+    public Rigidbody RB => m_rb;
+    public List<FireInfo> FireList => m_fire;
+    public float GetDefaultMaxSpeed => m_defaultMaxSpeed;
+    public float GetCurrentMaxSpeed => m_currentMaxSpeed;
+    public float GetBrakeMultiplier => m_brakeMultiplier;
+    public float GetAccelerationMultiplier => m_accelerateMultiplier;
+    public float GetTurnMultiplier => m_turningAngle + m_strafeMultiplier; 
+    public float ReturnBoost => m_currentBoost;
+    public int ReturnBoostLevel => m_boostLevel;
+    public bool ReturnIsBoosting => m_isBoosting;
+    public bool ReturnIsInRedline => m_isInRedline;
+
     public void DelayRedlineFalse() { StopCoroutine(RedlineFalse()); StartCoroutine(RedlineFalse()); }
+
+    public void ChangeDoneDifficulty(bool change) { m_hasDoneDifficultyChange = change; }
+    public void SetCurrentMaxSpeed(float speed) { m_currentMaxSpeed = speed; }
+    public void SwitchRedlineBool(bool switchTo) { m_isInRedline = switchTo; }
     public void MaxSpeedCatchupChange(float multiplier) { m_currentMaxSpeed = m_defaultMaxSpeed * multiplier; }
+    public void SetMaterialIndex(int index) { m_shipManiIndex = index; }
+
 
     private IEnumerator RedlineFalse()
     {
@@ -100,7 +110,7 @@ public class ShipsControls : MonoBehaviour
     public void ResetRedline()
     {
         m_isInRedline = false;
-        wantingToBoost = false;
+        m_wantingToBoost = false;
         m_isBoostingOnBoostPad = false;
         m_currentBoost = 0.0f;
         m_boostLevel = 0;
@@ -121,7 +131,7 @@ public class ShipsControls : MonoBehaviour
 
     public void ResetAcceleration()
     {
-        wantingToBoost = false;
+        m_wantingToBoost = false;
         m_boostLevel = 0;
         m_acceleration = 0;
     }
@@ -176,7 +186,7 @@ public class ShipsControls : MonoBehaviour
     {
         m_defaultMaxSpeed = VariantObject.DefaultMaxSpeed * GameManager.gManager.difficultyChange;
         m_currentMaxSpeed = m_defaultMaxSpeed;
-        m_maxSpeedDuringBoost = m_defaultMaxSpeed + maxBoostSpeedChange;
+        m_maxSpeedDuringBoost = m_defaultMaxSpeed + m_maxBoostSpeedChange;
         m_hasDoneDifficultyChange = true;
     }
 
@@ -293,7 +303,7 @@ public class ShipsControls : MonoBehaviour
         {
             if(m_currentBoost > m_boostLevel)
             {
-                m_currentBoost -= howFastYouLooseBoost * Time.deltaTime;
+                m_currentBoost -= m_howFastYouLooseBoost * Time.deltaTime;
                 if(m_currentBoost < m_boostLevel)
                 {
                     m_currentBoost = m_boostLevel;
@@ -313,7 +323,7 @@ public class ShipsControls : MonoBehaviour
         if (m_isInRedline)
         {
             float multiplier = 1f / (m_boostLevel + 1);
-            m_currentBoost += howFastYouGetBoost * multiplier * Time.deltaTime;
+            m_currentBoost += m_howFastYouGetBoost * multiplier * Time.deltaTime;
             if (m_currentBoost > 3)
             {
                 m_currentBoost = 3;
@@ -364,7 +374,7 @@ public class ShipsControls : MonoBehaviour
         else
             difference = tempTarget - tempCurrent;
         // this curve will let the modle rotate fast at the start and slow down once it gets to it max turn
-        float lerpSpeed = modelRotationCurve.Evaluate(difference);
+        float lerpSpeed = m_modelRotationCurve.Evaluate(difference);
 
         // this is similar to the ship turn lerp but its for the ship model to swing from side to side depending on which direction you are turning
         m_shipAngle = Mathf.Lerp(Mathf.Clamp(m_shipAngle, -35, 35), (m_currentAngle * 2f) * Mathf.Rad2Deg, lerpSpeed);
@@ -383,58 +393,27 @@ public class ShipsControls : MonoBehaviour
     {
         // raycasting to find the track and its normal.
         // raycasts from a 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.position - facingPoint.position, out hit))
+        RaycastHit hit1;
+        if (Physics.Raycast(transform.position, -rayCastPoint.up, out hit1))
         {
-            Debug.DrawRay(transform.position, facingPoint.position - transform.position);
-            if (hit.distance < 25)
+            Debug.DrawRay(transform.position, transform.position - facingPoint.position);
+        
+            if (hit1.transform.tag == "Road")
             {
-                if (hit.transform.tag == "Road")
-                {
-                    m_targetPos = hit.normal;
-
-                    m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, 0.09f);
-                    m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, 0.09f);
-                    m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, 0.09f);
-
-                    if (hit.distance < 1f)
-                        m_rb.AddForce(transform.up * 4000, ForceMode.Force);
-                }
-
-                if (hit.distance > 1.5f)
-                    m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
+                m_targetPos = hit1.normal;
+        
+                m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, m_shipAdjustSpeed);
+                m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, m_shipAdjustSpeed);
+                m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, m_shipAdjustSpeed);
+        
+                if (hit1.distance < 1f)
+                    m_rb.AddForce(transform.up * 4000, ForceMode.Force);
             }
-            else
-            {
-                RaycastHit hit1;
-                if (Physics.Raycast(transform.position, -rayCastPoint.up, out hit1))
-                {
-                    Debug.DrawRay(transform.position, transform.position - facingPoint.position);
-
-                    if (hit1.transform.tag == "Road")
-                    {
-                        m_targetPos = hit1.normal;
-
-                        m_currentPos.x = Mathf.Lerp(m_currentPos.x, m_targetPos.x, shipAdjustSpeed);
-                        m_currentPos.y = Mathf.Lerp(m_currentPos.y, m_targetPos.y, shipAdjustSpeed);
-                        m_currentPos.z = Mathf.Lerp(m_currentPos.z, m_targetPos.z, shipAdjustSpeed);
-
-                        if (hit1.distance < 1f)
-                            m_rb.AddForce(transform.up * 4000, ForceMode.Force);
-                    }
-
-                    if (hit1.distance > 1.5f)
-                        m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
-                }
-            }
-        }
-        else
-        {
-
+        
         }
 
-
-
+        if (hit1.distance > 1.5f)
+            m_rb.AddForce(-transform.up * VariantObject.DownForce, ForceMode.Force);
     }
 
     /// <summary>
@@ -534,22 +513,18 @@ public class ShipsControls : MonoBehaviour
         PAC.PlayBoostAudio(1);
         PAC.PlayBoostAudio(2);
 
-        float time = 0;
-        float currentAcclerationForce = 0;
+        float t = 0;
+        float targetTime = m_boostingTimes[m_boostLevel - 1];
 
-        if (m_boostLevel > 0)
-            time = boostingTimes[m_boostLevel - 1];
-
-        while (time > 0)
+        while (t < targetTime)
         {
             if (test != null)
-                test.text = time.ToString();
+                test.text = t.ToString();
 
-            if(currentAcclerationForce <= accelerationForce)
-                currentAcclerationForce += 0.1f;
-            time -= 0.1f * Time.fixedDeltaTime;
+            t += Time.fixedDeltaTime;
 
-            m_rb.AddForce(transform.forward * currentAcclerationForce, ForceMode.Acceleration);
+            m_rb.AddForce(transform.forward * m_accelerationForce, ForceMode.Acceleration);
+            yield return new WaitForFixedUpdate();
         }
 
         yield return new WaitForEndOfFrame();
@@ -557,7 +532,7 @@ public class ShipsControls : MonoBehaviour
         m_fire[0].TurnFireOff();
         m_fire[1].TurnFireOff();
         m_fire[2].TurnFireOff();
-        wantingToBoost = false;
+        m_wantingToBoost = false;
         m_currentBoost = 0f;
         m_boostLevel = 0;
 
@@ -657,7 +632,7 @@ public class ShipsControls : MonoBehaviour
         if (cameraRotationPoint != null)
         {
             // rotates a point that lets the camera rotate but a lot less then the ship
-            cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / cameraTurnAngle));
+            cameraRotationPoint.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle / m_cameraTurnAngle));
         }
         // this uses the shipAngle lerp to rotate both on the y axis and the z axis
         shipModel.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -m_shipAngle * 0.8f));
@@ -665,7 +640,7 @@ public class ShipsControls : MonoBehaviour
 
     private void Strafe()
     {
-        m_rb.AddForce(transform.right * m_strafeMultiplier * strafeStrength, ForceMode.VelocityChange);
+        m_rb.AddForce(transform.right * m_strafeMultiplier * m_strafeStrength, ForceMode.VelocityChange);
     }
 
     /// <summary>
@@ -674,8 +649,8 @@ public class ShipsControls : MonoBehaviour
     /// <param name="multiplier"></param>
     public void SetSpeedMultiplier(float multiplier) { m_accelerateMultiplier = multiplier; }
     public void SetBrakeMultiplier(float multiplier) { m_brakeMultiplier = multiplier; }
-    public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
+    public void SetTurnMultipliers(float multiplier) { m_turningAngle = multiplier; m_turnFireAngle = multiplier * 2; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     private void AddAnglesTogether(float angle1, float angle2) { m_targetAngle = angle1 + angle2; }
-    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
+    public void SetStrafeMultiplier(float multiplier) { m_strafeMultiplier = multiplier; m_strafeAnimAngle = multiplier * 2; AddAnglesTogether(m_strafeMultiplier, m_turningAngle); }
     public void WantToBoost() { ShipBoost(); }
 }

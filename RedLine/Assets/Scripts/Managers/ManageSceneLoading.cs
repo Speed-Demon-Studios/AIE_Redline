@@ -60,7 +60,9 @@ public class ManageSceneLoading : MonoBehaviour
         GameObject shipModelObject = controls.shipModel.transform.GetChild(0).gameObject;
         DestroyImmediate(playerOBJ.GetComponent<AIMoveInputs>());
 
-        controls.FireList().Clear();
+        playerInputScript.GetComponent<ShipToWallCollision>().ResetDetails();
+
+        controls.FireList.Clear();
         controls.VariantObject = null;
 
         shipCollisionObject.transform.parent = null;

@@ -35,6 +35,7 @@ namespace MenuManagement
         public MenuManager GetMenuManager() { return m_mManager; }
         public void SetTimeTrial(bool isTrue) { GameManager.gManager.isTimeTrial = isTrue; }
         public void ChangeGameManagerDifficulty(float change) { GameManager.gManager.ChangeDifficulty(change); }
+        public void ChangeGameManagerCatchUpCap(float change) { GameManager.gManager.catchUpTopCap = change; }
         public void ChangeGameManagerCatchUp(float change) { GameManager.gManager.ChangeCatchUp(change); }
         /// <summary>
         /// Adds another selectionMenu in for when a player joins

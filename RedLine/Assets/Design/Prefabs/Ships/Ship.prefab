@@ -306,9 +306,8 @@ MonoBehaviour:
   rayCastPoint: {fileID: 8319451938726217151}
   cameraRotationPoint: {fileID: 7341607018904620202}
   isTestShip: 0
-  strafeStrength: 1.4
-  cameraTurnAngle: 11
-  modelRotationCurve:
+  m_cameraTurnAngle: 11
+  m_modelRotationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -341,16 +340,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shipAdjustSpeed: 0.075
-  wantingToBoost: 0
-  accelerationForce: 5
-  howFastYouGetBoost: 1
-  howFastYouLooseBoost: 0.15
-  maxBoostSpeedChange: 300
-  boostingTimes:
-  - 3
-  - 3.5
-  - 4
+  m_strafeStrength: 1.4
+  m_shipAdjustSpeed: 0.075
+  m_accelerationForce: 300
+  m_howFastYouGetBoost: 1
+  m_howFastYouLooseBoost: 0.15
+  m_maxBoostSpeedChange: 300
+  m_boostingTimes:
+  - 0.3
+  - 0.7
+  - 1
   m_boostLevel: 0
   test: {fileID: 0}
 --- !u!54 &2868536069181459851
