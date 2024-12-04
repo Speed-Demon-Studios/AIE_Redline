@@ -377,7 +377,7 @@ namespace EAudioSystem
         {
             m_minEnginePitches.Add(minPitchValue);
             m_maxEnginePitches.Add(PitchValue);
-            m_maxEngineVolumes.Add(VolumeValue * GameManager.gManager.m_sfxVolume);
+            m_maxEngineVolumes.Add(VolumeValue);
         }
 
         // Set up the variables, emitters and 'events' for engine audio, based off of the selected ship variation.
@@ -936,13 +936,13 @@ namespace EAudioSystem
                     {
                         StudioEventEmitter currentRedlineEmitter = m_redlineSoundEmitters[i];
                         currentRedlineEmitter.EventInstance.setPitch((float)m_redlineAudioPitches[0]);
-                        currentRedlineEmitter.EventInstance.setVolume((float)m_redlineAudioVolume[0] * GameManager.gManager.m_sfxVolume);
+                        currentRedlineEmitter.EventInstance.setVolume((float)m_redlineAudioVolume[0]);
                     }
 
                     for (int i = 0; i < m_boostEmitters.Count(); i++)
                     {
                         StudioEventEmitter currentBoostEmitter = m_boostEmitters[i];
-                        currentBoostEmitter.EventInstance.setVolume((float)m_boostAudioVolumes[i] * GameManager.gManager.m_sfxVolume);
+                        currentBoostEmitter.EventInstance.setVolume((float)m_boostAudioVolumes[i]);
                     }
 
 
@@ -952,7 +952,7 @@ namespace EAudioSystem
                         {
                             StudioEventEmitter currentEngineEmitter = m_engineEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
                             currentEngineEmitter.EventInstance.setPitch((float)m_engineEmitterPitches[i]); // Update the PITCH of the audio assigned to the current emitter.
-                            currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i] * GameManager.gManager.m_sfxVolume); // Update the VOLUME of the audio assigned to the current emitter.
+                            currentEngineEmitter.EventInstance.setVolume(m_engineEmitterVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                         }
                     }
 
@@ -961,7 +961,7 @@ namespace EAudioSystem
                         if (m_gameplaySoundEmitters[i] != null) // If the emitter at the current index is not NULL
                         {
                             StudioEventEmitter currentGameplayEmitter = m_gameplaySoundEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
-                            currentGameplayEmitter.EventInstance.setVolume(m_gameplayAudioVolumes[i] * GameManager.gManager.m_sfxVolume); // Update the VOLUME of the audio assigned to the current emitter.
+                            currentGameplayEmitter.EventInstance.setVolume(m_gameplayAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                         }
                     }
 
@@ -970,7 +970,7 @@ namespace EAudioSystem
                         if (m_windEmitters[i] != null) // If the emitter at the current index is not NULL
                         {
                             StudioEventEmitter currentWindEmitter = m_windEmitters[i]; // Set the current emmitter to the emitter in the list at the current index.
-                            currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i] * GameManager.gManager.m_sfxVolume); // Update the VOLUME of the audio assigned to the current emitter.
+                            currentWindEmitter.EventInstance.setVolume(m_windAudioVolumes[i]); // Update the VOLUME of the audio assigned to the current emitter.
                         }
                     }
 

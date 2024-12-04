@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public IList<GameObject> allRacers = new List<GameObject>();
     public IList<GameObject> racerObjects = new List<GameObject>();
 
+    public bool finalLap = false;
+
     public bool resetRacerVariables = false;
     public bool namesAssigned = false;
 

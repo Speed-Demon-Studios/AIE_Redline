@@ -1,8 +1,5 @@
 using FMOD.Studio;
 using FMODUnity;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace EAudioSystem
@@ -13,34 +10,18 @@ namespace EAudioSystem
 
         public StudioEventEmitter a;
         public StudioGlobalParameterTrigger sgpt;
+        public StudioGlobalParameterTrigger musicTrigger;
         public GameObject musicParentGO;
+        public GameObject musicTriggerGO;
+        public bool newValueChanged = false;
+        public float newValue = 0.0f;
 
         public void SetParamValue(string paramName, float value)
         {
-            sgpt.Value = 0.0f;
-            float currentParamValue = 0.0f;
-            a.EventInstance.getParameterByName(paramName, out currentParamValue);
-
-            if (currentParamValue == value)
-            {
-                return;
-            }
-
-            float oldParamValue = currentParamValue;
-
-            Debug.Log("Audio Parameter '" + paramName + "' Current Value: " + currentParamValue);
-
-            a.EventInstance.setParameterByName(paramName, value);
-            a.EventInstance.getParameterByName(paramName, out currentParamValue);
-
-            if (currentParamValue == value)
-            {
-                Debug.Log("Audio Parameter '" + paramName + "' Value successfully changed from (" + oldParamValue + ") to (" + currentParamValue + ")");
-            }
-            else
-            {
-                Debug.Log("Audio Parameter '" + paramName + "' value failed to update");
-            }
+            GameManager.gManager.aC.musicTriggerGO.SetActive(true);
+            GameManager.gManager.aC.musicTrigger.Value = value;
+            GameManager.gManager.aC.musicTriggerGO.SetActive(false);
+            GameManager.gManager.aC.musicTriggerGO.SetActive(true);
         }
 
         private void Update()
@@ -60,12 +41,9 @@ namespace EAudioSystem
                 GameManager.gManager.m_musicVolume = 0.0f;
             }
 
-            if (GameManager.gManager.aC.sgpt.Value != GameManager.gManager.m_musicVolume)
+            if (GameManager.gManager.aC.newValueChanged == true)
             {
-                musicParentGO.SetActive(true);
-                GameManager.gManager.aC.sgpt.Value = GameManager.gManager.m_musicVolume;
-                musicParentGO.SetActive(false);
-                musicParentGO.SetActive(true);
+
             }
         }
     }
