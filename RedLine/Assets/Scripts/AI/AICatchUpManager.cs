@@ -47,7 +47,7 @@ public class AICatchUpManager : MonoBehaviour
     float ChangeCatchUp(GameObject ai)
     {
         RacerDetails aIRacerDets = ai.GetComponent<RacerDetails>();
-        float numberOfCheckPoints = GameManager.gManager.checkpointParent.GetNumberOfChildren();
+        float numberOfCheckPoints = GameManager.gManager.checkpointParent.GetNumberOfChildren() + 1;
         float score = 0f;
 
         foreach(GameObject playerObj in m_playerOBJS)
