@@ -3,7 +3,6 @@ using UnityEngine;
 using MenuManagement;
 using EAudioSystem;
 using FMODUnity;
-using UnityEditor.ShaderGraph.Internal;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     public float m_masterVolume = 1.0f;
     public float m_sfxVolume = 1.0f;
-    public float m_musicVolume = 1.0f;
+    public float m_musicVolume = 3.0f;
 
     public void ChangeCatchUp(float change) { catchUpMultiplier = change; }
     public void ChangeDifficulty(float change) { difficultyChange = change; ChangeClassString(); }
@@ -117,11 +116,11 @@ public class GameManager : MonoBehaviour
         {
             if (musicEmitter.IsPlaying())
             {
-                float currentVolume = 0.0f;
+                float currentVolume = 3.0f;
                 musicEmitter.EventInstance.getVolume(out currentVolume);
 
-                currentVolume = currentVolume * m_musicVolume;
-                musicEmitter.EventInstance.setVolume(currentVolume);
+                //currentVolume = currentVolume * m_musicVolume;
+                //musicEmitter.EventInstance.setVolume(currentVolume);
             }
         }
         if (CurrentScene == "MainMenu" && enableRacerMovement == true)

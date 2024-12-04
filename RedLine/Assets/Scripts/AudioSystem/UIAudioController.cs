@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using System;
+using System.Linq;
 
 namespace EAudioSystem
 {
@@ -10,6 +11,7 @@ namespace EAudioSystem
         [SerializeField] private StudioEventEmitter[] fmodEmitters; // List of FMOD audio emitter components for any UI or menu sounds (e.g. Player Joining, Game Pausing, Confirmation, ETC)
         [SerializeField] private EventReference[] menuAudio; // Array of FMOD audio 'Events' for all UI or menu sounds.
         [SerializeField] private float[] pitchVariations; // FLOAT array of any pitch variations for the menu confirmation audio.
+        [SerializeField] private float[] soundVolumes;
         private float selectedVariation = 0.0f;
         private float pitchSelected = 0.0f;
 
@@ -158,7 +160,12 @@ namespace EAudioSystem
             //{
             //    fmodEmitters[2].EventInstance.setPitch(selectedVariation);
             //}
-            fmodEmitters[0].EventInstance.setVolume(0.15f);
+            for (int i = 0; i < fmodEmitters.Count(); i++)
+            {
+                //fmodEmitters[0].EventInstance.setVolume(0.15f);
+                fmodEmitters[i].EventInstance.setVolume(soundVolumes[i]);
+            }
+
         }
     }
 }
