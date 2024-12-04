@@ -839,7 +839,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8856981498354301589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: FinishRace, Assembly-CSharp
+        m_MethodName: GoToFinishRace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8856981498378449578
 GameObject:
   m_ObjectHideFlags: 0
@@ -3903,7 +3915,7 @@ GameObject:
   - component: {fileID: 8856981499612539282}
   - component: {fileID: 1636480013}
   - component: {fileID: 1636480014}
-  - component: {fileID: 1636480015}
+  - component: {fileID: 1420299546}
   m_Layer: 0
   m_Name: Race Progression UI + Music
   m_TagString: Untagged
@@ -4092,7 +4104,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &1636480015
+--- !u!114 &1420299546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4101,15 +4113,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8856981499612539281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ab16fbaf4259244ae0a48564bb7dc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7016c463e1c3a9f4bb8a45799090c753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bankLoaderTest: {fileID: 0}
-  paramValue: 0
-  a: {fileID: 1636480014}
-  m_masterVolume: 1
-  m_gameplayVolume: 1
-  m_musicVolume: 1
+  paramTrigger: {fileID: 1812165024}
+  parentGO: {fileID: 1812165022}
+  tempParamValue: 1
+  UpdateParamValue: 0
 --- !u!1 &8856981499661880265
 GameObject:
   m_ObjectHideFlags: 0

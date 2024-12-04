@@ -114,10 +114,19 @@ public class RaceManager : MonoBehaviour
                 racer.crossedFinishLine = true;
                 racer.finishedRacing = true;
             }
+
+            if (racer.transform.gameObject.GetComponent<PlayerInputScript>() != null && racer.currentLap == (TotalLaps - 1) && GameManager.gManager.finalLap == false)
+            {
+                GameManager.gManager.finalLap = true;
+
+                GameManager.gManager.aC.SetParamValue("", 1.60f);
+            }
+
             if (racer.currentLap < TotalLaps)
             {
                 racer.currentLap += 1;
             }
+
             
             if (racer.currentLap > 0)
             {
