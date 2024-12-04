@@ -167,7 +167,7 @@ namespace EAudioSystem
 // --------------------------------------------------
         public void ChargeRedlineSound()
         {
-            if (m_sControls.ReturnIsBoosting() == true || m_sControls.wantingToBoost == true)
+            if (m_sControls.ReturnIsBoosting == true || m_sControls.WantingToBoost == true)
             {
                 if (m_redlineAudioPitches[0] != 0.0)
                 {
@@ -176,9 +176,9 @@ namespace EAudioSystem
             }
 
 
-            if (m_sControls.ReturnIsInRedline() == true)
+            if (m_sControls.ReturnIsInRedline == true)
             {
-                switch (m_sControls.ReturnBoostLevel())
+                switch (m_sControls.ReturnBoostLevel)
                 {
                     case 0:
                         {
@@ -244,7 +244,7 @@ namespace EAudioSystem
             {
                 tempRLVolume = m_redlineAudioVolume[0];
 
-                switch (m_sControls.ReturnBoostLevel())
+                switch (m_sControls.ReturnBoostLevel)
                 {
                     case 0:
                         {
@@ -273,7 +273,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                             }
-                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioVolume[0] < m_redlineMaxVolumes[0] && m_sControls.WantingToBoost == false && m_sControls.ReturnIsBoosting == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[0];
                             }
@@ -282,7 +282,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioPitches[0] -= 0.08f * Time.deltaTime;
                             }
-                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[0] && m_sControls.WantingToBoost == false && m_sControls.ReturnIsBoosting == false)
                             {
                                 m_redlineAudioPitches[0] = m_redlineMaxPitches[0];
                             }
@@ -301,7 +301,7 @@ namespace EAudioSystem
                                     m_redlineAudioVolume[0] -= 0.1 * Time.deltaTime;
                                 }
                             }
-                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioVolume[0] <= m_redlineMaxVolumes[1] && m_sControls.WantingToBoost == false && m_sControls.ReturnIsBoosting == false)
                             {
                                 m_redlineAudioVolume[0] = m_redlineMaxVolumes[1];
                             }
@@ -310,7 +310,7 @@ namespace EAudioSystem
                             {
                                 m_redlineAudioPitches[0] -= 0.06f * Time.deltaTime;
                             }
-                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1] && m_sControls.wantingToBoost == false && m_sControls.ReturnIsBoosting() == false)
+                            if (m_redlineAudioPitches[0] < m_redlineMaxPitches[1] && m_sControls.WantingToBoost == false && m_sControls.ReturnIsBoosting == false)
                             {
                                 m_redlineAudioPitches[0] = m_redlineMaxPitches[1];
                             }
@@ -324,7 +324,7 @@ namespace EAudioSystem
                 }
             }
 
-            if (m_sControls.ReturnIsBoosting() == true || m_sControls.wantingToBoost == true)
+            if (m_sControls.ReturnIsBoosting == true || m_sControls.WantingToBoost == true)
             {
                 if (m_redlineAudioPitches[0] != 0.0)
                 {
