@@ -69,7 +69,7 @@ public class ShipBlendAnimations : MonoBehaviour
             m_currentEnginePos = Mathf.Lerp(m_currentEnginePos, m_targetEnginePos, engineSpeed);
             m_controller.SetFloat("Engine", m_currentEnginePos); // blend engine to speed
 
-            m_targetFlapPos = m_controls.GetTurnMultiplier;
+            m_targetFlapPos = m_controls.StrafeAnimAngle;
             m_currentFlapPos = Mathf.Lerp(m_currentFlapPos, m_targetFlapPos, flapSpeed);
             m_controller.SetFloat("Flaps", m_currentFlapPos); // blend wing to the direction of turning
 
@@ -104,12 +104,12 @@ public class ShipBlendAnimations : MonoBehaviour
 
             if(m_controls.GetTurnMultiplier > 0)
             {
-                eSteeringEffects[0].SetFloat("Particle Alpha", m_controls.GetTurnMultiplier);
+                eSteeringEffects[0].SetFloat("Particle Alpha", m_controls.TurnFireAngle);
                 eSteeringEffects[1].SetFloat("Particle Alpha", 0);
             }
             else
             {
-                eSteeringEffects[1].SetFloat("Particle Alpha", -m_controls.GetTurnMultiplier);
+                eSteeringEffects[1].SetFloat("Particle Alpha", -m_controls.TurnFireAngle);
                 eSteeringEffects[0].SetFloat("Particle Alpha", 0);
             }
         }
