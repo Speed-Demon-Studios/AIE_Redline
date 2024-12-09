@@ -583,7 +583,7 @@ public class ShipsControls : MonoBehaviour
             if (PAC != null)
             {
                 // Audio Pitch & Volume Modulation
-                PAC.UpdateEngineModulations(shipSelected, 1);
+                PAC.UpdateEngineModulations(shipSelected, 1, 0.5f);
                 PAC.UpdateWindVolume(0, ((0.38f) * GameManager.gManager.difficultyChange), ((1.8f) * GameManager.gManager.difficultyChange), false, true, 0.01f);
             }
         }
