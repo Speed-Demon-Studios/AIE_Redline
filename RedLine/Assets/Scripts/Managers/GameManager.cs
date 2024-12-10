@@ -110,26 +110,26 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_sfxVolume < 0.0f)
-        {
-            m_sfxVolume = 0.0f;
-        }
-
-        if (musicEmitter != null)
-        {
-            if (musicEmitter.IsPlaying())
-            {
-                float currentVolume = 3.0f;
-                musicEmitter.EventInstance.getVolume(out currentVolume);
-
-                //currentVolume = currentVolume * m_musicVolume;
-                //musicEmitter.EventInstance.setVolume(currentVolume);
-            }
-        }
-        if (CurrentScene == "MainMenu" && enableRacerMovement == true)
-        {
-            enableRacerMovement = false;
-        }
+        //if (m_sfxVolume < 0.0f)
+        //{
+        //    m_sfxVolume = 0.0f;
+        //}
+        //
+        //if (musicEmitter != null)
+        //{
+        //    if (musicEmitter.IsPlaying())
+        //    {
+        //        float currentVolume = 3.0f;
+        //        musicEmitter.EventInstance.getVolume(out currentVolume);
+        //
+        //        //currentVolume = currentVolume * m_musicVolume;
+        //        //musicEmitter.EventInstance.setVolume(currentVolume);
+        //    }
+        //}
+        //if (CurrentScene == "MainMenu" && enableRacerMovement == true)
+        //{
+        //    enableRacerMovement = false;
+        //}
 
         if (resetRacerVariables == true)
         {

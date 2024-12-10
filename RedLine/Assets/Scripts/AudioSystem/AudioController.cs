@@ -18,10 +18,10 @@ namespace EAudioSystem
 
         public void SetParamValue(string paramName, float value)
         {
-            GameManager.gManager.aC.musicTriggerGO.SetActive(true);
             GameManager.gManager.aC.musicTrigger.Value = value;
             GameManager.gManager.aC.musicTriggerGO.SetActive(false);
             GameManager.gManager.aC.musicTriggerGO.SetActive(true);
+            GameManager.gManager.aC.musicTriggerGO.SetActive(false);
         }
 
         private void Update()
@@ -31,20 +31,20 @@ namespace EAudioSystem
                 GameManager.gManager.musicEmitter.Play();
             }
 
-            if (GameManager.gManager.m_musicVolume > 5.0f)
-            {
-                GameManager.gManager.m_musicVolume = 5.0f;
-            }
-
-            if (GameManager.gManager.m_musicVolume < 0.0f)
-            {
-                GameManager.gManager.m_musicVolume = 0.0f;
-            }
-
-            if (GameManager.gManager.aC.newValueChanged == true)
-            {
-
-            }
+            //if (GameManager.gManager.m_musicVolume > 5.0f)
+            //{
+            //    GameManager.gManager.m_musicVolume = 5.0f;
+            //}
+            //
+            //if (GameManager.gManager.m_musicVolume < 0.0f)
+            //{
+            //    GameManager.gManager.m_musicVolume = 0.0f;
+            //}
+            //
+            //if (GameManager.gManager.aC.newValueChanged == true)
+            //{
+            //
+            //}
         }
     }
 }

@@ -126,7 +126,6 @@ public class RaceManager : MonoBehaviour
             {
                 racer.currentLap += 1;
             }
-
             
             if (racer.currentLap > 0)
             {

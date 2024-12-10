@@ -56,6 +56,10 @@ public class VariantAudioContainer : MonoBehaviour
                     {
                         PAC.SetDefaultEngineModulations(m_CutlassMaxEnginePitchValues[i], m_CutlassMaxEngineVolumeValues[i], 0.00);
                     }
+                    //for (int i = 0; i < m_CutlassMaxEngineVolumeValues.Count(); i++)
+                    //{
+                    //    PAC.m_maxEngineVolumes.Add(m_CutlassMaxEngineVolumeValues[i]);
+                    //}
                     break;
                 }
         }

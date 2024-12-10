@@ -29,7 +29,7 @@ namespace EAudioSystem
         private bool engineSoundsPlaying = false;
 
 
-        private List<float> m_maxEngineVolumes = new(); // Default MAX volume values for the individual engine sounds.
+        public List<float> m_maxEngineVolumes = new(); // Default MAX volume values for the individual engine sounds.
         [SerializeField] private List<double> m_redlineMaxVolumes = new();
         [SerializeField] private List<float> m_engineEmitterVolumes = new(); // ENGINE Audio Volume float variables.
         [SerializeField] private List<double> m_redlineAudioVolume = new();
@@ -439,16 +439,16 @@ namespace EAudioSystem
                             case 2:
                                 {
                                     UpdateEnginePitch(0, ((1.3f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(0, 0.05f, m_maxEngineVolumes[0], true, true, false, 0.1f, false);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+                                    UpdateEngineVolume(0, 0.05f, m_maxEngineVolumes[0], true, true, false, 0.1f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
 
                                     UpdateEnginePitch(1, ((3.5f) * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(1, 0.2f, m_maxEngineVolumes[1], true, true, false, 0.1f, false);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+                                    UpdateEngineVolume(1, 0.2f, m_maxEngineVolumes[1], true, true, false, 0.1f, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
 
                                     UpdateEnginePitch(2, ((5.5f) * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(2, 0.01f, m_maxEngineVolumes[2], true, true, false, 0.1f, false);
+                                    UpdateEngineVolume(2, 0.01f, m_maxEngineVolumes[2], true, true, false, 0.1f, true);
 
                                     UpdateEnginePitch(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, true, false, default, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(3, 0.55f, m_maxEngineVolumes[3], true, true, false, 0.1f, false);
+                                    UpdateEngineVolume(3, 0.55f, m_maxEngineVolumes[3], true, true, false, 0.1f, true);
                                     break;
                                 }
                         }
@@ -488,16 +488,16 @@ namespace EAudioSystem
                             case 2:
                                 {
                                     UpdateEnginePitch(0, ((0.55f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                 // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(0, 0.015f, m_maxEngineVolumes[0], true, false, true, 0.1f, false);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
+                                    UpdateEngineVolume(0, 0.015f, m_maxEngineVolumes[0], true, false, true, 0.1f, true);                                                                              // Engine sound that is first  in the list  (Index [0]), Updating Volume, adding 0.015f to the volume value over time.
 
                                     UpdateEnginePitch(1, ((2.5f) * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                     // Engine sound that is second in the list  (Index [1]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(1, 0.015f, m_maxEngineVolumes[1], true, false, true, 0.1f, false);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
+                                    UpdateEngineVolume(1, 0.015f, m_maxEngineVolumes[1], true, false, true, 0.1f, true);                                                                              // Engine sound that is Second in the list  (Index [1]), Updating Volume, adding 0.015f to the volume value over time.
 
                                     UpdateEnginePitch(2, ((0.55f) * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(2, 0.015f, m_maxEngineVolumes[2], true, false, true, 0.1f, false);
+                                    UpdateEngineVolume(2, 0.015f, m_maxEngineVolumes[2], true, false, true, 0.1f, true);
 
                                     UpdateEnginePitch(3, ((0.55f) * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(3, 0.058f, m_maxEngineVolumes[3], true, false, true, 0.1f, false);
+                                    UpdateEngineVolume(3, 0.058f, m_maxEngineVolumes[3], true, false, true, 0.1f, true);
                                     break;
                                 }
                         }
@@ -535,16 +535,16 @@ namespace EAudioSystem
                             case 2:
                                 {
                                     UpdateEnginePitch(0, ((breakingValue * 0.7f) * GameManager.gManager.difficultyChange), ((5.8f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                    // Engine sound that is first  in the list  (Index [0]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                                    UpdateEngineVolume(0, 0.05f, m_maxEngineVolumes[0], true, false, true, 0.1f, false);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                                    UpdateEngineVolume(0, 0.05f, m_maxEngineVolumes[0], true, false, true, 0.1f, true);                                                                          // Engine sound that is first  in the list  (Index [0]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
                                     UpdateEnginePitch(1, (breakingValue * GameManager.gManager.difficultyChange), ((10.0f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                   // Engine sound that is second in the list  (Index [1]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                                    UpdateEngineVolume(1, 0.05f, m_maxEngineVolumes[1], true, false, true, 0.1f, false);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
+                                    UpdateEngineVolume(1, 0.05f, m_maxEngineVolumes[1], true, false, true, 0.1f, true);                                                                          // Engine sound that is Second in the list  (Index [1]), Updating Volume, subtracting 0.01f from the volume value over time, capping the minimum at 0.29f.
 
                                     UpdateEnginePitch(2, (breakingValue * GameManager.gManager.difficultyChange), ((22.2f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                    // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  subtracting 0.6f  from the pitch value over  time.
-                                    UpdateEngineVolume(2, 0.015f, m_maxEngineVolumes[2], true, false, true, 0.1f, false);
+                                    UpdateEngineVolume(2, 0.015f, m_maxEngineVolumes[2], true, false, true, 0.1f, true);
 
                                     UpdateEnginePitch(3, (breakingValue * GameManager.gManager.difficultyChange), ((0.67f) * GameManager.gManager.difficultyChange), true, false, true, 0.00, true);                                                                                     // Engine sound that is third  in the list  (Index [2]), Updating Pitch,  adding 0.7f  to the pitch  value over time.
-                                    UpdateEngineVolume(3, 0.15f, m_maxEngineVolumes[3], true, false, true, 0.1f, false);
+                                    //UpdateEngineVolume(3, 0.15f, 0.5f, true, false, true, 0.1f, true);
                                     break;
                                 }
                         }
@@ -913,13 +913,13 @@ namespace EAudioSystem
             if (variantSet == true) // If the variant has been selected
             {
 
-                for (int i = 0; i < m_maxEngineVolumes.Count(); i++)
-                {
-                    if (m_maxEngineVolumes[i] != (m_maxEngineVolumes[i] * GameManager.gManager.m_sfxVolume))
-                    {
-                        m_maxEngineVolumes[i] = m_maxEngineVolumes[i] * GameManager.gManager.m_sfxVolume;
-                    }
-                }
+                //for (int i = 0; i < m_maxEngineVolumes.Count(); i++)
+                //{
+                //    if (m_maxEngineVolumes[i] != (m_maxEngineVolumes[i] * GameManager.gManager.m_sfxVolume))
+                //    {
+                //        m_maxEngineVolumes[i] = m_maxEngineVolumes[i] * GameManager.gManager.m_sfxVolume;
+                //    }
+                //}
 
                 if (resettingAudio == false && GameManager.gManager.raceCountdown.m_countdownFinished == true)
                 {

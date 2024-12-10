@@ -22,6 +22,8 @@ public class ManageSceneLoading : MonoBehaviour
             ResetShip(playerOBJ);
         }
 
+        GameManager.gManager.aC.SetParamValue("", 0.0f);
+
         for (int i = GameManager.gManager.racerObjects.Count - 1; i >= 0; i--)
         {
             GameObject temp = GameManager.gManager.racerObjects[i];
