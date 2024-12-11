@@ -58,7 +58,7 @@ public class PositionHandler : MonoBehaviour
         {
             rD.placement = racers.IndexOf(rD) + 1;
         }
-        yield return new WaitForEndOfFrame();
+        yield return null;
         StopCoroutine(SortRacers());
     }
 
