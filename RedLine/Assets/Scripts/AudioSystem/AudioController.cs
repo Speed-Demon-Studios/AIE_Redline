@@ -11,8 +11,12 @@ namespace EAudioSystem
         public StudioEventEmitter a;
         public StudioGlobalParameterTrigger sgpt;
         public StudioGlobalParameterTrigger musicTrigger;
+        public StudioGlobalParameterTrigger musicRaceFinishedTrigger;
+        public StudioGlobalParameterTrigger musicLowpassValue;
         public GameObject musicParentGO;
         public GameObject musicTriggerGO;
+        public GameObject musicRaceFinishedTriggerGO;
+        public GameObject musicLowpassValueGO;
         public bool newValueChanged = false;
         public float newValue = 0.0f;
 

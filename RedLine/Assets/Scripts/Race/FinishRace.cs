@@ -48,6 +48,12 @@ public class FinishRace : MonoBehaviour
             m_alreadyShowingPlacements = true;
             GameManager.gManager.raceFinished = true;
 
+            GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(false);
+            GameManager.gManager.aC.musicRaceFinishedTrigger.Value = 1;
+            GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(true);
+            GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(false);
+
+
             foreach (GameObject racer in GameManager.gManager.allRacers)
             {
                 if (GameManager.gManager.players.Contains(racer) == false)

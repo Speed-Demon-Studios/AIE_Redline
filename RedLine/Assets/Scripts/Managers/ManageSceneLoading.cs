@@ -142,6 +142,11 @@ public class ManageSceneLoading : MonoBehaviour
         GameManager.gManager.namesAssigned = false;
         GameManager.gManager.nRandomiser.usedNames = new List<string>();
         GameManager.gManager.redlineActivated = false;
+        GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(false);
+        GameManager.gManager.aC.musicRaceFinishedTrigger.Value = 0;
+        GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(true);
+        GameManager.gManager.aC.musicRaceFinishedTriggerGO.SetActive(false);
+        GameManager.gManager.finalLap = false;
     }
 
     IEnumerator LoadMenuScene()

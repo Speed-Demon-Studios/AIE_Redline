@@ -42,10 +42,88 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638694288273317125
+  lastModified: 638695116082545247
   FileSizes:
   - Name: Desktop
-    Value: 6096032
+    Value: 6101728
+  Exists: 1
+--- !u!114 &-8982834461202225900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CutlassMainEngineCompressor/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &-8812285358551980690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic 3/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &-8424821504752720589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BoostSound#2/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
   Exists: 1
 --- !u!114 &-8172285251299688337
 MonoBehaviour:
@@ -100,6 +178,10 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: 3488589987285954473}
+  - {fileID: 303292338104323335}
+  - {fileID: -6420340322795635402}
+  - {fileID: -6258333355356572546}
+  - {fileID: -449952463377534817}
   MinDistance: 1
   MaxDistance: 20
   Length: 4700
@@ -183,9 +265,36 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: 3943109590843536789}
+  - {fileID: 1515930608478761683}
   MinDistance: 1
   MaxDistance: 20
   Length: 137142
+--- !u!114 &-6891541896187169811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NormalizedEngineSoundVolumeUp/RaceFinished
+  m_EditorClassIdentifier: 
+  Name: RaceFinished
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2846995877
+    data2: 3428332543
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
+  Exists: 1
 --- !u!114 &-6885077242360977996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,10 +383,87 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -4663712550057319346}
   MinDistance: 1
   MaxDistance: 20
   Length: 6500
+--- !u!114 &-6420340322795635402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceStart&Menu/RaceFinished
+  m_EditorClassIdentifier: 
+  Name: RaceFinished
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2846995877
+    data2: 3428332543
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
+  Exists: 1
+--- !u!114 &-6360490703901236054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RedlineBoostChargingVER2/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &-6258333355356572546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceStart&Menu/RaceMusicLowPass
+  m_EditorClassIdentifier: 
+  Name: RaceMusicLowPass
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 2408736322
+    data2: 2924274743
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-6065174765402507651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +514,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 4647457445661447607}
   MinDistance: 1
   MaxDistance: 20
   Length: 10448
@@ -355,6 +542,32 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &-5510069479434633736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ShipWindLoop/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
   Exists: 1
 --- !u!114 &-5152718037083755294
 MonoBehaviour:
@@ -403,7 +616,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -5510069479434633736}
   MinDistance: 1
   MaxDistance: 20
   Length: 10000
@@ -430,10 +644,63 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 5063933807366314062}
   MinDistance: 1
   MaxDistance: 20
   Length: 2900
+--- !u!114 &-4663712550057319346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/LightWind/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &-4653537488698740039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NormalizedEngineSoundVolumeUp/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &-4538654409565157545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +724,32 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &-3490819110275353257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic 3/ImpactPlayed
+  m_EditorClassIdentifier: 
+  Name: ImpactPlayed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 931734486
+    data2: 3694471394
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
   Exists: 1
 --- !u!114 &-3036983066808662327
 MonoBehaviour:
@@ -508,7 +801,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -8424821504752720589}
   MinDistance: 1
   MaxDistance: 20
   Length: 1200
@@ -613,7 +907,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 1616329387815085236}
   MinDistance: 1
   MaxDistance: 20
   Length: 53028
@@ -640,10 +935,63 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 2339732468064029707}
   MinDistance: 1
   MaxDistance: 20
   Length: 15500
+--- !u!114 &-1261628517993474334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic 2/ImpactPlayed
+  m_EditorClassIdentifier: 
+  Name: ImpactPlayed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 931734486
+    data2: 3694471394
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
+  Exists: 1
+--- !u!114 &-1202247852556063800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceFinished
+  m_EditorClassIdentifier: 
+  Name: RaceFinished
+  StudioPath: parameter:/RaceFinished
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2846995877
+    data2: 3428332543
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
+  Exists: 1
 --- !u!114 &-902353640327382038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,10 +1015,38 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -4653537488698740039}
+  - {fileID: -6891541896187169811}
   MinDistance: 1
   MaxDistance: 20
   Length: 19983
+--- !u!114 &-449952463377534817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceStart&Menu/ImpactPlayed
+  m_EditorClassIdentifier: 
+  Name: ImpactPlayed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 931734486
+    data2: 3694471394
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
+  Exists: 1
 --- !u!114 &-288118361261019097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,11 +1161,14 @@ MonoBehaviour:
   - {fileID: 2767285069615592140}
   - {fileID: -2719847745259103076}
   - {fileID: -5152718037083755294}
+  - {fileID: 2905889491567865443}
+  - {fileID: -1202247852556063800}
+  - {fileID: 7592940278961716972}
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638694288273317125
+  cacheTime: 638695116082545247
   cacheVersion: 131620
 --- !u!114 &115436463921783294
 MonoBehaviour:
@@ -819,6 +1198,8 @@ MonoBehaviour:
   - {fileID: -5755149814765961670}
   - {fileID: -136301121612700923}
   - {fileID: 332660626558741498}
+  - {fileID: -8812285358551980690}
+  - {fileID: -3490819110275353257}
   MinDistance: 1
   MaxDistance: 20
   Length: 10285
@@ -849,6 +1230,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 148
+--- !u!114 &303292338104323335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceStart&Menu/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &332660626558741498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +1307,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 339
+--- !u!114 &1515930608478761683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MenuMusic/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &1616329387815085236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainShipEngineLoopCompressor/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &1778980401390251707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,9 +1387,36 @@ MonoBehaviour:
   - {fileID: 6607927915455976103}
   - {fileID: -4538654409565157545}
   - {fileID: 7992538246621728974}
+  - {fileID: 3752164480741205784}
   MinDistance: 1
   MaxDistance: 20
   Length: 130295
+--- !u!114 &2339732468064029707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/StrongWind/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &2368922772598688561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,7 +1440,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 3225214814476204604}
   MinDistance: 1
   MaxDistance: 20
   Length: 11512
@@ -1000,10 +1487,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638694288272598506
+  lastModified: 638695116081933134
   FileSizes:
   - Name: Desktop
-    Value: 3608
+    Value: 3904
   Exists: 1
 --- !u!114 &2658546784528882239
 MonoBehaviour:
@@ -1028,7 +1515,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -8982834461202225900}
   MinDistance: 1
   MaxDistance: 20
   Length: 37485
@@ -1055,6 +1543,58 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &2905889491567865443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: parameter:/SetStereoOrMono
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &3225214814476204604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SplitwingEngineLoop1.2/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
   Exists: 1
 --- !u!114 &3279576114353477037
 MonoBehaviour:
@@ -1107,6 +1647,32 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &3752164480741205784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &3943109590843536789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,7 +1720,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 5407499377012553169}
   MinDistance: 1
   MaxDistance: 20
   Length: 10221
@@ -1213,9 +1780,37 @@ MonoBehaviour:
   - {fileID: 8058896536668101397}
   - {fileID: 6469501260797415340}
   - {fileID: 5183794869007074142}
+  - {fileID: 6820761817353361190}
+  - {fileID: -1261628517993474334}
   MinDistance: 1
   MaxDistance: 20
   Length: 76285
+--- !u!114 &4647457445661447607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CutlassEngineLoop1.1/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &4760523441949180700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,10 +1861,37 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 5399521369605515249}
   MinDistance: 1
   MaxDistance: 20
   Length: 908
+--- !u!114 &5063933807366314062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/248757-Sci-Fi_Energy_Shield_Up_14/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &5183794869007074142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,6 +1915,58 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &5399521369605515249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BoostSound#1/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
+--- !u!114 &5407499377012553169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ShipEngineHumAUX/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
   Exists: 1
 --- !u!114 &5637463809876672210
 MonoBehaviour:
@@ -1321,6 +1995,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19983
+--- !u!114 &5908220509679843718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/EngineHum/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &6361046141408350954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,7 +2095,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 5908220509679843718}
   MinDistance: 1
   MaxDistance: 20
   Length: 4200
@@ -1446,10 +2147,37 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -6360490703901236054}
   MinDistance: 1
   MaxDistance: 20
   Length: 8000
+--- !u!114 &6820761817353361190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RaceMusic 2/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
+  Exists: 1
 --- !u!114 &6928355200123278492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,7 +2202,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 8029527376150401962}
   MinDistance: 1
   MaxDistance: 20
   Length: 6687
@@ -1547,10 +2276,36 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638694288272548641
+  lastModified: 638695116081877744
   FileSizes:
   - Name: Desktop
-    Value: 15346976
+    Value: 15368480
+  Exists: 1
+--- !u!114 &7592940278961716972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ImpactPlayed
+  m_EditorClassIdentifier: 
+  Name: ImpactPlayed
+  StudioPath: parameter:/ImpactPlayed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 931734486
+    data2: 3694471394
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - False
+  - True
   Exists: 1
 --- !u!114 &7821424255209551234
 MonoBehaviour:
@@ -1602,6 +2357,32 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &8029527376150401962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MainEnginePulseLoop/SetStereoOrMono
+  m_EditorClassIdentifier: 
+  Name: SetStereoOrMono
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 3287983
+    data2: 3444888738
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Mono
+  - Stereo
   Exists: 1
 --- !u!114 &8058896536668101397
 MonoBehaviour:
@@ -1670,10 +2451,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/FulcrumEngine.bank
   Name: FulcrumEngine
   StudioPath: bank:/FulcrumEngine
-  lastModified: 638693587321634612
+  lastModified: 638695063524778897
   FileSizes:
   - Name: Desktop
-    Value: 1537824
+    Value: 1539008
   Exists: 1
 --- !u!114 &9140701790237856491
 MonoBehaviour:

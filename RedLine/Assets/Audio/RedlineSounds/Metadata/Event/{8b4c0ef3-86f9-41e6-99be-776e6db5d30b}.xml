@@ -53,7 +53,7 @@
 			<destination>{2b57bd8a-32b7-48a3-b549-898305bbd38c}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{e0c822ee-5104-4dbb-8a37-2513954233f0}</destination>
+			<destination>{2385ff85-70b7-4a37-8497-25479c079ba4}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{92f3fac6-64dc-4cfc-995f-b6de76879f49}" />
@@ -87,7 +87,11 @@
 			<destination>{393daa73-7173-48ba-92af-a0552315ad04}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{2b57bd8a-32b7-48a3-b549-898305bbd38c}" />
+	<object class="MixerBusPanner" id="{2b57bd8a-32b7-48a3-b549-898305bbd38c}">
+		<property name="surroundPanExtent">
+			<value>90</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{78a3a124-35dd-47a2-b509-54ffad8e8f43}">
 		<property name="length">
 			<value>0.053999999999999999</value>
@@ -121,7 +125,7 @@
 	</object>
 	<object class="MixerBusPanner" id="{9036a79a-17ce-4aa9-889b-e12850371ad2}">
 		<property name="surroundPanExtent">
-			<value>0</value>
+			<value>90</value>
 		</property>
 		<property name="surroundLFELevel">
 			<value>-30</value>
