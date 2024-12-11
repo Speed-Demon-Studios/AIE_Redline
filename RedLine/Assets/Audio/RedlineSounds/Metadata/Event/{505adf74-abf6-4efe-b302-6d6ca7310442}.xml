@@ -97,7 +97,11 @@
 			<destination>{be78a116-274a-4d01-87f6-0952c68e372f}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{2857777e-661e-480e-9685-9d01f51e2f9e}" />
+	<object class="MixerBusPanner" id="{2857777e-661e-480e-9685-9d01f51e2f9e}">
+		<relationship name="automators">
+			<destination>{e2307a11-a93c-40bd-8316-5cadb0140fa0}</destination>
+		</relationship>
+	</object>
 	<object class="SingleSound" id="{2015bb97-84b4-4dbd-b1eb-dc0bc86be0d5}">
 		<property name="length">
 			<value>1.2</value>
@@ -160,8 +164,17 @@
 			<destination>{a6819ad1-3943-4749-bac9-1a531e6a1372}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{728d5470-cdbc-4506-be5b-64eb14923dfb}" />
+	<object class="MixerBusPanner" id="{728d5470-cdbc-4506-be5b-64eb14923dfb}">
+		<relationship name="automators">
+			<destination>{0949e939-9745-44b4-a5d4-0f4649cd55b4}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{be78a116-274a-4d01-87f6-0952c68e372f}" />
+	<object class="Automator" id="{e2307a11-a93c-40bd-8316-5cadb0140fa0}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>surroundPanExtent</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{1f091538-b377-4bd4-8d13-0144b216e1b7}">
 		<relationship name="effects">
 			<destination>{b700e7dd-6464-4295-ab36-441fd602aef1}</destination>
@@ -191,6 +204,14 @@
 		<property name="userStereoSeparation">
 			<value>180</value>
 		</property>
+	</object>
+	<object class="Automator" id="{0949e939-9745-44b4-a5d4-0f4649cd55b4}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>surroundPanExtent</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{962d6743-7d74-4609-abbc-5084d5d3e82b}</destination>
+		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{b700e7dd-6464-4295-ab36-441fd602aef1}" />
 	<object class="AutomationPoint" id="{6f3fc8d4-4157-4f36-8dfe-123f014489d8}">
@@ -222,6 +243,31 @@
 		</property>
 		<property name="dryLevel">
 			<value>-19.5</value>
+		</property>
+	</object>
+	<object class="AutomationCurve" id="{962d6743-7d74-4609-abbc-5084d5d3e82b}">
+		<relationship name="parameter">
+			<destination>{d4fca420-72da-46a6-abaa-035c1623ce7b}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{d38b621e-290c-4980-82ca-ed27d37f9f22}</destination>
+			<destination>{7150d8ad-a91b-494c-82c2-8596801d289d}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{d38b621e-290c-4980-82ca-ed27d37f9f22}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{7150d8ad-a91b-494c-82c2-8596801d289d}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>360</value>
 		</property>
 	</object>
 </objects>

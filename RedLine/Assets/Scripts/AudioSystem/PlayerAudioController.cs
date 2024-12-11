@@ -117,6 +117,11 @@ namespace EAudioSystem
                     emitter.Stop();
                 }
 
+                foreach (StudioEventEmitter emitter in m_redlineSoundEmitters)
+                {
+                    emitter.Stop();
+                }
+
                 resettingAudio = false;
             }
             return;
