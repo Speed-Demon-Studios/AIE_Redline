@@ -61,7 +61,7 @@ namespace MenuManagement
             {
                 SwitchMenu(mainMenu);
                 GameManager.gManager.uiCInput.ResetFirstButton(0, mainMenu.menuStartButtons[0]);
-                bSelect.TransitionToTitle();
+                bSelect.TransitionToTitle(true);
                 m_gameLoadedAndStarted = true;
             }
         }

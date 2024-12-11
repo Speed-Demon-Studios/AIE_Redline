@@ -29,6 +29,7 @@ namespace MenuManagement
         public SetMenu shipSelectionMenu;
         public ShipSelectionSpawnerManager sssManager;
         public ButtonSelectManager bSManager;
+        [SerializeField] TransitionManager m_tManager;
         // Testing
         private bool HasInitialized = true;
 
@@ -141,9 +142,11 @@ namespace MenuManagement
             if (playersReady >= GameManager.gManager.players.Count) // if the number of player ready is equal to the number of players         
             {
                 GameManager.gManager.raceAboutToStart = true;
+                Invoke(nameof(DelayTransition), 1f);
                 Invoke(nameof(DelayGoToRace), 1.5f);// then go to race
             } 
-        }        
+        }     
+        void DelayTransition() { m_tManager.Transition("WipeOut"); }
         void DelayGoToRace()
         {
             GoToRace();

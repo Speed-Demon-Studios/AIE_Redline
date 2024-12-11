@@ -76,7 +76,7 @@ namespace DifficultyButtonSwitch
 
         }
 
-        public void TransitionToTitle()
+        public void TransitionToTitle(bool doTransitionEffect)
         {
             m_pressAToStart.SetActive(false);
             m_title.SetActive(true);
@@ -87,10 +87,13 @@ namespace DifficultyButtonSwitch
             }
             m_cameras[1].Priority = 1;
 
-            m_titleAnim.SetTrigger("TitleIn");
-            m_titleGlowAnim.SetTrigger("TitleInGlow");
-            if(m_titleAudio != null)
-                m_titleAudio.Play();
+            if (doTransitionEffect)
+            {
+                m_titleAnim.SetTrigger("TitleIn");
+                m_titleGlowAnim.SetTrigger("TitleInGlow");
+                if (m_titleAudio != null)
+                    m_titleAudio.Play();
+            }
         }
 
 

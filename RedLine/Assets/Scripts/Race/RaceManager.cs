@@ -9,6 +9,9 @@ public class RaceManager : MonoBehaviour
     public bool isTimeTrial = false;
     public TMP_Text classText;
     public TMP_Text classTextRed;
+    [SerializeField] private GameObject thirdPersonCameras;
+
+    public GameObject ThirdPersonCameras => thirdPersonCameras;
 
     public void ClassTextChange() { classText.text = GameManager.gManager.classString; classTextRed.text = GameManager.gManager.classString; }
 
@@ -42,6 +45,11 @@ public class RaceManager : MonoBehaviour
                     gObj.GetComponent<RacerDetails>().rCS.CallSpawnCollider();
             }
         }
+
+        if(GameManager.gManager.players.Count == 3)
+        {
+            thirdPersonCameras.SetActive(true);
+        }
     }
 
     public void StartRace()
@@ -72,6 +80,9 @@ public class RaceManager : MonoBehaviour
             
             AMC.UpdateActionMapForUI();
         }
+
+        if(GameManager.gManager.players.Count != 3)
+            thirdPersonCameras.SetActive(false);
 
         Invoke(nameof(CallFinalPlacements), 2f);
     }

@@ -22,7 +22,8 @@ public class LoadingScreen : MonoBehaviour
 
     IEnumerator LoadingScene(int sceneID)
     {
-        yield return new WaitForSeconds(2f);
+        loadingBar.fillAmount = 0;
+        yield return new WaitForSeconds(1f);
         AsyncOperation operation =  SceneManager.LoadSceneAsync(sceneID);
 
         while (!operation.isDone)
