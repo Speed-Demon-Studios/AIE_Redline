@@ -213,7 +213,7 @@ MonoBehaviour:
   m_allShipsInColliders: []
   colliderPrefab: {fileID: 5695694751950368063, guid: 1dd200e61d63f1c4d914e1d17c24efcd,
     type: 3}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 1292654985569490448}
   colliderParent: {fileID: 2671504990806942375}
 --- !u!65 &794404226698590004
 BoxCollider:
@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7595c461bd4753409945b692ec800fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipSelected: 0
   VariantObject: {fileID: 11400000, guid: 9a9a2e0ff77713c448c5fa1a01387c12, type: 2}
   rotation: {fileID: 2819560892090638106}
   facingPoint: {fileID: 2819560891588230136}
@@ -416,22 +417,49 @@ MonoBehaviour:
   rayCastPoint: {fileID: 4022018049878914855}
   cameraRotationPoint: {fileID: 0}
   isTestShip: 0
-  strafeStrength: 1.4
-  cameraTurnAngle: 11
-  modelRotationCurve:
+  m_cameraTurnAngle: 11
+  m_modelRotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7520871
+      value: 0.28697905
+      inSlope: -0.07099292
+      outSlope: -0.07099292
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09073286
+      outWeight: 0.22222584
+    - serializedVersion: 3
+      time: 1.002044
+      value: 0.090046264
+      inSlope: -2.2439308
+      outSlope: -2.2439308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.114574745
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shipAdjustSpeed: 0.75
-  wantingToBoost: 0
-  accelerationForce: 10
-  howFastYouGetBoost: 1
-  howFastYouLooseBoost: 0.15
-  maxBoostSpeedChange: 0
-  boostingTimes: []
+  m_strafeStrength: 1.4
+  m_shipAdjustSpeed: 0.075
+  m_accelerationForce: 300
+  m_howFastYouGetBoost: 1
+  m_howFastYouLooseBoost: 0.15
+  m_maxBoostSpeedChange: 300
+  m_boostingTimes: []
   m_boostLevel: 0
+  test: {fileID: 0}
 --- !u!54 &2819560891871692963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -523,7 +551,6 @@ MonoBehaviour:
   movementEnabled: 0
   playerCamOBJECT: {fileID: 0}
   sControls: {fileID: 2819560891871692962}
-  playerCamera: {fileID: 0}
   pInput: {fileID: 0}
   aiInput: {fileID: 2819560891871692965}
   rb: {fileID: 2819560891871692963}
@@ -881,8 +908,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8528683263023004094, guid: 06c4daaee1bde4643929c67e7b383244,
+        type: 3}
+      propertyPath: m_TagString
+      value: TrailSpawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c4daaee1bde4643929c67e7b383244, type: 3}
+--- !u!4 &1292654985569490448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7318651825848368018, guid: 06c4daaee1bde4643929c67e7b383244,
+    type: 3}
+  m_PrefabInstance: {fileID: 8386122326776049026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4594245189065152572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5450328047342581182, guid: 06c4daaee1bde4643929c67e7b383244,
