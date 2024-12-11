@@ -93,12 +93,12 @@ public class PositionHandler : MonoBehaviour
                         return r2.currentCheckpoint;
                     }
             
+                    StartCoroutine(SortRacers());
                     racersSorted = true;
                     return r1.NextCheckpointDistance().CompareTo(r2.NextCheckpointDistance());
                 });
                 GameManager.gManager.indexListSorted = true;
                 
-                StartCoroutine(SortRacers());
             }
         }
     }
