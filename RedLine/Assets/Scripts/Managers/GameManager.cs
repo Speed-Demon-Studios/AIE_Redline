@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public IList<GameObject> racerObjects = new List<GameObject>();
 
     public bool finalLap = false;
+    private int m_playerInteractingWithPause;
 
     public bool resetRacerVariables = false;
     public bool namesAssigned = false;
@@ -179,18 +180,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StopTime()
+    public void StopTime(int playerNumber)
     {
         pMenu.transform.GetChild(0).gameObject.SetActive(true);
-        players[0].GetComponent<ActionMappingControl>().UpdateActionMapForUI();
-        pMenu.SwitchPlayerOneButton();
+        m_playerInteractingWithPause = playerNumber;
+        players[playerNumber].GetComponent<ActionMappingControl>().UpdateActionMapForUI();
+        pMenu.SwitchPlayerOneButton(playerNumber);
         Time.timeScale = 0;
     }
 
     public void StartTime(bool switchs)
     {
         if(switchs)
-            players[0].GetComponent<ActionMappingControl>().UpdateActionMapForRace();
+            players[m_playerInteractingWithPause].GetComponent<ActionMappingControl>().UpdateActionMapForRace();
         Time.timeScale = 1;
     }
 

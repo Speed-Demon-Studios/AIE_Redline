@@ -13,9 +13,9 @@ public class PauseMenu : MonoBehaviour
         GameManager.gManager.pMenu = this;
     }
 
-    public void SwitchPlayerOneButton()
+    public void SwitchPlayerOneButton(int playerNumber)
     {
-        GameManager.gManager.players[0].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(pauseButtonFirst);
+        GameManager.gManager.players[playerNumber].GetComponent<ActionMappingControl>().mES.SetSelectedGameObject(pauseButtonFirst);
     }
 
     public void StartTimeAgain(bool switchs)

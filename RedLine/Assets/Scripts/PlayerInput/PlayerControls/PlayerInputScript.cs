@@ -94,11 +94,16 @@ public class PlayerInputScript : MonoBehaviour
         }
         if (!m_shipControls.isTestShip)
         {
-            if (m_virtualCam != null && playerLayers.Count > 0)
-                m_virtualCam.gameObject.layer = playerLayers[m_playerNumber - 1];
-            if (cam != null && playerLayers.Count > 0)
-                cam.cullingMask = ignoreLayers[m_playerNumber - 1];
+            SwitchCameraLayers(m_playerNumber - 1);
         }
+    }
+
+    public void SwitchCameraLayers(int playerNumber)
+    {
+        if (m_virtualCam != null && playerLayers.Count > 0)
+            m_virtualCam.gameObject.layer = playerLayers[playerNumber];
+        if (cam != null && playerLayers.Count > 0)
+            cam.cullingMask = ignoreLayers[playerNumber];
     }
 
     /// <summary>
@@ -115,6 +120,7 @@ public class PlayerInputScript : MonoBehaviour
                 if (GameManager.gManager.players[i].GetComponent<PlayerInputScript>().GetPlayerNumber() > m_playerNumber)
                 {
                     GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SetPlayerNumber(i);
+//                    GameManager.gManager.players[i].GetComponent<PlayerInputScript>().player.
                 }
             }
             foreach(Transform child in GameManager.gManager.uiCInput.GetMenuManager().gameObject.transform)
@@ -151,6 +157,11 @@ public class PlayerInputScript : MonoBehaviour
             gMan.uiCInput.sssManager.ReOrderShipSelection();
             gMan.uiCInput.GetMenuManager().SetButtons(gMan.uiCInput.GetMenuManager().GetCurrentMenu());
             GameManager.gManager.uiCInput.GetMenuManager().BackGroundPanelForSelection();
+
+            for (int i = m_playerNumber - 1; i < GameManager.gManager.players.Count; i++)
+            {
+                GameManager.gManager.players[i].GetComponent<PlayerInputScript>().SwitchCameraLayers(i);
+            }
 
             Destroy(this.gameObject);
         }
@@ -253,7 +264,7 @@ public class PlayerInputScript : MonoBehaviour
         {
             if (GameManager.gManager.raceStarted)
             {
-                GameManager.gManager.StopTime();
+                GameManager.gManager.StopTime(m_playerNumber - 1);
             }
         }
     }
