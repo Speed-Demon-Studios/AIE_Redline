@@ -54,8 +54,14 @@ public class AICatchUpManager : MonoBehaviour
         {
             RacerDetails playerRacerDets = playerObj.GetComponent<RacerDetails>();
 
-            float playerCheckPointPercentage = (playerRacerDets.currentCheckpoint / numberOfCheckPoints) + playerRacerDets.currentLap;
-            float aiCheckPointPercentage = (aIRacerDets.currentCheckpoint / numberOfCheckPoints) + aIRacerDets.currentLap;
+            float playerCheckpoint = playerRacerDets.currentCheckpoint;
+            float playerLap = playerRacerDets.currentLap;
+
+            float aiCheckpoint = aIRacerDets.currentCheckpoint;
+            float aiLap = aIRacerDets.currentLap;
+
+            float playerCheckPointPercentage = (playerCheckpoint / numberOfCheckPoints) + playerLap;
+            float aiCheckPointPercentage = (aiCheckpoint / numberOfCheckPoints) + aiLap;
 
             if (playerCheckPointPercentage < 1)
                 playerCheckPointPercentage += 1;

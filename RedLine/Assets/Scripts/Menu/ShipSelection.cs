@@ -190,26 +190,29 @@ public class ShipSelection : MonoBehaviour
     /// </summary>
     public void Ready()
     {
-        // Sets ship variants
-        m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
-        m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement
-        m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
-        m_ship.GetComponent<ShipsControls>().SetMaterialIndex(m_materialIndex);
-
-        if (m_ship.GetComponent<VariantAudioContainer>() != null)
+        if (!m_ship.GetComponent<PlayerInputScript>().playerReadyInMenu)
         {
-            m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
+            // Sets ship variants
+            m_ship.GetComponent<ShipsControls>().VariantObject = variants[m_shipIndex];
+            m_ship.GetComponent<ShipsControls>().enabled = true; // Enables shipControls for movement
             m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
+            m_ship.GetComponent<ShipsControls>().SetMaterialIndex(m_materialIndex);
+
+            if (m_ship.GetComponent<VariantAudioContainer>() != null)
+            {
+                m_ship.GetComponent<VariantAudioContainer>().CheckVariant(m_shipIndex);
+                m_ship.GetComponent<ShipsControls>().shipSelected = m_shipIndex;
+            }
+
+            if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
+                m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
+
+            GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
+
+            GameManager.gManager.uAC.PlayUISound(2);
+
+            sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
         }
-
-        if (m_ship.GetComponent<ShipBlendAnimations>()) // if the ship selected has animations
-            m_ship.GetComponent<ShipBlendAnimations>().enabled = true; // set the refrenece for animations
-
-        GameManager.gManager.uiCInput.ReadyPlayer(m_playerNum); // Readys this player
-
-        GameManager.gManager.uAC.PlayUISound(2);
-
-        sInfo.readyAnimator.SetTrigger(sInfo.readyTriggerString);
     }
     public void UnReady()
     {
