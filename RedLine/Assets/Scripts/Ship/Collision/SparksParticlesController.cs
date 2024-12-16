@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 
 public class SparksParticlesController : MonoBehaviour
 {
-    [HideInInspector] public PlayerAudioController PAC;
+    public PlayerAudioController PAC;
 
     public SparksTrigger[] sparksList;
     public ParticleSystem[] sparksParticles;
@@ -34,19 +34,17 @@ public class SparksParticlesController : MonoBehaviour
             if (sT.waiting == false)
             {
                 sT.waiting = true;
-                StartCoroutine(DeactivateSPRKS(particleToDeactivate, sT));
+                StartCoroutine(DeactivateSPRKS(sT));
             }
         }
     }
     
-    private IEnumerator DeactivateSPRKS(VisualEffect particleToDeactivate, SparksTrigger sT)
+    private IEnumerator DeactivateSPRKS(SparksTrigger sT)
     {
-        yield return new WaitForEndOfFrame();
-
-        particleToDeactivate.Stop();
+        yield return null;
 
         sT.waiting = false;
-        StopCoroutine(DeactivateSPRKS(particleToDeactivate, sT));
+        StopCoroutine(DeactivateSPRKS(sT));
     }
 
     void Awake()
