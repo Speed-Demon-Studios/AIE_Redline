@@ -172,6 +172,7 @@ public class ManageSceneLoading : MonoBehaviour
         {
             reloadingmenu = false;
             ActionMappingControl aMC = GameManager.gManager.players[0].GetComponent<ActionMappingControl>();
+            //
         }
     }
 }

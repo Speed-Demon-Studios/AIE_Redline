@@ -194,8 +194,10 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (m_shipControls.isTestShip || gMan.raceStarted == true && gMan.raceFinished == false) // if the race has started and not finished
+        if (GameManager.gManager.raceStarted == true && GameManager.gManager.raceFinished == false) // if the race has started and not finished
+        {
             CalculateFOV(); // calculate the FOV for the camera
+        }
     }
 
     private void CalculateFOV()

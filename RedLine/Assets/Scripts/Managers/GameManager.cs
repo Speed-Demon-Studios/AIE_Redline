@@ -3,6 +3,7 @@ using UnityEngine;
 using MenuManagement;
 using EAudioSystem;
 using FMODUnity;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public UIAudioController uAC;
     public StudioEventEmitter musicEmitter;
     public AudioController aC;
+    public PlayerInputManager PAM;
 
     public GameObject[] StartingPoints;
 
@@ -131,6 +133,8 @@ public class GameManager : MonoBehaviour
         //{
         //    enableRacerMovement = false;
         //}
+
+
 
         if (resetRacerVariables == true)
         {
