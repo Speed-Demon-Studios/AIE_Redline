@@ -35,6 +35,7 @@ public class PlayerInputScript : MonoBehaviour
     public float minFOV;
     public float maxFOV;
 
+    private bool m_alreadyLoadedIn = false;
     private int m_playerNumber;
     public bool playerReadyInMenu;
 
@@ -57,7 +58,7 @@ public class PlayerInputScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if(!GameManager.gManager.firstLoadIntoGame)
+        if(!m_alreadyLoadedIn)
             Inistialize();
     }
 
@@ -67,7 +68,7 @@ public class PlayerInputScript : MonoBehaviour
         gMan = GameManager.gManager; // seting a reference to the GameManager
         //m_virtualCam.gameObject.SetActive(true);
 
-        if (!GameManager.gManager.firstLoadIntoGame)
+        if (!m_alreadyLoadedIn)
         {
             GameManager.gManager.uiCInput.AddToPlayers();
 
@@ -96,6 +97,8 @@ public class PlayerInputScript : MonoBehaviour
         {
             SwitchCameraLayers(m_playerNumber - 1);
         }
+
+        m_alreadyLoadedIn = true;
     }
 
     public void SwitchCameraLayers(int playerNumber)
