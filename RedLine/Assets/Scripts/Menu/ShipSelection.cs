@@ -26,6 +26,14 @@ public class ShipSelection : MonoBehaviour
     private int m_shipIndex;
     private int m_materialIndex;
 
+    public int PlayerNuumber => m_playerNum;
+    public int ShipIndex => m_shipIndex;
+    public int MaterialIndex => m_materialIndex;
+
+    public void SetPlayerNum(int number) { m_playerNum = number; }
+    public void SetShipIndex(int number) { m_shipIndex = number; }
+    public void SetMaterialIndex(int number) { m_materialIndex = number; }
+
 
     /////////////////////////////////////////////////////////////////
     ///                                                          ///
@@ -34,11 +42,6 @@ public class ShipSelection : MonoBehaviour
     /////////////////////////////////////////////////////////////////
     public void SetShipSelectionNumbers(int number) { m_playerNum = number; }
     public void SetShip(GameObject ship) { m_ship = ship; }
-
-    private void Start()
-    {
-        m_currentShips = ships[0];
-    }
 
     private void OnEnable()
     {
@@ -56,11 +59,6 @@ public class ShipSelection : MonoBehaviour
     /// </summary>
     public void SetUp()
     {
-        // stops all the current coroutines
-        //StopAllCoroutines();
-        // starts the text coroutine
-        //StartCoroutine(NameChange(variants[0].VariantName));
-
         texture = GameManager.gManager.uiCInput.textures[m_playerNum];
         cam.GetComponentInChildren<Camera>().targetTexture = texture;
         image.texture = texture;
@@ -96,7 +94,13 @@ public class ShipSelection : MonoBehaviour
         sInfo.AccelerationBarFill(tempListOfFloats[1]);
         sInfo.HandlingBarFill(tempListOfFloats[2]);
 
-        ships[m_shipIndex].GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
+        foreach (GameObject ship in ships)
+            ship.SetActive(false);
+
+        m_currentShips = ships[m_shipIndex];
+        m_currentShips.SetActive(true);
+
+        m_currentShips.GetComponent<ShipTypeInfo>().SwitchMaterials(m_materialIndex);
     }
 
     public void OnNextMat()

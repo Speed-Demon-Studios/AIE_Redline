@@ -20,12 +20,7 @@ public class ShipSelectionSpawnerManager : MonoBehaviour
         int index = 0;
         foreach(GameObject playerOBJ in GameManager.gManager.players)
         {
-            if (playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection() != null)
-            {
-                Destroy(playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().gameObject);
-
-                playerOBJ.GetComponent<PlayerInputScript>().SetSelection(null);
-            }
+            ShipSelection tempSelection = playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection();
 
             switch (GameManager.gManager.players.Count)
             {
@@ -42,6 +37,22 @@ public class ShipSelectionSpawnerManager : MonoBehaviour
                     SpawnSelectionScreens(index, threeAndFourPrefab);
                     break;
             }
+
+            if (tempSelection != null)
+            {
+                playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().SetPlayerNum(tempSelection.PlayerNuumber);
+                playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().SetShipIndex(tempSelection.ShipIndex);
+                playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().SetMaterialIndex(tempSelection.MaterialIndex);
+
+                if (playerOBJ.GetComponent<PlayerInputScript>().playerReadyInMenu)
+                {
+                    playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().sInfo.readyAnimator.SetTrigger(playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().sInfo.readyTriggerString);
+                }
+
+                Destroy(tempSelection.gameObject);
+            }
+
+            playerOBJ.GetComponent<PlayerInputScript>().GetShipSelection().SetUp();
 
             index++;
         }

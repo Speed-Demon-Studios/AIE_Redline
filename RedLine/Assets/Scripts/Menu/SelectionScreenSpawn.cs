@@ -17,8 +17,6 @@ public class SelectionScreenSpawn : MonoBehaviour
 
         GameManager.gManager.uiCInput.shipSelectionMenu.menuStartButtons.Add(selectionMenu.GetComponent<ShipSelection>().readyButton); // Adds the button to the GameManager list
 
-        selectionMenu.GetComponent<ShipSelection>().SetUp();
-
         GameObject player = GameManager.gManager.players[m_playerNumber];
         player.GetComponent<PlayerInputScript>().SetSelection(selectionMenu.GetComponent<ShipSelection>());
 
