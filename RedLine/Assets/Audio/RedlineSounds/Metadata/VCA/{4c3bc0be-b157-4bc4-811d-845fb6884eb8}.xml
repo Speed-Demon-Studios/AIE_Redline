@@ -7,8 +7,53 @@
 		<property name="name">
 			<value>Ui</value>
 		</property>
+		<relationship name="automators">
+			<destination>{1c523334-e0a4-4074-892b-c83feebbf2a9}</destination>
+		</relationship>
 		<relationship name="mixer">
 			<destination>{75b0d06c-f70b-4c8b-814a-23c6214316c9}</destination>
 		</relationship>
+	</object>
+	<object class="Automator" id="{1c523334-e0a4-4074-892b-c83feebbf2a9}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{827a48ca-7e9b-4a6d-a742-bf94ed6542cc}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{827a48ca-7e9b-4a6d-a742-bf94ed6542cc}">
+		<relationship name="parameter">
+			<destination>{34962892-56a9-49f1-afa3-7f0d72d6b575}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{ef193c29-f518-4e73-aee8-34b829685b14}</destination>
+			<destination>{576f95ba-3279-48e0-8a74-98431e0c05eb}</destination>
+			<destination>{a88cf3df-da4c-4113-bd95-74e829f8c543}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{ef193c29-f518-4e73-aee8-34b829685b14}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>-2</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{576f95ba-3279-48e0-8a74-98431e0c05eb}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{a88cf3df-da4c-4113-bd95-74e829f8c543}">
+		<property name="position">
+			<value>2</value>
+		</property>
+		<property name="value">
+			<value>8</value>
+		</property>
 	</object>
 </objects>

@@ -35,6 +35,7 @@
 		<relationship name="parameters">
 			<destination>{242920e7-023a-4221-8846-1ca626537cc7}</destination>
 			<destination>{55609e8a-a930-4995-ba4b-42f9486b4de0}</destination>
+			<destination>{9035ec5f-2a55-4e77-bfc9-6604bcca3c80}</destination>
 		</relationship>
 		<relationship name="banks">
 			<destination>{5fa61944-07ae-4e08-a925-7e05829042b5}</destination>
@@ -109,6 +110,11 @@
 			<destination>{a244975a-e02d-4ede-bf05-2d2663d48b4f}</destination>
 		</relationship>
 	</object>
+	<object class="ParameterProxy" id="{9035ec5f-2a55-4e77-bfc9-6604bcca3c80}">
+		<relationship name="preset">
+			<destination>{34962892-56a9-49f1-afa3-7f0d72d6b575}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{16d9c903-1737-4606-9c72-898297e62dcd}">
 		<relationship name="effectChain">
 			<destination>{47c2e2a4-fbea-4470-945a-c2ef864eff64}</destination>
@@ -175,7 +181,7 @@
 			<value>true</value>
 		</property>
 		<property name="playCount">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="triggerConditions">
 			<destination>{7f586096-1e18-4138-bafb-64344b3d5efb}</destination>

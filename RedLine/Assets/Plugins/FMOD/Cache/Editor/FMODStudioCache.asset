@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638702947862273108
+  lastModified: 638722067323870330
   FileSizes:
   - Name: Desktop
-    Value: 6101728
+    Value: 6102048
   Exists: 1
 --- !u!114 &-8982834461202225900
 MonoBehaviour:
@@ -266,6 +266,7 @@ MonoBehaviour:
   Parameters:
   - {fileID: 3943109590843536789}
   - {fileID: 1515930608478761683}
+  - {fileID: 2667362214910106549}
   MinDistance: 1
   MaxDistance: 20
   Length: 137142
@@ -1164,11 +1165,12 @@ MonoBehaviour:
   - {fileID: 2905889491567865443}
   - {fileID: -1202247852556063800}
   - {fileID: 7592940278961716972}
+  - {fileID: 7790400147072235552}
   MasterBanks:
   - {fileID: 7530275692248856671}
   StringsBanks:
   - {fileID: 2572994617365935129}
-  cacheTime: 638702947862273108
+  cacheTime: 638722067323870330
   cacheVersion: 131620
 --- !u!114 &115436463921783294
 MonoBehaviour:
@@ -1487,10 +1489,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638702947862053655
+  lastModified: 638722067323190282
   FileSizes:
   - Name: Desktop
-    Value: 3904
+    Value: 3946
   Exists: 1
 --- !u!114 &2658546784528882239
 MonoBehaviour:
@@ -1520,6 +1522,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 37485
+--- !u!114 &2667362214910106549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MenuMusic/MasterVolume
+  m_EditorClassIdentifier: 
+  Name: MasterVolume
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 1
+  ID:
+    data1: 2843130939
+    data2: 2973284729
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &2767285069615592140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,10 +2302,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638702947862053655
+  lastModified: 638722067323154823
   FileSizes:
   - Name: Desktop
-    Value: 15368480
+    Value: 15369696
   Exists: 1
 --- !u!114 &7592940278961716972
 MonoBehaviour:
@@ -2306,6 +2332,30 @@ MonoBehaviour:
   Labels:
   - False
   - True
+  Exists: 1
+--- !u!114 &7790400147072235552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MasterVolume
+  m_EditorClassIdentifier: 
+  Name: MasterVolume
+  StudioPath: parameter:/MasterVolume
+  Min: 0
+  Max: 2
+  Default: 1
+  ID:
+    data1: 2843130939
+    data2: 2973284729
+  Type: 0
+  IsGlobal: 1
+  Labels: []
   Exists: 1
 --- !u!114 &7821424255209551234
 MonoBehaviour:
@@ -2451,10 +2501,10 @@ MonoBehaviour:
   Path: Assets/Audio/RedlineSounds/Build/Desktop/FulcrumEngine.bank
   Name: FulcrumEngine
   StudioPath: bank:/FulcrumEngine
-  lastModified: 638702947861279749
+  lastModified: 638722067239893432
   FileSizes:
   - Name: Desktop
-    Value: 1539008
+    Value: 1538976
   Exists: 1
 --- !u!114 &9140701790237856491
 MonoBehaviour:

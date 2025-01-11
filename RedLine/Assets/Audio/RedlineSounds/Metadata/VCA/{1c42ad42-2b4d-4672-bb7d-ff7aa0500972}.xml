@@ -4,8 +4,53 @@
 		<property name="name">
 			<value>Music</value>
 		</property>
+		<relationship name="automators">
+			<destination>{45f2d073-a72a-4b47-9fd2-9d1c2b7b2e53}</destination>
+		</relationship>
 		<relationship name="mixer">
 			<destination>{75b0d06c-f70b-4c8b-814a-23c6214316c9}</destination>
 		</relationship>
+	</object>
+	<object class="Automator" id="{45f2d073-a72a-4b47-9fd2-9d1c2b7b2e53}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{f41edc27-9700-48ed-a700-83f106e6f3f3}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{f41edc27-9700-48ed-a700-83f106e6f3f3}">
+		<relationship name="parameter">
+			<destination>{34962892-56a9-49f1-afa3-7f0d72d6b575}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{55c143f0-d9b0-4bb2-b386-1d995135abc8}</destination>
+			<destination>{c373eb4b-e43c-4acb-b208-20fa456d4bf7}</destination>
+			<destination>{1995c5af-51b4-48a0-992d-3e1cc066a3a9}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{55c143f0-d9b0-4bb2-b386-1d995135abc8}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>3.81469727e-06</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{c373eb4b-e43c-4acb-b208-20fa456d4bf7}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{1995c5af-51b4-48a0-992d-3e1cc066a3a9}">
+		<property name="position">
+			<value>2</value>
+		</property>
+		<property name="value">
+			<value>10</value>
+		</property>
 	</object>
 </objects>
