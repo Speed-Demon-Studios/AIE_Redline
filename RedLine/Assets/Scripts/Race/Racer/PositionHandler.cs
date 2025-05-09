@@ -9,6 +9,9 @@ public class PositionHandler : MonoBehaviour
     public IList<RacerDetails> racerFinder = new List<RacerDetails>();
     private bool racersSorted = false;
 
+    public List<GameObject> aiRacePrefabs = new();
+    public Nodes startNode;
+
     private void Awake()
     {
         GameManager.gManager.pHandler = this;
@@ -20,25 +23,30 @@ public class PositionHandler : MonoBehaviour
 
     public void OnRaceLoaded()
     {
-        // Find all the racers in the scene
-        racerFinder = FindObjectsOfType<RacerDetails>();
-
-        foreach (RacerDetails rD in racerFinder)
+        if (!GameManager.gManager.rManager.isTimeTrial)
         {
-            Debug.Log("FOUND RACER IN FINDER");
-            racers.Add(rD);
+            for (int i = 0; i < 9; i++)
+            {
+                int index = Random.Range(0, aiRacePrefabs.Count - 1);
+
+                GameObject a = Instantiate(aiRacePrefabs[index]);
+
+                a.GetComponent<AIMoveInputs>().desiredNode = startNode;
+                a.GetComponent<ShipsControls>().DifficultySpeedChange();
+                racers.Add(a.GetComponent<RacerDetails>());
+
+                GameManager.gManager.racerObjects.Add(a);
+            }
         }
 
-        foreach (RacerDetails rD in racers)
+        foreach(GameObject players in GameManager.gManager.players)
         {
-            GameManager.gManager.racerObjects.Add(rD.gameObject);
+            players.GetComponent<ShipsControls>().DifficultySpeedChange();
+            racers.Add(players.GetComponent<RacerDetails>());
         }
 
-        if (GameManager.gManager.racerObjects.Count == racers.Count && racers.Count == racerFinder.Count)
-        {
-            racersAdded = true;
-            GameManager.gManager.racersAdded = true;
-        }
+        racersAdded = true;
+        GameManager.gManager.racersAdded = true;
     }
 
     public IEnumerator SortRacers()

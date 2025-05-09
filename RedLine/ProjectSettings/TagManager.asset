@@ -8,13 +8,14 @@ TagManager:
   - Walls
   - Racer
   - TrailSpawn
+  - GameManager
+  - RacerColliders
   - RacerHEAD
   - FireParent
   - Fire
-  - GameManager
-  - Redline
   - Checkpoint
-  - RacerColliders
+  - Redline
+  - StartNode
   layers:
   - Default
   - TransparentFX
@@ -23,11 +24,11 @@ TagManager:
   - Water
   - UI
   - NoDirectSunlight
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lensflare
+  - Player1
+  - Player2
+  - Player3
+  - Player4
   - 
   - 
   - 
@@ -49,6 +50,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: HUD
+    uniqueID: 832210219
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

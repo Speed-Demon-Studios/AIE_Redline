@@ -28,9 +28,9 @@ public class RaceManager : MonoBehaviour
         gMAN.nRandomiser.AssignRacerNames();
         gMAN.raceStarted = true;
         
-        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        for (int i = 0; i < gMAN.players.Count; i++)
         {
-            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+            ActionMappingControl AMC = gMAN.players[i].GetComponent<ActionMappingControl>();
 
             AMC.UpdateActionMapForRace();
         }
@@ -43,23 +43,28 @@ public class RaceManager : MonoBehaviour
     {
         GameManager gMAN = GameManager.gManager;
         gMAN.DisableRMovement();
-        gMAN.raceFinished = true;
 
-        for (int i = 0; i < gMAN.racerObjects.Count; i++)
+        for (int i = 0; i < gMAN.players.Count; i++)
         {
-            ActionMappingControl AMC = gMAN.racerObjects[i].GetComponent<ActionMappingControl>();
+            ActionMappingControl AMC = gMAN.players[i].GetComponent<ActionMappingControl>();
             
             AMC.UpdateActionMapForUI();
         }
 
-        gMAN.raceFinisher.ShowFinalPlacements();
+        Invoke(nameof(CallFinalPlacements), 2f);
+    }
+
+    public void CallFinalPlacements()
+    {
+        GameManager.gManager.raceFinished = true;
+        GameManager.gManager.raceFinisher.ShowFinalPlacements();
     }
 
     IEnumerator InitPlayers()
     {
         yield return new WaitForEndOfFrame();
 
-        foreach (GameObject gObj in GameManager.gManager.playerObjects)
+        foreach (GameObject gObj in GameManager.gManager.allRacers)
         {
             if (gObj != null)
             {
@@ -83,15 +88,25 @@ public class RaceManager : MonoBehaviour
         StopCoroutine(InitPlayers());
     }
 
-    public void DisableFinishedRacerMovement()
+    public void DisableFinishedRacerMovement(RacerDetails racer = null)
     {
-        for (int i = 0; i < GameManager.gManager.players.Count; i++)
+        if (racer == null)
         {
-            RacerDetails racerDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
-
-            if (racerDeets.finishedRacing == true && racerDeets.crossedFinishLine == true)
+            for (int i = 0; i < GameManager.gManager.players.Count; i++)
             {
-                GameManager.gManager.DisableRMovement(GameManager.gManager.players[i]);
+                RacerDetails racerDeets = GameManager.gManager.players[i].GetComponent<RacerDetails>();
+
+                if (racerDeets.finishedRacing == true && racerDeets.crossedFinishLine == true)
+                {
+                    GameManager.gManager.DisableRMovement(GameManager.gManager.players[i]);
+                }
+            }
+        }
+        else
+        {
+            if(racer.finishedRacing == true && racer.crossedFinishLine == true)
+            {
+                GameManager.gManager.DisableRMovement(racer.gameObject);
             }
         }
     }
@@ -120,7 +135,7 @@ public class RaceManager : MonoBehaviour
                 FinishRace();
             }
             
-            DisableFinishedRacerMovement();
+            DisableFinishedRacerMovement(racer);
         }
         else
         {

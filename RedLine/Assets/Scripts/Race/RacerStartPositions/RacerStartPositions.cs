@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using EAudioSystem;
 
 public class RacerStartPositions : MonoBehaviour
 {
     [SerializeField] private GameObject[] startPositions;
     private bool placingRacers = false;
     private int placementIndexer = 0;
+
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class RacerStartPositions : MonoBehaviour
                     bool isPlayer = false;
                     foreach (GameObject playerOBJ in GameManager.gManager.players)
                     {
-                        if (GameManager.gManager.playerObjects[i] == playerOBJ)
+                        if (GameManager.gManager.allRacers[i] == playerOBJ)
                         {
                             isPlayer = true;
                         }
@@ -65,19 +67,26 @@ public class RacerStartPositions : MonoBehaviour
                         StartingPositionDetails thisPosition = startPositions[a].GetComponent<StartingPositionDetails>();
                         if (thisPosition.SpotFilled == false)
                         {
-                            thisPosition.HeldRacer = GameManager.gManager.racerObjects[i];
-                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = true;
-                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.racerObjects[i].transform);
-                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
-                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
-                            GameManager.gManager.racerObjects[i].transform.position = startPositions[a].transform.position;
-                            GameManager.gManager.racerObjects[i].transform.rotation = startPositions[a].transform.rotation;
-                            GameManager.gManager.racerObjects[i].GetComponent<ShipsControls>().enabled = false;
+                            thisPosition.HeldRacer = GameManager.gManager.allRacers[i];
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().enabled = true;
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().SetRotationToTrack(GameManager.gManager.allRacers[i].transform);
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().ResetAngles(0.0f, 0.0f, 0.0f);
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().ResetPositions(new Vector3(0.0f, 0.0f, 0.0f));
+                            GameManager.gManager.allRacers[i].transform.position = startPositions[a].transform.position;
+                            GameManager.gManager.allRacers[i].transform.rotation = startPositions[a].transform.rotation;
+                            GameManager.gManager.allRacers[i].GetComponent<ShipsControls>().enabled = false;
                             thisPosition.SpotFilled = true;
                             a = startPositions.Count();
                             break;
                         }
 
+                    }
+
+
+                    if (GameManager.gManager.players[i].GetComponent<PlayerAudioController>() != null)
+                    {
+                        PlayerAudioController pAC = GameManager.gManager.players[i].GetComponent<PlayerAudioController>();
+                        pAC.StartEngineHum();
                     }
                 }
 

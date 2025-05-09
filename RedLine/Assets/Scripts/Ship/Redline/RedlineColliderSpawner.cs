@@ -16,11 +16,9 @@ public class RedlineColliderSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameObject colliderParent;
 
-    //void OnEnable()
-    //{
-    //    CallSpawnCollider();
-    //}
-
+    /// <summary>
+    /// Spawns 35 colliders for the redline
+    /// </summary>
     public void CallSpawnCollider()
     {
         for (int i = 0; i < 35; i++)
@@ -33,69 +31,42 @@ public class RedlineColliderSpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //AddBoost();
+        // if the race has not finished then move the positions of the colliders
         if(!GameManager.gManager.raceFinished)
             ChangePositions();
-        //CheckShipsInLine();
     }
 
-    //private void AddBoost()
-    //{
-    //    for (int i = 0; i < m_shipsInColliders.Count; i++)
-    //    {
-    //        if (m_shipsInColliders[i] != transform.parent.gameObject)
-    //        {
-    //
-    //            ShipsControls outTest;
-    //            if (m_shipsInColliders[i].TryGetComponent<ShipsControls>(out outTest))
-    //            {
-    //                Debug.Log(outTest.gameObject + "Add to boosting");
-    //                outTest.GetComponent<ShipsControls>().SwitchRedlineBool(true);
-    //                outTest.AddToBoost();
-    //            }
-    //        }
-    //    }
-    //}
-
-    //public void CheckShipsInLine()
-    //{
-    //    for (int i = 0; i < m_shipsInColliders.Count; i++)
-    //    {
-    //        if (!m_allShipsInColliders.Contains(m_shipsInColliders[i]))
-    //        {
-    //            m_shipsInColliders[i].GetComponent<ShipsControls>().SwitchRedlineBool(false);
-    //            m_shipsInColliders.Remove(m_shipsInColliders[i]);
-    //        }
-    //    }
-    //    for (int i = 0; i < m_allShipsInColliders.Count; i++)
-    //    {
-    //        if (!m_shipsInColliders.Contains(m_allShipsInColliders[i]))
-    //        {
-    //            m_shipsInColliders.Add(m_allShipsInColliders[i]);
-    //        }
-    //
-    //    }
-    //}
-
+    /// <summary>
+    /// clears the list. is only called when the game resets back to menu
+    /// </summary>
     public void ClearList()
     {
         m_lineColliders = new List<GameObject> ();
     }
 
+    /// <summary>
+    /// changest the position of the back collider so that is at the front
+    /// </summary>
     private void ChangePositions()
     {
+        // checks for null references so that there are no errors
         if (spawnPoint != null && m_lineColliders[1] != null)
         {
             if (childIndex < m_lineColliders.Count)
             {
+                // changes the position of 1 collider which is the childIndex
                 m_lineColliders[childIndex].gameObject.transform.position = spawnPoint.transform.position;
                 childIndex += 1;
+                // if that childIndex gets to the end of the list length then go back to the first one
                 if (childIndex > m_lineColliders.Count - 1)
                     childIndex = 0;
             }
         }
     }
 
+    /// <summary>
+    /// Spawns a collider at the spawnpoint and then makes the parent null
+    /// </summary>
     public void SpawnCollider()
     {
         GameObject a = Instantiate(colliderPrefab, spawnPoint.position, Quaternion.Euler(Vector3.zero), colliderParent.transform.parent.transform);

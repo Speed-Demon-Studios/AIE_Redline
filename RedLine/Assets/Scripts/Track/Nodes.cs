@@ -12,8 +12,12 @@ public class Nodes : MonoBehaviour
 
     public float radius;
 
-    private void Start()
+    private void Awake()
     {
+        if (this.CompareTag("StartNode"))
+        {
+            GameManager.gManager.startNode = this;
+        }
     }
 
     public Vector3 RandomNavSphere(Vector3 origin)

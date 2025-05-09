@@ -4,7 +4,7 @@ public class RedlineActivator : MonoBehaviour
 {
     public void ActivateRedline()
     {
-        foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
+        foreach (GameObject racerOBJ in GameManager.gManager.allRacers)
         {
             RedlineColliderSpawner redlineScript = racerOBJ.GetComponent<RacerDetails>().rCS;
 
@@ -21,7 +21,7 @@ public class RedlineActivator : MonoBehaviour
 
     public void DeactivateRedline()
     {
-        foreach (GameObject racerOBJ in GameManager.gManager.racerObjects)
+        foreach (GameObject racerOBJ in GameManager.gManager.allRacers)
         {
             RedlineColliderSpawner redlineScript = racerOBJ.GetComponentInChildren<RedlineColliderSpawner>();
             redlineScript.enabled = false;
